@@ -1,0 +1,9 @@
+name = "teachinspire-survey"
+pages_build_output_dir = "./dist"
+compatibility_date = "2025-01-05"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "teachinspire-survey"
+database_id = "68ab182b-86d7-4980-91f4-e13f061c788b"

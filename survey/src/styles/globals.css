@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-navy font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply w-full px-4 py-3 rounded-lg border-2 border-navy/20 bg-white 
+           transition-all duration-200
+           focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20;
+  }
+
+  .radio-option {
+    @apply flex items-center gap-3 p-4 rounded-lg border-2 border-navy/10 bg-white
+           cursor-pointer transition-all duration-200
+           hover:border-sage/50 hover:bg-sage/5;
+  }
+
+  .radio-option.selected {
+    @apply border-sage bg-sage/10;
+  }
+
+  .checkbox-option {
+    @apply flex items-center gap-3 p-4 rounded-lg border-2 border-navy/10 bg-white
+           cursor-pointer transition-all duration-200
+           hover:border-sage/50 hover:bg-sage/5;
+  }
+
+  .checkbox-option.selected {
+    @apply border-sage bg-sage/10;
+  }
+}
