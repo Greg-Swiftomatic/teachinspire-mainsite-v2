@@ -3,23 +3,7 @@ import { useState } from 'react';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { ChevronDown } from 'lucide-react';
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const faqs = [
   {
@@ -69,25 +53,37 @@ function FAQItem({
   answer,
   isOpen,
   onClick,
+  prefersReducedMotion,
 }: {
   question: string;
   answer: string;
   isOpen: boolean;
   onClick: () => void;
+  prefersReducedMotion: boolean;
 }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
     <motion.div variants={fadeInUp} className="border-b border-navy/10 last:border-0">
       <button
         onClick={onClick}
-        className="w-full py-5 flex items-center justify-between text-left group"
+        className="w-full py-5 flex items-center justify-between text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-sm"
       >
         <span className="text-navy font-medium pr-4 group-hover:text-sage transition-colors">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 text-navy-light flex-shrink-0 transition-transform duration-300 ${
-            isOpen ? 'rotate-180' : ''
-          }`}
+          className={`w-5 h-5 text-navy-light flex-shrink-0 transition-transform ${
+            prefersReducedMotion ? '' : 'duration-300'
+          } ${isOpen ? 'rotate-180' : ''}`}
+          aria-hidden="true"
         />
       </button>
       <motion.div
@@ -96,7 +92,7 @@ function FAQItem({
           height: isOpen ? 'auto' : 0,
           opacity: isOpen ? 1 : 0,
         }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: prefersReducedMotion ? 0.01 : 0.3, ease: [0.16, 1, 0.3, 1] }}
         className="overflow-hidden"
       >
         <p className="text-navy-light pb-5 pr-8">{answer}</p>
@@ -107,6 +103,15 @@ function FAQItem({
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
 
   return (
     <section className="bg-cream py-16 lg:py-24 overflow-hidden">
@@ -127,6 +132,7 @@ export function FAQ() {
               answer={faq.answer}
               isOpen={openIndex === idx}
               onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+              prefersReducedMotion={prefersReducedMotion}
             />
           ))}
         </motion.div>

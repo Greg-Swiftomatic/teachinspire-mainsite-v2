@@ -2,23 +2,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Brain, Wallet, Shield } from 'lucide-react';
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const pillars = [
   {
@@ -52,6 +36,25 @@ const benefits = [
 ];
 
 export function Approach() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.15 },
+    },
+  };
+
   return (
     <section className="bg-cream py-16 lg:py-24 overflow-hidden">
       <Container>
@@ -83,6 +86,7 @@ export function Approach() {
                 className="absolute -bottom-1 left-0 w-full h-2 text-yellow"
                 viewBox="0 0 200 8"
                 preserveAspectRatio="none"
+                aria-hidden="true"
               >
                 <path
                   d="M0,4 Q50,0 100,4 T200,4"
@@ -103,7 +107,7 @@ export function Approach() {
                 key={idx}
                 className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-navy border border-navy/10"
               >
-                <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 {benefit}
@@ -147,7 +151,7 @@ export function Approach() {
                 <div
                   className={`w-14 h-14 rounded-xl ${iconBgClasses[pillar.color as keyof typeof iconBgClasses]} flex items-center justify-center mb-4`}
                 >
-                  <Icon className="w-7 h-7" />
+                  <Icon className="w-7 h-7" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-display font-bold text-navy mb-3">{pillar.title}</h3>
                 <p className="text-navy-light">{pillar.description}</p>

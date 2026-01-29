@@ -3,6 +3,7 @@ import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Button } from '../ui/Button';
 import { Clock, Award, Cpu } from 'lucide-react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const credentials = [
   {
@@ -23,6 +24,8 @@ const credentials = [
 ];
 
 export function Founder() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="bg-white py-16 lg:py-24 overflow-hidden">
       <Container>
@@ -30,9 +33,10 @@ export function Founder() {
 
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="grid md:grid-cols-5 gap-8 items-start"
           >
             {/* Photo placeholder */}
@@ -63,7 +67,7 @@ export function Founder() {
                       key={idx}
                       className="flex items-center gap-2 bg-cream px-3 py-2 rounded-lg"
                     >
-                      <Icon className="w-4 h-4 text-sage" />
+                      <Icon className="w-4 h-4 text-sage" aria-hidden="true" />
                       <span className="text-navy font-medium text-sm">{cred.value}</span>
                       <span className="text-navy-light text-sm">{cred.label}</span>
                     </div>

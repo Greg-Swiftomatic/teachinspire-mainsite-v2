@@ -4,6 +4,7 @@ import { SectionTitle } from '../ui/SectionTitle';
 import { Badge } from '../ui/Badge';
 import { TiltCard } from '../ui/MagicCard';
 import { Button } from '../ui/Button';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const modules = [
   {
@@ -29,33 +30,34 @@ const modules = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40, rotateX: -15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
-const lineVariants = {
-  hidden: { scaleX: 0 },
-  visible: {
-    scaleX: 1,
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const, delay: 0.3 },
-  },
-};
-
 export function Modules() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 40, rotateX: prefersReducedMotion ? 0 : -15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.2 },
+    },
+  };
+
+  const lineVariants = {
+    hidden: { scaleX: prefersReducedMotion ? 1 : 0 },
+    visible: {
+      scaleX: 1,
+      transition: { duration: prefersReducedMotion ? 0.01 : 1, ease: [0.16, 1, 0.3, 1] as const, delay: prefersReducedMotion ? 0 : 0.3 },
+    },
+  };
   return (
     <section className="bg-cream py-16 lg:py-24">
       <Container>
@@ -87,20 +89,28 @@ export function Modules() {
                 {/* Animated number badge */}
                 <motion.div
                   className="absolute -top-4 left-6 w-10 h-10 bg-yellow rounded-full flex items-center justify-center font-bold text-navy shadow-lg z-20"
-                  initial={{ scale: 0, rotate: -180 }}
+                  initial={{ scale: prefersReducedMotion ? 1 : 0, rotate: prefersReducedMotion ? 0 : -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 260,
-                    damping: 20,
-                    delay: 0.2 + module.number * 0.15,
-                  }}
-                  whileHover={{
-                    scale: 1.2,
-                    rotate: 10,
-                    boxShadow: '0 10px 30px rgba(241, 210, 99, 0.4)',
-                  }}
+                  transition={
+                    prefersReducedMotion
+                      ? { duration: 0.01 }
+                      : {
+                          type: 'spring',
+                          stiffness: 260,
+                          damping: 20,
+                          delay: 0.2 + module.number * 0.15,
+                        }
+                  }
+                  whileHover={
+                    prefersReducedMotion
+                      ? {}
+                      : {
+                          scale: 1.2,
+                          rotate: 10,
+                          boxShadow: '0 10px 30px rgba(241, 210, 99, 0.4)',
+                        }
+                  }
                 >
                   {module.number}
                 </motion.div>
@@ -125,10 +135,10 @@ export function Modules() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0.01 : 0.5 }}
           className="text-center mt-12"
         >
           <Button variant="secondary" size="lg" href="/formation">

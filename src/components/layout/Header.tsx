@@ -35,7 +35,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-navy hover:text-navy-light transition-colors duration-200 font-medium"
+                className="text-navy hover:text-navy-light transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-sm"
               >
                 {link.label}
               </a>
@@ -76,7 +76,7 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-navy hover:text-navy-light transition-colors duration-200 font-medium py-2"
+                    className="text-navy hover:text-navy-light transition-colors duration-200 font-medium py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-sm"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}

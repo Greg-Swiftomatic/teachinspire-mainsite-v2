@@ -5,6 +5,7 @@ import { SectionTitle } from '../ui/SectionTitle';
 import { Button } from '../ui/Button';
 import { MagicCard } from '../ui/MagicCard';
 import { Badge } from '../ui/Badge';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const offerings = [
   {
@@ -39,25 +40,27 @@ const offerings = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
 export function Offerings() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30, scale: prefersReducedMotion ? 1 : 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.2 },
+    },
+  };
+
   return (
     <section className="bg-white py-16 lg:py-24">
       <Container>
@@ -82,11 +85,12 @@ export function Offerings() {
                     className={`w-14 h-14 rounded-xl flex items-center justify-center ${
                       offering.highlighted ? 'bg-yellow/20' : 'bg-sage/20'
                     }`}
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 5 }}
                     transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                   >
                     <offering.icon
                       className={`w-7 h-7 ${offering.highlighted ? 'text-yellow' : 'text-sage'}`}
+                      aria-hidden="true"
                     />
                   </motion.div>
                   <Badge variant={offering.highlighted ? 'yellow' : 'sage'}>

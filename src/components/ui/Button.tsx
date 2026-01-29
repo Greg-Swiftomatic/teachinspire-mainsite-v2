@@ -19,7 +19,7 @@ export function Button({
   className = '',
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 relative overflow-hidden';
+    'inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
 
   const variants = {
     primary:

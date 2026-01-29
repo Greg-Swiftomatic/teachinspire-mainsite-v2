@@ -2,23 +2,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { Phone, Video, Lightbulb, Users } from 'lucide-react';
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const steps = [
   {
@@ -48,6 +32,25 @@ const steps = [
 ];
 
 export function HowItWorks() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.2 },
+    },
+  };
+
   return (
     <section className="bg-cream py-16 lg:py-24 overflow-hidden">
       <Container>
@@ -73,7 +76,7 @@ export function HowItWorks() {
               >
                 {/* Connecting line */}
                 {!isLast && (
-                  <div className="absolute left-6 top-20 w-0.5 h-16 bg-navy/10 hidden md:block" />
+                  <div className="absolute left-6 top-20 w-0.5 h-16 bg-navy/10 hidden md:block" aria-hidden="true" />
                 )}
 
                 <div className="flex gap-6 mb-8">
@@ -88,7 +91,7 @@ export function HowItWorks() {
                   <div className="bg-white rounded-2xl p-6 flex-1 border border-navy/5">
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-lg bg-yellow/20 flex items-center justify-center flex-shrink-0">
-                        <Icon className="w-5 h-5 text-yellow" />
+                        <Icon className="w-5 h-5 text-yellow" aria-hidden="true" />
                       </div>
                       <div>
                         <h3 className="text-xl font-display font-bold text-navy mb-2">
@@ -106,9 +109,10 @@ export function HowItWorks() {
 
         {/* Format note */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
           className="max-w-2xl mx-auto text-center"
         >
           <div className="bg-white rounded-xl p-6 border border-navy/10">

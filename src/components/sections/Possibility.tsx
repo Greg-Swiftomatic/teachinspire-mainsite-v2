@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { MagicCard } from '../ui/MagicCard';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const capabilities = [
   'Extraire le vocabulaire clé',
@@ -11,6 +12,13 @@ const capabilities = [
 ];
 
 export function Possibility() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const getTransition = (delay: number = 0) => ({
+    delay: prefersReducedMotion ? 0 : delay,
+    duration: prefersReducedMotion ? 0.01 : 0.6,
+  });
+
   return (
     <section className="bg-cream py-16 lg:py-24">
       <Container>
@@ -20,10 +28,10 @@ export function Possibility() {
 
         {/* Illustration des sources */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
+          transition={getTransition()}
           className="flex justify-center mb-12"
         >
           <img
@@ -35,10 +43,10 @@ export function Possibility() {
 
         {/* Ce que l'IA permet */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={getTransition(0.2)}
           className="max-w-3xl mx-auto"
         >
           <MagicCard
@@ -54,13 +62,13 @@ export function Possibility() {
               {capabilities.map((cap, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.3 + idx * 0.1 }}
+                  transition={getTransition(0.3 + idx * 0.1)}
                   className="flex items-start gap-3"
                 >
-                  <span className="text-sage font-bold">→</span>
+                  <span className="text-sage font-bold" aria-hidden="true">→</span>
                   <p className="text-navy-light">{cap}</p>
                 </motion.div>
               ))}
@@ -70,7 +78,7 @@ export function Possibility() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.7 }}
+              transition={getTransition(0.7)}
               className="pt-6 border-t border-navy/10"
             >
               <p className="text-navy font-medium text-lg">
