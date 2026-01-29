@@ -1,43 +1,14 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
-import { BlurReveal } from '../ui/TextReveal';
-import { MagicCard } from '../ui/MagicCard';
-
-const solutions = [
-  {
-    problem: 'Apprenant dans un secteur technique que vous ne maîtrisez pas',
-    solution: "Transformer n'importe quel contenu de son domaine en leçon adaptée",
-    icon: '/icons/approach-1.png',
-  },
-  {
-    problem: 'Ressource authentique parfaite mais trop complexe',
-    solution: "L'adapter au bon niveau en quelques minutes",
-    icon: '/icons/approach-2.png',
-  },
-  {
-    problem: '20h de formation avec objectifs très spécifiques',
-    solution: 'Créer des contenus ciblés au lieu de rester dans les généralités',
-    icon: '/icons/approach-3.png',
-  },
-  {
-    problem: 'Envie de sortir des manuels',
-    solution: 'Utiliser podcasts, vidéos, articles comme matière première',
-    icon: '/icons/approach-4.png',
-  },
-  {
-    problem: "Besoin d'audios réalistes",
-    solution: 'Générer dialogues et monologues avec des voix naturelles',
-    icon: '/icons/approach-5.png',
-  },
-];
+import { Brain, Wallet, Shield } from 'lucide-react';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -45,88 +16,144 @@ const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.15 },
   },
 };
 
+const pillars = [
+  {
+    icon: Brain,
+    title: "Penser avant d'utiliser",
+    description:
+      "Une approche structurée pour évaluer, choisir et adapter les outils IA à chaque contexte d'enseignement.",
+    color: 'sage',
+  },
+  {
+    icon: Wallet,
+    title: 'Gratuit ou presque',
+    description:
+      'Google AI Studio, transcription en 30 secondes, synthèse vocale pro — des outils puissants à 0€/mois.',
+    color: 'yellow',
+  },
+  {
+    icon: Shield,
+    title: 'Pas de dépendance',
+    description:
+      "Vos formateurs apprennent à s'adapter, pas à suivre un mode d'emploi qui sera obsolète dans 6 mois.",
+    color: 'navy',
+  },
+];
+
+const benefits = [
+  "Évaluer n'importe quel outil IA",
+  'Comprendre ses forces et limites',
+  "L'adapter à son contexte pédagogique",
+  'Garder le contrôle sur sa pratique',
+];
+
 export function Approach() {
   return (
-    <section className="bg-cream py-16 lg:py-24">
+    <section className="bg-cream py-16 lg:py-24 overflow-hidden">
       <Container>
         <SectionTitle>
-          On ne vous apprend pas un outil. On vous apprend à créer.
+          {"On n'enseigne pas un outil."}
+          <br />
+          <span className="text-sage">{"On enseigne à penser l'IA."}</span>
         </SectionTitle>
 
-        {/* Solutions table */}
+        {/* Main text */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="space-y-4 mb-12"
+          className="max-w-3xl mx-auto mb-12 text-center"
         >
-          {solutions.map((item, index) => (
-            <motion.div key={index} variants={fadeInUp}>
-              <MagicCard
-                className="bg-white"
-                gradientColor="#f1d263"
-                gradientOpacity={0.15}
+          <motion.p variants={fadeInUp} className="text-lg text-navy-light mb-6">
+            La plupart des formations IA vous apprennent à utiliser ChatGPT.
+            <br />
+            {"Problème : quand ChatGPT change (ou qu'un meilleur outil arrive), vous repartez de zéro."}
+          </motion.p>
+
+          <motion.p variants={fadeInUp} className="text-xl text-navy font-medium mb-8">
+            {"TeachInspire enseigne une "}
+            <span className="relative inline-block">
+              <span className="relative z-10">méthode transférable</span>
+              <svg
+                className="absolute -bottom-1 left-0 w-full h-2 text-yellow"
+                viewBox="0 0 200 8"
+                preserveAspectRatio="none"
               >
-                <div className="flex flex-col md:flex-row md:items-center gap-4">
-                  <div className="flex-1">
-                    <p className="text-navy-light">{item.problem}</p>
-                  </div>
-                  <div className="w-16 h-16 flex-shrink-0 hidden md:block">
-                    <img src={item.icon} alt="" className="w-full h-full object-contain" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-navy font-medium">{item.solution}</p>
-                  </div>
-                </div>
-              </MagicCard>
-            </motion.div>
-          ))}
+                <path
+                  d="M0,4 Q50,0 100,4 T200,4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            {" :"}
+          </motion.p>
+
+          {/* Benefits list */}
+          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-8">
+            {benefits.map((benefit, idx) => (
+              <span
+                key={idx}
+                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-navy border border-navy/10"
+              >
+                <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                {benefit}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.p variants={fadeInUp} className="text-lg text-navy font-medium">
+            {"Vos formateurs deviennent "}
+            <span className="text-sage">autonomes</span> — pas utilisateurs captifs.
+          </motion.p>
         </motion.div>
 
-        {/* Explanation text */}
+        {/* Three Pillars */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="max-w-3xl mx-auto"
+          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
-          <div className="relative bg-navy/5 rounded-2xl p-8 space-y-4 text-navy-light">
-            <BlurReveal delay={0.1}>
-              <p>
-                L'IA évolue vite. Très vite. De nouvelles solutions apparaissent
-                chaque mois, de plus en plus performantes, de moins en moins chères.
-              </p>
-            </BlurReveal>
-            <BlurReveal delay={0.2}>
-              <p className="font-medium text-navy">
-                Dans ce contexte, s'attacher à un seul outil serait une erreur.
-              </p>
-            </BlurReveal>
-            <BlurReveal delay={0.3}>
-              <p>
-                Notre approche : vous apprendre à maîtriser chaque <strong className="text-navy">TYPE d'outil</strong> —
-                génération de texte, transcription, synthèse vocale —
-                pour que vous puissiez créer ce que vous voulez, avec les solutions du moment.
-              </p>
-            </BlurReveal>
-            <BlurReveal delay={0.4}>
-              <p className="text-navy font-medium">
-                Vous repartez avec une compétence. Pas avec une dépendance.
-              </p>
-            </BlurReveal>
-            {/* Document icon in bottom right */}
-            <img
-              src="/icons/approach-6.png"
-              alt=""
-              className="absolute -bottom-8 -right-8 w-24 h-24 opacity-80 hidden md:block"
-            />
-          </div>
+          {pillars.map((pillar, idx) => {
+            const Icon = pillar.icon;
+            const colorClasses = {
+              sage: 'bg-sage/10 border-sage/20 text-sage',
+              yellow: 'bg-yellow/10 border-yellow/40 text-yellow',
+              navy: 'bg-navy/5 border-navy/10 text-navy',
+            };
+            const iconBgClasses = {
+              sage: 'bg-sage/20',
+              yellow: 'bg-yellow/30',
+              navy: 'bg-navy/10',
+            };
+
+            return (
+              <motion.div
+                key={idx}
+                variants={fadeInUp}
+                className={`rounded-2xl p-6 border-2 ${colorClasses[pillar.color as keyof typeof colorClasses]} bg-white`}
+              >
+                <div
+                  className={`w-14 h-14 rounded-xl ${iconBgClasses[pillar.color as keyof typeof iconBgClasses]} flex items-center justify-center mb-4`}
+                >
+                  <Icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-xl font-display font-bold text-navy mb-3">{pillar.title}</h3>
+                <p className="text-navy-light">{pillar.description}</p>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </Container>
     </section>

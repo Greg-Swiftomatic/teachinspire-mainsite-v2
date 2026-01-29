@@ -19,18 +19,18 @@ const staggerContainer = {
   },
 };
 
-const challenges = [
+const risks = [
   {
-    image: '/icons/challenge-1.png',
-    text: 'Des apprenants dans des secteurs que vous ne maîtrisez pas',
+    icon: '🔗',
+    text: "Dépendants d'outils qu'ils ne maîtrisent pas",
   },
   {
-    image: '/icons/challenge-2.png',
-    text: 'L\'aéronautique, la finance, la logistique, le juridique...',
+    icon: '🔄',
+    text: "Incapables de s'adapter quand l'outil change",
   },
   {
-    image: '/icons/challenge-3.png',
-    text: 'On se rabat sur ce qu\'on connaît',
+    icon: '⏳',
+    text: 'Dépassés par ceux qui ont compris la méthode',
   },
 ];
 
@@ -39,7 +39,9 @@ export function Problem() {
     <section className="bg-white py-16 lg:py-24 overflow-hidden">
       <Container>
         <SectionTitle>
-          Vous êtes limité par ce qui existe déjà.
+          {"Vos formateurs entendent parler d'IA partout."}
+          <br />
+          <span className="text-sage">Et après ?</span>
         </SectionTitle>
 
         {/* Main text content */}
@@ -54,32 +56,29 @@ export function Problem() {
             variants={fadeInUp}
             className="text-lg text-navy-light mb-6"
           >
-            Les manuels sont trop génériques. Les ressources toutes faites 
-            ne correspondent jamais vraiment au niveau ou aux objectifs.
+            Certains bricolent avec ChatGPT — résultats aléatoires.
+            <br />
+            D'autres attendent, sceptiques ou débordés.
+            <br />
+            {"Pendant ce temps, d'autres instituts forment déjà leurs équipes."}
           </motion.p>
 
           <motion.p
             variants={fadeInUp}
-            className="text-lg text-navy-light mb-6"
+            className="text-xl text-navy font-medium mb-8"
           >
-            Vous aimeriez utiliser cette{' '}
-            <span className="text-navy font-medium">vidéo YouTube parfaite</span>{' '}
-            pour votre apprenant. Ou ce{' '}
-            <span className="text-navy font-medium">podcast sur son secteur</span>. 
-            Ou cet{' '}
-            <span className="text-navy font-medium">article technique</span>.
-          </motion.p>
-
-          <motion.p
-            variants={fadeInUp}
-            className="text-lg text-navy-light"
-          >
-            Mais adapter tout ça au bon niveau ?{' '}
-            <span className="text-navy font-medium">Trop long.</span>
+            {"Le vrai risque ? Ce n'est pas que l'IA remplace vos formateurs."}
+            <br />
+            {"C'est qu'ils se retrouvent "}
+            <span className="relative inline-block">
+              <span className="relative z-10">largués</span>
+              <span className="absolute bottom-0 left-0 w-full h-2 bg-yellow/40 -z-0"></span>
+            </span>
+            {" — pendant que d'autres prennent de l'avance."}
           </motion.p>
         </motion.div>
 
-        {/* Challenges section with illustrations */}
+        {/* Three risks */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -87,54 +86,65 @@ export function Problem() {
           transition={{ delay: 0.2 }}
           className="max-w-3xl mx-auto mb-10"
         >
-          <p className="text-navy font-semibold text-lg mb-8 text-center">
-            Et puis il y a les domaines que vous ne maîtrisez pas :
+          <p className="text-navy font-semibold text-lg mb-6 text-center">
+            Trois scénarios à éviter :
           </p>
 
-          <div className="grid sm:grid-cols-3 gap-8">
-            {challenges.map((challenge, idx) => (
+          <div className="grid sm:grid-cols-3 gap-6">
+            {risks.map((risk, idx) => (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + idx * 0.1 }}
-                className="flex flex-col items-center text-center p-4"
+                className="bg-cream rounded-xl p-6 text-center border border-navy/5"
               >
-                <div className="w-32 h-32 lg:w-40 lg:h-40 mb-4">
-                  <img
-                    src={challenge.image}
-                    alt=""
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <p className="text-sm text-navy-light">{challenge.text}</p>
+                <div className="text-3xl mb-3">{risk.icon}</div>
+                <p className="text-sm text-navy-light">{risk.text}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Key insight - highlighted */}
+        {/* Key insight */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto mb-10"
         >
           <div className="relative">
-            {/* Decorative background blob */}
             <div className="absolute -inset-4 bg-gradient-to-r from-yellow/20 via-sage/10 to-yellow/20 rounded-2xl blur-xl opacity-60" />
-
             <div className="relative bg-navy text-cream rounded-2xl p-8 text-center">
               <p className="text-xl font-display font-medium mb-2">
-                Résultat : on reste dans les sentiers battus.
+                {"L'IA évolue vite. Les outils d'aujourd'hui seront obsolètes demain."}
               </p>
               <p className="text-cream/80">
-                Les apprenants reçoivent des cours génériques alors qu'ils ont des besoins spécifiques.
+                {"Ce qui reste ? La capacité à "}
+                <span className="text-yellow font-semibold">{"penser l'IA"}</span>.
               </p>
             </div>
           </div>
+        </motion.div>
+
+        {/* Quote */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="max-w-2xl mx-auto"
+        >
+          <blockquote className="border-l-4 border-yellow pl-6 py-2">
+            <p className="text-lg text-navy italic mb-2">
+              {"\"Celui qui ne prend pas le train de l'IA maintenant, il est en train de se faire dépasser.\""}
+            </p>
+            <footer className="text-sm text-navy-light">
+              {"— Directrice d'institut, après notre formation"}
+            </footer>
+          </blockquote>
         </motion.div>
       </Container>
     </section>

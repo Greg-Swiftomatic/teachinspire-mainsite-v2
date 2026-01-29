@@ -1,116 +1,104 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
+import { SectionTitle } from '../ui/SectionTitle';
 import { Button } from '../ui/Button';
-import { BlurReveal } from '../ui/TextReveal';
-import { ILLUSTRATIONS } from '../../assets/assets';
+import { Clock, Award, Cpu } from 'lucide-react';
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+const credentials = [
+  {
+    icon: Clock,
+    value: '9 000+',
+    label: "heures d'enseignement en ligne",
   },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
+  {
+    icon: Award,
+    value: 'CELTA',
+    label: 'avec mention (2016)',
   },
-};
+  {
+    icon: Cpu,
+    value: '3 ans',
+    label: 'AI Integration Specialist',
+  },
+];
 
 export function Founder() {
   return (
-    <section className="bg-white py-16 lg:py-24">
+    <section className="bg-white py-16 lg:py-24 overflow-hidden">
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Portrait with hover effect */}
+        <SectionTitle>Qui est derrière TeachInspire ?</SectionTitle>
+
+        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex justify-center lg:justify-start order-1 lg:order-none"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid md:grid-cols-5 gap-8 items-start"
           >
-            <motion.div
-              className="relative"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            >
-              {/* Animated glow behind image */}
-              <motion.div
-                className="absolute -inset-4 bg-gradient-to-br from-yellow/30 to-sage/30 rounded-3xl blur-xl"
-                animate={{
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
-              />
-              <img
-                src={ILLUSTRATIONS.portraitGregory}
-                alt="Grégory Le Dall, fondateur de TeachInspire"
-                className="w-full max-w-sm rounded-2xl shadow-xl relative z-10"
-              />
-            </motion.div>
-          </motion.div>
+            {/* Photo placeholder */}
+            <div className="md:col-span-2">
+              <div className="aspect-square rounded-2xl bg-navy/5 border-2 border-dashed border-navy/20 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-sage/20 flex items-center justify-center">
+                    <span className="text-sage font-display font-bold text-3xl">G</span>
+                  </div>
+                  <p className="text-navy-light text-sm">Photo</p>
+                  <p className="text-navy-light/60 text-xs">(placeholder)</p>
+                </div>
+              </div>
+            </div>
 
-          {/* Content */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-            className="order-2 lg:order-none"
-          >
-            <motion.h2
-              variants={fadeInUp}
-              className="text-4xl font-bold font-display text-navy mb-6"
-            >
-              Derrière TeachInspire
-            </motion.h2>
+            {/* Content */}
+            <div className="md:col-span-3">
+              <h3 className="text-2xl font-display font-bold text-navy mb-4">
+                Greg Le Dall
+              </h3>
 
-            <motion.div variants={fadeInUp} className="space-y-4 text-lg text-navy-light mb-8">
-              <BlurReveal delay={0.2}>
-                <p>
-                  Je m'appelle Grégory. Formateur de langues depuis 2016, certifié CELTA (Cambridge).
-                </p>
-              </BlurReveal>
-              <BlurReveal delay={0.3}>
-                <p>
-                  J'ai vécu le même dilemme que vous : des apprenants aux profils très différents, 
-                  des secteurs techniques que je ne maîtrisais pas, et l'impression d'être limité 
-                  par ce que je connaissais.
-                </p>
-              </BlurReveal>
-              <BlurReveal delay={0.4}>
-                <p>
-                  Fin 2022, j'ai découvert l'IA générative. Depuis, je peux transformer 
-                  n'importe quelle source en cours adapté. C'est ce que j'enseigne.
-                </p>
-              </BlurReveal>
-            </motion.div>
+              {/* Credentials */}
+              <div className="flex flex-wrap gap-4 mb-6">
+                {credentials.map((cred, idx) => {
+                  const Icon = cred.icon;
+                  return (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 bg-cream px-3 py-2 rounded-lg"
+                    >
+                      <Icon className="w-4 h-4 text-sage" />
+                      <span className="text-navy font-medium text-sm">{cred.value}</span>
+                      <span className="text-navy-light text-sm">{cred.label}</span>
+                    </div>
+                  );
+                })}
+              </div>
 
-            <motion.div variants={fadeInUp}>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                className="inline-block"
+              {/* Bio */}
+              <div className="space-y-4 text-navy-light mb-8">
+                <p>
+                  "J'ai passé des années à enseigner l'anglais à des pros dans des secteurs que je ne connaissais pas. L'aéronautique, la finance, le juridique...
+                </p>
+                <p>
+                  Quand l'IA générative est arrivée, j'ai vu le potentiel immédiatement.{' '}
+                  <span className="text-navy font-medium">
+                    Pas pour remplacer ce qu'on fait — pour amplifier notre capacité à personnaliser.
+                  </span>
+                </p>
+                <p>
+                  Mais j'ai aussi vu le piège : devenir dépendant d'un outil qu'on ne comprend pas.{' '}
+                  <span className="text-navy font-medium">
+                    C'est pour ça que TeachInspire enseigne une méthode, pas un mode d'emploi."
+                  </span>
+                </p>
+              </div>
+
+              {/* CTA */}
+              <Button
+                variant="primary"
+                size="lg"
+                href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
               >
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  href="/a-propos"
-                >
-                  En savoir plus sur mon parcours
-                </Button>
-              </motion.div>
-            </motion.div>
+                Réserver un appel avec Greg
+              </Button>
+            </div>
           </motion.div>
         </div>
       </Container>

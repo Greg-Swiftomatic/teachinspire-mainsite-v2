@@ -1,28 +1,19 @@
 import { motion } from 'framer-motion';
-import { Video, FileText, Headphones, Clock } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
+import { Button } from '../ui/Button';
+import { Clock, Globe, CreditCard } from 'lucide-react';
 
-const results = [
-  {
-    icon: Video,
-    text: 'Une vidéo YouTube → un cours complet adapté au niveau',
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
   },
-  {
-    icon: FileText,
-    text: 'Un article technique → du vocabulaire ciblé + exercices',
-  },
-  {
-    icon: Headphones,
-    text: "N'importe quel podcast → une compréhension orale sur-mesure",
-  },
-  {
-    icon: Clock,
-    text: 'Le tout en quelques minutes, pas en quelques heures',
-  },
-];
+};
 
-const containerVariants = {
+const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -30,47 +21,146 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+const metrics = [
+  {
+    icon: Clock,
+    value: '3h → 30 min',
+    label: "Temps de préparation d'un cours personnalisé",
+    note: '(Résultat moyen observé sur nos cohortes)',
   },
-};
+  {
+    icon: Globe,
+    value: "N'importe quel secteur",
+    label: "Finance, aéronautique, juridique — vos formateurs s'adaptent",
+    note: null,
+  },
+  {
+    icon: CreditCard,
+    value: '0€/mois',
+    label: 'Google AI Studio, transcription, synthèse vocale pro — tout gratuit',
+    note: null,
+  },
+];
 
 export function Results() {
   return (
-    <section className="bg-white py-16 lg:py-24">
-      <Container size="narrow">
-        <SectionTitle>Ce que ça change concrètement</SectionTitle>
+    <section className="bg-white py-16 lg:py-24 overflow-hidden">
+      <Container>
+        <SectionTitle>Ce que ça change, concrètement</SectionTitle>
 
-        <motion.ul
-          variants={containerVariants}
+        {/* Metrics */}
+        <motion.div
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
+          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16"
         >
-          {results.map((result, index) => (
-            <motion.li
-              key={index}
-              variants={itemVariants}
-              className="flex items-center gap-4 group"
-            >
+          {metrics.map((metric, idx) => {
+            const Icon = metric.icon;
+            return (
               <motion.div
-                className="w-12 h-12 bg-yellow/20 rounded-xl flex items-center justify-center flex-shrink-0"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                key={idx}
+                variants={fadeInUp}
+                className="bg-cream rounded-2xl p-6 text-center"
               >
-                <result.icon className="w-6 h-6 text-yellow" />
+                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-yellow/20 flex items-center justify-center">
+                  <Icon className="w-6 h-6 text-yellow" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-display font-bold text-navy mb-2">
+                  {metric.value}
+                </div>
+                <p className="text-navy-light text-sm">{metric.label}</p>
+                {metric.note && (
+                  <p className="text-navy-light/60 text-xs mt-2">{metric.note}</p>
+                )}
               </motion.div>
-              <span className="text-lg text-navy group-hover:text-sage transition-colors duration-200">
-                {result.text}
-              </span>
-            </motion.li>
-          ))}
-        </motion.ul>
+            );
+          })}
+        </motion.div>
+
+        {/* Before/After Story */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mb-12"
+        >
+          <p className="text-lg text-navy-light mb-6 text-center">
+            {"Le problème classique : un formateur doit préparer un cours pour un apprenant dans l'aéronautique. "}
+            <span className="text-navy font-medium">{"Il n'y connaît rien."}</span>
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Before */}
+            <div className="bg-red-50 border border-red-100 rounded-xl p-6">
+              <div className="text-red-600 font-semibold mb-3 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-sm">✗</span>
+                Avant
+              </div>
+              <p className="text-navy-light">
+                {"3 heures de recherche frustrante. Contenus recyclés. "}
+                <span className="text-navy">
+                  {"Un apprenant qui sent que ce n'est pas vraiment pour lui."}
+                </span>
+              </p>
+            </div>
+
+            {/* After */}
+            <div className="bg-sage/10 border border-sage/20 rounded-xl p-6">
+              <div className="text-sage font-semibold mb-3 flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-sage/20 flex items-center justify-center text-sm">✓</span>
+                Après TeachInspire
+              </div>
+              <p className="text-navy-light">
+                {"30 minutes. Contenu adapté au secteur, au niveau, aux objectifs. "}
+                <span className="text-navy font-medium">
+                  Un apprenant qui reconnaît son quotidien.
+                </span>
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Case Study */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mb-12"
+        >
+          <div className="bg-navy/5 rounded-2xl p-8">
+            <p className="text-navy-light mb-4">
+              {"\"Une formatrice devait créer un cours pour une entreprise de traite éthique qui s'internationalise. "}
+              <span className="text-navy font-medium">Secteur ultra-niche.</span>
+            </p>
+            <p className="text-navy-light mb-4">
+              Avec la méthode TeachInspire, elle a transformé la documentation métier en conversations réalistes.
+            </p>
+            <p className="text-navy font-medium italic">
+              {"Retour de la DRH : \"Je suis étonnée d'entendre des situations qu'on vit vraiment au travail.\""}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <p className="text-xl text-navy font-medium mb-6">
+            Vous voulez ces résultats pour vos équipes ?
+          </p>
+          <Button
+            variant="primary"
+            size="lg"
+            href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+          >
+            Réserver un appel découverte
+          </Button>
+        </motion.div>
       </Container>
     </section>
   );

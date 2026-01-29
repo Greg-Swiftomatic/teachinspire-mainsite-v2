@@ -1,44 +1,18 @@
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
-import { BorderGlowCard } from '../ui/MagicCard';
+import { Quote } from 'lucide-react';
 
-const testimonials = [
-  {
-    quote:
-      "J'ai divisé mon temps de préparation par 4. Mes élèves ont des contenus vraiment adaptés à leur secteur.",
-    name: 'Marie L.',
-    role: 'Formatrice FLE, Paris',
-    initials: 'ML',
-  },
-  {
-    quote:
-      'Enfin une formation IA qui comprend les vrais besoins des profs de langues. Pas du blabla tech.',
-    name: 'Thomas R.',
-    role: "Prof d'anglais, Lyon",
-    initials: 'TR',
-  },
-  {
-    quote:
-      'Les ateliers live font toute la différence. On pratique ensemble, on partage nos prompts.',
-    name: 'Sophie M.',
-    role: 'Formatrice espagnol, Bordeaux',
-    initials: 'SM',
-  },
-];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
-const containerVariants = {
+const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -46,81 +20,94 @@ const containerVariants = {
   },
 };
 
-const quoteIconVariants = {
-  hidden: { scale: 0, rotate: -180 },
-  visible: {
-    scale: 1,
-    rotate: 0,
-    transition: { type: 'spring' as const, stiffness: 260, damping: 20 },
+const testimonials = [
+  {
+    quote:
+      "Celui qui ne prend pas le train de l'IA maintenant, il est en train de se faire dépasser. Je vois déjà les équipes qui travaillent avec ça. C'est incroyable.",
+    author: 'Directrice',
+    company: 'Kintail',
+    avatar: null, // Placeholder
   },
-};
+  {
+    quote:
+      "Je ne pensais pas qu'on pouvait faire tout ça. Maintenant je crée des cours sur des secteurs que je ne connaissais pas du tout.",
+    author: 'Formatrice',
+    company: 'Cohorte 1',
+    avatar: null, // Placeholder
+  },
+];
 
 export function Testimonials() {
   return (
-    <section className="bg-cream py-16 lg:py-24">
+    <section className="bg-cream py-16 lg:py-24 overflow-hidden">
       <Container>
-        <SectionTitle subtitle="Des enseignants qui ont transformé leur pratique">
-          Ce qu'ils en disent
-        </SectionTitle>
+        <SectionTitle>Ce qu'en disent ceux qui l'ont vécu</SectionTitle>
 
+        {/* Testimonials grid */}
         <motion.div
-          variants={containerVariants}
+          variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid md:grid-cols-3 gap-8 mt-12"
+          className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12"
         >
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial, idx) => (
             <motion.div
-              key={testimonial.name}
-              variants={cardVariants}
-              className="relative"
+              key={idx}
+              variants={fadeInUp}
+              className="bg-white rounded-2xl p-6 border border-navy/5 relative"
             >
-              {/* Animated Quote icon */}
-              <motion.div
-                className="absolute -top-3 left-6 z-20"
-                variants={quoteIconVariants}
-                whileHover={{ scale: 1.2, rotate: 10 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-              >
-                <div className="w-10 h-10 bg-yellow rounded-full flex items-center justify-center shadow-lg">
-                  <Quote className="w-5 h-5 text-navy" />
+              {/* Quote icon */}
+              <div className="absolute -top-3 left-6">
+                <div className="w-8 h-8 rounded-full bg-yellow flex items-center justify-center">
+                  <Quote className="w-4 h-4 text-navy" />
                 </div>
-              </motion.div>
+              </div>
 
-              <BorderGlowCard className="h-full" glowColor="#f1d263">
-                <div className="pt-4">
-                  <motion.p
-                    className="text-navy mb-6 italic leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
-                  >
-                    "{testimonial.quote}"
-                  </motion.p>
+              {/* Quote text */}
+              <p className="text-navy-light text-lg leading-relaxed mb-6 pt-4">
+                "{testimonial.quote}"
+              </p>
 
-                  <div className="flex items-center gap-3">
-                    {/* Animated Avatar with initials */}
-                    <motion.div
-                      className="w-12 h-12 bg-sage/20 rounded-full flex items-center justify-center"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                    >
-                      <span className="text-sage font-semibold">
-                        {testimonial.initials}
-                      </span>
-                    </motion.div>
-
-                    <div>
-                      <p className="font-semibold text-navy">{testimonial.name}</p>
-                      <p className="text-sm text-navy-light">{testimonial.role}</p>
-                    </div>
-                  </div>
+              {/* Author */}
+              <div className="flex items-center gap-3">
+                {/* Avatar placeholder */}
+                <div className="w-10 h-10 rounded-full bg-sage/20 flex items-center justify-center">
+                  <span className="text-sage font-medium text-sm">
+                    {testimonial.author.charAt(0)}
+                  </span>
                 </div>
-              </BorderGlowCard>
+                <div>
+                  <p className="text-navy font-medium">{testimonial.author}</p>
+                  <p className="text-navy-light text-sm">{testimonial.company}</p>
+                </div>
+              </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Social proof */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <p className="text-navy font-medium mb-4">
+            Ils ont formé leurs équipes avec TeachInspire :
+          </p>
+          <div className="flex items-center justify-center gap-8">
+            {/* Logo placeholders */}
+            <div className="bg-white px-6 py-3 rounded-lg border border-navy/10">
+              <span className="text-navy font-display font-bold">Kintail</span>
+            </div>
+            <div className="bg-white px-6 py-3 rounded-lg border border-navy/10">
+              <span className="text-navy font-display font-bold">Arrimage</span>
+            </div>
+          </div>
+          <p className="text-navy-light text-sm mt-4">
+            (2 instituts formés depuis 2025)
+          </p>
         </motion.div>
       </Container>
     </section>
