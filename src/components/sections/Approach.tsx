@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
+import { Button } from '../ui/Button';
 import { Brain, Wallet, Shield } from 'lucide-react';
 
 const fadeInUp = {
@@ -44,13 +45,6 @@ const pillars = [
   },
 ];
 
-const benefits = [
-  "Évaluer n'importe quel outil IA",
-  'Comprendre ses forces et limites',
-  "L'adapter à son contexte pédagogique",
-  'Garder le contrôle sur sa pratique',
-];
-
 export function Approach() {
   return (
     <section className="bg-cream py-16 lg:py-24 overflow-hidden">
@@ -75,7 +69,7 @@ export function Approach() {
             {"Problème : quand ChatGPT change (ou qu'un meilleur outil arrive), vous repartez de zéro."}
           </motion.p>
 
-          <motion.p variants={fadeInUp} className="text-xl text-navy font-medium mb-8">
+          <motion.p variants={fadeInUp} className="text-xl text-navy font-medium">
             {"TeachInspire enseigne une "}
             <span className="relative inline-block">
               <span className="relative z-10">méthode transférable</span>
@@ -93,25 +87,8 @@ export function Approach() {
                 />
               </svg>
             </span>
-            {" :"}
-          </motion.p>
-
-          {/* Benefits list */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-8">
-            {benefits.map((benefit, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-navy border border-navy/10"
-              >
-                <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                {benefit}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.p variants={fadeInUp} className="text-lg text-navy font-medium">
+            {"."}
+            <br />
             {"Vos formateurs deviennent "}
             <span className="text-sage">autonomes</span> — pas utilisateurs captifs.
           </motion.p>
@@ -123,7 +100,7 @@ export function Approach() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-12"
         >
           {pillars.map((pillar, idx) => {
             const Icon = pillar.icon;
@@ -154,6 +131,18 @@ export function Approach() {
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <Button variant="secondary" size="lg" href="/formation">
+            Voir le programme détaillé
+          </Button>
         </motion.div>
       </Container>
     </section>

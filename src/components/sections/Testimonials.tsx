@@ -105,9 +105,6 @@ export function Testimonials() {
               <span className="text-navy font-display font-bold">Arrimage</span>
             </div>
           </div>
-          <p className="text-navy-light text-sm mt-4">
-            (2 instituts formés depuis 2025)
-          </p>
         </motion.div>
       </Container>
     </section>

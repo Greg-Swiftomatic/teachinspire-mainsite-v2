@@ -26,19 +26,17 @@ const metrics = [
     icon: Clock,
     value: '3h → 30 min',
     label: "Temps de préparation d'un cours personnalisé",
-    note: '(Résultat moyen observé sur nos cohortes)',
   },
   {
     icon: Globe,
     value: "N'importe quel secteur",
-    label: "Finance, aéronautique, juridique — vos formateurs s'adaptent",
-    note: null,
+    label: "Aéronautique, juridique, logistique — des contenus sur mesure pour n'importe quel secteur.",
+    sublabel: "Vos formateurs n'ont pas besoin d'être experts du domaine pour créer des leçons pertinentes.",
   },
   {
     icon: CreditCard,
     value: '0€/mois',
-    label: 'Google AI Studio, transcription, synthèse vocale pro — tout gratuit',
-    note: null,
+    label: "Pas d'abonnements. Des outils gratuits, des résultats pro.",
   },
 ];
 
@@ -71,55 +69,12 @@ export function Results() {
                   {metric.value}
                 </div>
                 <p className="text-navy-light text-sm">{metric.label}</p>
-                {metric.note && (
-                  <p className="text-navy-light/60 text-xs mt-2">{metric.note}</p>
+                {'sublabel' in metric && metric.sublabel && (
+                  <p className="text-navy-light/70 text-xs mt-2">{metric.sublabel}</p>
                 )}
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Before/After Story */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mx-auto mb-12"
-        >
-          <p className="text-lg text-navy-light mb-6 text-center">
-            {"Le problème classique : un formateur doit préparer un cours pour un apprenant dans l'aéronautique. "}
-            <span className="text-navy font-medium">{"Il n'y connaît rien."}</span>
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Before */}
-            <div className="bg-red-50 border border-red-100 rounded-xl p-6">
-              <div className="text-red-600 font-semibold mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-sm">✗</span>
-                Avant
-              </div>
-              <p className="text-navy-light">
-                {"3 heures de recherche frustrante. Contenus recyclés. "}
-                <span className="text-navy">
-                  {"Un apprenant qui sent que ce n'est pas vraiment pour lui."}
-                </span>
-              </p>
-            </div>
-
-            {/* After */}
-            <div className="bg-sage/10 border border-sage/20 rounded-xl p-6">
-              <div className="text-sage font-semibold mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-sage/20 flex items-center justify-center text-sm">✓</span>
-                Après TeachInspire
-              </div>
-              <p className="text-navy-light">
-                {"30 minutes. Contenu adapté au secteur, au niveau, aux objectifs. "}
-                <span className="text-navy font-medium">
-                  Un apprenant qui reconnaît son quotidien.
-                </span>
-              </p>
-            </div>
-          </div>
         </motion.div>
 
         {/* Case Study */}

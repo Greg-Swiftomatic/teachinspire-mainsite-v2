@@ -30,7 +30,7 @@ const risks = [
   },
   {
     icon: '⏳',
-    text: 'Dépassés par ceux qui ont compris la méthode',
+    text: "Dépassés par ceux qui ont compris la méthode",
   },
 ];
 
@@ -87,7 +87,7 @@ export function Problem() {
           className="max-w-3xl mx-auto mb-10"
         >
           <p className="text-navy font-semibold text-lg mb-6 text-center">
-            Trois scénarios à éviter :
+            Points à éviter :
           </p>
 
           <div className="grid sm:grid-cols-3 gap-6">
@@ -129,23 +129,6 @@ export function Problem() {
           </div>
         </motion.div>
 
-        {/* Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="max-w-2xl mx-auto"
-        >
-          <blockquote className="border-l-4 border-yellow pl-6 py-2">
-            <p className="text-lg text-navy italic mb-2">
-              {"\"Celui qui ne prend pas le train de l'IA maintenant, il est en train de se faire dépasser.\""}
-            </p>
-            <footer className="text-sm text-navy-light">
-              {"— Directrice d'institut, après notre formation"}
-            </footer>
-          </blockquote>
-        </motion.div>
       </Container>
     </section>
   );

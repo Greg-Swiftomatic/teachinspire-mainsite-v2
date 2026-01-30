@@ -29,19 +29,19 @@ export function Hero() {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-4xl mx-auto mb-12"
+          className="text-center max-w-4xl mx-auto"
         >
           <motion.div variants={fadeInUp} className="mb-6">
-            <Badge variant="sage">Formation IA · Instituts de langues · France</Badge>
+            <Badge variant="sage">Formation IA · Instituts de langues</Badge>
           </motion.div>
 
           <motion.h1
             variants={fadeInUp}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-navy mb-6 leading-tight"
           >
-            L'IA pour vos formateurs —{' '}
+            Formez vos équipes à créer des leçons{' '}
             <span className="relative inline-block">
-              <span className="relative z-10">une méthode, pas une béquille.</span>
+              <span className="relative z-10">à partir de n'importe quelle source</span>
               {/* Brush stroke underline */}
               <svg
                 className="absolute -bottom-2 left-0 w-full h-3 text-yellow"
@@ -63,14 +63,14 @@ export function Hero() {
             variants={fadeInUp}
             className="text-xl text-navy-light mb-4 max-w-2xl mx-auto"
           >
-            Formez vos équipes à penser l'IA, pas à dépendre d'un outil.
+            La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
           </motion.p>
 
           <motion.p
             variants={fadeInUp}
             className="text-lg text-navy font-medium mb-8 max-w-2xl mx-auto"
           >
-            Une formation qui rend autonome — pas captif.
+            Vidéo YouTube, podcast, article → leçon sur mesure en moins d'une heure.
           </motion.p>
 
           <motion.div
@@ -78,14 +78,14 @@ export function Hero() {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-6"
           >
             <Button variant="primary" size="lg" href="/formation">
-              Voir le programme complet
+              Découvrir le programme
             </Button>
             <Button
               variant="secondary"
               size="lg"
               href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
             >
-              Réserver mon appel (15 min, gratuit)
+              Réserver un appel
             </Button>
           </motion.div>
 
@@ -95,29 +95,6 @@ export function Hero() {
           >
             Éligible financement OPCO
           </motion.p>
-        </motion.div>
-
-        {/* Video Placeholder */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] as const }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl shadow-navy/10 bg-navy/5 border-2 border-dashed border-navy/20">
-            {/* Placeholder for video */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-yellow/20 flex items-center justify-center">
-                  <svg className="w-10 h-10 text-yellow" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <p className="text-navy-light text-sm">Vidéo de présentation</p>
-                <p className="text-navy-light/60 text-xs mt-1">(placeholder)</p>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </Container>
     </section>
