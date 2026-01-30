@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeachInspire Hero Playground</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#2c3d57',
+            cream: '#f8f7f2',
+            sage: '#85a2a3',
+            yellow: '#f1d263',
+            'navy-light': '#4a5568',
+            'sage-light': '#a8c5c6',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+            handwritten: ['Caveat', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'DM Sans', sans-serif; }
+    .separator { border-top: 4px dashed #85a2a3; margin: 60px 0; padding-top: 20px; }
+    .variation-label {
+      background: #2c3d57;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-navy/10 p-4">
+  <div class="max-w-6xl mx-auto flex gap-4 flex-wrap justify-center">
+    <a href="#v1" class="px-4 py-2 bg-navy text-white rounded-lg text-sm hover:bg-navy-light">V1: Current</a>
+    <a href="#v2" class="px-4 py-2 bg-sage text-white rounded-lg text-sm hover:bg-sage-light">V2: Bold Statement</a>
+    <a href="#v3" class="px-4 py-2 bg-yellow text-navy rounded-lg text-sm hover:bg-yellow/80">V3: Problem-First</a>
+    <a href="#v4" class="px-4 py-2 bg-navy text-white rounded-lg text-sm hover:bg-navy-light">V4: Minimal</a>
+    <a href="#v5" class="px-4 py-2 bg-sage text-white rounded-lg text-sm hover:bg-sage-light">V5: Social Proof</a>
+  </div>
+</nav>
+
+<div class="pt-20">
+
+<!-- ============================================ -->
+<!-- VARIATION 1: Current (V4 Copy) -->
+<!-- ============================================ -->
+<section id="v1" class="bg-cream py-16 lg:py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label">V1: Version actuelle (v4 copy)</span>
+
+    <div class="text-center max-w-4xl mx-auto">
+      <div class="mb-6">
+        <span class="inline-block px-4 py-2 bg-sage/20 text-sage rounded-full text-sm font-medium">
+          Formation IA · Instituts de langues
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-navy mb-6 leading-tight">
+        Formez vos équipes à créer des leçons
+        <span class="relative inline-block">
+          <span class="relative z-10">à partir de n'importe quelle source</span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3 text-yellow" viewBox="0 0 200 12" preserveAspectRatio="none">
+            <path d="M0,8 Q40,2 80,6 T160,4 T200,8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </h1>
+
+      <p class="text-xl text-navy-light mb-4 max-w-2xl mx-auto">
+        La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
+      </p>
+
+      <p class="text-lg text-navy font-medium mb-8 max-w-2xl mx-auto">
+        Vidéo YouTube, podcast, article → leçon sur mesure en moins d'une heure.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-yellow text-navy hover:bg-yellow/90 shadow-lg">
+          Découvrir le programme
+        </a>
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-transparent border-2 border-navy text-navy hover:bg-navy hover:text-cream">
+          Réserver un appel
+        </a>
+      </div>
+
+      <p class="text-sm text-navy-light">
+        Éligible financement OPCO
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="separator max-w-4xl mx-auto"></div>
+
+<!-- ============================================ -->
+<!-- VARIATION 2: Bold Statement -->
+<!-- ============================================ -->
+<section id="v2" class="bg-navy py-16 lg:py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label bg-yellow text-navy">V2: Bold Statement (fond navy)</span>
+
+    <div class="text-center max-w-4xl mx-auto">
+      <div class="mb-6">
+        <span class="inline-block px-4 py-2 bg-yellow/20 text-yellow rounded-full text-sm font-medium">
+          Formation IA · Instituts de langues
+        </span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-cream mb-6 leading-tight">
+        L'IA ne remplacera pas vos formateurs.
+        <br>
+        <span class="text-yellow">Elle va les rendre indispensables.</span>
+      </h1>
+
+      <p class="text-xl text-cream/80 mb-8 max-w-2xl mx-auto">
+        Formez vos équipes à créer des cours sur-mesure pour n'importe quel secteur.
+        Sans expertise technique. Sans abonnements coûteux.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-yellow text-navy hover:bg-yellow/90 shadow-lg">
+          Découvrir le programme
+        </a>
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-transparent border-2 border-cream text-cream hover:bg-cream hover:text-navy">
+          Réserver un appel — 15 min
+        </a>
+      </div>
+
+      <p class="text-sm text-cream/60">
+        Éligible financement OPCO
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="separator max-w-4xl mx-auto"></div>
+
+<!-- ============================================ -->
+<!-- VARIATION 3: Problem-First -->
+<!-- ============================================ -->
+<section id="v3" class="bg-cream py-16 lg:py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label">V3: Problem-First (accroche provocante)</span>
+
+    <div class="text-center max-w-4xl mx-auto">
+      <div class="mb-6">
+        <span class="inline-block px-4 py-2 bg-sage/20 text-sage rounded-full text-sm font-medium">
+          Formation IA · Instituts de langues
+        </span>
+      </div>
+
+      <p class="text-xl text-navy-light mb-4 font-handwritten text-2xl">
+        Vos formateurs bricolent avec ChatGPT ?
+      </p>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-navy mb-6 leading-tight">
+        Il est temps de passer
+        <span class="relative inline-block">
+          <span class="relative z-10 text-sage">à la méthode.</span>
+          <svg class="absolute -bottom-2 left-0 w-full h-3 text-yellow" viewBox="0 0 200 12" preserveAspectRatio="none">
+            <path d="M0,8 Q40,2 80,6 T160,4 T200,8" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </h1>
+
+      <p class="text-xl text-navy-light mb-8 max-w-2xl mx-auto">
+        Une formation qui rend vos équipes autonomes — pas dépendantes d'un outil qui changera demain.
+      </p>
+
+      <div class="bg-white rounded-2xl p-6 max-w-xl mx-auto mb-8 border border-navy/10">
+        <div class="flex items-center justify-center gap-8 text-center">
+          <div>
+            <div class="text-3xl font-display font-bold text-navy">3h → 30min</div>
+            <div class="text-sm text-navy-light">temps de prépa</div>
+          </div>
+          <div class="h-12 w-px bg-navy/10"></div>
+          <div>
+            <div class="text-3xl font-display font-bold text-sage">0€/mois</div>
+            <div class="text-sm text-navy-light">outils gratuits</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-yellow text-navy hover:bg-yellow/90 shadow-lg">
+          Voir comment ça marche
+        </a>
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-transparent border-2 border-navy text-navy hover:bg-navy hover:text-cream">
+          Réserver un appel
+        </a>
+      </div>
+
+      <p class="text-sm text-navy-light">
+        Éligible financement OPCO
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="separator max-w-4xl mx-auto"></div>
+
+<!-- ============================================ -->
+<!-- VARIATION 4: Minimal -->
+<!-- ============================================ -->
+<section id="v4" class="bg-cream py-20 lg:py-32">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label">V4: Minimal (épuré, focus message)</span>
+
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-display text-navy mb-8 leading-tight">
+        Vos formateurs.
+        <br>
+        <span class="text-sage">L'IA en renfort.</span>
+      </h1>
+
+      <p class="text-xl text-navy-light mb-10 max-w-xl mx-auto">
+        Formez vos équipes à créer des cours personnalisés en 30 minutes — pour n'importe quel secteur.
+      </p>
+
+      <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-10 py-5 text-xl bg-yellow text-navy hover:bg-yellow/90 shadow-lg mb-4">
+        Réserver un appel découverte
+      </a>
+
+      <p class="text-sm text-navy-light">
+        15 min · Gratuit · Sans engagement
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="separator max-w-4xl mx-auto"></div>
+
+<!-- ============================================ -->
+<!-- VARIATION 5: Social Proof Lead -->
+<!-- ============================================ -->
+<section id="v5" class="bg-cream py-16 lg:py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label">V5: Social Proof Lead (preuve sociale en avant)</span>
+
+    <div class="text-center max-w-4xl mx-auto">
+      <!-- Social proof first -->
+      <div class="mb-8">
+        <p class="text-navy-light mb-3 text-sm uppercase tracking-wide">Ils forment déjà leurs équipes avec nous</p>
+        <div class="flex items-center justify-center gap-6">
+          <span class="text-navy font-display font-bold text-xl">Kintail</span>
+          <span class="text-navy/30">•</span>
+          <span class="text-navy font-display font-bold text-xl">Arrimage</span>
+        </div>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-display text-navy mb-6 leading-tight">
+        La formation IA qui rend vos formateurs
+        <span class="relative inline-block">
+          <span class="relative z-10 text-sage">autonomes</span>
+          <svg class="absolute -bottom-1 left-0 w-full h-2 text-yellow" viewBox="0 0 200 8" preserveAspectRatio="none">
+            <path d="M0,4 Q50,0 100,4 T200,4" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </h1>
+
+      <p class="text-xl text-navy-light mb-4 max-w-2xl mx-auto">
+        Pas de dépendance à un outil. Une méthode transférable pour créer des cours sur-mesure — aéronautique, juridique, logistique...
+      </p>
+
+      <!-- Quote -->
+      <blockquote class="bg-white rounded-xl p-6 max-w-2xl mx-auto mb-8 border-l-4 border-yellow">
+        <p class="text-navy italic mb-2">
+          "Celui qui ne prend pas le train de l'IA maintenant, il est en train de se faire dépasser."
+        </p>
+        <footer class="text-sm text-navy-light">— Directrice, Kintail</footer>
+      </blockquote>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-yellow text-navy hover:bg-yellow/90 shadow-lg">
+          Découvrir le programme
+        </a>
+        <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-transparent border-2 border-navy text-navy hover:bg-navy hover:text-cream">
+          Réserver un appel — 15 min
+        </a>
+      </div>
+
+      <p class="text-sm text-navy-light">
+        Éligible financement OPCO
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="separator max-w-4xl mx-auto"></div>
+
+<!-- ============================================ -->
+<!-- VARIATION 6: Two-Column Layout -->
+<!-- ============================================ -->
+<section id="v6" class="bg-cream py-16 lg:py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <span class="variation-label bg-sage">V6: Two-Column (texte + visuel)</span>
+
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <!-- Left: Text -->
+      <div class="text-left">
+        <div class="mb-6">
+          <span class="inline-block px-4 py-2 bg-sage/20 text-sage rounded-full text-sm font-medium">
+            Formation IA · Instituts de langues
+          </span>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl font-bold font-display text-navy mb-6 leading-tight">
+          Formez vos équipes à créer des leçons
+          <span class="text-sage">à partir de n'importe quelle source</span>
+        </h1>
+
+        <p class="text-xl text-navy-light mb-6">
+          La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
+        </p>
+
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-3 text-navy">
+            <span class="w-6 h-6 rounded-full bg-yellow flex items-center justify-center text-sm">✓</span>
+            Vidéo, podcast, article → leçon en 30 min
+          </li>
+          <li class="flex items-center gap-3 text-navy">
+            <span class="w-6 h-6 rounded-full bg-yellow flex items-center justify-center text-sm">✓</span>
+            Outils 100% gratuits (Google AI Studio)
+          </li>
+          <li class="flex items-center gap-3 text-navy">
+            <span class="w-6 h-6 rounded-full bg-yellow flex items-center justify-center text-sm">✓</span>
+            Méthode transférable, pas dépendance
+          </li>
+        </ul>
+
+        <div class="flex flex-col sm:flex-row gap-4 mb-4">
+          <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-yellow text-navy hover:bg-yellow/90 shadow-lg">
+            Découvrir le programme
+          </a>
+          <a href="#" class="inline-flex items-center justify-center font-semibold rounded-lg px-8 py-4 text-lg bg-transparent border-2 border-navy text-navy hover:bg-navy hover:text-cream">
+            Réserver un appel
+          </a>
+        </div>
+
+        <p class="text-sm text-navy-light">
+          Éligible financement OPCO
+        </p>
+      </div>
+
+      <!-- Right: Visual placeholder -->
+      <div class="relative">
+        <div class="bg-white rounded-2xl p-8 border-2 border-dashed border-navy/20 aspect-square flex items-center justify-center">
+          <div class="text-center">
+            <div class="text-6xl mb-4">🎯</div>
+            <p class="text-navy-light">Illustration ou vidéo</p>
+            <p class="text-sm text-navy-light/60">(workflow IA en action)</p>
+          </div>
+        </div>
+        <!-- Floating stats -->
+        <div class="absolute -bottom-4 -left-4 bg-yellow rounded-xl p-4 shadow-lg">
+          <div class="text-2xl font-display font-bold text-navy">3h → 30min</div>
+          <div class="text-sm text-navy/70">temps de prépa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-navy text-cream py-8 mt-12">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <p class="text-cream/60">TeachInspire Hero Playground — Choisissez votre variation préférée</p>
+  </div>
+</footer>
+
+</div>
+</body>
+</html>
