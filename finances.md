@@ -99,9 +99,18 @@
 
 *Dernière mise à jour : 1er février 2026*
 
+### 💰 Snapshot Comptes (1er fév 2026)
+| Compte | Montant | EUR equiv |
+|--------|---------|-----------|
+| France | €1 140 | €1 140 |
+| Maroc | 26 676 MAD | ~€2 425 |
+| **Total** | | **~€3 565** |
+
+*Payé : loyer fév ✓, élec ✓, vol avril ✓ — En attente : Kintail €1 700 + YBH $4-5K*
+
 | Objectif | Cible | Actuel | Gap | Priorité | ETA |
 |----------|-------|--------|-----|----------|-----|
-| 🚨 Emergency Fund (6 mois) | €9 000 | €4 000 | €5 000 | 1 | Mars 2026 |
+| 🚨 Emergency Fund (6 mois) | €9 000 | €3 565 | €5 435 | 1 | Fin fév 2026 |
 | 🕌 Medina Fund (test 2027) | €20 000 | €0 | €20 000 | 2 | Q4 2027 |
 | 🏗️ Building Fund (Yamoussoukro) | TBD | €0 | TBD | 3 | TBD |
 | 🎓 Soumayya Studies Fund | TBD | €0 | TBD | 4 | 2030 |
