@@ -3,13 +3,14 @@ import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
 import { Problem } from './components/sections/Problem';
 import { Approach } from './components/sections/Approach';
-import { Results } from './components/sections/Results';
 import { HowItWorks } from './components/sections/HowItWorks';
-import { TargetAudience } from './components/sections/TargetAudience';
+import { Modules } from './components/sections/Modules';
+import { Results } from './components/sections/Results';
 import { Testimonials } from './components/sections/Testimonials';
 import { Founder } from './components/sections/Founder';
 import { FAQ } from './components/sections/FAQ';
 import { FinalCTA } from './components/sections/FinalCTA';
+import { BackToTop } from './components/ui/BackToTop';
 
 function App() {
   return (
@@ -21,9 +22,9 @@ function App() {
         <Hero />
         <Problem />
         <Approach />
-        <Results />
         <HowItWorks />
-        <TargetAudience />
+        <Modules />
+        <Results />
         <Testimonials />
         <Founder />
         <FAQ />
@@ -31,6 +32,7 @@ function App() {
       </main>
 
       <Footer />
+      <BackToTop />
     </div>
   );
 }

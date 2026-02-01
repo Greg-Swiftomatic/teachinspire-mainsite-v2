@@ -1,28 +1,32 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
-import { Button } from '../ui/Button';
-import { Clock, Globe, CreditCard, X, Check } from 'lucide-react';
+import { HandDrawnButton } from '../ui/HandDrawnButton';
+import { AnimatedCounter, ClockIcon, CoinIcon, PathIcon } from '../ui/HandDrawnIllustrations';
+import { X, Check } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const metrics = [
   {
-    icon: Clock,
-    value: '3h → 30 min',
+    icon: ClockIcon,
+    displayValue: <><AnimatedCounter value={3} suffix="h" /> → <AnimatedCounter value={30} suffix=" min" /></>,
     label: "Temps de préparation d'un cours personnalisé",
     note: '(Résultat moyen observé sur nos cohortes)',
+    color: 'yellow',
   },
   {
-    icon: Globe,
-    value: "N'importe quel secteur",
+    icon: PathIcon,
+    displayValue: "N'importe quel secteur",
     label: "Finance, aéronautique, juridique — vos formateurs s'adaptent",
     note: null,
+    color: 'sage',
   },
   {
-    icon: CreditCard,
-    value: '0€/mois',
+    icon: CoinIcon,
+    displayValue: <><AnimatedCounter value={0} prefix="" suffix="€" />/mois</>,
     label: 'Google AI Studio, transcription, synthèse vocale pro — tout gratuit',
     note: null,
+    color: 'rust',
   },
 ];
 
@@ -52,7 +56,7 @@ export function Results() {
   });
 
   return (
-    <section className="bg-white py-16 lg:py-24 overflow-hidden">
+    <section className="bg-white py-16 lg:py-24 overflow-hidden paper-texture relative">
       <Container>
         <SectionTitle>Ce que ça change, concrètement</SectionTitle>
 
@@ -66,19 +70,30 @@ export function Results() {
         >
           {metrics.map((metric, idx) => {
             const Icon = metric.icon;
+            const colorClasses = {
+              yellow: { bg: 'bg-yellow/15', text: 'text-yellow' },
+              sage: { bg: 'bg-sage/15', text: 'text-sage' },
+              rust: { bg: 'bg-rust/15', text: 'text-rust' },
+            };
+            const colors = colorClasses[metric.color as keyof typeof colorClasses];
+
             return (
               <motion.div
                 key={idx}
                 variants={fadeInUp}
-                className="bg-cream rounded-2xl p-6 text-center"
+                whileHover={{ y: prefersReducedMotion ? 0 : -4 }}
+                className="bg-cream rounded-2xl p-8 text-center border border-navy/5 hover:border-navy/10 transition-all shadow-sm hover:shadow-md"
+                style={{ borderRadius: '22px 16px 24px 14px' }}
               >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-yellow/20 flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-yellow" aria-hidden="true" />
+                <div className={`w-16 h-16 mx-auto mb-4 rounded-xl ${colors.bg} flex items-center justify-center`} style={{ borderRadius: '16px 12px 18px 10px' }}>
+                  <div className={`w-10 h-10 ${colors.text}`}>
+                    <Icon className="w-full h-full" />
+                  </div>
                 </div>
-                <div className="text-2xl sm:text-3xl font-display font-bold text-navy mb-2">
-                  {metric.value}
+                <div className="text-3xl sm:text-4xl font-display font-bold text-navy mb-3">
+                  {metric.displayValue}
                 </div>
-                <p className="text-navy-light text-sm">{metric.label}</p>
+                <p className="text-navy-light text-sm leading-relaxed">{metric.label}</p>
                 {metric.note && (
                   <p className="text-navy-light/60 text-xs mt-2">{metric.note}</p>
                 )}
@@ -168,13 +183,13 @@ export function Results() {
           <p className="text-xl text-navy font-medium mb-6">
             Vous voulez ces résultats pour vos équipes ?
           </p>
-          <Button
+          <HandDrawnButton
             variant="primary"
             size="lg"
             href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
           >
             Réserver un appel découverte
-          </Button>
+          </HandDrawnButton>
         </motion.div>
       </Container>
     </section>

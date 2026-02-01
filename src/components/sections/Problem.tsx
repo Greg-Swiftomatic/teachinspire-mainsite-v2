@@ -1,21 +1,54 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
-import { Link, RefreshCw, Clock } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+
+// Hand-drawn doodle icons for each risk
+const DependencyIcon = () => (
+  <svg viewBox="0 0 48 48" className="w-full h-full" fill="none">
+    <path d="M12 24 L24 24 M24 24 L36 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <circle cx="24" cy="24" r="6" stroke="currentColor" strokeWidth="2.5" />
+    <path d="M8 16 Q12 20 8 24 Q12 28 8 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+    <path d="M40 16 Q36 20 40 24 Q36 28 40 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
+  </svg>
+);
+
+const AdaptIcon = () => (
+  <svg viewBox="0 0 48 48" className="w-full h-full" fill="none">
+    <path d="M24 8 L24 14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <path d="M24 34 L24 40" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+    <path d="M10 24 Q17 18 24 24 T38 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+    <circle cx="10" cy="24" r="3" fill="currentColor" />
+    <circle cx="38" cy="24" r="3" fill="currentColor" />
+    <path d="M36 20 L40 24 L36 28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
+const OutpacedIcon = () => (
+  <svg viewBox="0 0 48 48" className="w-full h-full" fill="none">
+    <circle cx="16" cy="24" r="8" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 3" />
+    <circle cx="34" cy="24" r="6" stroke="currentColor" strokeWidth="2.5" fill="none" />
+    <path d="M34 18 L38 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M34 30 L38 34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M12 34 L12 38" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+  </svg>
+);
 
 const risks = [
   {
-    icon: Link,
+    icon: DependencyIcon,
     text: "Dépendants d'outils qu'ils ne maîtrisent pas",
+    color: 'text-rust',
   },
   {
-    icon: RefreshCw,
+    icon: AdaptIcon,
     text: "Incapables de s'adapter quand l'outil change",
+    color: 'text-sage',
   },
   {
-    icon: Clock,
+    icon: OutpacedIcon,
     text: 'Dépassés par ceux qui ont compris la méthode',
+    color: 'text-navy',
   },
 ];
 
@@ -45,7 +78,7 @@ export function Problem() {
   });
 
   return (
-    <section className="bg-white py-16 lg:py-24 overflow-hidden">
+    <section className="bg-white py-16 lg:py-24 overflow-hidden paper-texture relative">
       <Container>
         <SectionTitle>
           {"Vos formateurs entendent parler d'IA partout."}
@@ -109,12 +142,13 @@ export function Problem() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={getTransition(0.3 + idx * 0.1)}
-                  className="bg-cream rounded-xl p-6 text-center border border-navy/5"
+                  className="bg-cream rounded-2xl p-6 text-center border border-navy/5 hover:border-navy/10 transition-colors"
+                  style={{ borderRadius: '20px 16px 24px 14px' }}
                 >
-                  <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-navy/10 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-navy" aria-hidden="true" />
+                  <div className={`w-14 h-14 mx-auto mb-4 ${risk.color}`}>
+                    <Icon />
                   </div>
-                  <p className="text-sm text-navy-light">{risk.text}</p>
+                  <p className="text-sm text-navy-light leading-relaxed">{risk.text}</p>
                 </motion.div>
               );
             })}
