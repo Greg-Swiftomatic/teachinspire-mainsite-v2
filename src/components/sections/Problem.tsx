@@ -177,23 +177,6 @@ export function Problem() {
           </div>
         </motion.div>
 
-        {/* Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={getTransition(0.5)}
-          className="max-w-2xl mx-auto"
-        >
-          <blockquote className="border-l-4 border-yellow pl-6 py-2">
-            <p className="text-lg text-navy italic mb-2">
-              {"\"Celui qui ne prend pas le train de l'IA maintenant, il est en train de se faire dépasser.\""}
-            </p>
-            <footer className="text-sm text-navy-light">
-              {"— Directrice d'institut, après notre formation"}
-            </footer>
-          </blockquote>
-        </motion.div>
       </Container>
     </section>
   );

@@ -48,16 +48,16 @@ export function Hero() {
             className="text-left"
           >
             <motion.div variants={fadeInUp} className="mb-6">
-              <Badge variant="sage">Formation IA · Instituts de langues · France</Badge>
+              <Badge variant="sage">Formation IA · Instituts de langues</Badge>
             </motion.div>
 
             <motion.h1
               variants={fadeInUp}
               className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold font-display text-navy mb-6 leading-tight"
             >
-              L'IA pour vos formateurs —{' '}
+              Formez vos équipes à créer des leçons{' '}
               <span className="relative inline-block">
-                <span className="relative z-10">une méthode, pas une béquille.</span>
+                <span className="relative z-10">à partir de n'importe quelle source</span>
                 {/* Brush stroke underline */}
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-3 text-yellow"
@@ -80,14 +80,14 @@ export function Hero() {
               variants={fadeInUp}
               className="text-xl text-navy-light mb-4 max-w-xl"
             >
-              Formez vos équipes à penser l'IA, pas à dépendre d'un outil.
+              La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
             </motion.p>
 
             <motion.p
               variants={fadeInUp}
-              className="text-lg text-navy font-medium mb-8 max-w-xl"
+              className="text-lg text-navy-light/80 mb-8 max-w-xl"
             >
-              Une formation qui rend autonome — pas captif.
+              Vidéo YouTube, podcast, article → leçon sur mesure en moins d'une heure.
             </motion.p>
 
             <motion.div
@@ -95,14 +95,14 @@ export function Hero() {
               className="flex flex-col sm:flex-row gap-4 mb-6"
             >
               <HandDrawnButton variant="primary" size="lg" href="/formation">
-                Voir le programme complet
+                Découvrir le programme
               </HandDrawnButton>
               <HandDrawnButton
                 variant="secondary"
                 size="lg"
                 href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
               >
-                Réserver mon appel
+                Réserver un appel
               </HandDrawnButton>
             </motion.div>
 

@@ -3,9 +3,9 @@ import { Footer } from './components/layout/Footer';
 import { Hero } from './components/sections/Hero';
 import { Problem } from './components/sections/Problem';
 import { Approach } from './components/sections/Approach';
-import { HowItWorks } from './components/sections/HowItWorks';
-import { Modules } from './components/sections/Modules';
 import { Results } from './components/sections/Results';
+import { HowItWorks } from './components/sections/HowItWorks';
+import { TargetAudience } from './components/sections/TargetAudience';
 import { Testimonials } from './components/sections/Testimonials';
 import { Founder } from './components/sections/Founder';
 import { FAQ } from './components/sections/FAQ';
@@ -22,9 +22,9 @@ function App() {
         <Hero />
         <Problem />
         <Approach />
-        <HowItWorks />
-        <Modules />
         <Results />
+        <HowItWorks />
+        <TargetAudience />
         <Testimonials />
         <Founder />
         <FAQ />

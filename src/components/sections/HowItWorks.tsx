@@ -44,13 +44,15 @@ const steps = [
     icon: PhoneIcon,
     title: 'Appel découverte',
     description: 'On échange sur vos besoins, votre contexte, vos objectifs. Pas de pitch commercial — juste une conversation.',
+    duration: '15 min, gratuit',
     color: 'yellow',
   },
   {
     number: '02',
     icon: VideoIcon,
     title: 'Formation hybride',
-    description: '15 modules vidéo (20 min chacun) + 6-8 sessions live sur 12 semaines. Vos formateurs avancent à leur rythme, avec un point toutes les 2 semaines.',
+    description: 'Modules vidéo (20 min chacun) + sessions live. Vos formateurs avancent à leur rythme, avec un point régulier.',
+    duration: '12 semaines',
     color: 'sage',
   },
   {
@@ -58,6 +60,7 @@ const steps = [
     icon: LightbulbIcon,
     title: 'Mise en pratique',
     description: 'Pas de théorie abstraite. Chaque module se termine par une application concrète avec leurs vrais apprenants.',
+    duration: null,
     color: 'rust',
   },
   {
@@ -65,6 +68,7 @@ const steps = [
     icon: UsersIcon,
     title: 'Communauté',
     description: 'Accès à la communauté TeachInspire pendant 1 an. Questions, mises à jour sur les outils, entraide entre instituts.',
+    duration: null,
     color: 'navy',
   },
 ];
@@ -180,6 +184,9 @@ export function HowItWorks() {
                           {step.title}
                         </h3>
                         <p className="text-navy-light leading-relaxed">{step.description}</p>
+                        {step.duration && (
+                          <p className="text-sm text-sage mt-2 font-medium">{step.duration}</p>
+                        )}
                       </div>
                     </div>
                   </motion.div>

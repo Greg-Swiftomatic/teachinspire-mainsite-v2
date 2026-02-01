@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
+import { HandDrawnButton } from '../ui/HandDrawnButton';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { SquiggleLine } from '../ui/HandDrawnIllustrations';
 
@@ -55,12 +56,6 @@ const pillars = [
   },
 ];
 
-const benefits = [
-  "Évaluer n'importe quel outil IA",
-  'Comprendre ses forces et limites',
-  "L'adapter à son contexte pédagogique",
-  'Garder le contrôle sur sa pratique',
-];
 
 export function Approach() {
   const prefersReducedMotion = useReducedMotion();
@@ -150,7 +145,7 @@ export function Approach() {
             {"Problème : quand ChatGPT change (ou qu'un meilleur outil arrive), vous repartez de zéro."}
           </motion.p>
 
-          <motion.p variants={fadeInUp} className="text-xl text-navy font-medium mb-8">
+          <motion.p variants={fadeInUp} className="text-xl text-navy font-medium">
             {"TeachInspire enseigne une "}
             <span className="relative inline-block">
               <span className="relative z-10">méthode transférable</span>
@@ -169,25 +164,8 @@ export function Approach() {
                 />
               </svg>
             </span>
-            {" :"}
-          </motion.p>
-
-          {/* Benefits list */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap justify-center gap-3 mb-8">
-            {benefits.map((benefit, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-navy border border-navy/10"
-              >
-                <svg className="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                {benefit}
-              </span>
-            ))}
-          </motion.div>
-
-          <motion.p variants={fadeInUp} className="text-lg text-navy font-medium">
+            .
+            <br />
             {"Vos formateurs deviennent "}
             <span className="text-sage">autonomes</span> — pas utilisateurs captifs.
           </motion.p>
@@ -235,6 +213,19 @@ export function Approach() {
               </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: prefersReducedMotion ? 0 : 0.3, duration: prefersReducedMotion ? 0.01 : 0.5 }}
+          className="text-center mt-12"
+        >
+          <HandDrawnButton variant="secondary" size="lg" href="/formation">
+            Voir le programme détaillé
+          </HandDrawnButton>
         </motion.div>
       </Container>
     </section>

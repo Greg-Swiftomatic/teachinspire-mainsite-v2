@@ -144,7 +144,7 @@ export function Founder() {
               {/* Bio */}
               <div className="space-y-4 text-navy-light mb-8 leading-relaxed">
                 <p>
-                  "J'ai passé des années à enseigner l'anglais à des pros dans des secteurs que je ne connaissais pas. L'aéronautique, la finance, le juridique...
+                  "J'ai passé des années à enseigner l'anglais à des pros dans des secteurs que je ne connaissais pas. L'aéronautique, la logistique, le juridique...
                 </p>
                 <p>
                   Quand l'IA générative est arrivée, j'ai vu le potentiel immédiatement.{' '}

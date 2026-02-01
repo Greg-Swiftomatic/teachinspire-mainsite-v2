@@ -3,7 +3,6 @@ import { Container } from '../layout/Container';
 import { SectionTitle } from '../ui/SectionTitle';
 import { HandDrawnButton } from '../ui/HandDrawnButton';
 import { AnimatedCounter, ClockIcon, CoinIcon, PathIcon } from '../ui/HandDrawnIllustrations';
-import { X, Check } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const metrics = [
@@ -11,20 +10,20 @@ const metrics = [
     icon: ClockIcon,
     displayValue: <><AnimatedCounter value={3} suffix="h" /> → <AnimatedCounter value={30} suffix=" min" /></>,
     label: "Temps de préparation d'un cours personnalisé",
-    note: '(Résultat moyen observé sur nos cohortes)',
+    note: null,
     color: 'yellow',
   },
   {
     icon: PathIcon,
     displayValue: "N'importe quel secteur",
-    label: "Finance, aéronautique, juridique — vos formateurs s'adaptent",
+    label: "Aéronautique, juridique, logistique — des contenus sur mesure. Vos formateurs n'ont pas besoin d'être experts du domaine.",
     note: null,
     color: 'sage',
   },
   {
     icon: CoinIcon,
     displayValue: <><AnimatedCounter value={0} prefix="" suffix="€" />/mois</>,
-    label: 'Google AI Studio, transcription, synthèse vocale pro — tout gratuit',
+    label: "Pas d'abonnements. Des outils gratuits, des résultats pro.",
     note: null,
     color: 'rust',
   },
@@ -100,54 +99,6 @@ export function Results() {
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Before/After Story */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={getTransition(0)}
-          className="max-w-3xl mx-auto mb-12"
-        >
-          <p className="text-lg text-navy-light mb-6 text-center">
-            {"Le problème classique : un formateur doit préparer un cours pour un apprenant dans l'aéronautique. "}
-            <span className="text-navy font-medium">{"Il n'y connaît rien."}</span>
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Before */}
-            <div className="bg-navy/5 border border-navy/10 rounded-xl p-6">
-              <div className="text-navy-light font-semibold mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-navy/10 flex items-center justify-center">
-                  <X className="w-4 h-4 text-navy-light" aria-hidden="true" />
-                </span>
-                Avant
-              </div>
-              <p className="text-navy-light">
-                {"3 heures de recherche frustrante. Contenus recyclés. "}
-                <span className="text-navy">
-                  {"Un apprenant qui sent que ce n'est pas vraiment pour lui."}
-                </span>
-              </p>
-            </div>
-
-            {/* After */}
-            <div className="bg-sage/10 border border-sage/20 rounded-xl p-6">
-              <div className="text-sage font-semibold mb-3 flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-sage/20 flex items-center justify-center">
-                  <Check className="w-4 h-4 text-sage" aria-hidden="true" />
-                </span>
-                Après TeachInspire
-              </div>
-              <p className="text-navy-light">
-                {"30 minutes. Contenu adapté au secteur, au niveau, aux objectifs. "}
-                <span className="text-navy font-medium">
-                  Un apprenant qui reconnaît son quotidien.
-                </span>
-              </p>
-            </div>
-          </div>
         </motion.div>
 
         {/* Case Study */}
