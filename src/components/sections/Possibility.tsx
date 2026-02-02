@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import { SectionTitle } from '../ui/SectionTitle';
-import { MagicCard } from '../ui/MagicCard';
+import { PremiumSourceDiagram } from '../ui/PremiumSourceDiagram';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const capabilities = [
@@ -14,50 +13,55 @@ const capabilities = [
 export function Possibility() {
   const prefersReducedMotion = useReducedMotion();
 
-  const getTransition = (delay: number = 0) => ({
-    delay: prefersReducedMotion ? 0 : delay,
-    duration: prefersReducedMotion ? 0.01 : 0.6,
-  });
-
   return (
-    <section className="bg-cream py-16 lg:py-24">
-      <Container>
-        <SectionTitle>
-          Et si n'importe quelle source devenait votre matière&nbsp;première&nbsp;?
-        </SectionTitle>
-
-        {/* Illustration des sources */}
-        <motion.div
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={getTransition()}
-          className="flex justify-center mb-12"
-        >
-          <img
-            src="/icons/illustration-source.png"
-            alt="Sources variées : vidéos YouTube, podcasts, articles techniques, rapports d'entreprise"
-            className="max-w-2xl lg:max-w-3xl w-full h-auto rounded-2xl"
+    <section className="bg-cream py-20 lg:py-28 overflow-hidden relative">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px bg-navy"
+            style={{ left: `${(i + 1) * (100 / 12)}%` }}
           />
-        </motion.div>
+        ))}
+      </div>
 
-        {/* Ce que l'IA permet */}
+      <Container>
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={getTransition(0.2)}
-          className="max-w-3xl mx-auto"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 lg:mb-16"
         >
-          <MagicCard
-            className="bg-white"
-            gradientColor="#85a2a3"
-            gradientOpacity={0.15}
-          >
-            <p className="text-navy mb-6 font-medium">
-              Avec les bonnes méthodes IA, tout cela devient exploitable :
-            </p>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="w-12 h-px bg-rust" />
+            <span className="text-rust font-medium text-sm tracking-wide uppercase">
+              La transformation
+            </span>
+            <div className="w-12 h-px bg-rust" />
+          </div>
 
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight max-w-3xl mx-auto">
+            Et si n'importe quelle source devenait{' '}
+            <span className="text-rust">votre matière première</span> ?
+          </h2>
+        </motion.div>
+
+        {/* Premium diagram */}
+        <div className="mb-12 lg:mb-16">
+          <PremiumSourceDiagram />
+        </div>
+
+        {/* Capabilities list */}
+        <div className="grid lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-4">
+            <p className="text-sm text-navy/50 uppercase tracking-wider">
+              Ce que ça permet
+            </p>
+          </div>
+          <div className="lg:col-span-8">
             <div className="space-y-3 mb-8">
               {capabilities.map((cap, idx) => (
                 <motion.div
@@ -65,11 +69,13 @@ export function Possibility() {
                   initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={getTransition(0.3 + idx * 0.1)}
-                  className="flex items-start gap-3"
+                  transition={{ duration: 0.4, delay: 0.3 + idx * 0.1 }}
+                  className="flex items-start gap-3 py-3 border-b border-navy/10"
                 >
-                  <span className="text-sage font-bold" aria-hidden="true">→</span>
-                  <p className="text-navy-light">{cap}</p>
+                  <span className="text-rust font-display font-semibold">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <p className="text-navy/70">{cap}</p>
                 </motion.div>
               ))}
             </div>
@@ -78,17 +84,18 @@ export function Possibility() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={getTransition(0.7)}
-              className="pt-6 border-t border-navy/10"
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="p-6 bg-navy/5"
             >
-              <p className="text-navy font-medium text-lg">
+              <p className="text-navy font-medium">
                 Le contenu parfait pour votre apprenant existe déjà quelque part.
-                <br />
-                <span className="text-sage">Vous apprenez à le transformer.</span>
+              </p>
+              <p className="text-rust mt-1">
+                Vous apprenez à le transformer.
               </p>
             </motion.div>
-          </MagicCard>
-        </motion.div>
+          </div>
+        </div>
       </Container>
     </section>
   );

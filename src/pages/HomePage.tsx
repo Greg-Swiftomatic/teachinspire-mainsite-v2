@@ -2,7 +2,6 @@ import { Hero } from '../components/sections/Hero';
 import { Problem } from '../components/sections/Problem';
 import { Possibility } from '../components/sections/Possibility';
 import { Approach } from '../components/sections/Approach';
-import { Offerings } from '../components/sections/Offerings';
 import { Modules } from '../components/sections/Modules';
 import { Results } from '../components/sections/Results';
 import { Philosophy } from '../components/sections/Philosophy';
@@ -16,7 +15,6 @@ export function HomePage() {
       <Problem />
       <Possibility />
       <Approach />
-      <Offerings />
       <Modules />
       <Results />
       <Philosophy />

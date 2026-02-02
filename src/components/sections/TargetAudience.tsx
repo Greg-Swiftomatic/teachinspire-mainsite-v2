@@ -1,28 +1,7 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import { SectionTitle } from '../ui/SectionTitle';
-import { HandDrawnButton } from '../ui/HandDrawnButton';
+import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-
-// Hand-drawn check icon
-const CheckDoodle = () => (
-  <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-    <path
-      d="M4 12 Q8 8 10 14 Q14 6 20 4"
-      stroke="currentColor"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-// Hand-drawn X icon
-const XDoodle = () => (
-  <svg viewBox="0 0 24 24" className="w-full h-full" fill="none">
-    <path d="M6 6 L18 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-    <path d="M18 6 L6 18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-  </svg>
-);
 
 const forYouIf = [
   'Vous dirigez un institut de langues (10-50 formateurs)',
@@ -41,115 +20,122 @@ const notForYouIf = [
 export function TargetAudience() {
   const prefersReducedMotion = useReducedMotion();
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
-    },
-  };
-
   return (
-    <section className="bg-white py-16 lg:py-24 overflow-hidden paper-texture relative">
+    <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px bg-navy"
+            style={{ left: `${(i + 1) * (100 / 12)}%` }}
+          />
+        ))}
+      </div>
+
       <Container>
-        <SectionTitle>Pour les instituts qui veulent prendre de l'avance</SectionTitle>
+        {/* Section header */}
+        <div className="max-w-3xl mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <div className="w-12 h-px bg-rust" />
+            <span className="text-rust font-medium text-sm tracking-wide uppercase">
+              Pour qui ?
+            </span>
+          </motion.div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {/* For you if */}
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-sage/10 border-2 border-sage/30 p-6 lg:p-8"
-              style={{ borderRadius: '24px 18px 26px 16px' }}
-            >
-              <h3 className="text-xl font-display font-bold text-navy mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-sage/30 flex items-center justify-center" style={{ borderRadius: '10px 6px 12px 8px' }}>
-                  <span className="w-5 h-5 text-sage">
-                    <CheckDoodle />
-                  </span>
-                </span>
-                Pour vous si...
-              </h3>
-              <ul className="space-y-4">
-                {forYouIf.map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    variants={fadeInUp}
-                    className="flex items-start gap-3"
-                  >
-                    <span className="w-5 h-5 text-sage flex-shrink-0 mt-0.5">
-                      <CheckDoodle />
-                    </span>
-                    <span className="text-navy-light">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
+          >
+            Pour les instituts qui veulent
+            <span className="block text-rust mt-2">prendre de l'avance</span>
+          </motion.h2>
+        </div>
 
-            {/* Not for you if */}
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="bg-navy/5 border-2 border-navy/10 p-6 lg:p-8"
-              style={{ borderRadius: '18px 24px 16px 26px' }}
-            >
-              <h3 className="text-xl font-display font-bold text-navy mb-6 flex items-center gap-3">
-                <span className="w-8 h-8 bg-navy/10 flex items-center justify-center" style={{ borderRadius: '10px 6px 12px 8px' }}>
-                  <span className="w-5 h-5 text-navy-light">
-                    <XDoodle />
-                  </span>
-                </span>
-                Pas pour vous si...
-              </h3>
-              <ul className="space-y-4">
-                {notForYouIf.map((item, idx) => (
-                  <motion.li
-                    key={idx}
-                    variants={fadeInUp}
-                    className="flex items-start gap-3"
-                  >
-                    <span className="w-5 h-5 text-navy-light/60 flex-shrink-0 mt-0.5">
-                      <XDoodle />
-                    </span>
-                    <span className="text-navy-light">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* CTA */}
+        {/* Two columns */}
+        <div className="grid lg:grid-cols-2 gap-px bg-navy/10 mb-16">
+          {/* For you */}
           <motion.div
             initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: prefersReducedMotion ? 0 : 0.3, duration: prefersReducedMotion ? 0.01 : 0.5 }}
-            className="text-center"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white p-8 lg:p-12"
           >
-            <p className="text-xl text-navy font-medium mb-6">Ça vous ressemble ?</p>
-            <HandDrawnButton
-              variant="primary"
-              size="lg"
-              href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
-            >
-              Parlons-en — 15 min, gratuit
-            </HandDrawnButton>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-8 bg-sage/20 flex items-center justify-center text-sage font-bold">
+                ✓
+              </span>
+              <h3 className="text-xl font-display font-bold text-navy">
+                Pour vous si...
+              </h3>
+            </div>
+
+            <ul className="space-y-4">
+              {forYouIf.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-4">
+                  <span className="text-sage mt-1">→</span>
+                  <span className="text-navy-light">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Not for you */}
+          <motion.div
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="bg-cream p-8 lg:p-12"
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <span className="w-8 h-8 bg-navy/10 flex items-center justify-center text-navy/50 font-bold">
+                ✕
+              </span>
+              <h3 className="text-xl font-display font-bold text-navy">
+                Pas pour vous si...
+              </h3>
+            </div>
+
+            <ul className="space-y-4">
+              {notForYouIf.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-4">
+                  <span className="text-navy/30 mt-1">→</span>
+                  <span className="text-navy-light">{item}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         </div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
+          <p className="text-xl text-navy font-medium">Ça vous ressemble ?</p>
+          <Button
+            variant="primary"
+            size="lg"
+            href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+            showArrow
+          >
+            Parlons-en — 15 min, gratuit
+          </Button>
+        </motion.div>
       </Container>
     </section>
   );

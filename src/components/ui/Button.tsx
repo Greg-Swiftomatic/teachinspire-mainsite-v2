@@ -1,13 +1,13 @@
 import type { ReactNode } from 'react';
-import { motion } from 'framer-motion';
 
 interface ButtonProps {
   children: ReactNode;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   onClick?: () => void;
   className?: string;
+  showArrow?: boolean;
 }
 
 export function Button({
@@ -17,37 +17,49 @@ export function Button({
   href,
   onClick,
   className = '',
+  showArrow = false,
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold rounded-lg transition-colors duration-200 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
+    'inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream group';
 
   const variants = {
-    primary:
-      'bg-yellow text-navy hover:bg-yellow/90 shadow-lg hover:shadow-xl',
-    secondary:
-      'bg-transparent border-2 border-navy text-navy hover:bg-navy hover:text-cream',
+    primary: 'bg-navy text-cream hover:bg-navy/90',
+    secondary: 'border border-navy/20 text-navy hover:border-navy hover:bg-navy/5',
+    ghost: 'text-navy hover:text-navy/70 underline underline-offset-4',
   };
 
   const sizes = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
+    sm: 'px-4 py-2 text-sm gap-2',
+    md: 'px-6 py-3 text-base gap-3',
+    lg: 'px-8 py-4 text-lg gap-3',
   };
 
   const styles = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
 
-  const MotionComponent = href ? motion.a : motion.button;
+  const content = (
+    <>
+      <span>{children}</span>
+      {showArrow && (
+        <span
+          className={`${variant === 'primary' ? 'text-yellow' : ''} group-hover:translate-x-1 transition-transform`}
+        >
+          →
+        </span>
+      )}
+    </>
+  );
+
+  if (href) {
+    return (
+      <a href={href} className={styles}>
+        {content}
+      </a>
+    );
+  }
 
   return (
-    <MotionComponent
-      href={href}
-      onClick={onClick}
-      className={styles}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
-    >
-      {children}
-    </MotionComponent>
+    <button onClick={onClick} className={styles}>
+      {content}
+    </button>
   );
 }

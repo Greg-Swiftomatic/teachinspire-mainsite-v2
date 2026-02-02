@@ -16,16 +16,12 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-navy/5">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-navy/10">
       <Container>
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <img
-              src={LOGO}
-              alt="TeachInspire"
-              className="h-12 w-auto"
-            />
+            <img src={LOGO} alt="TeachInspire" className="h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -34,7 +30,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-navy hover:text-navy-light transition-colors duration-200 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-sm"
+                className="text-navy/70 hover:text-navy transition-colors text-sm font-medium tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 {link.label}
               </a>
@@ -43,6 +39,7 @@ export function Header() {
               variant="primary"
               size="sm"
               href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+              showArrow
             >
               Réserver un appel
             </Button>
@@ -66,16 +63,16 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-            className="md:hidden bg-cream border-b border-navy/5 overflow-hidden"
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-cream border-b border-navy/10 overflow-hidden"
           >
             <Container>
-              <div className="py-4 flex flex-col gap-4">
+              <div className="py-6 flex flex-col gap-1">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-navy hover:text-navy-light transition-colors duration-200 font-medium py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream rounded-sm"
+                    className="text-navy hover:text-sage transition-colors font-medium py-3 border-b border-navy/5 last:border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}
@@ -85,7 +82,8 @@ export function Header() {
                   variant="primary"
                   size="md"
                   href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
-                  className="mt-2"
+                  showArrow
+                  className="mt-4"
                 >
                   Réserver un appel
                 </Button>

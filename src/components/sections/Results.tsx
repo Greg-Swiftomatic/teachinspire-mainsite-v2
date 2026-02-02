@@ -1,146 +1,150 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import { SectionTitle } from '../ui/SectionTitle';
-import { HandDrawnButton } from '../ui/HandDrawnButton';
-import { AnimatedCounter, ClockIcon, CoinIcon, PathIcon } from '../ui/HandDrawnIllustrations';
+import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 const metrics = [
   {
-    icon: ClockIcon,
-    displayValue: <><AnimatedCounter value={3} suffix="h" /> → <AnimatedCounter value={30} suffix=" min" /></>,
+    value: '3h → 30min',
     label: "Temps de préparation d'un cours personnalisé",
-    note: null,
-    color: 'yellow',
+    accent: 'yellow',
   },
   {
-    icon: PathIcon,
-    displayValue: "N'importe quel secteur",
-    label: "Aéronautique, juridique, logistique — des contenus sur mesure. Vos formateurs n'ont pas besoin d'être experts du domaine.",
-    note: null,
-    color: 'sage',
+    value: 'Tous secteurs',
+    label: "Aéronautique, juridique, logistique — contenus sur mesure sans expertise préalable",
+    accent: 'sage',
   },
   {
-    icon: CoinIcon,
-    displayValue: <><AnimatedCounter value={0} prefix="" suffix="€" />/mois</>,
+    value: '0€/mois',
     label: "Pas d'abonnements. Des outils gratuits, des résultats pro.",
-    note: null,
-    color: 'rust',
+    accent: 'rust',
   },
 ];
 
 export function Results() {
   const prefersReducedMotion = useReducedMotion();
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.15 },
-    },
-  };
-
-  const getTransition = (delay: number) => ({
-    delay: prefersReducedMotion ? 0 : delay,
-    duration: prefersReducedMotion ? 0.01 : 0.5,
-  });
-
   return (
-    <section className="bg-white py-16 lg:py-24 overflow-hidden paper-texture relative">
-      <Container>
-        <SectionTitle>Ce que ça change, concrètement</SectionTitle>
+    <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
+      {/* Subtle grid */}
+      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px bg-navy"
+            style={{ left: `${(i + 1) * (100 / 12)}%` }}
+          />
+        ))}
+      </div>
 
-        {/* Metrics */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16"
-        >
+      <Container>
+        {/* Section header */}
+        <div className="max-w-3xl mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-4 mb-8"
+          >
+            <div className="w-12 h-px bg-yellow" />
+            <span className="text-yellow font-medium text-sm tracking-wide uppercase">
+              Résultats
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
+          >
+            Ce que ça change,
+            <span className="block text-rust mt-2">concrètement</span>
+          </motion.h2>
+        </div>
+
+        {/* Metrics grid */}
+        <div className="grid lg:grid-cols-3 gap-px bg-navy/10 mb-16">
           {metrics.map((metric, idx) => {
-            const Icon = metric.icon;
-            const colorClasses = {
-              yellow: { bg: 'bg-yellow/15', text: 'text-yellow' },
-              sage: { bg: 'bg-sage/15', text: 'text-sage' },
-              rust: { bg: 'bg-rust/15', text: 'text-rust' },
+            const accentColors = {
+              yellow: 'text-yellow',
+              sage: 'text-sage',
+              rust: 'text-rust',
             };
-            const colors = colorClasses[metric.color as keyof typeof colorClasses];
 
             return (
               <motion.div
                 key={idx}
-                variants={fadeInUp}
-                whileHover={{ y: prefersReducedMotion ? 0 : -4 }}
-                className="bg-cream rounded-2xl p-8 text-center border border-navy/5 hover:border-navy/10 transition-all shadow-sm hover:shadow-md"
-                style={{ borderRadius: '22px 16px 24px 14px' }}
+                initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                className="bg-white p-8 lg:p-10"
               >
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-xl ${colors.bg} flex items-center justify-center`} style={{ borderRadius: '16px 12px 18px 10px' }}>
-                  <div className={`w-10 h-10 ${colors.text}`}>
-                    <Icon className="w-full h-full" />
-                  </div>
-                </div>
-                <div className="text-3xl sm:text-4xl font-display font-bold text-navy mb-3">
-                  {metric.displayValue}
-                </div>
-                <p className="text-navy-light text-sm leading-relaxed">{metric.label}</p>
-                {metric.note && (
-                  <p className="text-navy-light/60 text-xs mt-2">{metric.note}</p>
-                )}
+                <p
+                  className={`text-4xl lg:text-5xl font-display font-bold ${accentColors[metric.accent as keyof typeof accentColors]} mb-4`}
+                >
+                  {metric.value}
+                </p>
+                <p className="text-navy-light leading-relaxed">{metric.label}</p>
               </motion.div>
             );
           })}
-        </motion.div>
+        </div>
 
-        {/* Case Study */}
+        {/* Case study */}
         <motion.div
-          initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={getTransition(0.1)}
-          className="max-w-3xl mx-auto mb-12"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid lg:grid-cols-12 gap-8 mb-16"
         >
-          <div className="bg-navy/5 rounded-2xl p-8">
-            <p className="text-navy-light mb-4">
-              {"\"Une formatrice devait créer un cours pour une entreprise de traite éthique qui s'internationalise. "}
-              <span className="text-navy font-medium">Secteur ultra-niche.</span>
-            </p>
-            <p className="text-navy-light mb-4">
-              Avec la méthode TeachInspire, elle a transformé la documentation métier en conversations réalistes.
-            </p>
-            <p className="text-navy font-medium italic">
-              {"Retour de la DRH : \"Je suis étonnée d'entendre des situations qu'on vit vraiment au travail.\""}
-            </p>
+          <div className="lg:col-span-4">
+            <span className="text-sm text-navy/50 uppercase tracking-wider">
+              Étude de cas
+            </span>
+          </div>
+          <div className="lg:col-span-8">
+            <div className="border-l-2 border-sage pl-8">
+              <p className="text-lg text-navy-light mb-4">
+                Une formatrice devait créer un cours pour une entreprise de traite
+                éthique qui s'internationalise.{' '}
+                <span className="text-navy font-medium">Secteur ultra-niche.</span>
+              </p>
+              <p className="text-lg text-navy-light mb-4">
+                Avec la méthode TeachInspire, elle a transformé la documentation
+                métier en conversations réalistes.
+              </p>
+              <p className="text-navy font-medium italic">
+                Retour de la DRH : "Je suis étonnée d'entendre des situations
+                qu'on vit vraiment au travail."
+              </p>
+            </div>
           </div>
         </motion.div>
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={getTransition(0.2)}
-          className="text-center"
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
         >
-          <p className="text-xl text-navy font-medium mb-6">
+          <p className="text-xl text-navy font-medium">
             Vous voulez ces résultats pour vos équipes ?
           </p>
-          <HandDrawnButton
+          <Button
             variant="primary"
             size="lg"
             href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+            showArrow
           >
-            Réserver un appel découverte
-          </HandDrawnButton>
+            Réserver un appel
+          </Button>
         </motion.div>
       </Container>
     </section>

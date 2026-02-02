@@ -1,158 +1,124 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
-import { HandDrawnButton } from '../ui/HandDrawnButton';
-import { Badge } from '../ui/Badge';
-import { LightbulbIllustration, SquiggleLine } from '../ui/HandDrawnIllustrations';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: prefersReducedMotion ? 0.01 : 0.6, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: prefersReducedMotion ? 0 : 0.15,
-        delayChildren: prefersReducedMotion ? 0 : 0.1,
-      },
-    },
-  };
-
   return (
-    <section className="bg-cream pt-28 pb-16 lg:pt-32 lg:pb-24 overflow-hidden paper-texture relative">
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-16 h-16 opacity-20" aria-hidden="true">
-        <SquiggleLine className="text-sage" />
-      </div>
-      <div className="absolute bottom-20 right-10 w-20 h-20 opacity-15 rotate-45" aria-hidden="true">
-        <SquiggleLine className="text-rust" />
+    <section className="bg-cream min-h-[90vh] relative overflow-hidden">
+      {/* Subtle grid overlay */}
+      <div className="absolute inset-0 opacity-[0.03]" aria-hidden="true">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute top-0 bottom-0 w-px bg-navy"
+            style={{ left: `${(i + 1) * (100 / 12)}%` }}
+          />
+        ))}
       </div>
 
       <Container>
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Text Content - Left */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="text-left"
-          >
-            <motion.div variants={fadeInUp} className="mb-6">
-              <Badge variant="sage">Formation IA · Instituts de langues</Badge>
+        <div className="grid lg:grid-cols-12 gap-8 min-h-[90vh] items-center py-24">
+          {/* Left column - main content */}
+          <div className="lg:col-span-7">
+            {/* Category label */}
+            <motion.div
+              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-4 mb-12"
+            >
+              <div className="w-12 h-px bg-rust" />
+              <span className="text-rust font-medium text-sm tracking-wide">
+                Formation IA · Instituts de langues
+              </span>
             </motion.div>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-bold font-display text-navy mb-6 leading-tight"
+            {/* Headline with number accent */}
+            <motion.div
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="relative"
             >
-              Formez vos équipes à créer des leçons{' '}
-              <span className="relative inline-block">
-                <span className="relative z-10">à partir de n'importe quelle source</span>
-                {/* Brush stroke underline */}
-                <svg
-                  className="absolute -bottom-2 left-0 w-full h-3 text-yellow"
-                  viewBox="0 0 200 12"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M0,8 Q40,2 80,6 T160,4 T200,8"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                </svg>
+              {/* Large number background */}
+              <span
+                className="absolute -left-4 -top-16 text-[12rem] font-display font-bold text-sage/10 leading-none select-none pointer-events-none hidden lg:block"
+                aria-hidden="true"
+              >
+                01
               </span>
-            </motion.h1>
 
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy leading-[1.1] relative z-10">
+                Formez vos équipes à créer des leçons à partir de
+                <span className="block text-rust">n'importe quelle source</span>
+              </h1>
+            </motion.div>
+
+            {/* Subheadline */}
             <motion.p
-              variants={fadeInUp}
-              className="text-xl text-navy-light mb-4 max-w-xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-xl text-navy-light mt-8 max-w-xl leading-relaxed"
             >
               La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
             </motion.p>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg text-navy-light/80 mb-8 max-w-xl"
-            >
-              Vidéo YouTube, podcast, article → leçon sur mesure en moins d'une heure.
-            </motion.p>
-
+            {/* CTAs */}
             <motion.div
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 mb-6"
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 mt-10"
             >
-              <HandDrawnButton variant="primary" size="lg" href="/formation">
-                Découvrir le programme
-              </HandDrawnButton>
-              <HandDrawnButton
-                variant="secondary"
-                size="lg"
+              <a
+                href="/formation"
+                className="group inline-flex items-center gap-3 px-6 py-4 bg-navy text-cream font-semibold hover:bg-navy/90 transition-colors"
+              >
+                <span>Découvrir le programme</span>
+                <span className="text-yellow group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+              <a
                 href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+                className="inline-flex items-center gap-3 px-6 py-4 border border-navy/20 text-navy font-semibold hover:border-navy hover:bg-navy/5 transition-all"
               >
                 Réserver un appel
-              </HandDrawnButton>
+              </a>
             </motion.div>
+          </div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-sm text-navy-light flex items-center gap-2"
-            >
-              <span className="w-2 h-2 rounded-full bg-sage" aria-hidden="true" />
-              Éligible financement OPCO
-            </motion.p>
-          </motion.div>
-
-          {/* Illustration - Right */}
+          {/* Right column - info card */}
           <motion.div
             initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0.01 : 0.8, delay: prefersReducedMotion ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] as const }}
-            className="relative flex justify-center lg:justify-end"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="lg:col-span-5"
           >
-            {/* Decorative background blob */}
-            <div
-              className="absolute inset-0 bg-gradient-to-br from-yellow/20 via-sage/10 to-transparent rounded-full blur-3xl"
-              style={{ transform: 'scale(0.8)' }}
-              aria-hidden="true"
-            />
+            <div className="bg-navy text-cream p-8 lg:p-10">
+              {/* Process preview */}
+              <div className="mb-8 pb-8 border-b border-cream/10">
+                <span className="text-cream/50 text-sm uppercase tracking-wider">Le processus</span>
+                <p className="text-xl font-display mt-3">
+                  Vidéo YouTube, podcast, article → leçon sur mesure
+                </p>
+              </div>
 
-            {/* Self-drawing lightbulb illustration */}
-            <LightbulbIllustration className="w-64 h-80 sm:w-80 sm:h-96 lg:w-96 lg:h-[28rem] relative z-10" />
+              {/* Time metric */}
+              <div className="mb-8 pb-8 border-b border-cream/10">
+                <span className="text-cream/50 text-sm uppercase tracking-wider">Temps de création</span>
+                <p className="text-4xl font-display font-bold text-yellow mt-2">
+                  &lt; 1 heure
+                </p>
+              </div>
 
-            {/* Small decorative doodles */}
-            <motion.div
-              className="absolute top-10 right-0 text-rust opacity-60"
-              animate={prefersReducedMotion ? {} : { rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              aria-hidden="true"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L14 8L20 10L14 12L12 18L10 12L4 10L10 8L12 2Z" />
-              </svg>
-            </motion.div>
-            <motion.div
-              className="absolute bottom-20 left-0 text-sage opacity-50"
-              animate={prefersReducedMotion ? {} : { scale: [1, 1.2, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              aria-hidden="true"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <circle cx="8" cy="8" r="6" />
-              </svg>
-            </motion.div>
+              {/* Funding note */}
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-sage" />
+                <span className="text-cream/70 text-sm">Éligible financement OPCO</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </Container>
