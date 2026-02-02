@@ -108,6 +108,17 @@
 
 *Payé : loyer fév ✓, élec ✓, vol avril ✓ — En attente : Kintail €1 700 + YBH $4-5K*
 
+### 📝 Dépenses Février 2026 (au fil de l'eau)
+
+| Date | Poste | Montant | Catégorie |
+|------|-------|---------|-----------|
+| 2 fév | Essence | 470 MAD | 🚗 Transport |
+| | | | |
+| **Total MAD** | | **470 MAD** | |
+| **Total EUR** | | **€0** | |
+
+*Budget restant estimé : essence ~1 030 MAD, courses ~7 000 MAD*
+
 | Objectif | Cible | Actuel | Gap | Priorité | ETA |
 |----------|-------|--------|-----|----------|-----|
 | 🚨 Emergency Fund (6 mois) | €9 000 | €3 565 | €5 435 | 1 | Fin fév 2026 |
