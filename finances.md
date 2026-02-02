@@ -73,7 +73,10 @@
 - **Exit potentiel :** ~2030 (5 ans)
 
 ### TeachInspire
-- **Arimage (6 mois) :** ~€600/mois
+- **Arimage (fév-juin 2026) :** €3 780 total
+  - Fév-Mai : €750/mois
+  - Juin : €780 (solde)
+- **Intel (fév one-shot) :** €400
 - **Potentiel Qualiopi :** À développer
 
 ### Autres
@@ -106,7 +109,8 @@
 | Maroc | 26 676 MAD | ~€2 425 |
 | **Total** | | **~€3 565** |
 
-*Payé : loyer fév ✓, élec ✓, vol avril ✓ — En attente : Kintail €1 700 + YBH $4-5K*
+*Payé : loyer fév ✓, élec ✓, vol avril ✓*
+*En attente fév : Arimage €750 + Intel €400 + YBH $4-5K (~€3 700-4 600)*
 
 ### 📝 Dépenses Février 2026 (au fil de l'eau)
 
