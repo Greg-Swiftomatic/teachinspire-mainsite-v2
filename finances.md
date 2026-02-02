@@ -67,9 +67,8 @@
 ## Revenus
 
 ### YBH (Phil)
-- **Actuel :** ~€2 200/mois
-- **À partir du 7 février :** $4 000-5 000 USD/mois (~€3 700-4 600)
-- **Évolution :** +30% possible basé sur objectifs IA
+- **Actuel (fév 2026) :** $4 000/mois = ~€3 375
+- **Évolution possible :** jusqu'à $5 000 (+30% basé sur objectifs IA)
 - **Exit potentiel :** ~2030 (5 ans)
 
 ### TeachInspire / Kintail
@@ -86,15 +85,15 @@
 
 ## Projection Épargne
 
-### Scénario $4K USD + Arimage
+### Scénario actuel ($4K + Arimage)
 | Revenu | Dépenses | Épargne |
 |--------|----------|---------|
-| €4 300 | €1 500 | **€2 800/mois** |
+| YBH €3 375 + Arimage €750 = **€4 125** | ~€1 500 | **~€2 600/mois** |
 
-### Scénario $5K USD + Arimage
+### Scénario optimiste ($5K + Arimage)
 | Revenu | Dépenses | Épargne |
 |--------|----------|---------|
-| €5 200 | €1 500 | **€3 700/mois** |
+| YBH ~€4 200 + Arimage €750 = **€4 950** | ~€1 500 | **~€3 450/mois** |
 
 ---
 
@@ -110,7 +109,7 @@
 | **Total** | | **~€3 565** |
 
 *Payé : loyer fév ✓, élec ✓, vol avril ✓*
-*En attente fév : Arimage €750 + Intel €400 + YBH $4-5K (~€3 700-4 600)*
+*Revenus fév : YBH €3 375 ✅ | Arimage €750 ⏳ | Intel €400 ⏳*
 
 ### 📝 Dépenses Février 2026 (au fil de l'eau)
 
