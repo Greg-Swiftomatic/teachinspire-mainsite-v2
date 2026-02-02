@@ -72,7 +72,7 @@
 - **Évolution :** +30% possible basé sur objectifs IA
 - **Exit potentiel :** ~2030 (5 ans)
 
-### TeachInspire
+### TeachInspire / Kintail
 - **Arimage (fév-juin 2026) :** €3 780 total
   - Fév-Mai : €750/mois
   - Juin : €780 (solde)
