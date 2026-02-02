@@ -83,17 +83,54 @@
 
 ---
 
-## Projection Épargne
+## Projection Épargne 2026
 
-### Scénario actuel ($4K + Arimage)
-| Revenu | Dépenses | Épargne |
-|--------|----------|---------|
-| YBH €3 375 + Arimage €750 = **€4 125** | ~€1 500 | **~€2 600/mois** |
+### Revenus mensuels
+| Période | YBH | Arimage | Total |
+|---------|-----|---------|-------|
+| Fév | €3 375 | €1 150 | **€4 525** |
+| Mar-Mai | €3 375 | €750 | **€4 125** |
+| Juin | €3 375 | €780 | **€4 155** |
+| Juil-Déc | €3 375 | — | **€3 375** |
 
-### Scénario optimiste ($5K + Arimage)
-| Revenu | Dépenses | Épargne |
-|--------|----------|---------|
-| YBH ~€4 200 + Arimage €750 = **€4 950** | ~€1 500 | **~€3 450/mois** |
+### Projection cumul (dépenses ~€1 500/mois)
+| Mois | Épargne | Cumul | Milestone |
+|------|---------|-------|-----------|
+| Fév | +€3 025 | €6 590 | |
+| Mar | +€2 625 | €9 215 | ✅ Emergency Fund |
+| Avr | +€2 625 | €11 840 | ✅ Medina Fund |
+| Mai | +€2 625 | €14 465 | |
+| Juin | +€2 655 | €17 120 | |
+| Juil | +€1 875 | €18 995 | |
+| Août | +€1 875 | €20 870 | |
+| Sept | +€1 875 | €22 745 | |
+| Oct | +€1 875 | €24 620 | |
+| Nov | +€1 875 | €26 495 | |
+| Déc | +€1 875 | **€28 370** | 🎯 Fin d'année |
+
+---
+
+## 🕌 Plan Médine Test (Janvier-Mars 2027)
+
+### Budget estimé
+| Poste | Montant |
+|-------|---------|
+| ✈️ Vols Casa↔Médine (3 pers, Saudi Airlines) | ~€2 400 |
+| 🏠 Appart meublé Médine (€450 × 3 mois) | ~€1 350 |
+| 🍽️ Vie quotidienne (€600 × 3 mois) | ~€1 800 |
+| 📦 Stockage Fès (2000 MAD × 3 mois) | ~€550 |
+| 🛡️ Buffer | ~€1 000 |
+| **Total coûts** | **~€7 100** |
+
+### Revenus pendant le test
+- YBH continue : €3 375 × 3 = **€10 125**
+- **Bilan net : +€3 000** (on gagne de l'argent même pendant le test!)
+
+### Ce qu'il faut avant de partir
+- Vols (à réserver en avance) : €2 400
+- Dépôt + 1er mois Médine : €1 000
+- Buffer confort : €1 500
+- **Minimum requis : €5 000** ✅
 
 ---
 
@@ -124,17 +161,18 @@
 
 | Objectif | Cible | Actuel | Gap | Priorité | ETA |
 |----------|-------|--------|-----|----------|-----|
-| 🚨 Emergency Fund (6 mois) | €9 000 | €3 565 | €5 435 | 1 | Fin fév 2026 |
-| 🕌 Medina Fund (test 2027) | €20 000 | €0 | €20 000 | 2 | Q4 2027 |
+| 🚨 Emergency Fund (6 mois) | €9 000 | €3 565 | €5 435 | 1 | Mars 2026 |
+| 🕌 Medina Fund (test 2027) | €5 000 | €0 | €5 000 | 2 | Avril 2026 ✓ |
 | 🏗️ Building Fund (Yamoussoukro) | TBD | €0 | TBD | 3 | TBD |
 | 🎓 Soumayya Studies Fund | TBD | €0 | TBD | 4 | 2030 |
 
-**Épargne mensuelle estimée :** €2 800 - €3 700 (avec Arimage) → €2 200 - €3 100 (sans)
+**Épargne mensuelle :** ~€2 600 (avec Arimage) → ~€1 875 (sans, à partir de juillet)
 
 ### Stratégie d'allocation
-1. **Priorité 1 :** Emergency Fund jusqu'à €9K (2-3 mois)
-2. **Priorité 2 :** Medina Fund jusqu'à €20K
+1. **Priorité 1 :** Emergency Fund jusqu'à €9K (mars 2026)
+2. **Priorité 2 :** Medina Fund €5K (couvert dès avril 2026)
 3. **Priorité 3-4 :** Building + Studies — à définir montants cibles
+4. **Objectif fin 2026 :** ~€28K buffer total
 
 ---
 
