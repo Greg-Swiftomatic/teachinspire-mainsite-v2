@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YBH — Full Pipeline</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --yellow: #F7B500;
+    --orange: #F17529;
+    --red: #EF4136;
+    --bg: #0D0D12;
+    --card: #15151F;
+    --card-border: rgba(247, 181, 0, 0.08);
+    --card-hover: #1A1A28;
+    --text: #E8E8ED;
+    --text-muted: #8888A0;
+    --accent-glow: rgba(247, 181, 0, 0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+}
+.hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--yellow), var(--orange), var(--red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+.hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-weight: 300;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding: 0 2rem 2rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+    border-bottom: 1px solid var(--card-border);
+    padding-top: 1rem;
+}
+.nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+.nav a:hover {
+    color: var(--yellow);
+    border-color: var(--card-border);
+    background: var(--card);
+}
+
+/* Sections */
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+.section h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.section h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--yellow);
+    background: rgba(247, 181, 0, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+.section .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+/* Mermaid containers */
+.diagram-wrap {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    overflow-x: auto;
+    position: relative;
+}
+.diagram-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--yellow), var(--orange), var(--red));
+    border-radius: 16px 16px 0 0;
+}
+
+/* Stats bar */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.stat {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    text-align: center;
+}
+.stat .number {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.stat .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.2rem;
+}
+
+/* Calendar table */
+.cal-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+    font-size: 0.82rem;
+}
+.cal-table thead {
+    position: relative;
+}
+.cal-table th {
+    background: var(--card);
+    color: var(--yellow);
+    font-weight: 600;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 1rem 0.8rem 0.6rem;
+    text-align: left;
+    border-bottom: 2px solid rgba(247, 181, 0, 0.15);
+}
+.cal-table td {
+    padding: 0.7rem 0.8rem;
+    background: rgba(255,255,255,0.02);
+    vertical-align: top;
+    line-height: 1.5;
+    font-size: 0.78rem;
+}
+.cal-table tbody tr {
+    border-radius: 8px;
+}
+.cal-table tbody tr:hover td {
+    background: rgba(247, 181, 0, 0.04);
+}
+.cal-table td:first-child {
+    border-radius: 8px 0 0 8px;
+    width: 60px;
+}
+.cal-table td:last-child {
+    border-radius: 0 8px 8px 0;
+}
+.badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.badge.li { background: rgba(0, 119, 181, 0.2); color: #5cb5e5; }
+.badge.yt { background: rgba(255, 0, 0, 0.15); color: #ff6b6b; }
+.badge.ig { background: rgba(225, 48, 108, 0.2); color: #e8729a; }
+.badge.tt { background: rgba(255, 255, 255, 0.1); color: #ddd; }
+.badge.fb { background: rgba(24, 119, 242, 0.2); color: #6eb0f7; }
+.badge.email { background: rgba(247, 181, 0, 0.15); color: var(--yellow); }
+
+/* Asset grid */
+.asset-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+.asset-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: border-color 0.2s;
+}
+.asset-card:hover { border-color: rgba(247, 181, 0, 0.2); }
+.asset-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--yellow);
+}
+.asset-card ul {
+    list-style: none;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.asset-card ul li::before {
+    content: '→ ';
+    color: var(--orange);
+}
+.asset-card ul li { margin-bottom: 0.2rem; }
+.asset-card .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--orange);
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>YOU'VE BEEN HEARD</h1>
+    <p>Full Pipeline — Episode Production to Distribution</p>
+</div>
+
+<nav class="nav">
+    <a href="#architecture">Architecture</a>
+    <a href="#pipeline">Full Pipeline</a>
+    <a href="#assets">Assets</a>
+    <a href="#calendar">Weekly Calendar</a>
+    <a href="#per-episode">Per Episode</a>
+    <a href="#emails">Email Sequence</a>
+</nav>
+
+<div class="stats">
+    <div class="stat"><div class="number">~15</div><div class="label">Assets per Episode</div></div>
+    <div class="stat"><div class="number">28+</div><div class="label">Distribution Touchpoints</div></div>
+    <div class="stat"><div class="number">5</div><div class="label">Platforms</div></div>
+    <div class="stat"><div class="number">6</div><div class="label">Guest Emails</div></div>
+    <div class="stat"><div class="number">2/wk</div><div class="label">Episodes (Tue + Thu)</div></div>
+</div>
+
+<!-- SECTION 1: ARCHITECTURE -->
+<div class="section" id="architecture">
+    <h2><span class="num">01</span> System Architecture</h2>
+    <p class="subtitle">From editing to publishing — how the pieces connect</p>
+    <div class="diagram-wrap">
+        <div class="mermaid">
+flowchart LR
+    subgraph PROD["🎬 Production"]
+        Z["Zubair\nEdits"] --> T["Transcript\n+ Audio + Video"]
+        T --> P["PULSE\nSTUDIO"]
+        P --> S["Sanity\nCMS"]
+    end
+    subgraph DIST["📡 Distribution"]
+        S -->|"Episode\nReady"| B["Distribution\nBot 🦀"]
+        B --> CAL["Calendar\nEngine"]
+        CAL --> SCH["Scheduler"]
+    end
+    subgraph PUB["📢 Channels"]
+        SCH --> LI["LinkedIn"]
+        SCH --> YT["YouTube"]
+        SCH --> IG["Instagram"]
+        SCH --> TK["TikTok"]
+        SCH --> FB["Facebook"]
+        SCH --> EM["Emails"]
+    end
+    subgraph TRACK["📊 Track"]
+        LI & YT & IG & TK & FB --> TR["URL\nTracker"]
+        TR --> DA["Dashboard"]
+    end
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 2: FULL PIPELINE -->
+<div class="section" id="pipeline">
+    <h2><span class="num">02</span> Full Pipeline</h2>
+    <p class="subtitle">Lead generation → Podcast → Content → Distribution → Revenue</p>
+    <div class="diagram-wrap">
+        <div class="mermaid">
+flowchart TB
+    R["🎯 Sales Reps\nLinkedIn Outreach"] --> D["DM: Podcast\nInvitation"]
+    D --> V["Phil's 10-min\nVideo"]
+    V --> Q["Fillout Quiz\n3 Questions"]
+    Q --> PP["Pre-Podcast Call\n+ Casefuel Intake"]
+    PP --> REC["🎙️ Recording\nZoom 45-60 min"]
+    REC --> EDIT["✂️ Zubair Edits"]
+    EDIT --> PULSE["🤖 PULSE STUDIO"]
+
+    PULSE --> PRF["PRF"]
+    PULSE --> HK["Viral Hooks"]
+    PULSE --> LP["LinkedIn Posts"]
+    PULSE --> DS["Design Studio"]
+    PULSE --> VC["Video Clips"]
+
+    DS --> FI["2x Flat Infographics"]
+    DS --> CI["2x Cinematographic"]
+    DS --> QC["3x Quote Cards"]
+    DS --> TL["Career Timeline 🔒"]
+    DS --> TH["Thumbnail"]
+
+    PRF & HK & LP & FI & CI & QC & VC & TH --> BK["🎁 Brand Kit\n+ 7 CTAs"]
+    PRF & HK & LP & FI & CI & QC & VC & TH --> BOT["📡 Distribution\nBot"]
+
+    BOT --> SOCIAL["5 Platforms\n28+ Touchpoints\nOver 7 Days"]
+    BOT --> EMAILS["📧 Guest Emails\nD-1 to D+60"]
+
+    BK --> ADV["💰 Advisory\nPipeline"]
+    EMAILS -->|"D+30"| ADV
+    ADV -->|"Referral"| R
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 3: ASSETS -->
+<div class="section" id="assets">
+    <h2><span class="num">03</span> Asset Inventory Per Episode</h2>
+    <p class="subtitle">Everything produced by Pulse Studio for each episode</p>
+    <div class="asset-grid">
+        <div class="asset-card">
+            <h4>📝 Text Content</h4>
+            <div class="count">5</div>
+            <ul>
+                <li>PRF Document</li>
+                <li>Viral Hooks</li>
+                <li>LinkedIn Post #1 (Release)</li>
+                <li>LinkedIn Post #2 (Follow-up)</li>
+                <li>Episode Metadata</li>
+            </ul>
+        </div>
+        <div class="asset-card">
+            <h4>🖼️ Images</h4>
+            <div class="count">9</div>
+            <ul>
+                <li>3x Quote Cards (1:1)</li>
+                <li>2x Flat Infographics (4:3)</li>
+                <li>2x Cine Infographics (4:3)</li>
+                <li>1x Thumbnail (16:9)</li>
+                <li>1x Career Timeline (16:9) 🔒</li>
+            </ul>
+        </div>
+        <div class="asset-card">
+            <h4>🎬 Video</h4>
+            <div class="count">6</div>
+            <ul>
+                <li>3x Clips Square (1:1)</li>
+                <li>3x Clips Vertical (9:16)</li>
+                <li>45s — 1m10 each</li>
+            </ul>
+        </div>
+        <div class="asset-card">
+            <h4>🎁 Brand Kit</h4>
+            <div class="count">3</div>
+            <ul>
+                <li>Landing Page</li>
+                <li>Download Kit (all assets)</li>
+                <li>7 Sidebar CTAs (rotating)</li>
+            </ul>
+        </div>
+        <div class="asset-card">
+            <h4>📧 Emails</h4>
+            <div class="count">6</div>
+            <ul>
+                <li>D-1: Pre-release</li>
+                <li>D+0: Live notification</li>
+                <li>D+3: Published URLs</li>
+                <li>D+14: Traction update</li>
+                <li>D+30: Advisory ask</li>
+                <li>D+60: Contract check-in</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 4: WEEKLY CALENDAR -->
+<div class="section" id="calendar">
+    <h2><span class="num">04</span> Weekly Distribution Calendar</h2>
+    <p class="subtitle">2 episodes per week — EP A (Tuesday) + EP B (Thursday)</p>
+    <div class="diagram-wrap" style="padding: 2rem; overflow-x: auto;">
+        <table class="cal-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>🔗 LinkedIn</th>
+                    <th>▶️ YouTube</th>
+                    <th>📸 Instagram</th>
+                    <th>🎵 TikTok</th>
+                    <th>👤 Facebook</th>
+                    <th>📧 Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MON</strong></td>
+                    <td>A: Pre-release teaser</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td><span class="badge email">A: Guest D-1</span></td>
+                </tr>
+                <tr style="background:rgba(247,181,0,0.06)">
+                    <td><strong style="color:var(--yellow)">TUE ★</strong></td>
+                    <td><span class="badge li">A: Release Post</span></td>
+                    <td><span class="badge yt">A: Full + Short #1</span></td>
+                    <td><span class="badge ig">A: Reel #1</span></td>
+                    <td><span class="badge tt">A: Clip #1</span></td>
+                    <td><span class="badge fb">A: Episode Link</span></td>
+                    <td><span class="badge email">A: Brand Kit</span></td>
+                </tr>
+                <tr>
+                    <td><strong>WED</strong></td>
+                    <td>A: Video Clip #1 (1:1)</td>
+                    <td><span class="badge yt">A: Short #2</span></td>
+                    <td>A: Quote Card</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td><span class="badge email">B: Guest D-1</span></td>
+                </tr>
+                <tr style="background:rgba(241,117,41,0.06)">
+                    <td><strong style="color:var(--orange)">THU ★</strong></td>
+                    <td><span class="badge li">B: Release Post</span><br><span style="font-size:0.75rem;color:var(--text-muted)">+ A: Quote Card #1</span></td>
+                    <td><span class="badge yt">B: Full + Short #1</span></td>
+                    <td><span class="badge ig">B: Reel #1</span></td>
+                    <td><span class="badge tt">B: Clip #1</span></td>
+                    <td><span class="badge fb">B: Episode Link</span></td>
+                    <td><span class="badge email">B: Brand Kit</span></td>
+                </tr>
+                <tr>
+                    <td><strong>FRI</strong></td>
+                    <td>B: Video Clip #1 (1:1)</td>
+                    <td><span class="badge yt">A: Short #3</span></td>
+                    <td>A: Cine Infographic</td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td>A: Video Clip</td>
+                    <td><span class="badge email">A: URLs Recap</span></td>
+                </tr>
+                <tr>
+                    <td><strong>SAT</strong></td>
+                    <td>A: Flat Infographic</td>
+                    <td><span class="badge yt">B: Short #2</span></td>
+                    <td><span class="badge ig">B: Reel #2</span></td>
+                    <td><span class="badge tt">A: Clip #2</span></td>
+                    <td>B: Infographic</td>
+                    <td style="color:var(--text-muted)">—</td>
+                </tr>
+                <tr>
+                    <td><strong>SUN</strong></td>
+                    <td>B: Quote Card #1</td>
+                    <td><span class="badge yt">B: Short #3</span></td>
+                    <td>B: Quote Card</td>
+                    <td><span class="badge tt">B: Clip #2</span></td>
+                    <td style="color:var(--text-muted)">—</td>
+                    <td><span class="badge email">B: URLs Recap</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 5: PER EPISODE -->
+<div class="section" id="per-episode">
+    <h2><span class="num">05</span> Per-Episode Distribution Timeline</h2>
+    <p class="subtitle">What gets posted where across 7 days</p>
+    <div class="diagram-wrap">
+        <div class="mermaid">
+mindmap
+  root(("Episode\nReleased"))
+    LinkedIn
+      D+0 Thumbnail + Post + Link
+      D+1 Video Clip 1.1
+      D+2 Flat Infographic 4.3
+      D+3 Quote Card 1.1
+      D+4 Cine Infographic 4.3
+      D+5 Video Clip 2
+      D+6 Quote Card 2
+    YouTube
+      D+0 Full Episode
+      D+0 Short 1
+      D+2 Short 2
+      D+4 Short 3
+    Instagram
+      D+0 Reel
+      D+1 Quote Card
+      D+3 Reel 2
+      D+4 Cine Infographic
+      D+5 Reel 3
+    TikTok
+      D+0 Clip 1
+      D+2 Clip 2
+      D+4 Clip 3
+    Facebook
+      D+0 Episode + Thumbnail
+      D+2 Video Clip
+      D+4 Infographic
+    Guest Emails
+      D-1 Pre-release
+      D+0 Brand Kit link
+      D+3 Published URLs
+      D+14 Traction update
+      D+30 Advisory ask
+      D+60 Contract check-in
+        </div>
+    </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECTION 6: EMAIL SEQUENCE -->
+<div class="section" id="emails">
+    <h2><span class="num">06</span> Guest Email Sequence</h2>
+    <p class="subtitle">Automated emails from pre-release through advisory conversion</p>
+    <div class="diagram-wrap">
+        <div class="mermaid">
+flowchart LR
+    D1["D-1\nPre-release\nheads up"] --> D0["D+0\nBrand Kit\nlink sent"]
+    D0 --> D3["D+3\nPublished\nURLs recap"]
+    D3 --> D14["D+14\nTraction\nupdate"]
+    D14 --> D30["D+30\nAdvisory\nsoft ask"]
+    D30 --> D60["D+60\nContract\ncheck-in"]
+    D30 -->|"Interest"| ADV["💰 Advisory\nPipeline"]
+    D60 -->|"Renewal"| ADV
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    🦀 Built by Pinch — YBH Pipeline v2.0 — February 2026
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+        primaryColor: '#2a2a3e',
+        primaryTextColor: '#E8E8ED',
+        primaryBorderColor: '#F7B500',
+        lineColor: '#F17529',
+        secondaryColor: '#1a1a28',
+        tertiaryColor: '#15151f',
+        fontFamily: 'Outfit, sans-serif',
+        fontSize: '14px',
+        nodeBorder: '#F7B500',
+        mainBkg: '#1a1a28',
+        clusterBkg: '#15151f',
+        clusterBorder: 'rgba(247,181,0,0.2)',
+        titleColor: '#F7B500'
+    },
+    flowchart: { curve: 'basis', padding: 20 },
+    mindmap: { padding: 20 }
+});
+</script>
+</body>
+</html>

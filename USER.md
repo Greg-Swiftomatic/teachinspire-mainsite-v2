@@ -6,6 +6,10 @@
 - **Timezone:** Africa/Casablanca (Fes, Morocco — UTC+1)
 - **Notes:** Lives in Morocco (~10 years), family still in France. Freelance business registered in France for teaching + AI training work. Targets French institutes.
 
+## Family
+
+- **Zayneb** — wife, muslimah pratiquante. Gère Mon Remède (naturopathie). Ton à adopter : courtois, poli, respectueux.
+
 ## Context
 
 - **TeachInspire.me** — AI training for language teachers (main business, 2 cohorts done, €7K+ revenue)

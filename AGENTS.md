@@ -24,6 +24,24 @@ You wake up fresh each session. These files are your continuity:
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
 
+### 📂 Knowledge Base (PARA-light)
+Structured context beyond daily notes:
+- **`people/`** — One markdown file per person (contacts, collaborateurs, prospects)
+- **`companies/`** — Clients, partenaires, organisations
+- **`projects/`** — Projets actifs avec deadline
+
+See `knowledge-index.md` for the full structure.
+
+**When to use:**
+- Talking about a specific person/company → check their file first
+- Starting work on a project → read its project file
+- New significant contact → create a file if 3+ interactions expected
+
+**When to update:**
+- Notable event → add to Historique section
+- Status change → update the file
+- Project complete → move to archives/
+
 ### 🧠 MEMORY.md - Your Long-Term Memory
 - **ONLY load in main session** (direct chats with your human)
 - **DO NOT load in shared contexts** (Discord, group chats, sessions with other people)

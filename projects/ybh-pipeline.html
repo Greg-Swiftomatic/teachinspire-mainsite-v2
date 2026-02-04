@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>YBH Full Pipeline</title>
+<style>
+body { background: #0a0a1a; color: #fff; font-family: 'Montserrat', sans-serif; padding: 2rem; }
+h1 { color: #F7B500; text-align: center; font-size: 2rem; }
+h2 { color: #F17529; margin-top: 3rem; border-bottom: 2px solid #F17529; padding-bottom: 0.5rem; }
+.mermaid { background: #1a1a2e; padding: 2rem; border-radius: 1rem; margin: 1rem 0; border: 1px solid rgba(255,255,255,0.1); }
+</style>
+</head>
+<body>
+<h1>🎙️ YOU'VE BEEN HEARD — Full Pipeline</h1>
+<p style="text-align:center; color:#A4BFC1;">Episode Production → Content Creation → Distribution</p>
+
+<h2>🏗️ System Architecture</h2>
+<div class="mermaid">
+flowchart LR
+    subgraph PRODUCTION["🎬 Content Production"]
+        ZUBAIR["Zubair\n(Edit)"] --> TRANSCRIPT["Transcript\n+ Audio\n+ Video"]
+        TRANSCRIPT --> PULSE["PULSE STUDIO\n(AI Factory)"]
+        PULSE --> SANITY["Sanity CMS\n(All Assets)"]
+    end
+
+    subgraph DISTRIBUTION["📡 Distribution Engine"]
+        SANITY -->|"Webhook:\nEpisode Ready"| BOT["Distribution Bot\n(Pinch 🦀)"]
+        BOT --> CALENDAR["Distribution\nCalendar Engine"]
+        CALENDAR --> SCHEDULER["Post Scheduler\n(Cron Jobs)"]
+    end
+
+    subgraph CHANNELS["📢 Publishing Channels"]
+        SCHEDULER -->|"API"| LI["LinkedIn"]
+        SCHEDULER -->|"API"| YT["YouTube"]
+        SCHEDULER -->|"API"| IG["Instagram"]
+        SCHEDULER -->|"API"| TT["TikTok"]
+        SCHEDULER -->|"API"| FB["Facebook"]
+        SCHEDULER -->|"Email"| EMAIL["Guest Emails"]
+        SCHEDULER -->|"Zoom"| ZOOM["Team Chat"]
+    end
+
+    subgraph TRACKING["📊 Tracking"]
+        LI & YT & IG & TT & FB --> TRACKER["URL Tracker"]
+        TRACKER --> DASH["Dashboard"]
+    end
+</div>
+
+<h2>🎯 Full Pipeline: Lead → Revenue</h2>
+<div class="mermaid">
+flowchart TB
+    REPS["🎯 Sales Reps\nLinkedIn Outreach"] --> DM["DM: Podcast Invitation"]
+    DM --> VIDEO["Phil's 10-min Video"]
+    VIDEO --> QUIZ["Fillout Quiz\n3 IT Questions"]
+    QUIZ --> PREPOD["Pre-Podcast Call\n+ Casefuel Intake\n(Hidden Value Discovery)"]
+    PREPOD --> RECORD["🎙️ Podcast Recording\n(Zoom, 45-60 min)"]
+    RECORD --> EDIT["✂️ Zubair Edits\n(Adobe Podcast)"]
+    EDIT --> PULSE["🤖 PULSE STUDIO"]
+    
+    PULSE --> PRF["PRF\n(AI Extraction)"]
+    PULSE --> HOOKS["Viral Hooks"]
+    PULSE --> POSTS["LinkedIn Posts\n(Phil Reviews)"]
+    PULSE --> DESIGN["Design Studio"]
+    PULSE --> CLIPS["Video Clips\n3× (1:1 + 9:16)"]
+    
+    DESIGN --> FLAT["2× Flat Infographics"]
+    DESIGN --> CINE["2× Cinematographic"]
+    DESIGN --> QUOTE["3× Quote Cards"]
+    DESIGN --> TIMELINE["Career Timeline\n🔒 Guest Only"]
+    DESIGN --> THUMB["Thumbnail"]
+    
+    PRF & HOOKS & POSTS & FLAT & CINE & QUOTE & CLIPS & THUMB --> BRANDKIT["🎁 Brand Kit\nLanding Page\n+ 7 CTAs"]
+    
+    PRF & HOOKS & POSTS & FLAT & CINE & QUOTE & CLIPS & THUMB --> DIST["📡 Distribution Bot"]
+    
+    DIST --> LI["LinkedIn\n7 posts/episode"]
+    DIST --> YT["YouTube\nFull + 3 Shorts"]
+    DIST --> IG["Instagram\n3 Reels + 3 Feed"]
+    DIST --> TT["TikTok\n3 Clips"]
+    DIST --> FB["Facebook\n3 Posts"]
+    DIST --> EMAIL_SEQ["📧 Guest Emails\nD-1, D+0, D+3\nD+14, D+30, D+60"]
+    
+    BRANDKIT --> ADVISORY["💰 Advisory Pipeline\n1:1 with Phil\nVendor Engagement\nDeal"]
+    EMAIL_SEQ -->|"D+30:\nVendor help?"| ADVISORY
+    
+    ADVISORY -->|"Referral"| REPS
+</div>
+
+<h2>📅 Per-Episode Distribution Timeline</h2>
+<div class="mermaid">
+gantt
+    title Per-Episode Content Distribution (7 days)
+    dateFormat X
+    axisFormat Day %s
+    
+    section LinkedIn
+    Thumbnail + Release Post    :li1, 0, 1
+    Video Clip #1 (1:1)         :li2, 1, 1
+    Flat Infographic (4:3)      :li3, 2, 1
+    Quote Card #1 (1:1)         :li4, 3, 1
+    Cine Infographic (4:3)      :li5, 4, 1
+    Video Clip #2 (1:1)         :li6, 5, 1
+    Quote Card #2 (1:1)         :li7, 6, 1
+    
+    section YouTube
+    Full Episode + Short #1     :yt1, 0, 1
+    Short #2                    :yt2, 2, 1
+    Short #3                    :yt3, 4, 1
+    
+    section Instagram
+    Reel #1                     :ig1, 0, 1
+    Quote Card                  :ig2, 1, 1
+    Reel #2                     :ig3, 3, 1
+    Cine Infographic            :ig4, 4, 1
+    Reel #3                     :ig5, 5, 1
+    
+    section TikTok
+    Clip #1                     :tt1, 0, 1
+    Clip #2                     :tt2, 2, 1
+    Clip #3                     :tt3, 4, 1
+    
+    section Facebook
+    Episode Link                :fb1, 0, 1
+    Video Clip                  :fb2, 2, 1
+    Infographic                 :fb3, 4, 1
+    
+    section Email
+    Pre-release (D-1)           :em0, -1, 1
+    Brand Kit Live              :em1, 0, 1
+    Published URLs Recap        :em2, 3, 1
+</div>
+
+<h2>📦 Asset Map Per Episode</h2>
+<div class="mermaid">
+mindmap
+  root((Episode Assets))
+    Text Content
+      PRF Document
+      Viral Hooks
+      LinkedIn Post #1 Release
+      LinkedIn Post #2 Follow-up
+      Episode Metadata
+      Show Notes
+    Images
+      3× Quote Cards 1:1
+      2× Flat Infographics 4:3/16:9
+      2× Cine Infographics 4:3/16:9
+      1× YouTube Thumbnail 16:9
+      1× Career Timeline 16:9 🔒
+    Video
+      3× Clips Square 1:1
+      3× Clips Vertical 9:16
+    Brand Kit
+      Landing Page
+      Download Kit
+      7 Sidebar CTAs
+    Emails
+      D-1 Pre-release
+      D+0 Live notification
+      D+3 Published URLs
+      D+14 Traction update
+      D+30 Advisory ask
+      D+60 Contract check-in
+</div>
+
+<h2>🔄 Weekly Calendar (Tue + Thu Release)</h2>
+<div class="mermaid">
+gantt
+    title Weekly Distribution (EP A=Tue, EP B=Thu)
+    dateFormat YYYY-MM-DD
+    axisFormat %a %d
+
+    section LinkedIn
+    A Pre-release teaser          :2026-02-02, 1d
+    A Release Post                :2026-02-03, 1d
+    A Video Clip                  :2026-02-04, 1d
+    B Release Post                :2026-02-05, 1d
+    A Quote Card                  :2026-02-05, 1d
+    B Video Clip                  :2026-02-06, 1d
+    A Infographic                 :2026-02-07, 1d
+    B Quote Card                  :2026-02-08, 1d
+
+    section YouTube
+    A Full + Short #1             :2026-02-03, 1d
+    A Short #2                    :2026-02-04, 1d
+    B Full + Short #1             :2026-02-05, 1d
+    A Short #3                    :2026-02-06, 1d
+    B Short #2                    :2026-02-07, 1d
+    B Short #3                    :2026-02-08, 1d
+
+    section Instagram
+    A Reel #1                     :2026-02-03, 1d
+    A Quote Card                  :2026-02-04, 1d
+    B Reel #1                     :2026-02-05, 1d
+    A Cine Infographic            :2026-02-06, 1d
+    B Reel #2                     :2026-02-07, 1d
+    B Quote Card                  :2026-02-08, 1d
+
+    section TikTok
+    A Clip #1                     :2026-02-03, 1d
+    B Clip #1                     :2026-02-05, 1d
+    A Clip #2                     :2026-02-07, 1d
+    B Clip #2                     :2026-02-08, 1d
+
+    section Emails
+    A Guest Pre-release           :2026-02-02, 1d
+    A Guest Live                  :2026-02-03, 1d
+    B Guest Pre-release           :2026-02-04, 1d
+    B Guest Live                  :2026-02-05, 1d
+    A Guest Recap                 :2026-02-06, 1d
+    B Guest Recap                 :2026-02-08, 1d
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ 
+    startOnLoad: true, 
+    theme: 'dark',
+    themeVariables: {
+        primaryColor: '#F7B500',
+        primaryTextColor: '#fff',
+        primaryBorderColor: '#F17529',
+        lineColor: '#A4BFC1',
+        secondaryColor: '#16213E',
+        tertiaryColor: '#0F3460',
+        fontFamily: 'Montserrat, sans-serif'
+    }
+});
+</script>
+</body>
+</html>

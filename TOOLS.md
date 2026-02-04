@@ -12,19 +12,23 @@ Things like:
 - Device nicknames
 - Anything environment-specific
 
-## Examples
+## TTS (Edge TTS)
 
-```markdown
-### Cameras
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
+**Français :**
+- `fr-FR-DeniseNeural` — voix féminine naturelle (par défaut)
+- `fr-FR-HenriNeural` — voix masculine
 
-### SSH
-- home-server → 192.168.1.100, user: admin
+**English :**
+- `en-US-JennyNeural` — natural female
+- `en-US-GuyNeural` — professional male
 
-### TTS
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+**Arabe :**
+- `ar-SA-ZariyahNeural` — Saudi female
+- `ar-SA-HamedNeural` — Saudi male
+
+**Usage :**
+```bash
+edge-tts --voice fr-FR-DeniseNeural --text "Texte" --write-media /tmp/voice.mp3
 ```
 
 ## Why Separate?
