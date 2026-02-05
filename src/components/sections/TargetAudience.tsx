@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
+import { Check, X } from 'lucide-react';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GridOverlay } from '../ui/GridOverlay';
 
 const forYouIf = [
   'Vous dirigez un institut de langues (10-50 formateurs)',
@@ -22,16 +24,7 @@ export function TargetAudience() {
 
   return (
     <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         {/* Section header */}
@@ -72,8 +65,8 @@ export function TargetAudience() {
             className="bg-white p-8 lg:p-12"
           >
             <div className="flex items-center gap-3 mb-8">
-              <span className="w-8 h-8 bg-sage/20 flex items-center justify-center text-sage font-bold">
-                ✓
+              <span className="w-8 h-8 bg-sage/20 flex items-center justify-center">
+                <Check className="w-4 h-4 text-sage" aria-hidden="true" />
               </span>
               <h3 className="text-xl font-display font-bold text-navy">
                 Pour vous si...
@@ -99,8 +92,8 @@ export function TargetAudience() {
             className="bg-cream p-8 lg:p-12"
           >
             <div className="flex items-center gap-3 mb-8">
-              <span className="w-8 h-8 bg-navy/10 flex items-center justify-center text-navy/50 font-bold">
-                ✕
+              <span className="w-8 h-8 bg-navy/10 flex items-center justify-center">
+                <X className="w-4 h-4 text-navy/50" aria-hidden="true" />
               </span>
               <h3 className="text-xl font-display font-bold text-navy">
                 Pas pour vous si...

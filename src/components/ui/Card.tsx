@@ -10,8 +10,8 @@ interface CardProps {
 export function Card({ children, className = '', hover = true }: CardProps) {
   return (
     <motion.div
-      className={`bg-white rounded-xl p-8 shadow-sm ${className}`}
-      whileHover={hover ? { y: -4 } : undefined}
+      className={`bg-white p-8 border border-navy/10 ${className}`}
+      whileHover={hover ? { backgroundColor: 'rgba(244, 243, 240, 0.5)' } : undefined}
       transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] as const }}
     >
       {children}

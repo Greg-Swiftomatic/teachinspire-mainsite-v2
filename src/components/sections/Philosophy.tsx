@@ -85,16 +85,15 @@ export function Philosophy() {
           </div>
 
           <motion.p
-            initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{
               duration: prefersReducedMotion ? 0.01 : 0.6,
               delay: prefersReducedMotion ? 0 : 1.2,
               ease: [0.16, 1, 0.3, 1] as const,
             }}
-            whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
-            className="text-sage font-handwritten text-2xl inline-block"
+            className="text-sage font-display italic text-2xl inline-block"
           >
             — C'est notre conviction depuis le premier jour.
           </motion.p>

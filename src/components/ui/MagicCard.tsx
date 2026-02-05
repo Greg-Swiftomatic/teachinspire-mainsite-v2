@@ -1,6 +1,7 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface MagicCardProps {
   children: ReactNode;
@@ -10,18 +11,20 @@ interface MagicCardProps {
   gradientOpacity?: number;
 }
 
-// Card with mouse-following gradient glow effect
+// Card with mouse-following gradient glow effect — Swiss editorial version
 export function MagicCard({
   children,
   className,
   gradientSize = 200,
   gradientColor = '#f1d263',
-  gradientOpacity = 0.15,
+  gradientOpacity = 0.1,
 }: MagicCardProps) {
+  const prefersReducedMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
     const rect = e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left);
     mouseY.set(e.clientY - rect.top);
@@ -36,21 +39,21 @@ export function MagicCard({
   `;
 
   return (
-    <motion.div
+    <div
       className={cn(
-        'relative overflow-hidden rounded-xl border border-navy/10 bg-white p-8 shadow-sm transition-shadow duration-300 hover:shadow-lg',
+        'relative overflow-hidden border border-navy/10 bg-white p-8 cursor-pointer',
         className
       )}
       onMouseMove={handleMouseMove}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2, ease: [0.25, 0.4, 0.25, 1] }}
     >
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background }}
-      />
+      {!prefersReducedMotion && (
+        <motion.div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{ background }}
+        />
+      )}
       <div className="relative z-10">{children}</div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -61,57 +64,20 @@ interface TiltCardProps {
   glareEnable?: boolean;
 }
 
-// 3D tilt effect card
+// Swiss editorial card — no 3D tilt, clean hover
 export function TiltCard({
   children,
   className,
-  tiltAmount = 10,
-  glareEnable = true,
 }: TiltCardProps) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -tiltAmount;
-    const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * tiltAmount;
-    x.set(rotateX);
-    y.set(rotateY);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <motion.div
+    <div
       className={cn(
-        'relative overflow-hidden rounded-xl border border-navy/10 bg-white p-8 shadow-sm',
+        'relative overflow-hidden border border-navy/10 bg-white p-8 cursor-pointer transition-colors duration-200 hover:bg-cream/50',
         className
       )}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX: x,
-        rotateY: y,
-        transformStyle: 'preserve-3d',
-        perspective: 1000,
-      }}
-      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
     >
-      {glareEnable && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 transition-opacity"
-          style={{
-            opacity: useMotionTemplate`${x}` ? 0.3 : 0,
-          }}
-        />
-      )}
-      <div style={{ transform: 'translateZ(20px)' }}>{children}</div>
-    </motion.div>
+      <div>{children}</div>
+    </div>
   );
 }
 
@@ -121,32 +87,19 @@ interface BorderGlowCardProps {
   glowColor?: string;
 }
 
-// Card with animated border glow
+// Card with subtle border hover — no infinite animation
 export function BorderGlowCard({
   children,
   className,
-  glowColor = '#f1d263',
 }: BorderGlowCardProps) {
   return (
-    <div className={cn('group relative', className)}>
-      <motion.div
-        className="absolute -inset-[1px] rounded-xl opacity-0 blur-sm transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background: `linear-gradient(90deg, ${glowColor}, #85a2a3, ${glowColor})`,
-          backgroundSize: '200% 100%',
-        }}
-        animate={{
-          backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      />
-      <div className="relative rounded-xl border border-navy/10 bg-white p-8 shadow-sm transition-shadow duration-300 group-hover:shadow-lg">
-        {children}
-      </div>
+    <div
+      className={cn(
+        'relative border border-navy/10 bg-white p-8 cursor-pointer transition-colors duration-200 hover:border-navy/30',
+        className
+      )}
+    >
+      {children}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GridOverlay } from '../ui/GridOverlay';
 
 const steps = [
   {
@@ -38,16 +39,7 @@ export function HowItWorks() {
 
   return (
     <section className="bg-cream py-20 lg:py-32 overflow-hidden relative">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         {/* Section header */}

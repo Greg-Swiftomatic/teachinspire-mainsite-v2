@@ -48,7 +48,7 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-cream/70 hover:text-yellow transition-colors flex items-center gap-2 group"
+                    className="text-cream/70 hover:text-yellow transition-colors flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                   >
                     <span className="text-sage/50 group-hover:text-yellow transition-colors">
                       →
@@ -69,7 +69,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:greg@teachinspire.me"
-                  className="text-cream/70 hover:text-yellow transition-colors"
+                  className="text-cream/70 hover:text-yellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   greg@teachinspire.me
                 </a>
@@ -77,7 +77,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 text-cream hover:bg-yellow hover:text-navy transition-colors mt-2"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 text-cream hover:bg-yellow hover:text-navy transition-colors mt-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   Réserver un appel
                   <span>→</span>
@@ -100,7 +100,7 @@ export function Footer() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-cream/40 hover:text-cream/70 text-sm transition-colors"
+                  className="text-cream/40 hover:text-cream/70 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   {link.label}
                 </a>

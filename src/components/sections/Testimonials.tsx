@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Container } from '../layout/Container';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GridOverlay } from '../ui/GridOverlay';
 
 const testimonials = [
   {
@@ -37,16 +38,7 @@ export function Testimonials() {
 
   return (
     <section className="bg-cream py-20 lg:py-32 overflow-hidden relative">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         {/* Section header */}
@@ -134,17 +126,21 @@ export function Testimonials() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Dots indicator */}
+              {/* Dots indicator — accessible touch targets */}
               <div className="flex gap-2 mt-6 ml-8 lg:ml-0">
                 {testimonials.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentIndex(idx)}
-                    className={`h-1 transition-all ${
-                      idx === currentIndex ? 'bg-navy w-8' : 'bg-navy/20 w-4 hover:bg-navy/40'
-                    }`}
+                    className="min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
                     aria-label={`Aller au témoignage ${idx + 1}`}
-                  />
+                  >
+                    <span
+                      className={`block h-1 transition-all duration-200 ${
+                        idx === currentIndex ? 'bg-navy w-8' : 'bg-navy/20 w-4 hover:bg-navy/40'
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             </div>
@@ -173,7 +169,7 @@ export function Testimonials() {
               </div>
 
               <p className="text-navy-light text-sm mt-6">
-                2 instituts formés depuis 2025
+                Premiers instituts accompagnés en 2025
               </p>
             </motion.div>
           </div>

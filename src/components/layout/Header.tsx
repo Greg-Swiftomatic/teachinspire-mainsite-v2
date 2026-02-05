@@ -48,7 +48,7 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-navy"
+            className="md:hidden p-2 text-navy cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

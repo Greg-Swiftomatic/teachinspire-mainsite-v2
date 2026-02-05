@@ -1,22 +1,14 @@
 import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GridOverlay } from '../ui/GridOverlay';
 
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
     <section className="bg-cream min-h-[90vh] relative overflow-hidden">
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 opacity-[0.03]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         <div className="grid lg:grid-cols-12 gap-8 min-h-[90vh] items-center py-24">

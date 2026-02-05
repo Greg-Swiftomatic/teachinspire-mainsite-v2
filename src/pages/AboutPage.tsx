@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { ILLUSTRATIONS } from '../assets/assets';
+import { GridOverlay } from '../components/ui/GridOverlay';
 
 const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
 
@@ -101,16 +102,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 function HeroSection() {
   return (
     <section className="bg-cream min-h-[60vh] relative overflow-hidden">
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         <div className="pt-32 pb-16 lg:pt-40 lg:pb-24">

@@ -3,44 +3,53 @@ import { useState } from 'react';
 import { Container } from '../layout/Container';
 import { ChevronDown } from 'lucide-react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { GridOverlay } from '../ui/GridOverlay';
 
 const faqs = [
   {
+    id: 'faq-0',
     question: "Mes formateurs ne sont pas à l'aise avec la tech",
     answer:
       "La formation est progressive et part de zéro. Pas besoin de compétences techniques préalables. On utilise des outils conçus pour être accessibles.",
   },
   {
+    id: 'faq-1',
     question: 'Ça va coûter cher en abonnements ?',
     answer:
       "Non. On utilise principalement Google AI Studio — gratuit et quasi-illimité, même pour la synthèse vocale pro. Pas d'abonnements qui s'empilent.",
   },
   {
+    id: 'faq-2',
     question: "J'ai testé ChatGPT, les résultats étaient moyens",
     answer:
       "Normal. Sans méthode structurée, les résultats sont aléatoires. C'est précisément ce qu'on enseigne : comment obtenir des résultats consistants, pas des coups de chance.",
   },
   {
+    id: 'faq-3',
     question: "On n'a pas le temps",
     answer:
       "Les modules font 20 minutes et s'intègrent dans le planning. Format pensé pour des formateurs en activité, pas des étudiants à temps plein.",
   },
   {
+    id: 'faq-4',
     question: 'Et si les outils changent ?',
     answer:
       "Ils vont changer, c'est certain. C'est pour ça qu'on enseigne une méthode transférable, pas un mode d'emploi spécifique. Vos formateurs sauront s'adapter.",
   },
   {
+    id: 'faq-5',
     question: "C'est finançable par OPCO ?",
     answer:
       "Oui, la formation est éligible au financement OPCO. On vous accompagne dans les démarches si besoin.",
   },
   {
+    id: 'faq-6',
     question: 'Combien ça coûte ?',
     answer:
       "Le tarif dépend de la taille de votre équipe. Standard (≤10 formateurs) : à partir de 4 200€ HT. On en parle lors de l'appel découverte — sans engagement.",
   },
   {
+    id: 'faq-7',
     question: 'Et si ça ne correspond pas à nos besoins ?',
     answer:
       "On le saura dès l'appel découverte. Pas de pression, pas de relance. Si ce n'est pas un fit, on vous le dira.",
@@ -48,6 +57,7 @@ const faqs = [
 ];
 
 function FAQItem({
+  id,
   question,
   answer,
   isOpen,
@@ -55,6 +65,7 @@ function FAQItem({
   index,
   prefersReducedMotion,
 }: {
+  id: string;
   question: string;
   answer: string;
   isOpen: boolean;
@@ -62,6 +73,9 @@ function FAQItem({
   index: number;
   prefersReducedMotion: boolean;
 }) {
+  const questionId = `${id}-question`;
+  const answerId = `${id}-answer`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 10 }}
@@ -71,19 +85,26 @@ function FAQItem({
       className="border-b border-navy/10"
     >
       <button
+        id={questionId}
         onClick={onClick}
-        className="w-full py-6 flex items-center justify-between text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
+        aria-expanded={isOpen}
+        aria-controls={answerId}
+        className="w-full py-6 flex items-center justify-between text-left group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
       >
-        <span className="text-navy font-medium pr-4 group-hover:text-sage transition-colors">
+        <span className="text-navy font-medium pr-4 group-hover:text-sage transition-colors duration-200">
           {question}
         </span>
         <ChevronDown
           className={`w-5 h-5 text-navy/40 flex-shrink-0 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
           }`}
+          aria-hidden="true"
         />
       </button>
       <motion.div
+        id={answerId}
+        role="region"
+        aria-labelledby={questionId}
         initial={false}
         animate={{
           height: isOpen ? 'auto' : 0,
@@ -104,16 +125,7 @@ export function FAQ() {
 
   return (
     <section className="bg-cream py-20 lg:py-32 overflow-hidden relative">
-      {/* Subtle grid */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
@@ -138,6 +150,7 @@ export function FAQ() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight mb-8"
+              style={{ textWrap: 'balance' }}
             >
               Questions
               <span className="block text-rust mt-2">fréquentes</span>
@@ -153,7 +166,7 @@ export function FAQ() {
               Une autre question ?{' '}
               <a
                 href="mailto:greg@teachinspire.me"
-                className="text-navy hover:text-sage underline underline-offset-4 transition-colors"
+                className="text-navy hover:text-sage underline underline-offset-4 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2"
               >
                 Écrivez-nous
               </a>
@@ -165,7 +178,8 @@ export function FAQ() {
             <div className="bg-white p-8 lg:p-10">
               {faqs.map((faq, idx) => (
                 <FAQItem
-                  key={idx}
+                  key={faq.id}
+                  id={faq.id}
                   question={faq.question}
                   answer={faq.answer}
                   isOpen={openIndex === idx}

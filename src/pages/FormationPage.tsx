@@ -1,26 +1,11 @@
 import { motion } from 'framer-motion';
+import { Check } from 'lucide-react';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
+import { GridOverlay } from '../components/ui/GridOverlay';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
 
 // Data
 const targetAudience = [
@@ -133,19 +118,27 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 // Hero Section
-function HeroSection() {
+function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
     <section className="bg-cream min-h-[70vh] relative overflow-hidden">
-      {/* Subtle grid overlay */}
-      <div className="absolute inset-0 opacity-[0.02]" aria-hidden="true">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute top-0 bottom-0 w-px bg-navy"
-            style={{ left: `${(i + 1) * (100 / 12)}%` }}
-          />
-        ))}
-      </div>
+      <GridOverlay />
 
       <Container>
         <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -155,14 +148,12 @@ function HeroSection() {
             variants={staggerContainer}
             className="max-w-4xl"
           >
-            {/* Label */}
             <motion.div variants={fadeInUp} className="mb-6">
               <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
                 Formation pour Instituts
               </span>
             </motion.div>
 
-            {/* Headline */}
             <motion.h1
               variants={fadeInUp}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight"
@@ -172,7 +163,6 @@ function HeroSection() {
               en cours sur-mesure.
             </motion.h1>
 
-            {/* Subheadline */}
             <motion.p
               variants={fadeInUp}
               className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
@@ -190,7 +180,6 @@ function HeroSection() {
               Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
             </motion.p>
 
-            {/* CTA */}
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
               <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
                 Réserver un appel découverte
@@ -200,7 +189,6 @@ function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* OPCO Note */}
             <motion.p
               variants={fadeInUp}
               className="mt-6 text-sm text-navy/50"
@@ -215,12 +203,29 @@ function HeroSection() {
 }
 
 // For Who Section
-function ForWhoSection() {
+function ForWhoSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left - Label */}
           <div className="lg:col-span-4">
             <SectionLabel>Pour qui</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
@@ -228,7 +233,6 @@ function ForWhoSection() {
             </h2>
           </div>
 
-          {/* Right - Content */}
           <div className="lg:col-span-8">
             <motion.div
               variants={staggerContainer}
@@ -241,9 +245,9 @@ function ForWhoSection() {
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="flex items-start gap-4 p-5 border border-navy/10 bg-cream/30"
+                  className="flex items-start gap-4 p-5 border border-navy/10 hover:border-navy/20 transition-colors duration-200"
                 >
-                  <span className="text-rust font-display text-lg font-semibold flex-shrink-0">
+                  <span className="text-rust font-display text-lg font-semibold flex-shrink-0 tabular-nums">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                   <p className="text-navy/80">{item}</p>
@@ -258,12 +262,12 @@ function ForWhoSection() {
 }
 
 // Promise Section
-function PromiseSection() {
+function PromiseSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-cream py-20 lg:py-28">
+    <section className="bg-cream py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left - Label */}
           <div className="lg:col-span-4">
             <SectionLabel>La promesse</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
@@ -271,11 +275,11 @@ function PromiseSection() {
             </h2>
           </div>
 
-          {/* Right - Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="lg:col-span-8"
           >
             <div className="bg-white p-8 lg:p-10 border border-navy/10">
@@ -304,9 +308,27 @@ function PromiseSection() {
 }
 
 // Modules Section
-function ModulesSection() {
+function ModulesSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
-    <section id="programme" className="bg-white py-20 lg:py-28">
+    <section id="programme" className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <SectionLabel>Le programme</SectionLabel>
 
@@ -337,13 +359,12 @@ function ModulesSection() {
             <motion.div
               key={module.number}
               variants={fadeInUp}
-              className="border border-navy/10 bg-cream/30"
+              className="border border-navy/10"
             >
               <div className="grid lg:grid-cols-12 gap-0">
                 {/* Module Header */}
                 <div className="lg:col-span-4 p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-navy/10">
-                  {/* Number */}
-                  <span className="text-6xl lg:text-7xl font-display font-bold text-navy/10 block mb-4">
+                  <span className="text-6xl lg:text-7xl font-display font-bold text-navy/10 block mb-4 tabular-nums">
                     {module.number}
                   </span>
 
@@ -363,7 +384,6 @@ function ModulesSection() {
                     <strong className="text-navy">Objectif :</strong> {module.objective}
                   </p>
 
-                  {/* Bonus */}
                   <div className="p-3 bg-sage/10 border-l-2 border-sage">
                     <p className="text-xs font-medium text-navy">
                       [Bonus] {module.bonus}
@@ -402,9 +422,27 @@ function ModulesSection() {
 }
 
 // Inclusions Section
-function InclusionsSection() {
+function InclusionsSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
-    <section className="bg-cream py-20 lg:py-28">
+    <section className="bg-cream py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <SectionLabel>Ce que vous recevez</SectionLabel>
 
@@ -416,21 +454,21 @@ function InclusionsSection() {
           </div>
         </div>
 
-        {/* Main inclusions grid */}
+        {/* Main inclusions — editorial separator grid */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid md:grid-cols-3 gap-6 mb-12"
+          className="grid md:grid-cols-3 gap-px bg-navy/10 mb-12"
         >
           {inclusions.map((inclusion, idx) => (
             <motion.div
               key={inclusion.title}
               variants={fadeInUp}
-              className="bg-white p-6 border border-navy/10"
+              className="bg-white p-6 lg:p-8"
             >
-              <span className="text-5xl font-display font-bold text-navy/10 block mb-4">
+              <span className="text-5xl font-display font-bold text-navy/10 block mb-4 tabular-nums">
                 {String(idx + 1).padStart(2, '0')}
               </span>
               <h3 className="text-lg font-display font-semibold text-navy mb-4">
@@ -448,18 +486,19 @@ function InclusionsSection() {
           ))}
         </motion.div>
 
-        {/* Community section */}
+        {/* Community section — full-bleed navy for rhythm break */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
           className="bg-navy text-cream p-8 lg:p-10"
         >
           <div className="grid lg:grid-cols-2 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <h3 className="text-xl font-display font-semibold">Communauté</h3>
-                <span className="text-xs font-medium tracking-wider uppercase px-2 py-1 bg-yellow/20 text-yellow">
+                <span className="text-xs font-medium tracking-wider uppercase px-2 py-1 bg-yellow/20 text-yellow rounded-sm">
                   1 an inclus
                 </span>
               </div>
@@ -499,12 +538,12 @@ function InclusionsSection() {
 }
 
 // Approach Section
-function ApproachSection() {
+function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left - Label */}
           <div className="lg:col-span-4">
             <SectionLabel>Notre approche</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
@@ -512,11 +551,11 @@ function ApproachSection() {
             </h2>
           </div>
 
-          {/* Right - Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="lg:col-span-8"
           >
             <div className="bg-cream/50 p-8 lg:p-10 border border-navy/10">
@@ -536,7 +575,7 @@ function ApproachSection() {
                   'Synthèse vocale (texte → audio naturel)',
                 ].map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="text-rust font-display font-semibold">
+                    <span className="text-rust font-display font-semibold tabular-nums">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
                     <span className="text-navy/70">{item}</span>
@@ -561,33 +600,53 @@ function ApproachSection() {
   );
 }
 
-// Financement Section
-function FinancementSection() {
+// Financement Section — editorial redesign with asymmetric layout
+function FinancementSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-cream py-20 lg:py-28">
+    <section className="bg-cream py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
-        <div className="max-w-2xl mx-auto text-center">
-          <SectionLabel>Financement</SectionLabel>
-
-          <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight mb-8">
-            Tarification
-          </h2>
-
-          <div className="bg-white p-8 lg:p-10 border border-navy/10 mb-8">
-            <p className="text-navy/70 mb-6">
-              Formation éligible au financement OPCO.
+        <div className="grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5">
+            <SectionLabel>Financement</SectionLabel>
+            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight mb-6">
+              Tarification
+            </h2>
+            <p className="text-navy-light leading-relaxed">
+              Le tarif dépend de la taille de votre équipe et de vos contraintes.
+              On en discute lors de l'appel découverte.
             </p>
-
-            <div className="pt-6 border-t border-navy/10">
-              <p className="text-navy font-medium">
-                Tarif : sur devis, selon la taille de votre équipe.
-              </p>
-            </div>
           </div>
 
-          <Button variant="secondary" size="lg" href={CALENDLY_URL} showArrow>
-            Réserver un appel pour en discuter
-          </Button>
+          <motion.div
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
+            className="lg:col-span-7"
+          >
+            <div className="bg-white p-8 lg:p-10 border border-navy/10 mb-8">
+              <div className="flex items-center gap-3 mb-6">
+                <Check className="w-5 h-5 text-sage flex-shrink-0" aria-hidden="true" />
+                <p className="text-navy font-medium">
+                  Formation éligible au financement OPCO
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-navy/10">
+                <p className="text-navy font-medium mb-2">
+                  Tarif : sur devis, selon la taille de votre équipe.
+                </p>
+                <p className="text-navy/60 text-sm">
+                  Standard (≤10 formateurs) : à partir de 4 200€ HT.
+                </p>
+              </div>
+            </div>
+
+            <Button variant="secondary" size="lg" href={CALENDLY_URL} showArrow>
+              Réserver un appel pour en discuter
+            </Button>
+          </motion.div>
         </div>
       </Container>
     </section>
@@ -595,9 +654,27 @@ function FinancementSection() {
 }
 
 // Guarantees Section
-function GuaranteesSection() {
+function GuaranteesSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <SectionLabel>Garanties</SectionLabel>
 
@@ -614,13 +691,13 @@ function GuaranteesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          className="grid sm:grid-cols-3 gap-6"
+          className="grid sm:grid-cols-3 gap-px bg-navy/10"
         >
           {guarantees.map((guarantee, idx) => (
             <motion.div
               key={idx}
               variants={fadeInUp}
-              className="p-6 border border-navy/10 bg-cream/30"
+              className="p-6 lg:p-8 bg-cream"
             >
               <span className="text-xs font-medium tracking-wider uppercase text-rust block mb-3">
                 {guarantee.label}
@@ -635,14 +712,16 @@ function GuaranteesSection() {
 }
 
 // Final CTA Section
-function FinalCTASection() {
+function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-navy py-20 lg:py-28">
+    <section className="bg-navy py-20 lg:py-28 relative">
+      <GridOverlay variant="light" />
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
           className="max-w-2xl mx-auto text-center"
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-yellow mb-6 block">
@@ -659,7 +738,7 @@ function FinalCTASection() {
             On évalue ensemble si c'est adapté à vos besoins.
           </p>
 
-          <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
+          <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow className="bg-yellow text-navy hover:bg-yellow/90">
             Réserver un appel découverte
           </Button>
         </motion.div>
@@ -670,17 +749,19 @@ function FinalCTASection() {
 
 // Main Page Component
 export function FormationPage() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <>
-      <HeroSection />
-      <ForWhoSection />
-      <PromiseSection />
-      <ModulesSection />
-      <InclusionsSection />
-      <ApproachSection />
-      <FinancementSection />
-      <GuaranteesSection />
-      <FinalCTASection />
+      <HeroSection prefersReducedMotion={prefersReducedMotion} />
+      <ForWhoSection prefersReducedMotion={prefersReducedMotion} />
+      <PromiseSection prefersReducedMotion={prefersReducedMotion} />
+      <ModulesSection prefersReducedMotion={prefersReducedMotion} />
+      <InclusionsSection prefersReducedMotion={prefersReducedMotion} />
+      <ApproachSection prefersReducedMotion={prefersReducedMotion} />
+      <FinancementSection prefersReducedMotion={prefersReducedMotion} />
+      <GuaranteesSection prefersReducedMotion={prefersReducedMotion} />
+      <FinalCTASection prefersReducedMotion={prefersReducedMotion} />
     </>
   );
 }

@@ -13,6 +13,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+    text-wrap: balance;
   }
 }
 
@@ -42,5 +43,10 @@
   /* Animated number counter utility */
   .animate-counter {
     animation: counter 2s ease-out forwards;
+  }
+
+  /* Tabular nums for metric displays */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
   }
 }
