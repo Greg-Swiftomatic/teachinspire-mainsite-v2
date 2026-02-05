@@ -36,17 +36,37 @@
 - **Package renamed:** `clawdbot` → `openclaw` (CLI: `openclaw`, npm: `openclaw`)
 - **Gateway bind:** changed to "lan" (0.0.0.0) for external connections
 - **Pulse login:** pinch@popularit.net / Pinch_pulse26
-- **Pulse repo:** `/root/pulse-content/` (GitHub PAT: REDACTED)
+- **Pulse repo:** `/root/pulse-content/` (GitHub PAT: stored in env, not in files)
 - **GitHub issue:** #7013 — OpenClaw desktop app protocol bug
 
 ## Canaux de Communication
 - **WhatsApp (+212619777878)** — Assistant personnel, discussions informelles, vie perso
-- **Telegram "The Shell"** — Bureau/QG, travail structuré, topics par projet
-  - Forum mode avec plusieurs topics
-  - Sub-agents configurés
-  - Topic à créer : 💰 Finances (coach financier)
+- **Discord** — NEW HQ (replaced Telegram 2026-02-05), guild ID: 1469102100330844256
+  - Full channel structure for TeachInspire Growth team
+  - Categories: Growth (dashboard/standup/strategy), Content (Omar), Prospecting (Octo), Sales (Pearl), Ops (Pinch)
+  - Dashboard channel: 1469114425587007511
+  - PRD for Kanban board: projects/teachinspire/PRD-kanban.md
+
+## Agent Architecture (decided 2026-02-04)
+- **Spawn-on-demand model** — NOT always-on heartbeat polling
+- Pinch = only always-on agent (main session)
+- Specialists are sub-agents, spawned via `sessions_spawn`:
+  - **Omar 🦞** — Content (LinkedIn, copy, anti-AI writing rules)
+  - **Octo 🐙** — Prospecting (research, lead qualification)
+  - **Pearl 🦪** — Sales (outreach, follow-ups, call prep)
+- Agent configs: `team/` folder (SOUL.md per agent, SPAWN-GUIDE.md, CONTEXT.md)
+- Project tracking: `projects/` folder (file-based, no database)
+- No idle agents, no agent-to-agent comms, no echo chambers
+- Cost scales with work done, not time elapsed
+- Full status report: `projects/STATUS-REPORT-2026-02-04.md`
+
+## Workspace
+- **Unified:** `/root/.openclaw/workspace` → symlink → `/root/clawd/`
+- All sessions (WhatsApp + all Telegram topics) share the same files
+- Fixed 2026-02-04 (was split-brain causing context loss between channels)
 
 ## My Role
 - Own the LifeOS system — daily notes, tasks, project tracking
 - Sync Obsidian after changes
 - Brain dump processor — Greg talks, I organize
+- **Coordinator:** spawn Omar/Octo/Pearl for specialized work
