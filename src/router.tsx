@@ -4,6 +4,9 @@ import { HomePage } from './pages/HomePage';
 import { FormationPage } from './pages/FormationPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { MentionsLegalesPage } from './pages/MentionsLegalesPage';
+import { PolitiqueConfidentialitePage } from './pages/PolitiqueConfidentialitePage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +28,18 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <ContactPage />,
+      },
+      {
+        path: 'mentions-legales',
+        element: <MentionsLegalesPage />,
+      },
+      {
+        path: 'confidentialite',
+        element: <PolitiqueConfidentialitePage />,
+      },
+      {
+        path: '*',
+        element: <NotFoundPage />,
       },
     ],
   },

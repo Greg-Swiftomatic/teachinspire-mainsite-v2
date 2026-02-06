@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { LOGO } from '../../assets/assets';
 import { Container } from './Container';
 
@@ -97,13 +98,13 @@ export function Footer() {
             </p>
             <div className="flex gap-6">
               {footerLinks.legal.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className="text-cream/40 hover:text-cream/70 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
