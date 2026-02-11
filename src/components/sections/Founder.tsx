@@ -3,6 +3,9 @@ import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import { KineticHeading } from '../animation/KineticHeading';
+import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
+import CountUp from '../reactbits/CountUp';
 
 const credentials = [
   {
@@ -25,6 +28,7 @@ export function Founder() {
   return (
     <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="founder" />
 
       <Container>
         {/* Section header */}
@@ -42,16 +46,21 @@ export function Founder() {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <KineticHeading
+            variant="cascade"
+            as="h2"
             className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
           >
             Qui est derrière
-            <span className="block text-rust mt-2">TeachInspire ?</span>
-          </motion.h2>
+          </KineticHeading>
+          <KineticHeading
+            variant="assemble"
+            as="span"
+            className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
+            delay={0.25}
+          >
+            TeachInspire ?
+          </KineticHeading>
         </div>
 
         {/* Content grid */}
@@ -64,7 +73,7 @@ export function Founder() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-4"
           >
-            <div className="aspect-[3/4] bg-sage/10 flex items-center justify-center">
+            <div className="aspect-[3/4] bg-sage/10 flex items-center justify-center" aria-hidden="true">
               {/* Placeholder for photo */}
               <div className="text-center p-8">
                 <div className="w-24 h-24 bg-navy/10 mx-auto mb-4 flex items-center justify-center">
@@ -89,9 +98,27 @@ export function Founder() {
 
             {/* Credentials */}
             <div className="flex flex-wrap gap-6 mb-8 pb-8 border-b border-navy/10">
-              {credentials.map((cred, idx) => (
+              {/* 9 000+ with spring CountUp */}
+              <div>
+                <div className="text-2xl font-display font-bold text-sage">
+                  <CountUp to={9000} separator=" " duration={2.5} className="text-2xl font-display font-bold text-sage" />
+                  <span className="text-2xl font-display font-bold text-sage">+</span>
+                </div>
+                <p className="text-sm text-navy-light">heures d'enseignement</p>
+              </div>
+              {/* Text-based credentials */}
+              {credentials.slice(1).map((cred, idx) => (
                 <div key={idx}>
-                  <p className="text-2xl font-display font-bold text-sage">{cred.value}</p>
+                  <div className="text-2xl font-display font-bold text-sage">
+                    <KineticHeading
+                      variant="counter-roll"
+                      as="span"
+                      className="text-2xl font-display font-bold text-sage"
+                      delay={0.5 + idx * 0.1}
+                    >
+                      {cred.value}
+                    </KineticHeading>
+                  </div>
                   <p className="text-sm text-navy-light">{cred.label}</p>
                 </div>
               ))}

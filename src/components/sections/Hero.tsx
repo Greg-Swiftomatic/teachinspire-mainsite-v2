@@ -1,116 +1,259 @@
-import { motion } from 'framer-motion';
+/* ─────────────────────────────────────────────────────────
+ * ANIMATION STORYBOARD — Homepage Hero
+ *
+ * Read top-to-bottom. Each `at` value is ms after mount.
+ *
+ *    0ms   Grid overlay visible (static)
+ *  200ms   Category label slides from left
+ *  400ms   Decorative "01" materializes
+ *  500ms   Headline blurs in word-by-word (BlurText)
+ * 1000ms   Rust accent line blurs in
+ * 1200ms   Subheadline fades up
+ * 1500ms   CTA buttons slide up (staggered 100ms)
+ * 1700ms   Video player enters from right
+ * ───────────────────────────────────────────────────────── */
+
+import { useRef, useState, useEffect } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Container } from '../layout/Container';
+import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import BlurText from '../reactbits/BlurText';
+import DecryptedText from '../reactbits/DecryptedText';
+import { HERO_VIDEO_EMBED, HERO_VIDEO_POSTER } from '../../assets/assets';
 
+/* ── Timing ─────────────────────────────────────────────── */
+const TIMING = {
+  grid:       0,      // squares background immediate
+  label:      200,    // category label slides in
+  number:     400,    // decorative "01" fades
+  headline:   500,    // blur text begins
+  accent:     1000,   // rust accent headline
+  sub:        1200,   // subheadline fades up
+  ctas:       1500,   // buttons slide up
+  card:       1700,   // info card enters
+};
+
+/* ── Element Configs ────────────────────────────────────── */
+const LABEL = {
+  offsetX: -20,       // px slide from left
+  spring: { type: 'spring' as const, stiffness: 300, damping: 30 },
+};
+
+const NUMBER = {
+  initialOpacity: 0,
+  finalOpacity: 1,
+  spring: { type: 'spring' as const, stiffness: 200, damping: 25 },
+};
+
+const SUB = {
+  offsetY: 15,        // px slide up from
+  spring: { type: 'spring' as const, stiffness: 300, damping: 30 },
+};
+
+const CTAS = {
+  offsetY: 20,        // px slide up from
+  stagger: 0.1,       // seconds between buttons
+  spring: { type: 'spring' as const, stiffness: 350, damping: 28 },
+};
+
+const VIDEO = {
+  offsetX: 40,        // px slide from right
+  spring: { type: 'spring' as const, stiffness: 250, damping: 28 },
+};
+
+/* ── Component ──────────────────────────────────────────── */
 export function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [stage, setStage] = useState(0);
+  const [showPlayer, setShowPlayer] = useState(false);
+
+  useEffect(() => {
+    if (!isInView) { setStage(0); return; }
+    if (prefersReducedMotion) { setStage(8); return; }
+
+    setStage(0);
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
+    timers.push(setTimeout(() => setStage(1), TIMING.label));
+    timers.push(setTimeout(() => setStage(2), TIMING.number));
+    timers.push(setTimeout(() => setStage(3), TIMING.headline));
+    timers.push(setTimeout(() => setStage(4), TIMING.accent));
+    timers.push(setTimeout(() => setStage(5), TIMING.sub));
+    timers.push(setTimeout(() => setStage(6), TIMING.ctas));
+    timers.push(setTimeout(() => setStage(7), TIMING.card));
+
+    return () => timers.forEach(clearTimeout);
+  }, [isInView, prefersReducedMotion]);
 
   return (
-    <section className="bg-cream min-h-[90vh] relative overflow-hidden">
+    <section ref={ref} className="bg-cream min-h-[90vh] relative overflow-hidden">
       <GridOverlay />
 
       <Container>
-        <div className="grid lg:grid-cols-12 gap-8 min-h-[90vh] items-center py-24">
-          {/* Left column - main content */}
+        <div className="grid lg:grid-cols-12 gap-8 items-center py-24">
+          {/* Left column — main content */}
           <div className="lg:col-span-7">
-            {/* Category label */}
+            {/* Category label with DecryptedText */}
             <motion.div
-              initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, x: LABEL.offsetX }}
+              animate={{
+                opacity: stage >= 1 ? 1 : 0,
+                x: stage >= 1 ? 0 : LABEL.offsetX,
+              }}
+              transition={LABEL.spring}
               className="flex items-center gap-4 mb-12"
             >
               <div className="w-12 h-px bg-rust" />
-              <span className="text-rust font-medium text-sm tracking-wide">
-                Formation IA · Instituts de langues
-              </span>
+              <DecryptedText
+                text="Formation IA · Instituts de langues"
+                animateOn="view"
+                speed={40}
+                sequential
+                revealDirection="start"
+                className="text-rust font-medium text-sm tracking-wide"
+                encryptedClassName="text-rust/40 font-medium text-sm tracking-wide"
+              />
             </motion.div>
 
-            {/* Headline with number accent */}
-            <motion.div
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="relative"
-            >
-              {/* Large number background */}
-              <span
+            {/* Headline with BlurText */}
+            <div className="relative">
+              {/* Large decorative number */}
+              <motion.span
+                initial={{ opacity: NUMBER.initialOpacity }}
+                animate={{ opacity: stage >= 2 ? NUMBER.finalOpacity : NUMBER.initialOpacity }}
+                transition={NUMBER.spring}
                 className="absolute -left-4 -top-16 text-[12rem] font-display font-bold text-sage/10 leading-none select-none pointer-events-none hidden lg:block"
                 aria-hidden="true"
               >
                 01
-              </span>
+              </motion.span>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy leading-[1.1] relative z-10">
-                Formez vos équipes à créer des leçons à partir de
-                <span className="block text-rust">n'importe quelle source</span>
-              </h1>
-            </motion.div>
+              <div className="relative z-10">
+                {stage >= 3 && (
+                  <h1>
+                    <BlurText
+                      text="Formez vos équipes à créer des leçons à partir de"
+                      delay={80}
+                      animateBy="words"
+                      direction="bottom"
+                      className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy leading-[1.1]"
+                      stepDuration={0.4}
+                    />
+                    {stage >= 4 && (
+                      <BlurText
+                        text="n'importe quelle source"
+                        delay={100}
+                        animateBy="words"
+                        direction="bottom"
+                        className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-rust leading-[1.1] mt-1"
+                        stepDuration={0.4}
+                      />
+                    )}
+                  </h1>
+                )}
+                {stage < 3 && (
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy/0 leading-[1.1]" aria-hidden="true">
+                    Formez vos équipes à créer des leçons à partir de
+                  </h1>
+                )}
+              </div>
+            </div>
 
             {/* Subheadline */}
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              initial={{ opacity: 0, y: SUB.offsetY }}
+              animate={{
+                opacity: stage >= 5 ? 1 : 0,
+                y: stage >= 5 ? 0 : SUB.offsetY,
+              }}
+              transition={SUB.spring}
               className="text-xl text-navy-light mt-8 max-w-xl leading-relaxed"
             >
               La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
             </motion.p>
 
             {/* CTAs */}
-            <motion.div
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mt-10"
-            >
-              <a
-                href="/formation"
-                className="group inline-flex items-center gap-3 px-6 py-4 bg-navy text-cream font-semibold hover:bg-navy/90 transition-colors"
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
+              <motion.div
+                initial={{ opacity: 0, y: CTAS.offsetY }}
+                animate={{
+                  opacity: stage >= 6 ? 1 : 0,
+                  y: stage >= 6 ? 0 : CTAS.offsetY,
+                }}
+                transition={{ ...CTAS.spring, delay: 0 }}
               >
-                <span>Découvrir le programme</span>
-                <span className="text-yellow group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-              <a
-                href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
-                className="inline-flex items-center gap-3 px-6 py-4 border border-navy/20 text-navy font-semibold hover:border-navy hover:bg-navy/5 transition-all"
+                <Button variant="primary" size="lg" href="/formation" showArrow>
+                  Découvrir le programme
+                </Button>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: CTAS.offsetY }}
+                animate={{
+                  opacity: stage >= 6 ? 1 : 0,
+                  y: stage >= 6 ? 0 : CTAS.offsetY,
+                }}
+                transition={{ ...CTAS.spring, delay: CTAS.stagger }}
               >
-                Réserver un appel
-              </a>
-            </motion.div>
+                <Button variant="secondary" size="lg" href="https://cal.com/greg-teachinspire/decouverte-teachinspire">
+                  Réserver un appel
+                </Button>
+              </motion.div>
+            </div>
           </div>
 
-          {/* Right column - info card */}
+          {/* Right column — video showcase */}
           <motion.div
-            initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            initial={{ opacity: 0, x: VIDEO.offsetX }}
+            animate={{
+              opacity: stage >= 7 ? 1 : 0,
+              x: stage >= 7 ? 0 : VIDEO.offsetX,
+            }}
+            transition={VIDEO.spring}
             className="lg:col-span-5"
           >
-            <div className="bg-navy text-cream p-8 lg:p-10">
-              {/* Process preview */}
-              <div className="mb-8 pb-8 border-b border-cream/10">
-                <span className="text-cream/50 text-sm uppercase tracking-wider">Le processus</span>
-                <p className="text-xl font-display mt-3">
-                  Vidéo YouTube, podcast, article → leçon sur mesure
-                </p>
-              </div>
-
-              {/* Time metric */}
-              <div className="mb-8 pb-8 border-b border-cream/10">
-                <span className="text-cream/50 text-sm uppercase tracking-wider">Temps de création</span>
-                <p className="text-4xl font-display font-bold text-yellow mt-2">
-                  &lt; 1 heure
-                </p>
-              </div>
-
-              {/* Funding note */}
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-sage" />
-                <span className="text-cream/70 text-sm">Éligible financement OPCO</span>
-              </div>
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(44,61,87,0.15)]">
+              {showPlayer ? (
+                /* Cloudinary Video Player iframe — loaded on click */
+                <iframe
+                  src={`${HERO_VIDEO_EMBED}&player[autoplay]=true`}
+                  className="w-full aspect-video"
+                  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                  style={{ border: 0 }}
+                  title="TeachInspire — présentation vidéo"
+                />
+              ) : (
+                /* Thumbnail with play button — click to load player */
+                <div
+                  className="relative group cursor-pointer"
+                  onClick={() => setShowPlayer(true)}
+                >
+                  <img
+                    src={HERO_VIDEO_POSTER}
+                    alt="TeachInspire — présentation vidéo"
+                    className="w-full aspect-video object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 rounded-full bg-yellow/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-yellow transition-all duration-200">
+                      <svg className="w-6 h-6 text-navy ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-3 right-3 bg-navy/70 backdrop-blur-sm text-cream text-xs font-medium px-2.5 py-1 rounded-md">
+                    1:28
+                  </div>
+                </div>
+              )}
             </div>
+            <p className="text-sm text-navy-light/70 mt-4 text-center italic">
+              Découvrez TeachInspire en 90 secondes
+            </p>
           </motion.div>
         </div>
       </Container>

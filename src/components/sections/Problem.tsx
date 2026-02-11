@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import { Container } from '../layout/Container';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import { KineticHeading } from '../animation/KineticHeading';
+import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
+import ScrollReveal from '../reactbits/ScrollReveal';
 
 const risks = [
   {
@@ -24,6 +27,7 @@ export function Problem() {
   return (
     <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="problem" />
 
       <Container>
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
@@ -42,16 +46,21 @@ export function Problem() {
               </span>
             </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            <KineticHeading
+              variant="word-reveal"
+              as="h2"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
               Vos formateurs entendent parler d'IA partout.
-              <span className="block text-rust mt-2">Et après ?</span>
-            </motion.h2>
+            </KineticHeading>
+            <KineticHeading
+              variant="assemble"
+              as="span"
+              className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
+              delay={0.3}
+            >
+              Et après ?
+            </KineticHeading>
           </div>
 
           {/* Right column - content */}
@@ -99,7 +108,7 @@ export function Problem() {
                     transition={{ duration: 0.4, delay: 0.4 + idx * 0.1 }}
                     className="flex items-center gap-6 py-4 border-b border-navy/10"
                   >
-                    <span className="text-3xl font-display font-bold text-sage/40">
+                    <span className="text-3xl font-display font-bold text-navy/10" aria-hidden="true">
                       {risk.number}
                     </span>
                     <p className="text-navy-light">{risk.text}</p>
@@ -116,9 +125,17 @@ export function Problem() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="bg-navy text-cream p-8"
             >
-              <p className="text-xl font-display mb-2">
+              <ScrollReveal
+                as="p"
+                containerClassName="text-xl font-display mb-2"
+                textClassName="text-xl font-display"
+                enableBlur
+                blurStrength={3}
+                baseOpacity={0.15}
+                wordAnimationEnd="center center"
+              >
                 L'IA évolue vite. Les outils d'aujourd'hui seront obsolètes demain.
-              </p>
+              </ScrollReveal>
               <p className="text-cream/70">
                 Ce qui reste ? La capacité à{' '}
                 <span className="text-yellow font-semibold">penser l'IA</span>.

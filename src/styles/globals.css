@@ -22,6 +22,7 @@
     @apply py-20 lg:py-32;
   }
 
+
   /* Quote highlight style */
   .quote-highlight {
     position: relative;

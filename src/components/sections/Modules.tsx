@@ -4,6 +4,10 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import { KineticHeading } from '../animation/KineticHeading';
+import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
+import SpotlightCard from '../reactbits/SpotlightCard';
+import DecryptedText from '../reactbits/DecryptedText';
 
 const modules = [
   {
@@ -53,14 +57,15 @@ export function Modules() {
   };
 
   const accentColors = {
-    yellow: 'text-yellow',
-    sage: 'text-sage',
-    rust: 'text-rust',
+    yellow: 'text-yellow/20',
+    sage: 'text-sage/20',
+    rust: 'text-rust/20',
   };
 
   return (
     <section className="bg-white py-20 lg:py-32 relative overflow-hidden">
       <GridOverlay />
+      <GeometricAccentGroup preset="modules" />
 
       <Container>
         {/* Section header — asymmetric grid */}
@@ -79,17 +84,39 @@ export function Modules() {
               </span>
             </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
-              style={{ textWrap: 'balance' }}
+            <KineticHeading
+              variant="cascade"
+              as="h2"
+              className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight [text-wrap:balance]"
             >
               Un parcours progressif
-              <span className="block text-rust mt-2">en 3 étapes</span>
-            </motion.h2>
+            </KineticHeading>
+            <div className="flex items-baseline gap-3 mt-2">
+              <KineticHeading
+                variant="cascade"
+                as="span"
+                className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight"
+                delay={0.2}
+              >
+                en
+              </KineticHeading>
+              <KineticHeading
+                variant="counter-roll"
+                as="span"
+                className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight"
+                delay={0.3}
+              >
+                3
+              </KineticHeading>
+              <KineticHeading
+                variant="cascade"
+                as="span"
+                className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight"
+                delay={0.35}
+              >
+                étapes
+              </KineticHeading>
+            </div>
           </div>
 
           <div className="lg:col-span-7 lg:pt-16">
@@ -118,25 +145,36 @@ export function Modules() {
             <motion.div
               key={module.number}
               variants={itemVariants}
-              className="bg-white p-8 lg:p-10"
             >
-              {/* Large faded number */}
-              <span className={`text-6xl font-display font-bold ${accentColors[module.color]}/20 block mb-6`}>
-                {module.number}
-              </span>
+              <SpotlightCard
+                className="bg-white p-8 lg:p-10 h-full"
+                spotlightColor="rgba(133, 162, 163, 0.10)"
+              >
+                {/* Large faded number */}
+                <span className={`text-6xl font-display font-bold ${accentColors[module.color]} block mb-6`} aria-hidden="true">
+                  {module.number}
+                </span>
 
-              <div className="flex items-center gap-3 mb-4">
-                <Badge variant={module.color === 'yellow' ? 'yellow' : module.color === 'sage' ? 'sage' : 'default'}>
-                  Module {module.number}
-                </Badge>
-                <span className="text-sm text-navy-light">{module.period}</span>
-              </div>
+                <div className="flex items-center gap-3 mb-4">
+                  <Badge variant={module.color === 'yellow' ? 'yellow' : module.color === 'sage' ? 'sage' : 'default'}>
+                    Module {module.number}
+                  </Badge>
+                  <span className="text-sm text-navy-light">{module.period}</span>
+                </div>
 
-              <h3 className="text-xl font-display font-bold text-navy mb-3">
-                {module.title}
-              </h3>
+                <h3 className="text-xl font-display font-bold text-navy mb-3">
+                  <DecryptedText
+                    text={module.title}
+                    animateOn="hover"
+                    speed={30}
+                    maxIterations={8}
+                    className="text-xl font-display font-bold text-navy"
+                    encryptedClassName="text-xl font-display font-bold text-navy/40"
+                  />
+                </h3>
 
-              <p className="text-navy-light leading-relaxed">{module.description}</p>
+                <p className="text-navy-light leading-relaxed">{module.description}</p>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>

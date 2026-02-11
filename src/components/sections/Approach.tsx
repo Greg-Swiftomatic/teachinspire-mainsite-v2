@@ -3,6 +3,8 @@ import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import { KineticHeading } from '../animation/KineticHeading';
+import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
 
 const pillars = [
   {
@@ -31,6 +33,7 @@ export function Approach() {
   return (
     <section className="bg-cream py-20 lg:py-32 overflow-hidden relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="approach" />
 
       <Container>
         {/* Section header */}
@@ -49,16 +52,21 @@ export function Approach() {
               </span>
             </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+            <KineticHeading
+              variant="word-reveal"
+              as="h2"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
               On n'enseigne pas un outil.
-              <span className="block text-rust mt-2">On enseigne à penser l'IA.</span>
-            </motion.h2>
+            </KineticHeading>
+            <KineticHeading
+              variant="assemble"
+              as="span"
+              className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
+              delay={0.3}
+            >
+              On enseigne à penser l'IA.
+            </KineticHeading>
           </div>
 
           <div className="lg:col-span-7 lg:pt-16">

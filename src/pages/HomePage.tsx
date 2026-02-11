@@ -7,10 +7,11 @@ import { Results } from '../components/sections/Results';
 import { Philosophy } from '../components/sections/Philosophy';
 import { Founder } from '../components/sections/Founder';
 import { FinalCTA } from '../components/sections/FinalCTA';
+import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
 
 export function HomePage() {
   return (
-    <>
+    <ScrollThreadContainer preset="homepage">
       <Hero />
       <Problem />
       <Possibility />
@@ -20,6 +21,6 @@ export function HomePage() {
       <Philosophy />
       <Founder />
       <FinalCTA />
-    </>
+    </ScrollThreadContainer>
   );
 }

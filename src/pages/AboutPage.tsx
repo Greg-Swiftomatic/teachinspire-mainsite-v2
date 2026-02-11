@@ -3,26 +3,36 @@ import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { ILLUSTRATIONS } from '../assets/assets';
 import { GridOverlay } from '../components/ui/GridOverlay';
+import { KineticHeading } from '../components/animation/KineticHeading';
+import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
+import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
+import { AboutLandscape } from '../components/illustrations/about/AboutLandscape';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+import SpotlightCard from '../components/reactbits/SpotlightCard';
+import BlurText from '../components/reactbits/BlurText';
 
 const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
+function useAnimationVariants(prefersReducedMotion: boolean) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
+  return { fadeInUp, staggerContainer };
+}
 
 // Timeline data
 const timeline = [
@@ -99,10 +109,14 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 // Hero Section
-function HeroSection() {
+function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const { fadeInUp, staggerContainer } = useAnimationVariants(prefersReducedMotion);
+
   return (
     <section className="bg-cream min-h-[60vh] relative overflow-hidden">
       <GridOverlay />
+      <GeometricAccentGroup preset="about-hero" />
+      <AboutLandscape />
 
       <Container>
         <div className="pt-32 pb-16 lg:pt-40 lg:pb-24">
@@ -120,13 +134,24 @@ function HeroSection() {
             </motion.div>
 
             {/* Headline */}
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight"
-            >
-              Derrière{' '}
-              <span className="text-rust">TeachInspire</span>
-            </motion.h1>
+            <h1 className="mb-6">
+              <BlurText
+                text="Derrière"
+                delay={100}
+                animateBy="words"
+                direction="bottom"
+                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
+                stepDuration={0.4}
+              />
+              <BlurText
+                text="TeachInspire"
+                delay={80}
+                animateBy="letters"
+                direction="bottom"
+                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
+                stepDuration={0.35}
+              />
+            </h1>
 
             {/* Subheadline */}
             <motion.p
@@ -144,9 +169,12 @@ function HeroSection() {
 }
 
 // Who Am I Section
-function WhoAmISection() {
+function WhoAmISection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const { fadeInUp, staggerContainer } = useAnimationVariants(prefersReducedMotion);
+
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Photo Column */}
@@ -154,13 +182,16 @@ function WhoAmISection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.6 }}
             className="lg:col-span-4"
           >
             <div className="aspect-[3/4] bg-sage/20 border border-navy/10 overflow-hidden">
               <img
                 src={ILLUSTRATIONS.portraitGregory}
                 alt="Grégory - Fondateur de TeachInspire"
+                width={400}
+                height={533}
+                loading="lazy"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -174,7 +205,7 @@ function WhoAmISection() {
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-100px' }}
             className="lg:col-span-8 space-y-6"
           >
             <motion.div variants={fadeInUp}>
@@ -223,24 +254,30 @@ function WhoAmISection() {
 }
 
 // Déclic Section
-function DeclicSection() {
+function DeclicSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-cream py-20 lg:py-28">
+    <section className="bg-cream py-20 lg:py-28 relative overflow-hidden">
+      <GeometricAccentGroup preset="about-declic" />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Label */}
           <div className="lg:col-span-4">
             <SectionLabel>Le déclic</SectionLabel>
-            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
+            <KineticHeading
+              variant="cascade"
+              as="h2"
+              className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight"
+            >
               Fin 2022
-            </h2>
+            </KineticHeading>
           </div>
 
           {/* Right - Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="lg:col-span-8"
           >
             <div className="bg-white p-8 lg:p-10 border border-navy/10">
@@ -278,9 +315,10 @@ function DeclicSection() {
 }
 
 // TeachInspire Birth Section
-function TeachInspireBirthSection() {
+function TeachInspireBirthSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-white py-20 lg:py-28">
+    <section className="bg-white py-20 lg:py-28 relative">
+      <GridOverlay />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Label */}
@@ -293,9 +331,10 @@ function TeachInspireBirthSection() {
 
           {/* Right - Content */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
             className="lg:col-span-8 space-y-6"
           >
             <p className="text-navy/70 leading-relaxed">
@@ -328,17 +367,23 @@ function TeachInspireBirthSection() {
 }
 
 // Timeline Section
-function TimelineSection() {
+function TimelineSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const { fadeInUp, staggerContainer } = useAnimationVariants(prefersReducedMotion);
   return (
-    <section className="bg-cream py-20 lg:py-28">
+    <section className="bg-cream py-20 lg:py-28 relative overflow-hidden">
+      <GeometricAccentGroup preset="about-timeline" />
       <Container>
         <SectionLabel>Parcours</SectionLabel>
 
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
-            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
+            <KineticHeading
+              variant="cascade"
+              as="h2"
+              className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight"
+            >
               Les étapes clés
-            </h2>
+            </KineticHeading>
           </div>
         </div>
 
@@ -371,7 +416,8 @@ function TimelineSection() {
 }
 
 // Philosophy Section
-function PhilosophySection() {
+function PhilosophySection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const { fadeInUp, staggerContainer } = useAnimationVariants(prefersReducedMotion);
   return (
     <section className="bg-white py-20 lg:py-28">
       <Container>
@@ -396,9 +442,12 @@ function PhilosophySection() {
             <motion.div
               key={point.number}
               variants={fadeInUp}
-              className="bg-cream/50 p-6 border border-navy/10"
             >
-              <span className="text-4xl font-display font-bold text-navy/10 block mb-3">
+              <SpotlightCard
+                className="bg-cream/50 p-6 border border-navy/10 h-full"
+                spotlightColor="rgba(133, 162, 163, 0.12)"
+              >
+              <span className="text-4xl font-display font-bold text-navy/10 block mb-3" aria-hidden="true">
                 {point.number}
               </span>
               <h3 className="text-lg font-display font-semibold text-navy mb-2">
@@ -407,6 +456,7 @@ function PhilosophySection() {
               <p className="text-sm text-navy/60 leading-relaxed">
                 {point.description}
               </p>
+              </SpotlightCard>
             </motion.div>
           ))}
         </motion.div>
@@ -416,23 +466,30 @@ function PhilosophySection() {
 }
 
 // CTA Section
-function CTASection() {
+function CTASection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
-    <section className="bg-navy py-20 lg:py-28">
+    <section className="bg-navy py-20 lg:py-28 relative overflow-hidden">
+      <GridOverlay variant="light" />
+      <GeometricAccentGroup preset="about-cta" />
       <Container>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
           className="max-w-2xl mx-auto text-center"
         >
           <span className="text-xs font-medium tracking-[0.2em] uppercase text-yellow mb-6 block">
             Prochaine étape
           </span>
 
-          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6">
+          <KineticHeading
+            variant="cascade"
+            as="h2"
+            className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6"
+          >
             Envie d'en discuter ?
-          </h2>
+          </KineticHeading>
 
           <p className="text-xl text-cream/70 mb-8">
             Réservez un appel découverte de 45 minutes. Sans engagement.
@@ -449,15 +506,17 @@ function CTASection() {
 
 // Main Page Component
 export function AboutPage() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <>
-      <HeroSection />
-      <WhoAmISection />
-      <DeclicSection />
-      <TeachInspireBirthSection />
-      <TimelineSection />
-      <PhilosophySection />
-      <CTASection />
-    </>
+    <ScrollThreadContainer preset="about">
+      <HeroSection prefersReducedMotion={prefersReducedMotion} />
+      <WhoAmISection prefersReducedMotion={prefersReducedMotion} />
+      <DeclicSection prefersReducedMotion={prefersReducedMotion} />
+      <TeachInspireBirthSection prefersReducedMotion={prefersReducedMotion} />
+      <TimelineSection prefersReducedMotion={prefersReducedMotion} />
+      <PhilosophySection prefersReducedMotion={prefersReducedMotion} />
+      <CTASection prefersReducedMotion={prefersReducedMotion} />
+    </ScrollThreadContainer>
   );
 }

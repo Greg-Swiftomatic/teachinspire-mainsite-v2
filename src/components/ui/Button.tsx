@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'cta';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   onClick?: () => void;
@@ -26,6 +26,7 @@ export function Button({
     primary: 'bg-navy text-cream hover:bg-navy/90',
     secondary: 'border border-navy/20 text-navy hover:border-navy hover:bg-navy/5',
     ghost: 'text-navy hover:text-navy/70 underline underline-offset-4',
+    cta: 'bg-yellow text-navy hover:bg-yellow/90',
   };
 
   const sizes = {
@@ -50,8 +51,13 @@ export function Button({
   );
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <a href={href} className={styles}>
+      <a
+        href={href}
+        className={styles}
+        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
         {content}
       </a>
     );

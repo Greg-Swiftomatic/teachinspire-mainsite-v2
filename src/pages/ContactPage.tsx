@@ -2,32 +2,37 @@ import { motion } from 'framer-motion';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
+import { KineticHeading } from '../components/animation/KineticHeading';
+import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
 const EMAIL = 'greg@teachinspire.me';
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
 export function ContactPage() {
+  const prefersReducedMotion = useReducedMotion();
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
   return (
-    <section className="bg-cream min-h-screen relative overflow-hidden">
+    <main className="bg-cream min-h-screen relative overflow-hidden">
       <GridOverlay />
+      <GeometricAccentGroup preset="contact-hero" />
 
       <Container>
         <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -45,13 +50,13 @@ export function ContactPage() {
                 </span>
               </motion.div>
 
-              <motion.h1
-                variants={fadeInUp}
+              <KineticHeading
+                variant="cascade"
+                as="h1"
                 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight"
               >
-                Parlons de{' '}
-                <span className="text-rust">votre projet</span>
-              </motion.h1>
+                Parlons de votre projet
+              </KineticHeading>
 
               <motion.p
                 variants={fadeInUp}
@@ -76,7 +81,7 @@ export function ContactPage() {
                   className="bg-white p-8 lg:p-10 border border-navy/10"
                 >
                   <div className="flex items-center gap-4 mb-6">
-                    <span className="text-5xl font-display font-bold text-navy/10">01</span>
+                    <span className="text-5xl font-display font-bold text-navy/10" aria-hidden="true">01</span>
                     <div className="h-px flex-1 bg-navy/10" />
                   </div>
 
@@ -113,7 +118,7 @@ export function ContactPage() {
                   className="bg-white p-8 lg:p-10 border border-navy/10"
                 >
                   <div className="flex items-center gap-4 mb-6">
-                    <span className="text-5xl font-display font-bold text-navy/10">02</span>
+                    <span className="text-5xl font-display font-bold text-navy/10" aria-hidden="true">02</span>
                     <div className="h-px flex-1 bg-navy/10" />
                   </div>
 
@@ -123,7 +128,7 @@ export function ContactPage() {
 
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="text-rust hover:text-rust-dark transition-colors text-lg font-medium block mb-2"
+                    className="text-rust hover:text-rust/80 transition-colors text-lg font-medium block mb-2"
                   >
                     {EMAIL}
                   </a>
@@ -149,7 +154,7 @@ export function ContactPage() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: prefersReducedMotion ? 0 : 0.6 }}
             className="mt-20 pt-8 border-t border-navy/10"
           >
             <p className="text-navy/40 text-sm">
@@ -158,6 +163,6 @@ export function ContactPage() {
           </motion.div>
         </div>
       </Container>
-    </section>
+    </main>
   );
 }

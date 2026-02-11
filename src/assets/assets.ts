@@ -4,9 +4,30 @@ export const CLOUDINARY_BASE = "https://res.cloudinary.com/ducvoebot";
 // Logo (already hosted)
 export const LOGO = `${CLOUDINARY_BASE}/image/upload/v1747991665/Teachinspire_logo_transparent_yjt3uf.png`;
 
-// Hero video (upload to Cloudinary when ready)
-export const HERO_VIDEO = ""; // TODO: Add Cloudinary URL
-export const HERO_VIDEO_POSTER = "https://placehold.co/600x400/f1d263/2c3d57?text=Hero+Video";
+// Hero video — Cloudinary Video Player embed
+const VIDEO_CLOUD = "dsps9ydcp";
+const VIDEO_ID = "teachinspire_qloczl";
+const VIDEO_COLORS = {
+  accent: "f1d263",  // gold
+  base: "2c3d57",    // navy
+  text: "F4F3F0",    // cream
+};
+
+export const HERO_VIDEO_EMBED = [
+  `https://player.cloudinary.com/embed/`,
+  `?cloud_name=${VIDEO_CLOUD}`,
+  `&public_id=${VIDEO_ID}`,
+  `&player[colors][accent]=${VIDEO_COLORS.accent}`,
+  `&player[colors][base]=${VIDEO_COLORS.base}`,
+  `&player[colors][text]=${VIDEO_COLORS.text}`,
+  `&player[showLogo]=true`,
+  `&player[logoImageUrl]=${encodeURIComponent(LOGO)}`,
+  `&player[logoOnclickUrl]=${encodeURIComponent("https://teachinspire.com")}`,
+  `&player[fluid]=true`,
+  `&source[poster][publicId]=${VIDEO_ID}`,
+].join("");
+
+export const HERO_VIDEO_POSTER = "/video-thumbnail.png";
 
 // ===== PLACEHOLDERS (replace with real URLs as illustrations are created) =====
 export const ILLUSTRATIONS = {

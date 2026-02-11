@@ -4,6 +4,10 @@ import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { KineticHeading } from '../components/animation/KineticHeading';
+import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
+import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
+import { FormationMap } from '../components/illustrations/formation/FormationMap';
 
 const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
 
@@ -139,6 +143,8 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
   return (
     <section className="bg-cream min-h-[70vh] relative overflow-hidden">
       <GridOverlay />
+      <GeometricAccentGroup preset="formation-hero" />
+      <FormationMap />
 
       <Container>
         <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -154,14 +160,34 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
               </span>
             </motion.div>
 
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight"
-            >
-              Apprenez à transformer{' '}
-              <span className="text-rust">n'importe quelle source</span>{' '}
-              en cours sur-mesure.
-            </motion.h1>
+            <div className="mb-6">
+              <KineticHeading
+                variant="cascade"
+                as="h1"
+                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
+                triggerStart="top 95%"
+              >
+                Apprenez à transformer
+              </KineticHeading>
+              <KineticHeading
+                variant="slide-from-sides"
+                as="span"
+                className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
+                delay={0.3}
+                triggerStart="top 95%"
+              >
+                n'importe quelle source
+              </KineticHeading>
+              <KineticHeading
+                variant="cascade"
+                as="span"
+                className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
+                delay={0.5}
+                triggerStart="top 95%"
+              >
+                {' en cours sur-mesure.'}
+              </KineticHeading>
+            </div>
 
             <motion.p
               variants={fadeInUp}
@@ -329,15 +355,27 @@ function ModulesSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
   return (
     <section id="programme" className="bg-white py-20 lg:py-28 relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="formation-modules" />
       <Container>
         <SectionLabel>Le programme</SectionLabel>
 
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
-            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Un parcours progressif en{' '}
-              <span className="text-rust">3 étapes</span>
-            </h2>
+            <KineticHeading
+              variant="cascade"
+              as="h2"
+              className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight"
+            >
+              Un parcours progressif en
+            </KineticHeading>
+            <KineticHeading
+              variant="counter-roll"
+              as="span"
+              className="inline text-3xl lg:text-4xl font-display font-semibold text-rust"
+              delay={0.3}
+            >
+              3 étapes
+            </KineticHeading>
           </div>
           <div className="lg:col-span-6 lg:flex lg:items-end">
             <p className="text-navy/60">
@@ -364,7 +402,7 @@ function ModulesSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
               <div className="grid lg:grid-cols-12 gap-0">
                 {/* Module Header */}
                 <div className="lg:col-span-4 p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-navy/10">
-                  <span className="text-6xl lg:text-7xl font-display font-bold text-navy/10 block mb-4 tabular-nums">
+                  <span className="text-6xl lg:text-7xl font-display font-bold text-navy/10 block mb-4 tabular-nums" aria-hidden="true">
                     {module.number}
                   </span>
 
@@ -468,7 +506,7 @@ function InclusionsSection({ prefersReducedMotion }: { prefersReducedMotion: boo
               variants={fadeInUp}
               className="bg-white p-6 lg:p-8"
             >
-              <span className="text-5xl font-display font-bold text-navy/10 block mb-4 tabular-nums">
+              <span className="text-5xl font-display font-bold text-navy/10 block mb-4 tabular-nums" aria-hidden="true">
                 {String(idx + 1).padStart(2, '0')}
               </span>
               <h3 className="text-lg font-display font-semibold text-navy mb-4">
@@ -542,13 +580,18 @@ function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boole
   return (
     <section className="bg-white py-20 lg:py-28 relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="formation-approach" />
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <SectionLabel>Notre approche</SectionLabel>
-            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
+            <KineticHeading
+              variant="word-reveal"
+              as="h2"
+              className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight"
+            >
               Les types d'outils, pas les outils
-            </h2>
+            </KineticHeading>
           </div>
 
           <motion.div
@@ -600,7 +643,7 @@ function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boole
   );
 }
 
-// Financement Section — editorial redesign with asymmetric layout
+// Financement Section
 function FinancementSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
   return (
     <section className="bg-cream py-20 lg:py-28 relative">
@@ -716,6 +759,7 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
   return (
     <section className="bg-navy py-20 lg:py-28 relative">
       <GridOverlay variant="light" />
+      <GeometricAccentGroup preset="formation-cta" />
       <Container>
         <motion.div
           initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
@@ -728,9 +772,13 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
             Prochaine étape
           </span>
 
-          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6">
+          <KineticHeading
+            variant="cascade"
+            as="h2"
+            className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6"
+          >
             Prêt à former votre équipe ?
-          </h2>
+          </KineticHeading>
 
           <p className="text-xl text-cream/70 mb-8">
             Réservez un appel découverte gratuit de 15 minutes.
@@ -738,7 +786,7 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
             On évalue ensemble si c'est adapté à vos besoins.
           </p>
 
-          <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow className="bg-yellow text-navy hover:bg-yellow/90">
+          <Button variant="cta" size="lg" href={CALENDLY_URL} showArrow>
             Réserver un appel découverte
           </Button>
         </motion.div>
@@ -752,7 +800,7 @@ export function FormationPage() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <>
+    <ScrollThreadContainer preset="formation">
       <HeroSection prefersReducedMotion={prefersReducedMotion} />
       <ForWhoSection prefersReducedMotion={prefersReducedMotion} />
       <PromiseSection prefersReducedMotion={prefersReducedMotion} />
@@ -762,6 +810,6 @@ export function FormationPage() {
       <FinancementSection prefersReducedMotion={prefersReducedMotion} />
       <GuaranteesSection prefersReducedMotion={prefersReducedMotion} />
       <FinalCTASection prefersReducedMotion={prefersReducedMotion} />
-    </>
+    </ScrollThreadContainer>
   );
 }

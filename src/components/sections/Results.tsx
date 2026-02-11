@@ -3,6 +3,9 @@ import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
+import { KineticHeading } from '../animation/KineticHeading';
+import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
+import SpotlightCard from '../reactbits/SpotlightCard';
 
 const metrics = [
   {
@@ -28,6 +31,7 @@ export function Results() {
   return (
     <section className="bg-white py-20 lg:py-32 overflow-hidden relative">
       <GridOverlay />
+      <GeometricAccentGroup preset="results" />
 
       <Container>
         {/* Section header */}
@@ -45,26 +49,32 @@ export function Results() {
             </span>
           </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <KineticHeading
+            variant="slide-from-sides"
+            as="h2"
             className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
           >
             Ce que ça change,
-            <span className="block text-rust mt-2">concrètement</span>
-          </motion.h2>
+          </KineticHeading>
+          <KineticHeading
+            variant="slide-from-sides"
+            as="span"
+            className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
+            delay={0.15}
+          >
+            concrètement
+          </KineticHeading>
         </div>
 
-        {/* Metrics grid */}
+        {/* Metrics grid — counter-roll for numeric values */}
         <div className="grid lg:grid-cols-3 gap-px bg-navy/10 mb-16">
           {metrics.map((metric, idx) => {
-            const accentColors = {
+            const accentColorMap: Record<string, string> = {
               yellow: 'text-yellow',
               sage: 'text-sage',
               rust: 'text-rust',
             };
+            const colorClass = accentColorMap[metric.accent] ?? 'text-navy';
 
             return (
               <motion.div
@@ -73,14 +83,23 @@ export function Results() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                className="bg-white p-8 lg:p-10"
               >
-                <p
-                  className={`text-4xl lg:text-5xl font-display font-bold ${accentColors[metric.accent as keyof typeof accentColors]} mb-4`}
+                <SpotlightCard
+                  className="bg-white p-8 lg:p-10 h-full"
+                  spotlightColor="rgba(133, 162, 163, 0.12)"
                 >
-                  {metric.value}
-                </p>
-                <p className="text-navy-light leading-relaxed">{metric.label}</p>
+                  <div className="mb-4">
+                    <KineticHeading
+                      variant="counter-roll"
+                      as="span"
+                      className={`text-4xl lg:text-5xl font-display font-bold ${colorClass}`}
+                      delay={0.3 + idx * 0.15}
+                    >
+                      {metric.value}
+                    </KineticHeading>
+                  </div>
+                  <p className="text-navy-light leading-relaxed">{metric.label}</p>
+                </SpotlightCard>
               </motion.div>
             );
           })}
