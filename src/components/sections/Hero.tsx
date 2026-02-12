@@ -94,9 +94,9 @@ export function Hero() {
       <GridOverlay />
 
       <Container>
-        <div className="grid lg:grid-cols-12 gap-8 items-center py-24">
+        <div className="grid lg:grid-cols-12 gap-10 items-center py-24">
           {/* Left column — main content */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6">
             {/* Category label with DecryptedText */}
             <motion.div
               initial={{ opacity: 0, x: LABEL.offsetX }}
@@ -213,9 +213,13 @@ export function Hero() {
               x: stage >= 7 ? 0 : VIDEO.offsetX,
             }}
             transition={VIDEO.spring}
-            className="lg:col-span-5"
+            className="lg:col-span-6"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(44,61,87,0.15)]">
+            <div className="relative border border-navy/10 overflow-hidden">
+              {/* Decorative corner accents */}
+              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-rust z-10" />
+              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-rust z-10" />
+
               {showPlayer ? (
                 /* Cloudinary Video Player iframe — loaded on click */
                 <iframe
@@ -228,30 +232,34 @@ export function Hero() {
                 />
               ) : (
                 /* Thumbnail with play button — click to load player */
-                <div
-                  className="relative group cursor-pointer"
+                <button
+                  type="button"
+                  className="relative group cursor-pointer w-full text-left"
                   onClick={() => setShowPlayer(true)}
+                  aria-label="Lancer la vidéo de présentation"
                 >
                   <img
                     src={HERO_VIDEO_POSTER}
                     alt="TeachInspire — présentation vidéo"
                     className="w-full aspect-video object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-navy/5 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-yellow/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-yellow transition-all duration-200">
-                      <svg className="w-6 h-6 text-navy ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <div className="w-14 h-14 bg-yellow flex items-center justify-center group-hover:bg-yellow/90 transition-colors duration-150">
+                      <svg className="w-5 h-5 text-navy ml-0.5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
                   </div>
-                  <div className="absolute bottom-3 right-3 bg-navy/70 backdrop-blur-sm text-cream text-xs font-medium px-2.5 py-1 rounded-md">
-                    1:28
+                  <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span className="bg-navy/80 backdrop-blur-sm text-cream text-xs font-medium tracking-wide px-2.5 py-1 rounded-sm">
+                      1:28
+                    </span>
                   </div>
-                </div>
+                </button>
               )}
             </div>
-            <p className="text-sm text-navy-light/70 mt-4 text-center italic">
+            <p className="text-xs text-navy-light/60 mt-4 tracking-wide uppercase">
               Découvrez TeachInspire en 90 secondes
             </p>
           </motion.div>
