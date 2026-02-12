@@ -7,6 +7,7 @@ import { ContactPage } from './pages/ContactPage';
 import { MentionsLegalesPage } from './pages/MentionsLegalesPage';
 import { PolitiqueConfidentialitePage } from './pages/PolitiqueConfidentialitePage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { OffrePage } from './pages/OffrePage';
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ export const router = createBrowserRouter([
       {
         path: 'formation',
         element: <FormationPage />,
+      },
+      {
+        // Hidden page — not in navigation, accessible only via direct URL
+        path: 'offre',
+        element: <OffrePage />,
       },
       {
         path: 'a-propos',

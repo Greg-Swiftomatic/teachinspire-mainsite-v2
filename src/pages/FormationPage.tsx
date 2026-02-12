@@ -34,7 +34,7 @@ const modules = [
       "Prise en main d'un environnement de travail IA",
     ],
     deliverable: 'Votre première ressource pédagogique créée avec l\'IA',
-    bonus: 'App "Text 2 Script" — Générateur de dialogues formatés',
+    bonus: 'Prise en main de Google AI Studio',
   },
   {
     number: '02',
@@ -82,7 +82,6 @@ const inclusions = [
     title: 'Outils Exclusifs',
     items: [
       'Prompt Builder Pro (accès à vie)',
-      'Text 2 Script Generator (accès à vie)',
       'Mises à jour automatiques incluses',
     ],
   },
