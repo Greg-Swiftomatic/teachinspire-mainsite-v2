@@ -198,7 +198,7 @@ export function Hero() {
                 }}
                 transition={{ ...CTAS.spring, delay: CTAS.stagger }}
               >
-                <Button variant="secondary" size="lg" href="https://cal.com/greg-teachinspire/decouverte-teachinspire">
+                <Button variant="secondary" size="lg" href="https://cal.com/teachinspire.me">
                   Réserver un appel
                 </Button>
               </motion.div>

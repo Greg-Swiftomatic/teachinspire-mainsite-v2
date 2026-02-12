@@ -77,7 +77,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+                  href="https://cal.com/teachinspire.me"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 text-cream hover:bg-yellow hover:text-navy transition-colors mt-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   Réserver un appel

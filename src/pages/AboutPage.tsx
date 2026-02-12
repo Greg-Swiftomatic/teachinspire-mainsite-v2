@@ -11,7 +11,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 import SpotlightCard from '../components/reactbits/SpotlightCard';
 import BlurText from '../components/reactbits/BlurText';
 
-const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
+const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
 function useAnimationVariants(prefersReducedMotion: boolean) {
   const fadeInUp = {

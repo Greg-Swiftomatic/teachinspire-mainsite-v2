@@ -82,7 +82,7 @@ export function FinalCTA() {
             <Button
               variant="cta"
               size="lg"
-              href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+              href="https://cal.com/teachinspire.me"
               showArrow
             >
               Réserver mon appel découverte

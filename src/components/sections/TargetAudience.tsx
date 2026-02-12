@@ -123,7 +123,7 @@ export function TargetAudience() {
           <Button
             variant="primary"
             size="lg"
-            href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+            href="https://cal.com/teachinspire.me"
             showArrow
           >
             Parlons-en — 15 min, gratuit

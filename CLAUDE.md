@@ -394,7 +394,7 @@ const fadeInUp = {
 
 | Resource | URL |
 |----------|-----|
-| Calendly | `https://cal.com/greg-teachinspire/decouverte-teachinspire` |
+| Calendly | `https://cal.com/teachinspire.me` |
 | Email | `greg@teachinspire.me` |
 
 ---

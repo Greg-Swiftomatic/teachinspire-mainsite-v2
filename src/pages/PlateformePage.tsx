@@ -20,7 +20,7 @@ import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { MagicCard, TiltCard } from '../components/ui/MagicCard';
 
-const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
+const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
 // Animation variants
 const fadeInUp = {

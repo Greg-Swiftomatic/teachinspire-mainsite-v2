@@ -38,7 +38,7 @@ export function Header() {
             <Button
               variant="primary"
               size="sm"
-              href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+              href="https://cal.com/teachinspire.me"
               showArrow
             >
               Réserver un appel
@@ -81,7 +81,7 @@ export function Header() {
                 <Button
                   variant="primary"
                   size="md"
-                  href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+                  href="https://cal.com/teachinspire.me"
                   showArrow
                   className="mt-4"
                 >

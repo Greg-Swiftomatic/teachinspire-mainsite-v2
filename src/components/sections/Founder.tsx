@@ -151,7 +151,7 @@ export function Founder() {
             <Button
               variant="primary"
               size="lg"
-              href="https://cal.com/greg-teachinspire/decouverte-teachinspire"
+              href="https://cal.com/teachinspire.me"
               showArrow
             >
               Réserver un appel avec Greg

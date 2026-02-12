@@ -5,7 +5,7 @@ import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
+const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
 // ── Data ──────────────────────────────────────────────────
 

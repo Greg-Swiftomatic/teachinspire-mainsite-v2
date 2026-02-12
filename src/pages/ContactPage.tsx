@@ -6,7 +6,7 @@ import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
+const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 const EMAIL = 'greg@teachinspire.me';
 
 export function ContactPage() {

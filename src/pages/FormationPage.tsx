@@ -9,7 +9,7 @@ import { GeometricAccentGroup } from '../components/animation/GeometricAccentGro
 import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
 import { FormationMap } from '../components/illustrations/formation/FormationMap';
 
-const CALENDLY_URL = 'https://cal.com/greg-teachinspire/decouverte-teachinspire';
+const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
 // Data
 const targetAudience = [
