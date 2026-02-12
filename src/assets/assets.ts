@@ -24,6 +24,10 @@ export const HERO_VIDEO_EMBED = [
   `&player[logoImageUrl]=${encodeURIComponent(LOGO)}`,
   `&player[logoOnclickUrl]=${encodeURIComponent("https://teachinspire.com")}`,
   `&player[fluid]=true`,
+  // Hide title/description/subtitle metadata overlays
+  `&source[info][title]=`,
+  `&source[info][subtitle]=`,
+  `&source[info][description]=`,
   `&source[poster][publicId]=${VIDEO_ID}`,
 ].join("");
 
