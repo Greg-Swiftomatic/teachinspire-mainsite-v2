@@ -7,7 +7,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
-import { FormationMap } from '../components/illustrations/formation/FormationMap';
+import { FormationPipelineWorkbench } from '../components/illustrations/formation/FormationPipelineWorkbench';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
@@ -143,7 +143,6 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
     <section className="bg-cream min-h-[70vh] relative overflow-hidden">
       <GridOverlay />
       <GeometricAccentGroup preset="formation-hero" />
-      <FormationMap />
 
       <Container>
         <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -151,75 +150,81 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="max-w-4xl"
+            className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center"
           >
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
-                Formation pour Instituts
-              </span>
-            </motion.div>
+            <div className="lg:col-span-6 max-w-3xl">
+              <motion.div variants={fadeInUp} className="mb-6">
+                <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
+                  Formation pour Instituts
+                </span>
+              </motion.div>
 
-            <div className="mb-6">
-              <KineticHeading
-                variant="cascade"
-                as="h1"
-                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
-                triggerStart="top 95%"
+              <div className="mb-6">
+                <KineticHeading
+                  variant="cascade"
+                  as="h1"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
+                  triggerStart="top 95%"
+                >
+                  Apprenez à transformer
+                </KineticHeading>
+                <KineticHeading
+                  variant="slide-from-sides"
+                  as="span"
+                  className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
+                  delay={0.3}
+                  triggerStart="top 95%"
+                >
+                  n'importe quelle source
+                </KineticHeading>
+                <KineticHeading
+                  variant="cascade"
+                  as="span"
+                  className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
+                  delay={0.5}
+                  triggerStart="top 95%"
+                >
+                  {' en cours sur-mesure.'}
+                </KineticHeading>
+              </div>
+
+              <motion.p
+                variants={fadeInUp}
+                className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
               >
-                Apprenez à transformer
-              </KineticHeading>
-              <KineticHeading
-                variant="slide-from-sides"
-                as="span"
-                className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
-                delay={0.3}
-                triggerStart="top 95%"
+                Une formation pour maîtriser l'IA pédagogique.
+              </motion.p>
+
+              <motion.p
+                variants={fadeInUp}
+                className="text-lg text-navy/60 mb-10 max-w-2xl"
               >
-                n'importe quelle source
-              </KineticHeading>
-              <KineticHeading
-                variant="cascade"
-                as="span"
-                className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
-                delay={0.5}
-                triggerStart="top 95%"
+                <strong className="text-navy">15 tutoriels vidéo (6h)</strong> +{' '}
+                <strong className="text-navy">6 à 8 sessions live</strong> adaptées à votre équipe.
+                <br />
+                Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
+              </motion.p>
+
+              <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
+                <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
+                  Réserver un appel découverte
+                </Button>
+                <Button variant="secondary" size="lg" href="#programme">
+                  Voir le programme
+                </Button>
+              </motion.div>
+
+              <motion.p
+                variants={fadeInUp}
+                className="mt-6 text-sm text-navy/50"
               >
-                {' en cours sur-mesure.'}
-              </KineticHeading>
+                Éligible financement OPCO
+              </motion.p>
             </div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
-            >
-              Une formation pour maîtriser l'IA pédagogique.
-            </motion.p>
-
-            <motion.p
-              variants={fadeInUp}
-              className="text-lg text-navy/60 mb-10 max-w-2xl"
-            >
-              <strong className="text-navy">15 tutoriels vidéo (6h)</strong> +{' '}
-              <strong className="text-navy">6 à 8 sessions live</strong> adaptées à votre équipe.
-              <br />
-              Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
-            </motion.p>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
-                Réserver un appel découverte
-              </Button>
-              <Button variant="secondary" size="lg" href="#programme">
-                Voir le programme
-              </Button>
+            <motion.div variants={fadeInUp} className="lg:col-span-6 lg:pl-6">
+              <FormationPipelineWorkbench prefersReducedMotion={prefersReducedMotion} />
             </motion.div>
-
-            <motion.p
-              variants={fadeInUp}
-              className="mt-6 text-sm text-navy/50"
-            >
-              Éligible financement OPCO
-            </motion.p>
           </motion.div>
         </div>
       </Container>
