@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '../../../hooks/useReducedMotion';
@@ -44,8 +44,6 @@ export function useSvgDraw(
   } = options;
 
   const prefersReducedMotion = useReducedMotion();
-  const optionsRef = useRef(options);
-  optionsRef.current = options;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -187,5 +185,5 @@ export function useSvgDraw(
     }, container);
 
     return () => ctx.revert();
-  }, [prefersReducedMotion, triggerStart, scrub, baseDuration, stagger]);
+  }, [containerRef, prefersReducedMotion, triggerStart, scrub, baseDuration, stagger, onAfterDraw]);
 }

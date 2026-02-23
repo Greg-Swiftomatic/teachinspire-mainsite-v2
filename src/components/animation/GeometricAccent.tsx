@@ -124,6 +124,9 @@ export function GeometricAccent({
   const ref = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const animationType = animation.type;
+  const animationSpeed = animation.speed ?? 30;
+  const animationRange = animation.range ?? 360;
 
   // Mobile: reduce size by 30%
   const effectiveSize = isMobile ? Math.round(size * 0.7) : size;
@@ -135,14 +138,13 @@ export function GeometricAccent({
     if (isMobile) return;
 
     const el = ref.current;
-    const { type, speed = 30, range = 360 } = animation;
     let ctx: gsap.Context;
 
-    switch (type) {
+    switch (animationType) {
       case 'parallax':
         ctx = gsap.context(() => {
           gsap.to(el, {
-            y: speed,
+            y: animationSpeed,
             ease: 'none',
             scrollTrigger: {
               trigger: el.parentElement,
@@ -157,7 +159,7 @@ export function GeometricAccent({
       case 'rotate':
         ctx = gsap.context(() => {
           gsap.to(el, {
-            rotation: range,
+            rotation: animationRange,
             ease: 'none',
             scrollTrigger: {
               trigger: el.parentElement,
@@ -172,8 +174,8 @@ export function GeometricAccent({
       case 'ambient':
         ctx = gsap.context(() => {
           gsap.to(el, {
-            y: speed * 0.3,
-            rotation: range * 0.05,
+            y: animationSpeed * 0.3,
+            rotation: animationRange * 0.05,
             duration: 6,
             repeat: -1,
             yoyo: true,
@@ -184,7 +186,7 @@ export function GeometricAccent({
     }
 
     return () => ctx?.revert();
-  }, [prefersReducedMotion, isMobile, animation.type, animation.speed, animation.range]);
+  }, [prefersReducedMotion, isMobile, animationType, animationSpeed, animationRange]);
 
   return (
     <div

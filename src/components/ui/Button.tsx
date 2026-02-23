@@ -64,7 +64,7 @@ export function Button({
   }
 
   return (
-    <button onClick={onClick} className={styles}>
+    <button type="button" onClick={onClick} className={styles}>
       {content}
     </button>
   );

@@ -126,9 +126,10 @@ export function InteractiveSourceDiagram() {
 
   // Cleanup on unmount
   useEffect(() => {
+    const stageContainer = stageRef.current?.getContainer() ?? null;
     return () => {
       clearAutoReturn();
-      kill(stageRef.current?.getContainer() ?? null);
+      kill(stageContainer);
     };
   }, [clearAutoReturn, kill]);
 

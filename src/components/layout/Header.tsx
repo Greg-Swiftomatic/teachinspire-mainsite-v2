@@ -21,7 +21,7 @@ export function Header() {
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <img src={LOGO} alt="TeachInspire" className="h-10 w-auto" />
+            <img src={LOGO} alt="TeachInspire" width={320} height={80} className="h-10 w-auto" />
           </a>
 
           {/* Desktop Navigation */}
@@ -48,8 +48,10 @@ export function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-navy cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+            className="md:hidden p-2.5 text-navy cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
             aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -64,6 +66,7 @@ export function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
+            id="mobile-navigation"
             className="md:hidden bg-cream border-b border-navy/10 overflow-hidden"
           >
             <Container>

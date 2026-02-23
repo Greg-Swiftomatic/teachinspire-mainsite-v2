@@ -3,7 +3,7 @@
  * Word-by-word opacity + blur reveal driven by scroll position.
  * Uses GSAP ScrollTrigger.
  */
-import { useEffect, useRef, useMemo, type ReactNode, type RefObject } from 'react';
+import { useEffect, useRef, useMemo, type ReactNode, type RefObject, type Ref } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -36,7 +36,7 @@ export default function ScrollReveal({
   wordAnimationEnd = 'bottom bottom',
   as: Tag = 'p',
 }: ScrollRevealProps) {
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const splitText = useMemo(() => {
     const text = typeof children === 'string' ? children : '';
@@ -54,55 +54,38 @@ export default function ScrollReveal({
     const el = containerRef.current;
     if (!el) return;
 
-    const scroller =
-      scrollContainerRef && scrollContainerRef.current
-        ? scrollContainerRef.current
-        : window;
+    const ctx = gsap.context(() => {
+      const scroller =
+        scrollContainerRef && scrollContainerRef.current
+          ? scrollContainerRef.current
+          : window;
 
-    if (baseRotation !== 0) {
-      gsap.fromTo(
-        el,
-        { transformOrigin: '0% 50%', rotate: baseRotation },
-        {
-          ease: 'none',
-          rotate: 0,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: 'top bottom',
-            end: rotationEnd,
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    const wordElements = el.querySelectorAll<HTMLElement>('.word');
-
-    gsap.fromTo(
-      wordElements,
-      { opacity: baseOpacity, willChange: 'opacity' },
-      {
-        ease: 'none',
-        opacity: 1,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: 'top bottom-=20%',
-          end: wordAnimationEnd,
-          scrub: true,
-        },
+      if (baseRotation !== 0) {
+        gsap.fromTo(
+          el,
+          { transformOrigin: '0% 50%', rotate: baseRotation },
+          {
+            ease: 'none',
+            rotate: 0,
+            scrollTrigger: {
+              trigger: el,
+              scroller,
+              start: 'top bottom',
+              end: rotationEnd,
+              scrub: true,
+            },
+          }
+        );
       }
-    );
 
-    if (enableBlur) {
+      const wordElements = el.querySelectorAll<HTMLElement>('.word');
+
       gsap.fromTo(
         wordElements,
-        { filter: `blur(${blurStrength}px)` },
+        { opacity: baseOpacity, willChange: 'opacity' },
         {
           ease: 'none',
-          filter: 'blur(0px)',
+          opacity: 1,
           stagger: 0.05,
           scrollTrigger: {
             trigger: el,
@@ -113,15 +96,34 @@ export default function ScrollReveal({
           },
         }
       );
-    }
+
+      if (enableBlur) {
+        gsap.fromTo(
+          wordElements,
+          { filter: `blur(${blurStrength}px)` },
+          {
+            ease: 'none',
+            filter: 'blur(0px)',
+            stagger: 0.05,
+            scrollTrigger: {
+              trigger: el,
+              scroller,
+              start: 'top bottom-=20%',
+              end: wordAnimationEnd,
+              scrub: true,
+            },
+          }
+        );
+      }
+    }, el);
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ctx.revert();
     };
   }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
 
   return (
-    <Tag ref={containerRef as any} className={containerClassName}>
+    <Tag ref={containerRef as unknown as Ref<HTMLDivElement>} className={containerClassName}>
       <span className={`inline ${textClassName}`}>{splitText}</span>
     </Tag>
   );

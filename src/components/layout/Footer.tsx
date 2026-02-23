@@ -28,6 +28,8 @@ export function Footer() {
             <img
               src={LOGO}
               alt="TeachInspire"
+              width={320}
+              height={80}
               className="h-10 w-auto mb-6 brightness-0 invert"
             />
             <p className="text-xl font-display text-cream/90 mb-4">

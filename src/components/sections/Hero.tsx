@@ -68,15 +68,19 @@ export function Hero() {
   const prefersReducedMotion = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
   const isInView = useInView(ref, { once: true });
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState(() => (prefersReducedMotion ? 8 : 0));
   const [showPlayer, setShowPlayer] = useState(false);
 
   useEffect(() => {
-    if (!isInView) { setStage(0); return; }
-    if (prefersReducedMotion) { setStage(8); return; }
+    if (!isInView) return;
 
-    setStage(0);
+    if (prefersReducedMotion) {
+      const reducedMotionFrame = window.requestAnimationFrame(() => setStage(8));
+      return () => window.cancelAnimationFrame(reducedMotionFrame);
+    }
+
     const timers: ReturnType<typeof setTimeout>[] = [];
+    timers.push(setTimeout(() => setStage(0), 0));
 
     timers.push(setTimeout(() => setStage(1), TIMING.label));
     timers.push(setTimeout(() => setStage(2), TIMING.number));
@@ -241,6 +245,10 @@ export function Hero() {
                   <img
                     src={HERO_VIDEO_POSTER}
                     alt="TeachInspire — présentation vidéo"
+                    width={1920}
+                    height={1080}
+                    loading="eager"
+                    decoding="async"
                     className="w-full aspect-video object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-navy/5 to-transparent" />
