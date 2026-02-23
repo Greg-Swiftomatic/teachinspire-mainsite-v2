@@ -171,7 +171,7 @@ export function PremiumSourceDiagram() {
                   className={`
                     flex items-center gap-4 p-4
                     bg-white border border-navy/10
-                    transition-all duration-300 ease-out
+                    transition-[transform,box-shadow,border-color] duration-300 ease-out
                     ${hoveredSource === source.id ? 'border-navy/30 shadow-lg -translate-y-0.5' : 'shadow-sm'}
                   `}
                 >
@@ -179,7 +179,7 @@ export function PremiumSourceDiagram() {
                   <div
                     className={`
                       flex-shrink-0 w-12 h-12 flex items-center justify-center
-                      transition-all duration-300
+                      transition-transform duration-300
                       ${hoveredSource === source.id ? 'scale-110' : ''}
                     `}
                   >
@@ -196,7 +196,7 @@ export function PremiumSourceDiagram() {
                   <div
                     className={`
                       flex-shrink-0 w-6 h-6 flex items-center justify-center
-                      text-navy/30 transition-all duration-300
+                      text-navy/30 transition-[transform,color] duration-300
                       ${hoveredSource === source.id ? 'text-rust translate-x-1' : ''}
                     `}
                   >

@@ -77,7 +77,7 @@ export function SourceCard({
           <div
             className={`
               w-12 h-12 flex items-center justify-center
-              transition-all duration-300
+              transition-colors duration-300
               ${isActive ? 'bg-rust/6' : 'bg-sage/10 group-hover:bg-sage/15'}
             `}
           >

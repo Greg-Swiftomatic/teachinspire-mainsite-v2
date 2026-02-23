@@ -42,7 +42,7 @@ export function OutputPreview({
 
       {/* Glow effect — intensifies when output revealed */}
       <div
-        className="absolute -top-10 -right-10 w-44 h-44 transition-all duration-700"
+        className="absolute -top-10 -right-10 w-44 h-44 transition-[opacity,filter] duration-700"
         style={{
           background: 'radial-gradient(circle, rgba(241,210,99,0.25) 0%, transparent 70%)',
           opacity: isRevealed ? 0.6 : 0.12,

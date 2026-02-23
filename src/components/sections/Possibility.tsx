@@ -97,7 +97,7 @@ export function Possibility() {
 
         <div className="relative mx-auto flex w-full max-w-6xl flex-col items-stretch justify-between gap-8 lg:flex-row">
           <motion.article
-            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
+            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-[transform,box-shadow] duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
             {...reveal(0.25)}
           >
             <div className="mb-8 flex items-start justify-between">
@@ -161,7 +161,7 @@ export function Possibility() {
           </div>
 
           <motion.article
-            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
+            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-[transform,box-shadow] duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
             {...reveal(0.4)}
           >
             <div className="mb-8 flex items-start justify-between">
@@ -241,7 +241,7 @@ export function Possibility() {
           </div>
 
           <motion.article
-            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-all duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
+            className="group relative flex flex-1 flex-col rounded-[24px] border border-white/60 bg-[#faf8f5] p-8 shadow-[12px_12px_24px_#d9d4d0,-12px_-12px_24px_#ffffff] transition-[transform,box-shadow] duration-500 hover:-translate-y-2 hover:shadow-[16px_16px_32px_#d0ccc9,-16px_-16px_32px_#ffffff]"
             {...reveal(0.55)}
           >
             <div className="mb-8 flex items-start justify-between">
@@ -299,7 +299,7 @@ export function Possibility() {
           <Link
             id="cta-discover-method"
             to="/formation"
-            className="group inline-flex items-center gap-3 rounded-xl border border-white/50 bg-yellow px-8 py-4 text-base font-bold text-navy shadow-[6px_6px_12px_#d9d4d0,-6px_-6px_12px_#ffffff] transition-all duration-300 hover:translate-y-[2px] hover:shadow-[2px_2px_4px_#d9d4d0,-2px_-2px_4px_#ffffff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
+            className="group inline-flex items-center gap-3 rounded-xl border border-white/50 bg-yellow px-8 py-4 text-base font-bold text-navy shadow-[6px_6px_12px_#d9d4d0,-6px_-6px_12px_#ffffff] transition-[transform,box-shadow] duration-300 hover:translate-y-[2px] hover:shadow-[2px_2px_4px_#d9d4d0,-2px_-2px_4px_#ffffff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rust"
           >
             Découvrir la méthode
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-black/5 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.15),inset_-1px_-1px_3px_rgba(255,255,255,0.4)]">

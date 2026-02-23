@@ -105,10 +105,12 @@ export function ScrollThreadContainer({ preset, children }: ScrollThreadContaine
 
     // Re-measure on resize
     window.addEventListener('resize', measure);
+    window.addEventListener('scroll-thread:remeasure', measure);
 
     return () => {
       clearTimeout(timer);
       window.removeEventListener('resize', measure);
+      window.removeEventListener('scroll-thread:remeasure', measure);
     };
   }, [prefersReducedMotion]);
 

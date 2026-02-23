@@ -136,7 +136,7 @@ export function Testimonials() {
                     aria-label={`Aller au témoignage ${idx + 1}`}
                   >
                     <span
-                      className={`block h-1 transition-all duration-200 ${
+                      className={`block h-1 transition-[width,background-color] duration-200 ${
                         idx === currentIndex ? 'bg-navy w-8' : 'bg-navy/20 w-4 hover:bg-navy/40'
                       }`}
                     />
