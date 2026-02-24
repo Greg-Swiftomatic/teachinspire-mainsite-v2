@@ -12,11 +12,26 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
+/* ── Desktop SVG flow lines ── */
+
+.pdm-flow-svg {
+  z-index: 10;
+}
+
 .pdm-flow-line path {
   fill: none;
   stroke: #2c3d57;
   stroke-width: 1.5;
   opacity: 0.25;
+  stroke-linejoin: round;
+}
+
+.pdm-flow-loop path {
+  fill: none;
+  stroke: #b7553d;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+  opacity: 0.4;
   stroke-linejoin: round;
 }
 
@@ -28,6 +43,76 @@
   opacity: 0.45;
   stroke-linejoin: round;
 }
+
+/* ── Responsive node positioning ──
+   On mobile (< 1024px): relative flow layout (inline style left/top ignored).
+   On lg (≥ 1024px): absolute, using inline left/top values.
+*/
+
+.pdm-node-start,
+.pdm-decision,
+.pdm-deadend,
+.pdm-loopback,
+.pdm-method,
+.pdm-method-end {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .pdm-node-start {
+    position: absolute;
+    transform: translateX(-50%);
+  }
+
+  .pdm-decision {
+    position: absolute;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .pdm-deadend {
+    position: absolute;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    gap: 11px;
+  }
+
+  .pdm-loopback {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .pdm-method {
+    position: absolute;
+    width: 170px;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .pdm-method-end {
+    position: absolute;
+    transform: translate(-4px, -50%);
+    border: none;
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}
+
+/* ── Pulse animations (dead-end dots) ── */
 
 .pdm-p1 {
   animation: pdm-pulse-1 7s infinite;
@@ -42,60 +127,50 @@
 }
 
 @keyframes pdm-pulse-1 {
-  0%,
-  90%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
+  0%, 90%, 100% {
+    transform: scale(1);
     background-color: #b7553d;
     box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
   }
-
   95% {
-    transform: translate(-50%, -50%) scale(1.4);
+    transform: scale(1.4);
     background-color: #c9674f;
     box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
   }
 }
 
 @keyframes pdm-pulse-2 {
-  0%,
-  28%,
-  38%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
+  0%, 28%, 38%, 100% {
+    transform: scale(1);
     background-color: #b7553d;
     box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
   }
-
   33% {
-    transform: translate(-50%, -50%) scale(1.4);
+    transform: scale(1.4);
     background-color: #c9674f;
     box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
   }
 }
 
 @keyframes pdm-pulse-3 {
-  0%,
-  61%,
-  71%,
-  100% {
-    transform: translate(-50%, -50%) scale(1);
+  0%, 61%, 71%, 100% {
+    transform: scale(1);
     background-color: #b7553d;
     box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
   }
-
   66% {
-    transform: translate(-50%, -50%) scale(1.4);
+    transform: scale(1.4);
     background-color: #c9674f;
     box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
   }
 }
 
+/* ── Reduced motion ── */
+
 @media (prefers-reduced-motion: reduce) {
   .pdm-anim-dot {
     display: none;
   }
-
   .pdm-p1,
   .pdm-p2,
   .pdm-p3 {
