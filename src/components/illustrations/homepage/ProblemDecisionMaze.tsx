@@ -191,8 +191,8 @@ export function ProblemDecisionMaze({
                 style={{ left: node.left, top: node.top }}
               />
               <div
-                className="absolute w-[120px] -translate-y-1/2 font-display text-[10px] font-medium leading-tight text-rust sm:w-[170px] sm:text-[12px] md:w-[190px] md:text-[13px]"
-                style={{ left: '74.16%', top: node.top }}
+                className="absolute -translate-y-1/2 font-sans text-[10px] font-medium leading-tight text-rust sm:text-[12px] md:text-[13px]"
+                style={{ left: '73%', top: node.top, width: '24%' }}
               >
                 {node.label}
               </div>
@@ -213,8 +213,8 @@ export function ProblemDecisionMaze({
             style={{ left: '71.66%', top: '84.61%' }}
           />
           <div
-            className="absolute w-[120px] -translate-y-1/2 font-display text-[10px] italic leading-tight text-[#7a9177] opacity-90 sm:w-[170px] sm:text-[12px] md:w-[190px] md:text-[13px]"
-            style={{ left: '74.16%', top: '84.61%' }}
+            className="absolute -translate-y-1/2 font-sans text-[10px] italic leading-tight text-[#7a9177] opacity-90 sm:text-[12px] md:text-[13px]"
+            style={{ left: '73%', top: '84.61%', width: '24%' }}
           >
             Progression guidée
           </div>
