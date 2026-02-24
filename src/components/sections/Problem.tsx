@@ -33,7 +33,7 @@ export function Problem() {
       <Container>
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left column - section label and title */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6 xl:col-span-5">
             <motion.div
               initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -68,7 +68,7 @@ export function Problem() {
           </div>
 
           {/* Right column - content */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-6 xl:col-span-7">
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

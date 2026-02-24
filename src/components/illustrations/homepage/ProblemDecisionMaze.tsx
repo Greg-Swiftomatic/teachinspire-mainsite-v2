@@ -21,44 +21,44 @@ interface DeadEndNode {
 }
 
 const decisionNodes: DecisionNode[] = [
-  { id: 'tool', label: 'Quel outil choisir ?', left: '41.66%', top: '13.46%' },
-  { id: 'prompt', label: 'Comment lui parler ?', left: '41.66%', top: '32.69%' },
-  { id: 'adapt', label: "Comment l'adapter à mes élèves ?", left: '41.66%', top: '51.92%' },
-  { id: 'course', label: 'Comment en faire un vrai cours ?', left: '41.66%', top: '69.23%' },
+  { id: 'tool', label: 'Quel outil choisir ?', left: '34%', top: '13.46%' },
+  { id: 'prompt', label: 'Comment lui parler ?', left: '34%', top: '32.69%' },
+  { id: 'adapt', label: "Comment l'adapter à mes élèves ?", left: '34%', top: '51.92%' },
+  { id: 'course', label: 'Comment en faire un vrai cours ?', left: '34%', top: '69.23%' },
 ];
 
 const deadEnds: DeadEndNode[] = [
   {
     id: 'd1',
     label: "On passe plus de temps à tester qu'à enseigner",
-    left: '71.66%',
+    left: '58%',
     top: '13.46%',
     pulse: 'p1',
   },
   {
     id: 'd2',
     label: "Le résultat ne correspond jamais à ce qu'on veut",
-    left: '71.66%',
+    left: '58%',
     top: '32.69%',
     pulse: 'p2',
   },
   {
     id: 'd3',
     label: 'Exercice trop facile, trop dur, hors-sujet',
-    left: '71.66%',
+    left: '58%',
     top: '51.92%',
   },
   {
     id: 'd4',
     label: 'Du contenu brut inutilisable en classe',
-    left: '71.66%',
+    left: '58%',
     top: '69.23%',
     pulse: 'p3',
   },
 ];
 
 const wrapperBase =
-  'pdm-wrapper mt-10 w-full max-w-[640px] overflow-hidden rounded-[2rem] border border-white bg-[#fcfbf9] shadow-[0_16px_40px_-10px_rgba(0,0,0,0.1)]';
+  'pdm-wrapper mt-10 w-full overflow-hidden rounded-[2rem] border border-white bg-[#fcfbf9] shadow-[0_16px_40px_-10px_rgba(0,0,0,0.1)]';
 
 export function ProblemDecisionMaze({
   className = '',
@@ -97,24 +97,24 @@ export function ProblemDecisionMaze({
           </defs>
 
           <g className="pdm-flow-line">
-            <path d="M 70 70 L 140 70" />
-            <path d="M 140 70 L 250 70" />
-            <path d="M 250 70 L 250 360" />
+            <path d="M 70 70 L 130 70" />
+            <path d="M 130 70 L 205 70" />
+            <path d="M 205 70 L 205 360" />
 
-            <path d="M 335 70 L 430 70" />
-            <path d="M 335 170 L 430 170" />
-            <path d="M 335 270 L 430 270" />
-            <path d="M 335 360 L 430 360" />
+            <path d="M 270 70 L 338 70" />
+            <path d="M 270 170 L 338 170" />
+            <path d="M 270 270 L 338 270" />
+            <path d="M 270 360 L 338 360" />
           </g>
 
           <g className="pdm-flow-method">
-            <path d="M 250 360 L 250 440 L 430 440" />
+            <path d="M 205 360 L 205 440 L 338 440" />
           </g>
 
           {!prefersReducedMotion && (
             <>
               <circle className="pdm-anim-dot" r="4.5" fill="#f1d263" filter="url(#pdm-dot-glow)">
-                <animateMotion begin="0s" dur="7s" repeatCount="indefinite" path="M 70 70 L 250 70 L 430 70" />
+                <animateMotion begin="0s" dur="7s" repeatCount="indefinite" path="M 70 70 L 205 70 L 338 70" />
                 <animate
                   attributeName="opacity"
                   begin="0s"
@@ -126,7 +126,7 @@ export function ProblemDecisionMaze({
               </circle>
 
               <circle className="pdm-anim-dot" r="4.5" fill="#f1d263" filter="url(#pdm-dot-glow)">
-                <animateMotion begin="2.3s" dur="7s" repeatCount="indefinite" path="M 70 70 L 250 70 L 250 170 L 430 170" />
+                <animateMotion begin="2.3s" dur="7s" repeatCount="indefinite" path="M 70 70 L 205 70 L 205 170 L 338 170" />
                 <animate
                   attributeName="opacity"
                   begin="2.3s"
@@ -142,7 +142,7 @@ export function ProblemDecisionMaze({
                   begin="4.6s"
                   dur="7s"
                   repeatCount="indefinite"
-                  path="M 70 70 L 250 70 L 250 170 L 250 270 L 250 360 L 430 360"
+                  path="M 70 70 L 205 70 L 205 170 L 205 270 L 205 360 L 338 360"
                 />
                 <animate
                   attributeName="opacity"
@@ -170,7 +170,7 @@ export function ProblemDecisionMaze({
           {decisionNodes.map((node) => (
             <div
               key={node.id}
-              className="absolute flex w-[130px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg border border-navy/15 bg-white px-2 py-2.5 shadow-sm sm:w-[170px] sm:py-3.5 md:w-[190px]"
+              className="absolute flex w-[160px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg border border-navy/15 bg-white px-3 py-3 shadow-sm sm:w-[200px] sm:py-3.5 md:w-[230px]"
               style={{ left: node.left, top: node.top }}
             >
               <span className="text-center font-display text-[11px] font-semibold leading-snug text-navy sm:text-[13px] md:text-[14px]">
@@ -191,8 +191,8 @@ export function ProblemDecisionMaze({
                 style={{ left: node.left, top: node.top }}
               />
               <div
-                className="absolute -translate-y-1/2 font-sans text-[10px] font-medium leading-tight text-rust sm:text-[12px] md:text-[13px]"
-                style={{ left: '73%', top: node.top, width: '24%' }}
+                className="absolute -translate-y-1/2 font-sans text-[11px] font-medium leading-[1.35] text-rust sm:text-[12px] md:text-[13px]"
+                style={{ right: '2.5%', top: node.top, width: '41%' }}
               >
                 {node.label}
               </div>
@@ -201,7 +201,7 @@ export function ProblemDecisionMaze({
 
           <div
             className="absolute flex w-[130px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-lg border-[1.5px] border-dashed border-[#7a9177] bg-[#f0f4f1] px-2 py-2 shadow-sm sm:w-[170px] sm:py-3 md:w-[190px]"
-            style={{ left: '41.66%', top: '84.61%' }}
+            style={{ left: '34%', top: '84.61%' }}
           >
             <span className="text-center font-display text-[10px] font-bold leading-snug text-[#7a9177] sm:text-[12px] md:text-[13px]">
               Méthode pédagogique
@@ -210,11 +210,11 @@ export function ProblemDecisionMaze({
 
           <div
             className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#7a9177] opacity-80 sm:h-2.5 sm:w-2.5"
-            style={{ left: '71.66%', top: '84.61%' }}
+            style={{ left: '58%', top: '84.61%' }}
           />
           <div
-            className="absolute -translate-y-1/2 font-sans text-[10px] italic leading-tight text-[#7a9177] opacity-90 sm:text-[12px] md:text-[13px]"
-            style={{ left: '73%', top: '84.61%', width: '24%' }}
+            className="absolute -translate-y-1/2 font-sans text-[11px] italic leading-[1.35] text-[#7a9177] opacity-90 sm:text-[12px] md:text-[13px]"
+            style={{ right: '2.5%', top: '84.61%', width: '41%' }}
           >
             Progression guidée
           </div>
