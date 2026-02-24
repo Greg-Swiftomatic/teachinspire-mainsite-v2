@@ -4,7 +4,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
 import { KineticHeading } from '../animation/KineticHeading';
 import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
-import { SpriteAnimation } from '../ui/SpriteAnimation';
+import { ProblemDecisionMaze } from '../illustrations/homepage/ProblemDecisionMaze';
 import ScrollReveal from '../reactbits/ScrollReveal';
 
 const risks = [
@@ -63,18 +63,8 @@ export function Problem() {
               Et après ?
             </KineticHeading>
 
-            {/* Sprite animation — teacher overwhelmed at desk */}
-            <SpriteAnimation
-              src="/sprites/problem-overwhelm.webp"
-              columns={7}
-              rows={3}
-              totalFrames={21}
-              frameDuration={167}
-              playOnce
-              threshold={0.4}
-              className="mt-10 w-full aspect-[402/512] max-w-[320px] hidden lg:block"
-              alt="Un enseignant submergé par les papiers après 3 heures de préparation"
-            />
+            {/* Animated branching flow — confusion without method */}
+            <ProblemDecisionMaze prefersReducedMotion={prefersReducedMotion} />
           </div>
 
           {/* Right column - content */}

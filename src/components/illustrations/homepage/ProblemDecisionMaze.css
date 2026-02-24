@@ -1,0 +1,114 @@
+.pdm-wrapper {
+  position: relative;
+}
+
+.pdm-texture {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+.pdm-flow-line path {
+  fill: none;
+  stroke: #2c3d57;
+  stroke-width: 1.5;
+  opacity: 0.25;
+  stroke-linejoin: round;
+}
+
+.pdm-flow-method path {
+  fill: none;
+  stroke: #7a9177;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.45;
+  stroke-linejoin: round;
+}
+
+.pdm-p1 {
+  animation: pdm-pulse-1 7s infinite;
+}
+
+.pdm-p2 {
+  animation: pdm-pulse-2 7s infinite;
+}
+
+.pdm-p3 {
+  animation: pdm-pulse-3 7s infinite;
+}
+
+@keyframes pdm-pulse-1 {
+  0%,
+  90%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: #b7553d;
+    box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
+  }
+
+  95% {
+    transform: translate(-50%, -50%) scale(1.4);
+    background-color: #c9674f;
+    box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
+  }
+}
+
+@keyframes pdm-pulse-2 {
+  0%,
+  28%,
+  38%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: #b7553d;
+    box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
+  }
+
+  33% {
+    transform: translate(-50%, -50%) scale(1.4);
+    background-color: #c9674f;
+    box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
+  }
+}
+
+@keyframes pdm-pulse-3 {
+  0%,
+  61%,
+  71%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: #b7553d;
+    box-shadow: 0 0 0 0 rgba(241, 210, 99, 0);
+  }
+
+  66% {
+    transform: translate(-50%, -50%) scale(1.4);
+    background-color: #c9674f;
+    box-shadow: 0 0 12px 4px rgba(241, 210, 99, 0.5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pdm-anim-dot {
+    display: none;
+  }
+
+  .pdm-p1,
+  .pdm-p2,
+  .pdm-p3 {
+    animation: none !important;
+  }
+}
+
+.reduced-motion .pdm-anim-dot {
+  display: none;
+}
+
+.reduced-motion .pdm-p1,
+.reduced-motion .pdm-p2,
+.reduced-motion .pdm-p3 {
+  animation: none !important;
+}
