@@ -87,8 +87,8 @@ export function InvitePage() {
                 variants={fadeInUp}
                 className="text-xl text-navy/70 leading-relaxed mb-6"
               >
-                Cette page n’est pas publique. Elle vous permet de voir le tout premier
-                module vidéo et d’évaluer le niveau, le ton et la clarté de la formation.
+                Cette page vous permet de voir le tout premier module vidéo et d’évaluer
+                le niveau, le ton et la clarté de la formation.
               </motion.p>
 
               <motion.div
@@ -135,9 +135,6 @@ export function InvitePage() {
                   />
                 </div>
               </div>
-              <p className="text-xs text-navy/50 mt-4 tracking-[0.16em] uppercase">
-                Lien non listé · aperçu du premier tutoriel
-              </p>
             </motion.div>
           </motion.div>
 
