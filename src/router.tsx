@@ -22,6 +22,11 @@ const AboutPage = lazy(async () => {
   return { default: mod.AboutPage };
 });
 
+const InvitePage = lazy(async () => {
+  const mod = await import('./pages/InvitePage');
+  return { default: mod.InvitePage };
+});
+
 const ContactPage = lazy(async () => {
   const mod = await import('./pages/ContactPage');
   return { default: mod.ContactPage };
@@ -73,6 +78,11 @@ export const router = createBrowserRouter([
       {
         path: 'a-propos',
         element: withSuspense(<AboutPage />),
+      },
+      {
+        // Hidden page — not in navigation, accessible only via direct URL
+        path: 'invite',
+        element: withSuspense(<InvitePage />),
       },
       {
         path: 'contact',

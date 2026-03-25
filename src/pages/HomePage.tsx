@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Hero } from '../components/sections/Hero';
 import { Problem } from '../components/sections/Problem';
 import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
@@ -116,6 +117,11 @@ function DeferredSection({
 export function HomePage() {
   return (
     <ScrollThreadContainer preset="homepage">
+      <PageMeta
+        title="TeachInspire — L'IA comme assistant, pas comme remplaçant"
+        description="Formation IA pour instituts de langues. Vos formateurs créent des cours personnalisés en 30 min. Méthode transférable, outils gratuits. Éligible OPCO."
+        path="/"
+      />
       <Hero />
       <Problem />
       <DeferredSection minHeight={960} placeholderClassName="relative overflow-hidden bg-[#f5f1ed] py-20 lg:py-24">

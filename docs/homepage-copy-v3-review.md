@@ -9,7 +9,7 @@
 
 ### Value Proposition Clarity ✅
 **Score: 8/10**
-- Headline clair et différenciant ("méthode, pas béquille")
+- Headline clair et différenciant ("L'IA comme assistant, pas comme remplaçant")
 - Sous-titre renforce le message
 - Compréhensible en 5 secondes
 
@@ -252,7 +252,7 @@ Formation IA · Instituts de langues · France
 
 **Headline:** (inchangé)
 ```
-L'IA pour vos formateurs — une méthode, pas une béquille.
+L'IA comme assistant, pas comme remplaçant.
 ```
 
 **Sous-titre:** (inchangé)

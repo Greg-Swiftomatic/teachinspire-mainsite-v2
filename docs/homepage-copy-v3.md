@@ -29,7 +29,7 @@ Formation IA · Instituts de langues · France
 
 ### Headline principal
 ```
-L'IA pour vos formateurs — une méthode, pas une béquille.
+L'IA comme assistant, pas comme remplaçant.
 ```
 
 ### Sous-titre
@@ -444,7 +444,7 @@ outils gratuits, résultats concrets. Éligible financement OPCO.
 
 ### Titre de page (SEO)
 ```
-TeachInspire — Formation IA pour formateurs de langues | Méthode, pas béquille
+TeachInspire — L'IA comme assistant, pas comme remplaçant
 ```
 
 ---
