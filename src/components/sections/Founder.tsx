@@ -73,14 +73,14 @@ export function Founder() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-4"
           >
-            <div className="aspect-[3/4] bg-sage/10 flex items-center justify-center" aria-hidden="true">
-              {/* Placeholder for photo */}
-              <div className="text-center p-8">
-                <div className="w-24 h-24 bg-navy/10 mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-4xl font-display font-bold text-navy/30">GL</span>
-                </div>
-                <p className="text-sm text-navy/40">Photo à venir</p>
-              </div>
+            <div className="aspect-[3/4] bg-sage/10 overflow-hidden">
+              <img
+                src="/greg-le-dall.jpg"
+                alt="Portrait de Greg Le Dall, fondateur de TeachInspire"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
             </div>
           </motion.div>
 
