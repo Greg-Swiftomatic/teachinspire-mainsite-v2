@@ -4,7 +4,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
 import { KineticHeading } from '../animation/KineticHeading';
 import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
-import { ProblemDecisionMaze } from '../illustrations/homepage/ProblemDecisionMaze';
+import { ProblemFlowCard } from '../illustrations/homepage/ProblemFlowCard';
 import ScrollReveal from '../reactbits/ScrollReveal';
 
 const risks = [
@@ -64,7 +64,7 @@ export function Problem() {
             </KineticHeading>
 
             {/* Animated branching flow — confusion without method */}
-            <ProblemDecisionMaze prefersReducedMotion={prefersReducedMotion} />
+            <ProblemFlowCard prefersReducedMotion={prefersReducedMotion} />
           </div>
 
           {/* Right column - content */}
