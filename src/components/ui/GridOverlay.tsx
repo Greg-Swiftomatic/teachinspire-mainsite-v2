@@ -11,7 +11,7 @@ export function GridOverlay({ variant = 'dark' }: GridOverlayProps) {
         <div
           key={i}
           className={`absolute top-0 bottom-0 w-px ${color}`}
-          style={{ left: `${(i + 1) * (100 / 12)}%` }}
+          style={{ left: i === 11 ? 'calc(100% - 1px)' : `${(i + 1) * (100 / 12)}%` }}
         />
       ))}
     </div>

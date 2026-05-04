@@ -10,7 +10,7 @@ import SpotlightCard from '../reactbits/SpotlightCard';
 const metrics = [
   {
     value: '3h → 30min',
-    label: "Temps de préparation d'un cours personnalisé",
+    label: "Temps de préparation d'un cours personnalisé, quand le workflow est cadré par un formateur",
     accent: 'yellow',
   },
   {

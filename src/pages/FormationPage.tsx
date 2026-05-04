@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
@@ -7,9 +8,10 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
-import { FormationPipelineWorkbench } from '../components/illustrations/formation/FormationPipelineWorkbench';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+const FORMATION_BOUNDARY_ILLUSTRATION = '/illustrations/formation-boundary.png';
+const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 
 // Data
 const targetAudience = [
@@ -24,47 +26,66 @@ const modules = [
   {
     number: '01',
     period: 'Mois 1',
-    title: 'Panorama des Outils IA',
-    objective: "Se familiariser avec les briques essentielles de l'IA générative pour l'enseignement.",
+    title: "Comprendre ce que l'IA peut vraiment déléguer",
+    objective: "Démystifier l'IA, identifier les tâches à faible risque et distinguer gain de temps et perte de maîtrise.",
     topics: [
-      "Qu'est-ce que l'IA générative ? (démystification)",
-      'Les modèles de langage : ces "cerveaux" qui génèrent du texte',
-      'Transcription automatique : transformer audio/vidéo en texte instantanément',
-      'Synthèse vocale : créer des audios naturels (monologues, dialogues)',
-      "Prise en main d'un environnement de travail IA",
+      "Ce que l'IA générative sait vraiment faire, et ce qu'elle simule",
+      'Les familles d\'outils : texte, transcription, synthèse vocale, recherche',
+      'Tâches automatisables, partiellement automatisables et assistées',
+      'Hallucinations, erreurs invisibles et sorties trop lisses',
+      "Prise en main d'un environnement de travail IA sans dépendance à un outil",
     ],
-    deliverable: 'Votre première ressource pédagogique créée avec l\'IA',
+    deliverable: "Votre cartographie des usages IA à déléguer, contrôler ou garder humains",
     bonus: 'Prise en main de Google AI Studio',
   },
   {
     number: '02',
     period: 'Mois 2',
-    title: 'Prompt Engineering',
-    objective: 'Obtenir des résultats stables, précis et exploitables grâce à des instructions bien structurées.',
+    title: "Piloter l'IA avec des critères pédagogiques",
+    objective: 'Obtenir des résultats stables, précis et exploitables en guidant l\'IA avec vos critères métier.',
     topics: [
-      'Principes de formulation (pourquoi vos prompts ne marchent pas)',
-      "Anatomie d'un prompt expert (analyse détaillée)",
-      'Méthode MVP (Minimum Viable Prompt)',
-      "IA agentique : faire s'auto-évaluer l'IA",
-      'Choix du modèle selon la tâche',
+      'Prompt engineering appliqué à la pédagogie',
+      'CECRL, niveau, registre, progression et charge cognitive',
+      'Méthode MVP (Minimum Viable Prompt) avec critères de qualité',
+      "Faire s'auto-évaluer l'IA sans lui abandonner la décision finale",
+      'Choisir le modèle selon la tâche, le risque et le niveau attendu',
     ],
-    deliverable: 'Votre premier prompt professionnel réutilisable',
+    deliverable: 'Votre premier prompt professionnel réutilisable, avec grille de contrôle pédagogique',
     bonus: 'App "Prompt Builder" — Structurez vos prompts en quelques clics',
   },
   {
     number: '03',
     period: 'Mois 3',
-    title: 'Workflows Complets',
-    objective: 'Transformer une ressource authentique en séquence pédagogique complète et imprimable.',
+    title: "Construire des workflows IA sans perdre la main",
+    objective: 'Transformer une ressource authentique en séquence complète, avec validation humaine et adaptation finale.',
     topics: [
       'Trouver des ressources pertinentes (banque de mots-clés, Perplexity)',
       'Workflow complet : vidéo → transcription → points de langue → audio',
       'Backward Design : objectifs, critères, progression',
-      'Créer fiches prof & élève (HTML → PDF)',
-      'Adapter au niveau (B2 → A2)',
+      'Créer fiches prof & élève, puis relire avec une grille qualité',
+      'Adapter au niveau (B2 → A2) sans perdre le contexte ni la progression',
     ],
-    deliverable: '2 séquences complètes (B2 et A2) avec tous les supports',
+    deliverable: '2 séquences complètes (B2 et A2) avec supports, critères de validation et traces de décision',
     bonus: 'Annexe IA & Éthique — Anonymiser les données sensibles (RGPD)',
+  },
+];
+
+const protectedElements = [
+  {
+    title: 'La qualité pédagogique',
+    text: 'Les supports générés sont relus, corrigés, contextualisés et alignés sur un objectif clair.',
+  },
+  {
+    title: "L'autonomie des formateurs",
+    text: 'Ils comprennent la méthode, pas seulement une suite de prompts.',
+  },
+  {
+    title: 'La progression des apprenants',
+    text: "L'IA ne remplace pas le diagnostic, le feedback et la décision pédagogique.",
+  },
+  {
+    title: 'La soutenabilité du travail',
+    text: 'Le temps gagné ne doit pas devenir une pression à produire toujours plus.',
   },
 ];
 
@@ -166,7 +187,7 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                   className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
                   triggerStart="top 95%"
                 >
-                  Apprenez à transformer
+                  Gagner du temps
                 </KineticHeading>
                 <KineticHeading
                   variant="slide-from-sides"
@@ -175,16 +196,7 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                   delay={0.3}
                   triggerStart="top 95%"
                 >
-                  n'importe quelle source
-                </KineticHeading>
-                <KineticHeading
-                  variant="cascade"
-                  as="span"
-                  className="inline text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
-                  delay={0.5}
-                  triggerStart="top 95%"
-                >
-                  {' en cours sur-mesure.'}
+                  sans perdre le métier
                 </KineticHeading>
               </div>
 
@@ -192,17 +204,19 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                 variants={fadeInUp}
                 className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
               >
-                Une formation pour maîtriser l'IA pédagogique.
+                Un parcours de 3 mois pour installer une pratique IA commune dans votre institut.
               </motion.p>
 
               <motion.p
                 variants={fadeInUp}
                 className="text-lg text-navy/60 mb-10 max-w-2xl"
               >
-                <strong className="text-navy">15 tutoriels vidéo (6h)</strong> +{' '}
-                <strong className="text-navy">6 à 8 sessions live</strong> adaptées à votre équipe.
+                Vos formateurs apprennent à transformer n'importe quelle source en cours sur-mesure,
+                avec une méthode qui protège le jugement pédagogique, la qualité des supports et
+                l'autonomie de l'équipe.
                 <br />
-                Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
+                <strong className="text-navy">15 tutoriels vidéo</strong> +{' '}
+                <strong className="text-navy">6 à 8 sessions live</strong>, adaptés à vos cas réels.
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
@@ -222,8 +236,19 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
               </motion.p>
             </div>
 
-            <motion.div variants={fadeInUp} className="lg:col-span-6 lg:pl-6">
-              <FormationPipelineWorkbench prefersReducedMotion={prefersReducedMotion} />
+            <motion.div
+              variants={fadeInUp}
+              className="lg:col-span-6 lg:pl-6"
+            >
+              <img
+                src={FORMATION_BOUNDARY_ILLUSTRATION}
+                alt=""
+                width={1536}
+                height={1024}
+                className="mx-auto w-full max-w-[680px] object-contain lg:-ml-8 lg:w-[115%] lg:max-w-none"
+                aria-hidden="true"
+                fetchPriority="high"
+              />
             </motion.div>
           </motion.div>
         </div>
@@ -316,21 +341,111 @@ function PromiseSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
               <p className="text-lg text-navy/70 mb-6 leading-relaxed">
                 Prendre n'importe quelle source — une vidéo YouTube, un podcast,
                 un article technique, un document de l'entreprise de votre apprenant —
-                et la transformer en cours parfaitement adapté.
+                et la transformer en cours exploitable, sans sacrifier la qualité pédagogique.
               </p>
 
               <p className="text-navy font-medium mb-6">
                 Au bon niveau. Avec le bon vocabulaire.
-                Avec des exercices ciblés. Et des audios naturels si besoin.
+                Avec des exercices ciblés. Et avec des décisions pédagogiques qui restent entre
+                les mains du formateur.
               </p>
 
               <div className="p-6 bg-yellow/10 border-l-2 border-yellow">
                 <p className="text-navy font-medium">
-                  Le tout en une fraction du temps que ça prendrait sans l'IA.
+                  3h → 30 min, quand le workflow est cadré par un formateur.
                 </p>
               </div>
             </div>
           </motion.div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+// Protection Section
+function ProtectionSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }) {
+  const fadeInUp = {
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
+    },
+  };
+
+  return (
+    <section className="bg-white py-20 lg:py-28 relative overflow-hidden">
+      <GridOverlay />
+      <Container>
+        <div className="grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-4">
+            <SectionLabel>Ce que la formation protège</SectionLabel>
+            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
+              Une formation IA ne devrait pas seulement apprendre à produire plus vite.
+            </h2>
+
+            <motion.img
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: prefersReducedMotion ? 0.01 : 0.45 }}
+              src={CONTACT_CONVERSATION_ILLUSTRATION}
+              alt=""
+              width={1536}
+              height={1024}
+              className="mt-10 hidden w-full max-w-[320px] object-contain lg:block"
+              aria-hidden="true"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="lg:col-span-8">
+            <motion.p
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
+              className="text-lg text-navy/70 leading-relaxed mb-8"
+            >
+              Elle doit installer un cadre d'adoption responsable : pratique, transférable,
+              et suffisamment clair pour que chaque formateur sache quand l'IA aide vraiment.
+            </motion.p>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              className="grid sm:grid-cols-2 gap-px bg-navy/10"
+            >
+              {protectedElements.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  variants={fadeInUp}
+                  className="bg-cream p-6 lg:p-8"
+                >
+                  <span className="text-4xl font-display font-bold text-rust/20 block mb-4 tabular-nums" aria-hidden="true">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-lg font-display font-semibold text-navy mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-navy/70 leading-relaxed">
+                    {item.text}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </Container>
     </section>
@@ -383,7 +498,7 @@ function ModulesSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
           </div>
           <div className="lg:col-span-6 lg:flex lg:items-end">
             <p className="text-navy/60">
-              De la découverte des outils à la création de séquences complètes.
+              De l'identification des tâches délégables à la création de séquences complètes.
               <br />
               Cadence recommandée : 3 mois. Adaptable selon les contraintes de votre équipe.
             </p>
@@ -676,16 +791,22 @@ function FinancementSection({ prefersReducedMotion }: { prefersReducedMotion: bo
               <div className="flex items-center gap-3 mb-6">
                 <Check className="w-5 h-5 text-sage flex-shrink-0" aria-hidden="true" />
                 <p className="text-navy font-medium">
-                  Formation éligible au financement OPCO
+                  Parcours de 3 mois pour installer une pratique IA commune
                 </p>
               </div>
+
+              <p className="text-navy/70 leading-relaxed mb-6">
+                À la fin, vos formateurs ne repartent pas avec une collection de prompts.
+                Ils repartent avec une méthode commune, des workflows réutilisables,
+                des critères de qualité partagés et une capacité à décider quand l'IA aide vraiment.
+              </p>
 
               <div className="pt-6 border-t border-navy/10">
                 <p className="text-navy font-medium mb-2">
                   Tarif : sur devis, selon la taille de votre équipe.
                 </p>
                 <p className="text-navy/60 text-sm">
-                  Standard (≤10 formateurs) : à partir de 4 200€ HT.
+                  Standard (≤10 formateurs) : à partir de 4 200€ HT. Éligible financement OPCO.
                 </p>
               </div>
             </div>
@@ -805,9 +926,15 @@ export function FormationPage() {
 
   return (
     <ScrollThreadContainer preset="formation">
+      <PageMeta
+        title="La Formation IA pour formateurs de langues | TeachInspire"
+        description="Un parcours de 3 mois pour installer une pratique IA commune dans votre institut. Gagnez du temps sans perdre le métier."
+        path="/formation"
+      />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />
       <ForWhoSection prefersReducedMotion={prefersReducedMotion} />
       <PromiseSection prefersReducedMotion={prefersReducedMotion} />
+      <ProtectionSection prefersReducedMotion={prefersReducedMotion} />
       <ModulesSection prefersReducedMotion={prefersReducedMotion} />
       <InclusionsSection prefersReducedMotion={prefersReducedMotion} />
       <ApproachSection prefersReducedMotion={prefersReducedMotion} />

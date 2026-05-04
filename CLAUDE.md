@@ -53,6 +53,26 @@ The design follows a **sophisticated, authoritative editorial aesthetic** inspir
 
 ---
 
+## Design Context
+
+### Users
+TeachInspire serves B2B decision-makers in language education: institute directors, training managers, and language school owners who need to help teaching teams adopt generative AI without lowering pedagogical standards. Secondary users include independent FLE, English, and Spanish trainers evaluating whether the method fits their own preparation workflow. Their job is to understand the offer quickly, trust the pedagogical framing, and book a discovery call when the approach feels credible.
+
+### Brand Personality
+The brand should feel authoritative, clear, and human. It should evoke confidence, calm control, and professional momentum rather than hype or urgency. The core emotional promise is: AI adoption can be practical and efficient without sacrificing teacher expertise, learner adaptation, or pedagogical judgment.
+
+### Aesthetic Direction
+The visual direction is Swiss editorial: sharp, typography-led, asymmetric, structured, and premium. Use Fraunces for confident editorial hierarchy and DM Sans for clear UI/body text. The palette is warm but restrained: navy, cream, sage, yellow, and rust. References include high-end business magazines, Swiss International Typographic Style, and the warm editorial restraint noted in the Anthropic-inspired design brief. Anti-references: playful classroom visuals, doodles, generic AI SaaS gradients, rounded card-heavy layouts, purple tech clichés, glassmorphism, and overproduced tool-dashboard aesthetics.
+
+### Design Principles
+1. Lead with judgment, not tooling: every section should reinforce that AI assists the formateur but does not replace pedagogical decision-making.
+2. Preserve editorial restraint: sharp corners, deliberate asymmetry, generous whitespace, strong type hierarchy, and section labels with rules.
+3. Make proof concrete: keep “source → cours”, “3h → 30 min”, modules, pricing, and outcomes visible, but frame them with quality guardrails.
+4. Keep the interface trustworthy: prioritize readable contrast, accessible navigation, visible focus states, reduced-motion support, and no hidden critical actions on mobile.
+5. Avoid AI slop: no generic card grids, gratuitous gradients, decorative glass, playful illustrations, or hype language.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |

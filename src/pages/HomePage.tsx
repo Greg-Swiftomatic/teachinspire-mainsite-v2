@@ -119,7 +119,7 @@ export function HomePage() {
     <ScrollThreadContainer preset="homepage">
       <PageMeta
         title="TeachInspire — L'IA comme assistant, pas comme remplaçant"
-        description="Formation IA pour instituts de langues. Vos formateurs créent des cours personnalisés en 30 min. Méthode transférable, outils gratuits. Éligible OPCO."
+        description="Formation IA pour instituts de langues. Gagnez du temps sans perdre le métier : méthode transférable, qualité pédagogique, autonomie d'équipe."
         path="/"
       />
       <Hero />

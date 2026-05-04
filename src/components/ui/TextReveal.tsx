@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { cn } from '../../lib/utils';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface TextRevealProps {
   children: string;
@@ -52,7 +53,7 @@ interface BlurRevealProps {
   once?: boolean;
 }
 
-// Blur-to-focus text reveal
+// Restrained text reveal
 export function BlurReveal({
   children,
   className,
@@ -61,21 +62,24 @@ export function BlurReveal({
 }: BlurRevealProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once, margin: '-50px' });
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <motion.span
       ref={ref}
       className={cn('inline-block', className)}
-      initial={{ filter: 'blur(10px)', opacity: 0 }}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 10 }}
       animate={
-        isInView
-          ? { filter: 'blur(0px)', opacity: 1 }
-          : { filter: 'blur(10px)', opacity: 0 }
+        prefersReducedMotion
+          ? undefined
+          : isInView
+            ? { opacity: 1, y: 0 }
+            : { opacity: 0, y: 10 }
       }
       transition={{
-        duration: 0.8,
+        duration: prefersReducedMotion ? 0.01 : 0.45,
         delay,
-        ease: [0.25, 0.4, 0.25, 1],
+        ease: [0.16, 1, 0.3, 1],
       }}
     >
       {children}

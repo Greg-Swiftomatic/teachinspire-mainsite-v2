@@ -7,31 +7,30 @@ import { GridOverlay } from '../ui/GridOverlay';
 import { KineticHeading } from '../animation/KineticHeading';
 import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
 import SpotlightCard from '../reactbits/SpotlightCard';
-import DecryptedText from '../reactbits/DecryptedText';
 
 const modules = [
   {
     number: '01',
     period: 'Mois 1',
-    title: 'Panorama des Outils IA',
+    title: "Comprendre ce que l'IA peut vraiment déléguer",
     description:
-      "Se familiariser avec les briques essentielles : modèles de langage, transcription automatique, synthèse vocale. Comprendre ce que chaque type d'outil permet de créer.",
+      "Démystifier l'IA, repérer les tâches à faible risque, identifier les hallucinations et distinguer gain de temps et perte de maîtrise.",
     color: 'yellow' as const,
   },
   {
     number: '02',
     period: 'Mois 2',
-    title: 'Prompt Engineering',
+    title: "Piloter l'IA avec des critères pédagogiques",
     description:
-      "Apprendre à formuler des instructions claires pour obtenir des résultats précis et exploitables. La clé pour transformer n'importe quel contenu.",
+      "Formuler des consignes exploitables, intégrer le CECRL et contrôler le niveau, le registre, la progression et la pertinence métier.",
     color: 'sage' as const,
   },
   {
     number: '03',
     period: 'Mois 3',
-    title: 'Workflows Complets',
+    title: "Construire des workflows IA sans perdre la main",
     description:
-      "Partir d'une ressource authentique (vidéo, podcast, article) et en faire une séquence pédagogique complète et imprimable.",
+      "Transformer une source authentique en séquence complète, avec validation humaine, critères de qualité et adaptation finale.",
     color: 'rust' as const,
   },
 ];
@@ -128,7 +127,7 @@ export function Modules() {
               className="text-lg text-navy-light leading-relaxed"
             >
               Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
-              De la découverte des outils à la création de séquences complètes.
+              De la compréhension des usages à la création de séquences complètes cadrées par vos critères pédagogiques.
             </motion.p>
           </div>
         </div>
@@ -163,14 +162,7 @@ export function Modules() {
                 </div>
 
                 <h3 className="text-xl font-display font-bold text-navy mb-3">
-                  <DecryptedText
-                    text={module.title}
-                    animateOn="hover"
-                    speed={30}
-                    maxIterations={8}
-                    className="text-xl font-display font-bold text-navy"
-                    encryptedClassName="text-xl font-display font-bold text-navy/40"
-                  />
+                  {module.title}
                 </h3>
 
                 <p className="text-navy-light leading-relaxed">{module.description}</p>

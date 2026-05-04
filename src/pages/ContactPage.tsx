@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
@@ -8,6 +9,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 const EMAIL = 'greg@teachinspire.me';
+const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 
 export function ContactPage() {
   const prefersReducedMotion = useReducedMotion();
@@ -31,6 +33,11 @@ export function ContactPage() {
 
   return (
     <main className="bg-cream min-h-screen relative overflow-hidden">
+      <PageMeta
+        title="Contactez TeachInspire | Réserver un appel"
+        description="Discutons de vos besoins en formation IA pour votre institut de langues. Réservez un appel gratuit ou envoyez-nous un message."
+        path="/contact"
+      />
       <GridOverlay />
       <GeometricAccentGroup preset="contact-hero" />
 
@@ -65,6 +72,17 @@ export function ContactPage() {
                 Vous avez des questions sur la formation ?
                 Vous voulez savoir si c'est adapté à votre institut ?
               </motion.p>
+
+              <motion.img
+                variants={fadeInUp}
+                src={CONTACT_CONVERSATION_ILLUSTRATION}
+                alt=""
+                width={1536}
+                height={1024}
+                className="mt-10 w-full max-w-[520px] object-contain lg:mt-14"
+                aria-hidden="true"
+                loading="eager"
+              />
             </motion.div>
 
             {/* Right Column - Contact Options */}
@@ -78,7 +96,7 @@ export function ContactPage() {
                 {/* Main CTA Card */}
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-white p-8 lg:p-10 border border-navy/10"
+                  className="border-l-2 border-rust py-8 pl-8 lg:py-10 lg:pl-10"
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <span className="text-5xl font-display font-bold text-navy/10" aria-hidden="true">01</span>
@@ -93,7 +111,7 @@ export function ContactPage() {
                     45 minutes pour discuter de vos besoins et voir comment on peut vous aider.
                   </p>
 
-                  <p className="text-sm text-navy/50 mb-6">
+                  <p className="text-sm text-navy-light mb-6">
                     Sans engagement
                   </p>
 
@@ -115,7 +133,7 @@ export function ContactPage() {
                 {/* Email Alternative */}
                 <motion.div
                   variants={fadeInUp}
-                  className="bg-white p-8 lg:p-10 border border-navy/10"
+                  className="border-l-2 border-sage py-8 pl-8 lg:py-10 lg:pl-10"
                 >
                   <div className="flex items-center gap-4 mb-6">
                     <span className="text-5xl font-display font-bold text-navy/10" aria-hidden="true">02</span>
@@ -128,12 +146,12 @@ export function ContactPage() {
 
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="text-rust hover:text-rust/80 transition-colors text-lg font-medium block mb-2"
+                  className="mb-2 inline-flex min-h-11 items-center text-lg font-medium text-rust transition-colors hover:text-rust-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-rust focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                   >
                     {EMAIL}
                   </a>
 
-                  <p className="text-sm text-navy/50 mb-6">
+                  <p className="text-sm text-navy-light mb-6">
                     Je réponds généralement sous 24h.
                   </p>
 
@@ -157,7 +175,7 @@ export function ContactPage() {
             transition={{ delay: prefersReducedMotion ? 0 : 0.6 }}
             className="mt-20 pt-8 border-t border-navy/10"
           >
-            <p className="text-navy/40 text-sm">
+            <p className="text-sm text-navy-light">
               TeachInspire — Formation IA pour l'enseignement des langues
             </p>
           </motion.div>

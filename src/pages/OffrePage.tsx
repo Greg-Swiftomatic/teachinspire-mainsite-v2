@@ -4,13 +4,14 @@ import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { PageMeta } from '../components/seo/PageMeta';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 
 // ── Data ──────────────────────────────────────────────────
 
 const problems = [
-  { before: '3h pour créer un cours personnalisé', after: '30 min pour un cours multimédia complet' },
+  { before: '3h pour créer un cours personnalisé', after: '30 min avec un workflow cadré par un formateur' },
   { before: 'Difficulté à adapter aux secteurs spécialisés', after: 'Adaptation automatique au secteur' },
   { before: 'Ressources génériques, faible engagement', after: 'Transformation de contenus authentiques' },
   { before: 'Coûts élevés de production multimédia', after: 'Outils techniquement accessibles' },
@@ -20,7 +21,7 @@ const months = [
   {
     number: '01',
     period: 'Mois 1',
-    title: 'Outils IA Essentiels',
+    title: "Comprendre ce que l'IA peut vraiment déléguer",
     topics: [
       'Large Language Models (LLM)',
       'Speech-to-Text (transcription)',
@@ -31,23 +32,23 @@ const months = [
   {
     number: '02',
     period: 'Mois 2',
-    title: 'Prompt Engineering',
+    title: "Piloter l'IA avec des critères pédagogiques",
     topics: [
-      'Techniques de communication avec l\'IA',
-      'Structurer des prompts efficaces',
-      'Approches agentiques',
-      'Bibliothèque de prompts personnalisés',
+      "Prompt engineering appliqué à la pédagogie",
+      'CECRL, niveau, registre et progression',
+      "Auto-évaluation de l'IA sans abandonner la décision finale",
+      'Critères de qualité partagés',
     ],
   },
   {
     number: '03',
     period: 'Mois 3',
-    title: 'Workflows Complets',
+    title: "Construire des workflows IA sans perdre la main",
     topics: [
       'Transformation de contenus authentiques',
       'Création de séquences pédagogiques',
-      'Intégration dans vos pratiques existantes',
-      'Optimisation de vos processus',
+      'Validation humaine et adaptation finale',
+      'Traçabilité des décisions pédagogiques',
     ],
   },
 ];
@@ -198,16 +199,16 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
               variants={fadeInUp}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight mb-6"
             >
-              Transformez votre pédagogie{' '}
-              <span className="text-rust">avec l'IA</span>
+              Gagner du temps{' '}
+              <span className="text-rust">sans perdre le métier</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
             >
-              Parcours hybride de 3 mois — 15 tutoriels vidéo (6h) + 6 à 8 sessions live
-              adaptées à votre équipe.
+              Parcours hybride de 3 mois pour installer une pratique IA commune :
+              workflows réutilisables, critères de qualité partagés et autonomie d'équipe.
             </motion.p>
 
             <motion.p
@@ -665,7 +666,7 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
           </span>
 
           <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6">
-            Prêt à transformer votre institut ?
+            Prêt à structurer l'usage IA de votre institut ?
           </h2>
 
           <p className="text-xl text-cream/70 mb-4">
@@ -699,6 +700,11 @@ export function OffrePage() {
 
   return (
     <>
+      <PageMeta
+        title="Offre Formation IA pour instituts de langues | TeachInspire"
+        description="Parcours de 3 mois pour structurer l'usage de l'IA en institut de langues, avec méthode commune, workflows réutilisables et critères de qualité."
+        path="/offre"
+      />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />
       <ProblemsSection prefersReducedMotion={prefersReducedMotion} />
       <ProgrammeSection prefersReducedMotion={prefersReducedMotion} />

@@ -30,7 +30,7 @@ export interface KineticHeadingProps {
 }
 
 /**
- * Animated heading with 6 GSAP-powered variants.
+ * Editorial heading reveal with restrained GSAP-powered variants.
  * Uses SplitText-style DOM splitting internally.
  * Respects prefers-reduced-motion and simplifies on mobile.
  */
@@ -48,11 +48,13 @@ export function KineticHeading({
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // On mobile, simplify complex variants to cascade
-  const effectiveVariant = useMemo(() => {
-    if (isMobile && (variant === 'assemble' || variant === 'slide-from-sides')) {
+  // Keep headings calm across the site. Older variants are accepted for API
+  // compatibility, but resolve to restrained editorial motion.
+  const effectiveVariant = useMemo<KineticVariant>(() => {
+    if (variant === 'assemble' || variant === 'slide-from-sides') {
       return 'cascade';
     }
+    if (isMobile && variant === 'counter-roll') return 'cascade';
     return variant;
   }, [variant, isMobile]);
 
@@ -97,60 +99,48 @@ export function KineticHeading({
 
       switch (effectiveVariant) {
         case 'cascade':
-          gsap.set(elements, { y: '110%', opacity: 0 });
+          gsap.set(elements, { y: '55%', opacity: 0 });
           tl.to(elements, {
             y: 0,
             opacity: 1,
-            duration: 0.5,
-            stagger: 0.06,
-            ease: 'power2.out',
+            duration: 0.42,
+            stagger: 0.035,
+            ease: 'power3.out',
             delay,
           });
           break;
 
         case 'word-reveal':
-          gsap.set(elements, { opacity: 0, filter: 'blur(4px)' });
+          gsap.set(elements, { y: 8, opacity: 0 });
           tl.to(elements, {
+            y: 0,
             opacity: 1,
-            filter: 'blur(0px)',
-            duration: 0.5,
-            stagger: 0.08,
-            ease: 'power2.out',
+            duration: 0.4,
+            stagger: 0.035,
+            ease: 'power3.out',
             delay,
           });
           break;
 
         case 'slide-from-sides':
-          elements.forEach((el, i) => {
-            const fromX = i % 2 === 0 ? -60 : 60;
-            gsap.set(el, { x: fromX, opacity: 0 });
-          });
+          gsap.set(elements, { y: '55%', opacity: 0 });
           tl.to(elements, {
-            x: 0,
+            y: 0,
             opacity: 1,
-            duration: 0.5,
-            stagger: 0.05,
-            ease: 'power2.out',
+            duration: 0.42,
+            stagger: 0.035,
+            ease: 'power3.out',
             delay,
           });
           break;
 
         case 'assemble':
-          elements.forEach((el) => {
-            gsap.set(el, {
-              x: (Math.random() - 0.5) * 120,
-              y: (Math.random() - 0.5) * 80,
-              rotation: (Math.random() - 0.5) * 20,
-              opacity: 0,
-            });
-          });
+          gsap.set(elements, { y: '55%', opacity: 0 });
           tl.to(elements, {
-            x: 0,
             y: 0,
-            rotation: 0,
             opacity: 1,
-            duration: 0.8,
-            stagger: 0.04,
+            duration: 0.42,
+            stagger: 0.035,
             ease: 'power3.out',
             delay,
           });
@@ -171,28 +161,28 @@ export function KineticHeading({
 
           // Text: simple fade up
           if (textEls.length > 0) {
-            gsap.set(textEls, { y: '110%', opacity: 0 });
+            gsap.set(textEls, { y: '55%', opacity: 0 });
             tl.to(textEls, {
               y: 0,
               opacity: 1,
-              duration: 0.5,
-              stagger: 0.06,
-              ease: 'power2.out',
+              duration: 0.42,
+              stagger: 0.035,
+              ease: 'power3.out',
               delay,
             });
           }
 
-          // Numbers: roll from top
+          // Numbers: fade up, no odometer bounce.
           if (numberEls.length > 0) {
-            gsap.set(numberEls, { y: '-110%', opacity: 0 });
+            gsap.set(numberEls, { y: '35%', opacity: 0 });
             tl.to(
               numberEls,
               {
                 y: 0,
                 opacity: 1,
-                duration: 0.7,
-                stagger: 0.08,
-                ease: 'back.out(1.2)',
+                duration: 0.42,
+                stagger: 0.035,
+                ease: 'power3.out',
                 delay,
               },
               '<'

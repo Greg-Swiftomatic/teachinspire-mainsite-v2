@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { GridOverlay } from '../components/ui/GridOverlay';
 
@@ -14,6 +15,12 @@ const fadeIn = {
 export function MentionsLegalesPage() {
   return (
     <section className="bg-cream min-h-screen relative overflow-hidden">
+      <PageMeta
+        title="Mentions légales | TeachInspire"
+        description="Mentions légales de TeachInspire — informations légales, éditeur, hébergeur et conditions d'utilisation."
+        path="/mentions-legales"
+        noindex
+      />
       <GridOverlay />
 
       <Container>

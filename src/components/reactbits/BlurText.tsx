@@ -1,10 +1,11 @@
 /**
  * BlurText — adapted from reactbits.dev
- * Blur-to-sharp text reveal, word by word or letter by letter.
+ * Restrained editorial text reveal, word by word or letter by letter.
  * Uses Framer Motion + IntersectionObserver.
  */
 import { motion, type Easing } from 'framer-motion';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface BlurTextProps {
   text?: string;
@@ -47,6 +48,7 @@ export default function BlurText({
   onAnimationComplete,
   stepDuration = 0.35,
 }: BlurTextProps) {
+  const prefersReducedMotion = useReducedMotion();
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLSpanElement>(null);
@@ -69,17 +71,16 @@ export default function BlurText({
   const defaultFrom = useMemo(
     () =>
       direction === 'top'
-        ? { filter: 'blur(10px)', opacity: 0, y: -30 }
-        : { filter: 'blur(10px)', opacity: 0, y: 30 },
+        ? { opacity: 0, y: -12 }
+        : { opacity: 0, y: 12 },
     [direction]
   );
 
   const defaultTo = useMemo(
     () => [
-      { filter: 'blur(5px)', opacity: 0.5, y: direction === 'top' ? 5 : -5 },
-      { filter: 'blur(0px)', opacity: 1, y: 0 },
+      { opacity: 1, y: 0 },
     ],
-    [direction]
+    []
   );
 
   const fromSnapshot = animationFrom ?? defaultFrom;
@@ -89,6 +90,10 @@ export default function BlurText({
   const times = Array.from({ length: stepCount }, (_, i) =>
     stepCount === 1 ? 0 : i / (stepCount - 1)
   );
+
+  if (prefersReducedMotion) {
+    return <span className={className}>{text}</span>;
+  }
 
   return (
     <span ref={ref} className={`blur-text ${className} flex flex-wrap`}>
@@ -111,7 +116,7 @@ export default function BlurText({
             }
             style={{
               display: 'inline-block',
-              willChange: 'transform, filter, opacity',
+              willChange: 'transform, opacity',
             }}
           >
             {segment === ' ' ? '\u00A0' : segment}

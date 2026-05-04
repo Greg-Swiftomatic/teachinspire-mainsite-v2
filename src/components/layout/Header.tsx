@@ -20,7 +20,7 @@ export function Header() {
       <Container>
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="/" className="flex items-center">
+          <a href="/" className="flex min-h-11 min-w-11 items-center">
             <img src={LOGO} alt="TeachInspire" width={320} height={80} className="h-10 w-auto" />
           </a>
 
@@ -30,7 +30,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-navy/70 hover:text-navy transition-colors text-sm font-medium tracking-wide focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                className="inline-flex min-h-11 items-center text-sm font-medium tracking-wide text-navy-light transition-colors hover:text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
               >
                 {link.label}
               </a>
@@ -62,12 +62,13 @@ export function Header() {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
+            initial={{ opacity: 0, scaleY: 0.98, y: -8 }}
+            animate={{ opacity: 1, scaleY: 1, y: 0 }}
+            exit={{ opacity: 0, scaleY: 0.98, y: -8 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            style={{ transformOrigin: 'top' }}
             id="mobile-navigation"
-            className="md:hidden bg-cream border-b border-navy/10 overflow-hidden"
+            className="md:hidden bg-cream border-b border-navy/10"
           >
             <Container>
               <div className="py-6 flex flex-col gap-1">
@@ -75,7 +76,7 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-navy hover:text-sage transition-colors font-medium py-3 border-b border-navy/5 last:border-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+                    className="flex min-h-11 items-center border-b border-navy/5 py-3 font-medium text-navy transition-colors last:border-0 hover:text-rust focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {link.label}

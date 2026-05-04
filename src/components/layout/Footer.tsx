@@ -35,15 +35,15 @@ export function Footer() {
             <p className="text-xl font-display text-cream/90 mb-4">
               L'IA comme assistant, pas comme remplaçant.
             </p>
-            <p className="text-cream/50 text-sm leading-relaxed max-w-sm">
-              Formation pratique à l'IA pour formateurs en langues. Créez des cours
-              personnalisés en moins de temps.
+            <p className="text-cream/70 text-sm leading-relaxed max-w-sm">
+              Formation IA pour formateurs en langues. Gagner du temps sans perdre
+              le métier.
             </p>
           </div>
 
           {/* Navigation */}
           <div className="md:col-span-3 md:col-start-7">
-            <h4 className="text-sm uppercase tracking-wider text-cream/50 mb-6">
+            <h4 className="text-sm uppercase tracking-wider text-cream/70 mb-6">
               Navigation
             </h4>
             <ul className="space-y-3">
@@ -51,9 +51,9 @@ export function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-cream/70 hover:text-yellow transition-colors flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                    className="flex min-h-11 items-center gap-2 text-cream/80 transition-colors hover:text-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy group"
                   >
-                    <span className="text-sage/50 group-hover:text-yellow transition-colors">
+                    <span className="text-sage-light group-hover:text-yellow transition-colors">
                       →
                     </span>
                     {link.label}
@@ -65,14 +65,14 @@ export function Footer() {
 
           {/* Contact */}
           <div className="md:col-span-4">
-            <h4 className="text-sm uppercase tracking-wider text-cream/50 mb-6">
+            <h4 className="text-sm uppercase tracking-wider text-cream/70 mb-6">
               Contact
             </h4>
             <ul className="space-y-3">
               <li>
                 <a
                   href="mailto:greg@teachinspire.me"
-                  className="text-cream/70 hover:text-yellow transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                  className="inline-flex min-h-11 items-center text-cream/80 transition-colors hover:text-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   greg@teachinspire.me
                 </a>
@@ -80,7 +80,7 @@ export function Footer() {
               <li>
                 <a
                   href="https://cal.com/teachinspire.me"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-cream/10 text-cream hover:bg-yellow hover:text-navy transition-colors mt-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                  className="mt-2 inline-flex min-h-11 items-center gap-2 bg-cream/15 px-4 py-2 text-cream transition-colors hover:bg-yellow hover:text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   Réserver un appel
                   <span>→</span>
@@ -95,7 +95,7 @@ export function Footer() {
       <div className="border-t border-cream/10">
         <Container>
           <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-cream/40 text-sm">
+            <p className="text-cream/60 text-sm">
               © {currentYear} TeachInspire. Tous droits réservés.
             </p>
             <div className="flex gap-6">
@@ -103,7 +103,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-cream/40 hover:text-cream/70 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+                  className="inline-flex min-h-11 items-center text-sm text-cream/60 transition-colors hover:text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   {link.label}
                 </Link>

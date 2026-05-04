@@ -4,13 +4,13 @@
  * Read top-to-bottom. Each `at` value is ms after mount.
  *
  *    0ms   Grid overlay visible (static)
- *  200ms   Category label slides from left
- *  400ms   Decorative "01" materializes
- *  500ms   Headline blurs in word-by-word (BlurText)
- * 1000ms   Rust accent line blurs in
- * 1200ms   Subheadline fades up
- * 1500ms   CTA buttons slide up (staggered 100ms)
- * 1700ms   Video player enters from right
+ *  120ms   Category label slides from left
+ *  180ms   Decorative "01" materializes
+ *  240ms   Headline fades in with restrained editorial motion
+ *  460ms   Rust accent line fades in
+ *  620ms   Subheadline fades up
+ *  780ms   CTA buttons slide up (staggered 100ms)
+ *  920ms   Video player enters from right
  * ───────────────────────────────────────────────────────── */
 
 import { useRef, useState, useEffect } from 'react';
@@ -19,20 +19,18 @@ import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { GridOverlay } from '../ui/GridOverlay';
-import BlurText from '../reactbits/BlurText';
-import DecryptedText from '../reactbits/DecryptedText';
 import { HERO_VIDEO_EMBED, HERO_VIDEO_POSTER } from '../../assets/assets';
 
 /* ── Timing ─────────────────────────────────────────────── */
 const TIMING = {
   grid:       0,      // squares background immediate
-  label:      200,    // category label slides in
-  number:     400,    // decorative "01" fades
-  headline:   500,    // blur text begins
-  accent:     1000,   // rust accent headline
-  sub:        1200,   // subheadline fades up
-  ctas:       1500,   // buttons slide up
-  card:       1700,   // info card enters
+  label:      120,    // category label slides in
+  number:     180,    // decorative "01" fades
+  headline:   240,    // headline begins
+  accent:     460,    // rust accent headline
+  sub:        620,    // subheadline fades up
+  ctas:       780,    // buttons slide up
+  card:       920,    // info card enters
 };
 
 /* ── Element Configs ────────────────────────────────────── */
@@ -62,6 +60,8 @@ const VIDEO = {
   offsetX: 40,        // px slide from right
   spring: { type: 'spring' as const, stiffness: 250, damping: 28 },
 };
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
 
 /* ── Component ──────────────────────────────────────────── */
 export function Hero() {
@@ -101,7 +101,7 @@ export function Hero() {
         <div className="grid lg:grid-cols-12 gap-10 items-center py-24">
           {/* Left column — main content */}
           <div className="lg:col-span-6">
-            {/* Category label with DecryptedText */}
+            {/* Category label */}
             <motion.div
               initial={{ opacity: 0, x: LABEL.offsetX }}
               animate={{
@@ -112,18 +112,12 @@ export function Hero() {
               className="flex items-center gap-4 mb-12"
             >
               <div className="w-12 h-px bg-rust" />
-              <DecryptedText
-                text="Formation IA · Instituts de langues"
-                animateOn="view"
-                speed={40}
-                sequential
-                revealDirection="start"
-                className="text-rust font-medium text-sm tracking-wide"
-                encryptedClassName="text-rust/40 font-medium text-sm tracking-wide"
-              />
+              <span className="text-rust font-medium text-sm tracking-wide">
+                Formation IA · Instituts de langues
+              </span>
             </motion.div>
 
-            {/* Headline with BlurText */}
+            {/* Headline */}
             <div className="relative">
               {/* Large decorative number */}
               <motion.span
@@ -138,30 +132,30 @@ export function Hero() {
 
               <div className="relative z-10">
                 {stage >= 3 && (
-                  <h1>
-                    <BlurText
-                      text="Formez vos équipes à créer des leçons à partir de"
-                      delay={80}
-                      animateBy="words"
-                      direction="bottom"
-                      className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy leading-[1.1]"
-                      stepDuration={0.4}
-                    />
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">
+                    <motion.span
+                      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
+                      className="block text-navy"
+                    >
+                      Formez vos équipes à utiliser l'IA sans perdre
+                    </motion.span>
                     {stage >= 4 && (
-                      <BlurText
-                        text="n'importe quelle source"
-                        delay={100}
-                        animateBy="words"
-                        direction="bottom"
-                        className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-rust leading-[1.1] mt-1"
-                        stepDuration={0.4}
-                      />
+                      <motion.span
+                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 14 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
+                        className="mt-1 block text-rust"
+                      >
+                        leur expertise pédagogique
+                      </motion.span>
                     )}
                   </h1>
                 )}
                 {stage < 3 && (
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy/0 leading-[1.1]" aria-hidden="true">
-                    Formez vos équipes à créer des leçons à partir de
+                    Formez vos équipes à utiliser l'IA sans perdre leur expertise pédagogique
                   </h1>
                 )}
               </div>
@@ -177,7 +171,19 @@ export function Hero() {
               transition={SUB.spring}
               className="text-xl text-navy-light mt-8 max-w-xl leading-relaxed"
             >
-              La méthode IA pour vos formateurs de langues — sans expertise, sans budget.
+              TeachInspire aide les instituts de langues à transformer n'importe quelle source en cours sur-mesure, avec une méthode qui protège le jugement du formateur, la qualité des supports et l'autonomie de l'équipe.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: SUB.offsetY }}
+              animate={{
+                opacity: stage >= 5 ? 1 : 0,
+                y: stage >= 5 ? 0 : SUB.offsetY,
+              }}
+              transition={{ ...SUB.spring, delay: 0.05 }}
+              className="mt-4 text-lg font-display font-semibold text-rust"
+            >
+              Gagner du temps sans perdre le métier.
             </motion.p>
 
             {/* CTAs */}
@@ -190,8 +196,8 @@ export function Hero() {
                 }}
                 transition={{ ...CTAS.spring, delay: 0 }}
               >
-                <Button variant="primary" size="lg" href="/formation" showArrow>
-                  Découvrir le programme
+                <Button variant="primary" size="lg" href="https://cal.com/teachinspire.me" showArrow>
+                  Structurer l'usage IA de mon équipe
                 </Button>
               </motion.div>
               <motion.div
@@ -202,8 +208,8 @@ export function Hero() {
                 }}
                 transition={{ ...CTAS.spring, delay: CTAS.stagger }}
               >
-                <Button variant="secondary" size="lg" href="https://cal.com/teachinspire.me">
-                  Réserver un appel
+                <Button variant="secondary" size="lg" href="#methode">
+                  Voir la méthode
                 </Button>
               </motion.div>
             </div>

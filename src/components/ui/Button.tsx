@@ -20,7 +20,7 @@ export function Button({
   showArrow = false,
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-semibold transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream group';
+    'inline-flex min-h-11 items-center justify-center font-semibold transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream group';
 
   const variants = {
     primary: 'bg-navy text-cream hover:bg-navy/90',

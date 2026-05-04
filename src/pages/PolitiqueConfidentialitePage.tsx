@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { GridOverlay } from '../components/ui/GridOverlay';
 
@@ -14,6 +15,12 @@ const fadeIn = {
 export function PolitiqueConfidentialitePage() {
   return (
     <section className="bg-cream min-h-screen relative overflow-hidden">
+      <PageMeta
+        title="Politique de confidentialité | TeachInspire"
+        description="Politique de confidentialité de TeachInspire — comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD."
+        path="/confidentialite"
+        noindex
+      />
       <GridOverlay />
 
       <Container>

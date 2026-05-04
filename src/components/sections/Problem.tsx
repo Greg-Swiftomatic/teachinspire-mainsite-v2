@@ -5,20 +5,22 @@ import { GridOverlay } from '../ui/GridOverlay';
 import { KineticHeading } from '../animation/KineticHeading';
 import { GeometricAccentGroup } from '../animation/GeometricAccentGroup';
 import { ProblemFlowCard } from '../illustrations/homepage/ProblemFlowCard';
-import ScrollReveal from '../reactbits/ScrollReveal';
 
-const risks = [
+const boundaries = [
   {
     number: '01',
-    text: "Dépendants d'outils qu'ils ne maîtrisent pas",
+    title: 'À déléguer',
+    text: 'Transcrire, reformuler, adapter un niveau, générer des variantes, produire un premier jet de fiche.',
   },
   {
     number: '02',
-    text: "Incapables de s'adapter quand l'outil change",
+    title: 'À contrôler',
+    text: 'Le niveau CECRL, le registre, la progression, la charge cognitive et les erreurs invisibles.',
   },
   {
     number: '03',
-    text: 'Dépassés par ceux qui ont compris la méthode',
+    title: 'À garder humain',
+    text: "Le diagnostic, les objectifs, l'adaptation fine au groupe, le feedback sensible et la relation apprenant.",
   },
 ];
 
@@ -43,7 +45,7 @@ export function Problem() {
             >
               <div className="w-12 h-px bg-rust" />
               <span className="text-rust font-medium text-sm tracking-wide uppercase">
-                Le contexte
+                La frontière
               </span>
             </motion.div>
 
@@ -52,7 +54,7 @@ export function Problem() {
               as="h2"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
-              Vos formateurs entendent parler d'IA partout.
+              Ce que l'IA ne doit
             </KineticHeading>
             <KineticHeading
               variant="assemble"
@@ -60,7 +62,7 @@ export function Problem() {
               className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
               delay={0.3}
             >
-              Et après ?
+              pas remplacer
             </KineticHeading>
 
             {/* Animated branching flow — confusion without method */}
@@ -77,20 +79,20 @@ export function Problem() {
               className="space-y-6 mb-12"
             >
               <p className="text-lg text-navy-light leading-relaxed">
-                Certains bricolent avec ChatGPT — résultats aléatoires.
-                D'autres attendent, sceptiques ou débordés.
-                Pendant ce temps, d'autres instituts forment déjà leurs équipes.
+                L'IA peut accélérer la préparation de cours. Elle peut aussi créer
+                de la dépendance, des supports trop lisses, des erreurs invisibles
+                et une pression implicite à produire toujours plus vite.
               </p>
 
               <p className="text-xl text-navy font-medium">
-                Le vrai risque ? Ce n'est pas que l'IA remplace vos formateurs.
-                C'est qu'ils se retrouvent{' '}
-                <span className="text-rust">largués</span> — pendant que d'autres
-                prennent de l'avance.
+                Le vrai risque n'est pas que l'IA remplace vos formateurs.
+                C'est qu'elle s'installe dans leurs pratiques{' '}
+                <span className="text-rust">sans méthode</span>, sans critères de
+                qualité et sans garde-fous pédagogiques.
               </p>
             </motion.div>
 
-            {/* Three risks */}
+            {/* Human boundaries */}
             <motion.div
               initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -99,11 +101,11 @@ export function Problem() {
               className="mb-12"
             >
               <p className="text-sm text-navy/60 uppercase tracking-wider mb-6">
-                Trois scénarios à éviter
+                Ce que vos formateurs doivent apprendre à déléguer. Et ce qu'ils doivent continuer à maîtriser.
               </p>
 
               <div className="space-y-4">
-                {risks.map((risk, idx) => (
+                {boundaries.map((boundary, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 20 }}
@@ -113,9 +115,12 @@ export function Problem() {
                     className="flex items-center gap-6 py-4 border-b border-navy/10"
                   >
                     <span className="text-3xl font-display font-bold text-navy/10" aria-hidden="true">
-                      {risk.number}
+                      {boundary.number}
                     </span>
-                    <p className="text-navy-light">{risk.text}</p>
+                    <div>
+                      <p className="font-medium text-navy">{boundary.title}</p>
+                      <p className="text-navy-light">{boundary.text}</p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
@@ -129,20 +134,12 @@ export function Problem() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="bg-navy text-cream p-8"
             >
-              <ScrollReveal
-                as="p"
-                containerClassName="text-xl font-display mb-2"
-                textClassName="text-xl font-display"
-                enableBlur
-                blurStrength={3}
-                baseOpacity={0.15}
-                wordAnimationEnd="center center"
-              >
+              <p className="text-xl font-display mb-2">
                 L'IA évolue vite. Les outils d'aujourd'hui seront obsolètes demain.
-              </ScrollReveal>
+              </p>
               <p className="text-cream/70">
-                Ce qui reste ? La capacité à{' '}
-                <span className="text-yellow font-semibold">penser l'IA</span>.
+                C'est cette frontière que TeachInspire apprend à tracer : utiliser
+                l'IA comme assistant de conception, sans déléguer le jugement pédagogique.
               </p>
             </motion.div>
           </div>

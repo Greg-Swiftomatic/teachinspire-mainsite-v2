@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { ILLUSTRATIONS } from '../assets/assets';
@@ -12,6 +13,7 @@ import SpotlightCard from '../components/reactbits/SpotlightCard';
 import BlurText from '../components/reactbits/BlurText';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 
 function useAnimationVariants(prefersReducedMotion: boolean) {
   const fadeInUp = {
@@ -74,7 +76,7 @@ const philosophyPoints = [
     number: '01',
     title: "L'IA est un assistant, pas un remplaçant",
     description:
-      "Vous restez le pédagogue. L'IA vous fait gagner du temps, elle ne décide pas à votre place.",
+      "Gagner du temps sans perdre le métier : l'IA accélère certaines tâches, elle ne décide pas à la place du formateur.",
   },
   {
     number: '02',
@@ -136,7 +138,7 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
             {/* Headline */}
             <h1 className="mb-6">
               <BlurText
-                text="Derrière"
+                text="L'IA ne doit pas"
                 delay={100}
                 animateBy="words"
                 direction="bottom"
@@ -144,9 +146,9 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                 stepDuration={0.4}
               />
               <BlurText
-                text="TeachInspire"
+                text="faire oublier le métier"
                 delay={80}
-                animateBy="letters"
+                animateBy="words"
                 direction="bottom"
                 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
                 stepDuration={0.35}
@@ -158,8 +160,8 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
               variants={fadeInUp}
               className="text-xl text-navy/70 max-w-2xl leading-relaxed"
             >
-              L'histoire d'un formateur de langues qui a découvert comment l'IA
-              pouvait transformer sa pratique — et qui veut partager ça avec vous.
+              Avant de former à l'IA, j'ai été formateur de langues. C'est ce qui change tout :
+              je sais ce qu'un outil peut accélérer, et ce qu'il ne doit pas décider à la place du formateur.
             </motion.p>
           </motion.div>
         </div>
@@ -270,6 +272,20 @@ function DeclicSection({ prefersReducedMotion }: { prefersReducedMotion: boolean
             >
               Fin 2022
             </KineticHeading>
+
+            <motion.img
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: prefersReducedMotion ? 0.01 : 0.45 }}
+              src={CONTACT_CONVERSATION_ILLUSTRATION}
+              alt=""
+              width={1536}
+              height={1024}
+              className="mt-10 hidden w-full max-w-[360px] object-contain lg:block"
+              aria-hidden="true"
+              loading="lazy"
+            />
           </div>
 
           {/* Right - Content */}
@@ -287,24 +303,24 @@ function DeclicSection({ prefersReducedMotion }: { prefersReducedMotion: boolean
               </p>
 
               <p className="text-navy/70 mb-6 leading-relaxed">
-                J'expérimente. Je teste. Je découvre une communauté active
-                qui partage ses astuces sur le "prompting".
-                Je combine plusieurs outils : génération de texte,
-                synthèse vocale, transcription automatique.
+                Je vois immédiatement ce que l'IA générative peut apporter :
+                transcrire une vidéo, extraire du vocabulaire, adapter un texte,
+                créer des dialogues, produire des variantes d'exercices.
               </p>
 
               <div className="p-6 bg-yellow/10 border-l-2 border-yellow mb-6">
                 <p className="text-navy font-medium">
-                  Le résultat dépasse mes espérances : je retrouve le plaisir
-                  d'imaginer des leçons personnalisées. Mes élèves bénéficient
-                  de contenus adaptés à leur secteur professionnel.
+                  Mais je vois aussi le piège : une sortie bien écrite peut donner
+                  une impression de qualité alors qu'elle reste trop générale,
+                  mal calibrée ou pédagogiquement fragile.
                 </p>
               </div>
 
               <p className="text-navy/70 leading-relaxed">
-                Ces outils compensent mes lacunes sur certains domaines techniques.
-                Je peux enfin proposer des supports pertinents même dans des domaines
-                que je ne maîtrise pas personnellement.
+                TeachInspire est né de cette frontière : utiliser l'IA pour réduire
+                l'effort périphérique, sans déléguer le jugement pédagogique.
+                C'est aussi ce qui m'a permis de retrouver le plaisir de créer
+                des leçons personnalisées pour des contextes très spécifiques.
               </p>
             </div>
           </motion.div>
@@ -353,10 +369,9 @@ function TeachInspireBirthSection({ prefersReducedMotion }: { prefersReducedMoti
 
             <div className="p-6 bg-sage/10 border-l-2 border-sage">
               <p className="text-navy">
-                <strong>L'objectif reste simple :</strong> accompagner les enseignants
-                dans la découverte et la maîtrise de l'IA,
-                personnaliser l'expérience de l'apprenant,
-                et dire adieu aux tâches chronophages.
+                <strong>L'objectif reste simple :</strong> aider les formateurs à gagner
+                du temps sans perdre le métier : objectifs clairs, supports contrôlés,
+                adaptation fine et autonomie face aux outils qui changent.
               </p>
             </div>
           </motion.div>
@@ -510,6 +525,11 @@ export function AboutPage() {
 
   return (
     <ScrollThreadContainer preset="about">
+      <PageMeta
+        title="À propos de Gregory — TeachInspire"
+        description="TeachInspire est né d'une conviction : l'IA peut accélérer la conception pédagogique sans remplacer le jugement du formateur."
+        path="/a-propos"
+      />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />
       <WhoAmISection prefersReducedMotion={prefersReducedMotion} />
       <DeclicSection prefersReducedMotion={prefersReducedMotion} />
