@@ -7,13 +7,12 @@ import { GridOverlay } from '../components/ui/GridOverlay';
 import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { ScrollThreadContainer } from '../components/animation/ScrollThreadContainer';
-import { AboutLandscape } from '../components/illustrations/about/AboutLandscape';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SpotlightCard from '../components/reactbits/SpotlightCard';
-import BlurText from '../components/reactbits/BlurText';
 
 const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
+const ABOUT_HUMAN_JUDGMENT_ILLUSTRATION = '/illustrations/about-human-judgment.png';
 
 function useAnimationVariants(prefersReducedMotion: boolean) {
   const fadeInUp = {
@@ -117,8 +116,6 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
   return (
     <section className="bg-cream min-h-[60vh] relative overflow-hidden">
       <GridOverlay />
-      <GeometricAccentGroup preset="about-hero" />
-      <AboutLandscape />
 
       <Container>
         <div className="pt-32 pb-16 lg:pt-40 lg:pb-24">
@@ -126,43 +123,46 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
             initial="hidden"
             animate="visible"
             variants={staggerContainer}
-            className="max-w-3xl"
+            className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16"
           >
-            {/* Label */}
-            <motion.div variants={fadeInUp} className="mb-6">
-              <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
-                À propos
-              </span>
+            <div className="lg:col-span-6">
+              {/* Label */}
+              <motion.div variants={fadeInUp} className="mb-6">
+                <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
+                  À propos
+                </span>
+              </motion.div>
+
+              {/* Headline */}
+              <motion.h1
+                variants={fadeInUp}
+                className="mb-6 max-w-4xl text-4xl font-display font-semibold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-6xl"
+              >
+                L'IA ne doit pas{' '}
+                <span className="text-rust">faire oublier le métier</span>
+              </motion.h1>
+
+              {/* Subheadline */}
+              <motion.p
+                variants={fadeInUp}
+                className="text-xl text-navy/70 max-w-2xl leading-relaxed"
+              >
+                Avant de former à l'IA, j'ai été formateur de langues. C'est ce qui change tout :
+                je sais ce qu'un outil peut accélérer, et ce qu'il ne doit pas décider à la place du formateur.
+              </motion.p>
+            </div>
+
+            <motion.div variants={fadeInUp} className="lg:col-span-6">
+              <img
+                src={ABOUT_HUMAN_JUDGMENT_ILLUSTRATION}
+                alt=""
+                width={1536}
+                height={1024}
+                className="mx-auto w-full max-w-[620px] object-contain lg:-ml-8 lg:w-[112%] lg:max-w-none"
+                aria-hidden="true"
+                fetchPriority="high"
+              />
             </motion.div>
-
-            {/* Headline */}
-            <h1 className="mb-6">
-              <BlurText
-                text="L'IA ne doit pas"
-                delay={100}
-                animateBy="words"
-                direction="bottom"
-                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight"
-                stepDuration={0.4}
-              />
-              <BlurText
-                text="faire oublier le métier"
-                delay={80}
-                animateBy="words"
-                direction="bottom"
-                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-rust leading-[1.1] tracking-tight"
-                stepDuration={0.35}
-              />
-            </h1>
-
-            {/* Subheadline */}
-            <motion.p
-              variants={fadeInUp}
-              className="text-xl text-navy/70 max-w-2xl leading-relaxed"
-            >
-              Avant de former à l'IA, j'ai été formateur de langues. C'est ce qui change tout :
-              je sais ce qu'un outil peut accélérer, et ce qu'il ne doit pas décider à la place du formateur.
-            </motion.p>
           </motion.div>
         </div>
       </Container>
