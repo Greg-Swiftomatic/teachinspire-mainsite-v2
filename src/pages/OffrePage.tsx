@@ -11,10 +11,10 @@ const CALENDLY_URL = 'https://cal.com/teachinspire.me';
 // ── Data ──────────────────────────────────────────────────
 
 const problems = [
-  { before: '3h pour créer un cours personnalisé', after: '30 min avec un workflow cadré par un formateur' },
-  { before: 'Difficulté à adapter aux secteurs spécialisés', after: 'Adaptation automatique au secteur' },
-  { before: 'Ressources génériques, faible engagement', after: 'Transformation de contenus authentiques' },
-  { before: 'Coûts élevés de production multimédia', after: 'Outils techniquement accessibles' },
+  { before: '3h pour créer un cours personnalisé', after: '30 min quand la méthode est cadrée' },
+  { before: 'Difficulté à adapter aux secteurs spécialisés', after: 'Sources métier exploitables, même sur un secteur peu familier' },
+  { before: 'Ressources génériques, faible engagement', after: 'Supports tirés de vos vidéos, podcasts et documents' },
+  { before: 'Coûts élevés de production multimédia', after: 'Audio, transcription et fiches sans budget multimédia lourd' },
 ];
 
 const months = [
@@ -34,7 +34,7 @@ const months = [
     period: 'Mois 2',
     title: "Piloter l'IA avec des critères pédagogiques",
     topics: [
-      "Prompt engineering appliqué à la pédagogie",
+      "Consignes IA appliquées à la pédagogie",
       'CECRL, niveau, registre et progression',
       "Auto-évaluation de l'IA sans abandonner la décision finale",
       'Critères de qualité partagés',
@@ -43,9 +43,9 @@ const months = [
   {
     number: '03',
     period: 'Mois 3',
-    title: "Construire des workflows IA sans perdre la main",
+    title: "Créer une séquence complète sans perdre la main",
     topics: [
-      'Transformation de contenus authentiques',
+      'Sources métier utilisées pour créer des activités de cours',
       'Création de séquences pédagogiques',
       'Validation humaine et adaptation finale',
       'Traçabilité des décisions pédagogiques',
@@ -59,13 +59,13 @@ const resources = [
     title: 'Formation Live',
     items: [
       '6 à 8 webinaires dédiés à votre équipe',
-      'Sessions pratiques avec vos cas réels',
+      'Travail en direct sur vos cas réels',
       'Coaching sur les premiers cours créés',
     ],
   },
   {
     icon: Zap,
-    title: 'Outils Exclusifs',
+    title: 'Outils maison',
     items: [
       'Prompt Builder Pro (accès à vie)',
       'Mises à jour automatiques incluses',
@@ -73,20 +73,20 @@ const resources = [
   },
   {
     icon: BookOpen,
-    title: 'Bibliothèque de Ressources',
+    title: 'Bibliothèque de supports',
     items: [
-      'Leçons complètes créées avec nos méthodes',
-      '100% réutilisables et modifiables',
-      'Templates de cours prêts à personnaliser',
+      'Leçons complètes créées avec la méthode',
+      'Supports réutilisables et modifiables',
+      'Modèles de cours prêts à adapter',
     ],
   },
   {
     icon: Layers,
-    title: 'Modules Futurs Inclus',
+    title: 'Modules ajoutés plus tard',
     items: [
       'Formation pédagogique Notion',
       'Workflow Notebook LM',
-      'Accès prioritaire aux nouvelles techniques IA',
+      'Nouveaux usages IA ajoutés quand ils tiennent la route',
     ],
   },
 ];
@@ -94,14 +94,14 @@ const resources = [
 const communityPublic = [
   'Accès aux webinaires publics',
   'Bibliothèque de ressources partagées',
-  'Partage de workflows et de prompts',
-  'Veille sur les outils IA',
+  'Retours d\'usage entre formateurs',
+  'Veille sur les outils qui valent vraiment le détour',
 ];
 
 const communityPrivate = [
-  'Accompagnement dédié pour votre équipe',
+  'Point dédié pour votre équipe',
   'Partage sécurisé de ressources internes',
-  'Suivi de progression et statistiques d\'utilisation',
+  'Suivi des essais réalisés pendant l\'année',
 ];
 
 const pricingTiers = [
@@ -111,9 +111,9 @@ const pricingTiers = [
     price: '4 200€ HT',
     perPerson: '420€/personne pour 10',
     features: [
-      'Formation complète de votre équipe',
+      'Formation de votre équipe',
       '6 à 8 webinaires en groupe unique',
-      'Outils exclusifs (accès à vie)',
+      'Outils maison (accès à vie)',
       'Accès communauté 1 an',
     ],
     highlighted: false,
@@ -124,9 +124,9 @@ const pricingTiers = [
     price: '4 200€ HT + 250€ HT',
     perPerson: 'par formateur supplémentaire — ex. : 15 formateurs = 5 450€ HT (363€/pers.)',
     features: [
-      'Tous les avantages de la formule Standard',
+      'Tous les éléments de la formule Standard',
       'Sessions en groupes plus restreints',
-      'Coordination et accompagnement renforcés',
+      'Coordination plus serrée avec vos responsables',
     ],
     highlighted: true,
   },
@@ -136,10 +136,10 @@ const pricingTiers = [
     price: 'Sur devis',
     perPerson: 'Tarif préférentiel',
     features: [
-      'Planning optimisé',
+      'Planning adapté à vos contraintes',
       'Accompagnement dédié',
       'Formation d\'ambassadeurs internes',
-      'Adaptation complète à votre structure',
+      'Format ajusté à votre organisation',
     ],
     highlighted: false,
   },
@@ -199,16 +199,16 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
               variants={fadeInUp}
               className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight mb-6"
             >
-              Gagner du temps{' '}
-              <span className="text-rust">sans perdre le métier</span>
+              Créer des cours avec l'IA{' '}
+              <span className="text-rust">sans abîmer la qualité</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
             >
-              Parcours hybride de 3 mois pour installer une pratique IA commune :
-              workflows réutilisables, critères de qualité partagés et autonomie d'équipe.
+              Parcours hybride de 3 mois pour aider vos formateurs à produire plus vite,
+              relire mieux et garder la décision pédagogique.
             </motion.p>
 
             <motion.p
@@ -261,7 +261,7 @@ function ProblemsSection({ prefersReducedMotion }: { prefersReducedMotion: boole
           <div className="lg:col-span-4">
             <SectionLabel>Le constat</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Avant / Après{' '}
+              Ce qui change avec{' '}
               <span className="text-rust">TeachInspire</span>
             </h2>
           </div>
@@ -327,15 +327,15 @@ function ProgrammeSection({ prefersReducedMotion }: { prefersReducedMotion: bool
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Un parcours hybride et{' '}
-              <span className="text-rust">flexible</span>
+              Un parcours hybride sur{' '}
+              <span className="text-rust">3 mois</span>
             </h2>
           </div>
           <div className="lg:col-span-6 lg:flex lg:items-end">
             <p className="text-navy/60">
               15 tutoriels vidéo (6h au total) + 6 à 8 sessions live (1h à 1h30 chacune).
               <br />
-              Cadence recommandée : 3 mois.
+              Le rythme laisse le temps de tester entre deux séances.
             </p>
           </div>
         </div>
@@ -412,8 +412,8 @@ function ResourcesSection({ prefersReducedMotion }: { prefersReducedMotion: bool
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Accompagnement et{' '}
-              <span className="text-rust">ressources</span>
+              Ce que votre équipe{' '}
+              <span className="text-rust">reçoit</span>
             </h2>
           </div>
         </div>
@@ -471,8 +471,8 @@ function CommunitySection({ prefersReducedMotion }: { prefersReducedMotion: bool
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Votre accès à la communauté{' '}
-              <span className="text-rust">TeachInspire</span>
+              Un an pour rester{' '}
+              <span className="text-rust">à jour</span>
             </h2>
           </div>
           <div className="lg:col-span-6 lg:flex lg:items-end">
@@ -561,8 +561,8 @@ function PricingSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Une tarification claire et{' '}
-              <span className="text-rust">adaptée</span>
+              Tarifs par taille{' '}
+              <span className="text-rust">d'équipe</span>
             </h2>
           </div>
         </div>
@@ -623,7 +623,7 @@ function PricingSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
               <p className="text-navy font-medium">Éligible financement OPCO</p>
             </div>
             <p className="text-sm text-navy/60">
-              Nous vous accompagnons dans les démarches de prise en charge.
+              On vous fournit les éléments nécessaires pour la demande de prise en charge.
             </p>
           </div>
           <div className="bg-cream p-6 lg:p-8">
@@ -666,14 +666,14 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
           </span>
 
           <h2 className="text-3xl sm:text-4xl font-display font-semibold text-cream mb-6">
-            Prêt à structurer l'usage IA de votre institut ?
+            Prêt à cadrer l'usage IA de votre institut ?
           </h2>
 
           <p className="text-xl text-cream/70 mb-4">
             Réservez une session découverte gratuite de 45 minutes.
           </p>
           <p className="text-cream/50 mb-8">
-            On évalue ensemble vos besoins et on vous présente le parcours en détail.
+            On regarde votre équipe, vos besoins, puis le bon format.
           </p>
 
           <Button variant="cta" size="lg" href={CALENDLY_URL} showArrow>
@@ -685,7 +685,7 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
             <a href="mailto:greg@teachinspire.me" className="text-cream/60 underline hover:text-yellow transition-colors duration-150">
               greg@teachinspire.me
             </a>
-            {' '}— réponse sous 24h avec un devis personnalisé.
+            {'. '}Réponse sous 24h avec un devis adapté à votre équipe.
           </p>
         </motion.div>
       </Container>
@@ -702,7 +702,7 @@ export function OffrePage() {
     <>
       <PageMeta
         title="Offre Formation IA pour instituts de langues | TeachInspire"
-        description="Parcours de 3 mois pour structurer l'usage de l'IA en institut de langues, avec méthode commune, workflows réutilisables et critères de qualité."
+        description="Parcours de 3 mois pour cadrer l'usage de l'IA en institut de langues, avec méthode commune, essais encadrés et critères de qualité."
         path="/offre"
       />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />

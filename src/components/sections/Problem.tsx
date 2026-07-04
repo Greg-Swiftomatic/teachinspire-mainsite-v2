@@ -54,7 +54,7 @@ export function Problem() {
               as="h2"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
-              Ce que l'IA ne doit
+              La frontière à garder
             </KineticHeading>
             <KineticHeading
               variant="assemble"
@@ -62,7 +62,7 @@ export function Problem() {
               className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
               delay={0.3}
             >
-              pas remplacer
+              en tête
             </KineticHeading>
 
             {/* Animated branching flow — confusion without method */}
@@ -85,10 +85,9 @@ export function Problem() {
               </p>
 
               <p className="text-xl text-navy font-medium">
-                Le vrai risque n'est pas que l'IA remplace vos formateurs.
-                C'est qu'elle s'installe dans leurs pratiques{' '}
+                Le risque commence quand l'IA entre dans les pratiques{' '}
                 <span className="text-rust">sans méthode</span>, sans critères de
-                qualité et sans garde-fous pédagogiques.
+                qualité, sans personne pour relire ce qui arrive devant les apprenants.
               </p>
             </motion.div>
 
@@ -101,7 +100,7 @@ export function Problem() {
               className="mb-12"
             >
               <p className="text-sm text-navy/60 uppercase tracking-wider mb-6">
-                Ce que vos formateurs doivent apprendre à déléguer. Et ce qu'ils doivent continuer à maîtriser.
+                À déléguer à l'outil. À garder côté formateur.
               </p>
 
               <div className="space-y-4">
@@ -135,11 +134,11 @@ export function Problem() {
               className="bg-navy text-cream p-8"
             >
               <p className="text-xl font-display mb-2">
-                L'IA évolue vite. Les outils d'aujourd'hui seront obsolètes demain.
+                Les outils vont changer. Le jugement pédagogique restera.
               </p>
               <p className="text-cream/70">
-                C'est cette frontière que TeachInspire apprend à tracer : utiliser
-                l'IA comme assistant de conception, sans déléguer le jugement pédagogique.
+                TeachInspire donne à vos équipes une manière de tracer cette frontière
+                à chaque support : ce que l'IA prépare, ce que le formateur vérifie.
               </p>
             </motion.div>
           </div>

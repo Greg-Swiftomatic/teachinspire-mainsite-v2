@@ -10,7 +10,7 @@ const FORMATION_BOUNDARY_ILLUSTRATION = '/illustrations/formation-boundary.png';
 const steps = [
   {
     number: '01',
-    title: 'Source authentique',
+    title: 'Source réelle',
     text: 'Vidéo, podcast, article ou document métier. On part du matériau réel des apprenants.',
     icon: Podcast,
     detail: 'Transcription · contexte · vocabulaire',
@@ -25,7 +25,7 @@ const steps = [
   {
     number: '03',
     title: 'Support exploitable',
-    text: 'La séquence finale reste relue, adaptée et validée avant d’arriver devant les apprenants.',
+    text: 'La séquence finale reste relue, adaptée et validée avant d’arriver en classe.',
     icon: FileText,
     detail: 'Fiche prof · fiche élève · audio',
   },
@@ -64,12 +64,12 @@ export function Possibility() {
 
             <h2 className="font-display text-3xl font-bold leading-tight text-navy sm:text-4xl lg:text-5xl">
               De la source au <span className="text-rust">cours complet</span>,
-              sans perdre la main.
+              avec validation humaine.
             </h2>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-navy-light">
-              La promesse n'est pas de laisser l'IA décider. C'est de lui déléguer
-              l'effort périphérique, puis de garder les critères pédagogiques au centre.
+              L'IA trie, reformule et propose. Le formateur garde les critères :
+              niveau, progression, erreurs possibles, contexte métier.
             </p>
 
             <motion.img

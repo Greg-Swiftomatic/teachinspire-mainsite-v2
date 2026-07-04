@@ -10,17 +10,17 @@ import SpotlightCard from '../reactbits/SpotlightCard';
 const metrics = [
   {
     value: '3h → 30min',
-    label: "Temps de préparation d'un cours personnalisé, quand le workflow est cadré par un formateur",
+    label: "Temps de préparation d'un cours personnalisé, quand la méthode est cadrée par un formateur",
     accent: 'yellow',
   },
   {
     value: 'Tous secteurs',
-    label: "Aéronautique, juridique, logistique — contenus sur mesure sans expertise préalable",
+    label: "Aéronautique, juridique, logistique : contenus sur mesure sans expertise préalable",
     accent: 'sage',
   },
   {
     value: '0€/mois',
-    label: "Pas d'abonnements. Des outils gratuits, des résultats pro.",
+    label: "Pas besoin d'empiler les abonnements pour démarrer proprement.",
     accent: 'rust',
   },
 ];
@@ -54,7 +54,7 @@ export function Results() {
             as="h2"
             className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
           >
-            Ce que ça change,
+            Ce que ça change
           </KineticHeading>
           <KineticHeading
             variant="slide-from-sides"
@@ -62,7 +62,7 @@ export function Results() {
             className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
             delay={0.15}
           >
-            concrètement
+            dans la semaine
           </KineticHeading>
         </div>
 
@@ -121,13 +121,13 @@ export function Results() {
           <div className="lg:col-span-8">
             <div className="border-l-2 border-sage pl-8">
               <p className="text-lg text-navy-light mb-4">
-                Une formatrice devait créer un cours pour une entreprise de traite
-                éthique qui s'internationalise.{' '}
+                Une formatrice devait préparer un cours pour un traiteur éthique
+                en pleine internationalisation.{' '}
                 <span className="text-navy font-medium">Secteur ultra-niche.</span>
               </p>
               <p className="text-lg text-navy-light mb-4">
-                Avec la méthode TeachInspire, elle a transformé la documentation
-                métier en conversations réalistes.
+                Elle a utilisé les documents métier pour produire des conversations
+                proches des vraies situations de travail.
               </p>
               <p className="text-navy font-medium italic">
                 Retour de la DRH : "Je suis étonnée d'entendre des situations

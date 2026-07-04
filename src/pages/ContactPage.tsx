@@ -3,7 +3,6 @@ import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
-import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
@@ -35,7 +34,7 @@ export function ContactPage() {
     <main className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
         title="Contactez TeachInspire | Réserver un appel"
-        description="Discutons de vos besoins en formation IA pour votre institut de langues. Réservez un appel gratuit ou envoyez-nous un message."
+        description="Parlons de vos formateurs, de vos contraintes et de la place que l'IA peut prendre dans votre institut de langues."
         path="/contact"
       />
       <GridOverlay />
@@ -43,13 +42,13 @@ export function ContactPage() {
 
       <Container>
         <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="grid w-full max-w-full gap-12 lg:grid-cols-12 lg:gap-16">
             {/* Left Column - Header */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={staggerContainer}
-              className="lg:col-span-5"
+              className="w-full max-w-[calc(100vw-2rem)] min-w-0 lg:col-span-5 lg:max-w-none"
             >
               <motion.div variants={fadeInUp} className="mb-6">
                 <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
@@ -57,20 +56,21 @@ export function ContactPage() {
                 </span>
               </motion.div>
 
-              <KineticHeading
-                variant="cascade"
-                as="h1"
-                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight"
+              <motion.h1
+                variants={fadeInUp}
+                className="text-3xl min-[390px]:text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy mb-6 leading-[1.1] tracking-tight break-words"
               >
-                Parlons de votre projet
-              </KineticHeading>
+                Parlons de votre{' '}
+                <span className="block sm:inline">projet</span>
+              </motion.h1>
 
               <motion.p
                 variants={fadeInUp}
-                className="text-xl text-navy/70 leading-relaxed"
+                className="max-w-[calc(100vw-2rem)] break-words text-lg leading-relaxed text-navy/70 sm:text-xl lg:max-w-xl"
               >
-                Vous avez des questions sur la formation ?
-                Vous voulez savoir si c'est adapté à votre institut ?
+                Vous voulez cadrer l'IA.
+                <br />
+                Parlons de votre équipe.
               </motion.p>
 
               <motion.img
@@ -79,14 +79,14 @@ export function ContactPage() {
                 alt=""
                 width={1536}
                 height={1024}
-                className="mt-10 w-full max-w-[520px] object-contain lg:mt-14"
+                className="mt-10 w-full max-w-[calc(100vw-2rem)] object-contain lg:mt-14 lg:max-w-[520px]"
                 aria-hidden="true"
                 loading="eager"
               />
             </motion.div>
 
             {/* Right Column - Contact Options */}
-            <div className="lg:col-span-7">
+            <div className="w-full max-w-[calc(100vw-2rem)] min-w-0 lg:col-span-7 lg:max-w-none">
               <motion.div
                 variants={staggerContainer}
                 initial="hidden"
@@ -108,11 +108,13 @@ export function ContactPage() {
                   </h2>
 
                   <p className="text-navy/70 mb-2">
-                    45 minutes pour discuter de vos besoins et voir comment on peut vous aider.
+                    45 minutes.
+                    <br />
+                    Vos outils et vos cours.
                   </p>
 
                   <p className="text-sm text-navy-light mb-6">
-                    Sans engagement
+                    Sans engagement. Sans relance insistante.
                   </p>
 
                   <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
@@ -176,7 +178,7 @@ export function ContactPage() {
             className="mt-20 pt-8 border-t border-navy/10"
           >
             <p className="text-sm text-navy-light">
-              TeachInspire — Formation IA pour l'enseignement des langues
+              TeachInspire, formation IA pour formateurs de langues
             </p>
           </motion.div>
         </div>

@@ -10,31 +10,31 @@ const faqs = [
     id: 'faq-0',
     question: "Mes formateurs ne sont pas à l'aise avec la tech",
     answer:
-      "La formation est progressive et part de zéro. Pas besoin de compétences techniques préalables. On utilise des outils conçus pour être accessibles.",
+      "On part de zéro. Les premiers exercices sont courts, guidés, et faits avec des outils que l'on peut prendre en main sans profil technique.",
   },
   {
     id: 'faq-1',
     question: 'Ça va coûter cher en abonnements ?',
     answer:
-      "Non. On utilise principalement Google AI Studio — gratuit et quasi-illimité, même pour la synthèse vocale pro. Pas d'abonnements qui s'empilent.",
+      "L'objectif est justement d'éviter la pile d'abonnements. On travaille surtout avec Google AI Studio, gratuit aujourd'hui, y compris pour une partie des usages audio.",
   },
   {
     id: 'faq-2',
     question: "J'ai testé ChatGPT, les résultats étaient moyens",
     answer:
-      "Normal. Sans méthode structurée, les résultats sont aléatoires. C'est précisément ce qu'on enseigne : comment obtenir des résultats consistants, pas des coups de chance.",
+      "C'est fréquent. ChatGPT donne des sorties très correctes un jour, médiocres le lendemain. La formation apprend à cadrer la demande et à relire le résultat avec des critères stables.",
   },
   {
     id: 'faq-3',
     question: "On n'a pas le temps",
     answer:
-      "Les modules font 20 minutes et s'intègrent dans le planning. Format pensé pour des formateurs en activité, pas des étudiants à temps plein.",
+      "Les modules vidéo durent environ 20 minutes. Le format est pensé pour des formateurs déjà en activité, avec des essais courts entre deux sessions live.",
   },
   {
     id: 'faq-4',
     question: 'Et si les outils changent ?',
     answer:
-      "Ils vont changer, c'est certain. C'est pour ça qu'on enseigne une méthode transférable, pas un mode d'emploi spécifique. Vos formateurs sauront s'adapter.",
+      "Ils changeront. La formation travaille donc les familles d'usages : générer, transcrire, vérifier, adapter. Quand l'interface change, la logique reste.",
   },
   {
     id: 'faq-5',
@@ -46,13 +46,13 @@ const faqs = [
     id: 'faq-6',
     question: 'Combien ça coûte ?',
     answer:
-      "Le tarif dépend de la taille de votre équipe. Standard (≤10 formateurs) : à partir de 4 200€ HT. On en parle lors de l'appel découverte — sans engagement.",
+      "Le tarif dépend de la taille de votre équipe. Standard (≤10 formateurs) : à partir de 4 200€ HT. On en parle lors de l'appel découverte, sans engagement.",
   },
   {
     id: 'faq-7',
     question: 'Et si ça ne correspond pas à nos besoins ?',
     answer:
-      "On le saura dès l'appel découverte. Pas de pression, pas de relance. Si ce n'est pas un fit, on vous le dira.",
+      "On le verra dès l'appel découverte. Si le format ne colle pas à votre contexte, je vous le dirai clairement.",
   },
 ];
 

@@ -11,14 +11,14 @@ const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f
 
 const previewPoints = [
   'Le ton et la pédagogie de la formation',
-  'La manière dont chaque vidéo est structurée',
-  'Le niveau de précision attendu dans le programme complet',
+  'La manière dont une vidéo avance, sans jargon inutile',
+  'Le niveau de précision demandé aux formateurs',
 ];
 
 const courseIncludes = [
   '15 tutoriels vidéo pour donner des bases solides à vos formateurs',
-  '6 à 8 sessions live adaptées à votre équipe et à vos cas concrets',
-  'Une méthode transférable, pensée pour rester utile malgré l’évolution rapide des outils',
+  '6 à 8 sessions live à partir de vos cas de cours',
+  "Une méthode qui reste utile quand les outils changent d'interface",
 ];
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
@@ -56,7 +56,7 @@ export function InvitePage() {
     <main className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
         title="Aperçu privé — TeachInspire"
-        description="Premier aperçu vidéo non listé de la formation TeachInspire pour instituts de langues."
+        description="Aperçu vidéo privé de la formation TeachInspire pour instituts de langues."
         path="/invite"
         noindex
       />
@@ -79,16 +79,16 @@ export function InvitePage() {
                 variants={fadeInUp}
                 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.05] tracking-tight mb-6"
               >
-                Un premier extrait du{' '}
-                <span className="text-rust">programme complet</span>
+                Un extrait pour voir{' '}
+                <span className="text-rust">comment ça travaille</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeInUp}
                 className="text-xl text-navy/70 leading-relaxed mb-6"
               >
-                Cette page vous permet de voir le tout premier module vidéo et d’évaluer
-                le niveau, le ton et la clarté de la formation.
+                Vous pouvez regarder le premier module et juger le rythme, le ton,
+                et le niveau de détail avant d'en discuter.
               </motion.p>
 
               <motion.div
@@ -177,11 +177,11 @@ export function InvitePage() {
                   Prochaine étape
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-display font-semibold leading-tight mb-4">
-                  Si cet aperçu vous parle, le plus simple est d’en discuter.
+                  Si cet aperçu vous parle, parlons de votre équipe.
                 </h2>
                 <p className="text-cream/70 text-lg leading-relaxed max-w-2xl">
-                  Je peux vous montrer comment la formation s’adapte à votre équipe,
-                  à vos contraintes et à vos objectifs pédagogiques.
+                  Je peux vous montrer où le parcours colle à vos besoins,
+                  et où il faudra l'ajuster.
                 </p>
               </div>
 
@@ -190,8 +190,8 @@ export function InvitePage() {
                   <div className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-yellow flex-shrink-0 mt-0.5" aria-hidden="true" />
                     <p className="text-cream/80">
-                      Appel découverte de 15 minutes pour voir si la formation est adaptée
-                      à votre institut.
+                      Appel découverte de 15 minutes pour vérifier si le format
+                      correspond à votre institut.
                     </p>
                   </div>
                 </div>

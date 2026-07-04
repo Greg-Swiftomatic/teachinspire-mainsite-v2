@@ -9,8 +9,8 @@ const forYouIf = [
   'Vous dirigez un institut de langues (10-50 formateurs)',
   'Vos formateurs créent leurs propres cours',
   'Vous formez des adultes professionnels',
-  'Vous voulez rester compétitif face à la transformation du secteur',
-  'Vous cherchez une solution structurée, pas des bricolages individuels',
+  "Vous voyez l'IA arriver dans les pratiques et vous voulez cadrer les usages",
+  "Vous voulez éviter les bricolages individuels d'un formateur à l'autre",
 ];
 
 const notForYouIf = [
@@ -50,7 +50,7 @@ export function TargetAudience() {
             className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
           >
             Pour les instituts qui veulent
-            <span className="block text-rust mt-2">prendre de l'avance</span>
+            <span className="block text-rust mt-2">cadrer l'usage IA</span>
           </motion.h2>
         </div>
 
@@ -96,7 +96,7 @@ export function TargetAudience() {
                 <X className="w-4 h-4 text-navy/50" aria-hidden="true" />
               </span>
               <h3 className="text-xl font-display font-bold text-navy">
-                Pas pour vous si...
+                Moins adapté si...
               </h3>
             </div>
 
@@ -126,7 +126,7 @@ export function TargetAudience() {
             href="https://cal.com/teachinspire.me"
             showArrow
           >
-            Parlons-en — 15 min, gratuit
+            Parlons-en, 15 min, gratuit
           </Button>
         </motion.div>
       </Container>

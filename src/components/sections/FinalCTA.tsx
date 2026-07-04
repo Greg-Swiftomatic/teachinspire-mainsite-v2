@@ -65,7 +65,7 @@ export function FinalCTA() {
               <p className="text-cream/50 max-w-xl mx-auto leading-relaxed">
                 On échange sur vos besoins, votre contexte, vos questions.
                 <span className="block mt-1 italic">
-                  Pas de pitch commercial — juste une conversation.
+                  Aucun pitch commercial. Une conversation de cadrage.
                 </span>
               </p>
             </motion.div>

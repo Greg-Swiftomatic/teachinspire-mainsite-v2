@@ -8,7 +8,7 @@ const steps = [
     number: '01',
     title: 'Appel découverte',
     description:
-      'On échange sur vos besoins, votre contexte, vos objectifs. Pas de pitch commercial — juste une conversation.',
+      'On parle de vos formateurs, de vos contraintes et des usages IA déjà tentés. Aucun pitch commercial.',
     duration: '15 min, gratuit',
   },
   {
@@ -22,14 +22,14 @@ const steps = [
     number: '03',
     title: 'Mise en pratique',
     description:
-      'Pas de théorie abstraite. Chaque module se termine par une application concrète avec leurs vrais apprenants.',
+      'Chaque module se termine par un essai sur une vraie situation de cours.',
     duration: null,
   },
   {
     number: '04',
     title: 'Communauté',
     description:
-      'Accès à la communauté TeachInspire pendant 1 an. Questions, mises à jour sur les outils, entraide entre instituts.',
+      'Accès pendant 1 an pour poser des questions, suivre les outils et voir ce que testent les autres instituts.',
     duration: null,
   },
 ];
@@ -65,7 +65,7 @@ export function HowItWorks() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
-              Un parcours structuré
+              Un parcours clair
               <span className="block text-rust mt-2">pour vos équipes</span>
             </motion.h2>
           </div>
@@ -79,7 +79,7 @@ export function HowItWorks() {
               className="text-lg text-navy-light leading-relaxed"
             >
               Format groupe (10-25 formateurs) pour que toute l'équipe avance ensemble.
-              Espace dédié pour votre institut dans la communauté.
+              Votre institut garde aussi un espace privé pour ses essais et ses supports.
             </motion.p>
           </div>
         </div>

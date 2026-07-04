@@ -71,14 +71,14 @@ export function Philosophy() {
             <BlurReveal delay={prefersReducedMotion ? 0 : 0.9}>
               <p>
                 Votre expertise pédagogique, votre connaissance de vos élèves,
-                votre capacité d'adaptation — ça, l'IA ne peut pas le faire.
+                votre capacité d'adaptation : ça, l'IA ne peut pas le faire.
               </p>
             </BlurReveal>
             <BlurReveal delay={prefersReducedMotion ? 0 : 1}>
               <p>
                 Ce qu'elle peut faire : vous donner accès à des contenus
                 que vous n'auriez jamais pu exploiter autrement.
-                Et vous libérer du temps pour ce qui compte vraiment :
+                Et vous redonner du temps pour ce qui compte :
                 l'accompagnement, la relation, l'inspiration.
               </p>
             </BlurReveal>
@@ -95,7 +95,7 @@ export function Philosophy() {
             }}
             className="text-sage font-display italic text-2xl inline-block"
           >
-            — C'est notre conviction depuis le premier jour.
+            Notre conviction depuis le premier jour.
           </motion.p>
         </motion.div>
       </Container>

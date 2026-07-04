@@ -28,9 +28,9 @@ const modules = [
   {
     number: '03',
     period: 'Mois 3',
-    title: "Construire des workflows IA sans perdre la main",
+    title: "Créer une séquence complète sans perdre la main",
     description:
-      "Transformer une source authentique en séquence complète, avec validation humaine, critères de qualité et adaptation finale.",
+      "Partir d'une source réelle et produire une séquence complète, avec relecture humaine, critères de qualité et adaptation finale.",
     color: 'rust' as const,
   },
 ];
@@ -127,7 +127,7 @@ export function Modules() {
               className="text-lg text-navy-light leading-relaxed"
             >
               Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
-              De la compréhension des usages à la création de séquences complètes cadrées par vos critères pédagogiques.
+              On part des usages simples, puis on va vers des séquences complètes cadrées par vos critères pédagogiques.
             </motion.p>
           </div>
         </div>

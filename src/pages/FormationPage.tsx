@@ -18,8 +18,8 @@ const targetAudience = [
   "Vous voulez créer des cours adaptés au secteur et aux objectifs de chaque apprenant",
   "Vous êtes limité par ce que les manuels proposent",
   "Vous avez des apprenants dans des domaines que vous ne maîtrisez pas",
-  "Vous voulez exploiter des ressources authentiques (vidéos, podcasts, articles) mais c'est trop long à adapter",
-  "Vos formateurs ont testé l'IA mais ne voient pas comment l'utiliser concrètement",
+  "Vous avez repéré des vidéos, podcasts ou articles utiles, mais leur adaptation prend trop de temps",
+  "Vos formateurs ont testé l'IA et se retrouvent avec des résultats inégaux",
 ];
 
 const modules = [
@@ -27,42 +27,42 @@ const modules = [
     number: '01',
     period: 'Mois 1',
     title: "Comprendre ce que l'IA peut vraiment déléguer",
-    objective: "Démystifier l'IA, identifier les tâches à faible risque et distinguer gain de temps et perte de maîtrise.",
+    objective: "Repérer les tâches à faible risque et les moments où le formateur doit reprendre la main.",
     topics: [
       "Ce que l'IA générative sait vraiment faire, et ce qu'elle simule",
       'Les familles d\'outils : texte, transcription, synthèse vocale, recherche',
-      'Tâches automatisables, partiellement automatisables et assistées',
+      "Tâches que l'outil peut préparer, tâches à vérifier, tâches à garder humaines",
       'Hallucinations, erreurs invisibles et sorties trop lisses',
-      "Prise en main d'un environnement de travail IA sans dépendance à un outil",
+      "Mise en place d'un espace de travail IA simple, sans attachement à une seule interface",
     ],
-    deliverable: "Votre cartographie des usages IA à déléguer, contrôler ou garder humains",
+    deliverable: "Une carte claire des usages à déléguer, à contrôler ou à garder côté formateur",
     bonus: 'Prise en main de Google AI Studio',
   },
   {
     number: '02',
     period: 'Mois 2',
     title: "Piloter l'IA avec des critères pédagogiques",
-    objective: 'Obtenir des résultats stables, précis et exploitables en guidant l\'IA avec vos critères métier.',
+    objective: "Obtenir des sorties relisibles et utilisables en donnant à l'IA vos critères métier.",
     topics: [
-      'Prompt engineering appliqué à la pédagogie',
+      'Consignes IA appliquées à la pédagogie',
       'CECRL, niveau, registre, progression et charge cognitive',
       'Méthode MVP (Minimum Viable Prompt) avec critères de qualité',
-      "Faire s'auto-évaluer l'IA sans lui abandonner la décision finale",
+      "Demander une auto-vérification à l'IA, puis décider soi-même",
       'Choisir le modèle selon la tâche, le risque et le niveau attendu',
     ],
-    deliverable: 'Votre premier prompt professionnel réutilisable, avec grille de contrôle pédagogique',
+    deliverable: 'Un prompt réutilisable, accompagné d’une grille de contrôle pédagogique',
     bonus: 'App "Prompt Builder" — Structurez vos prompts en quelques clics',
   },
   {
     number: '03',
     period: 'Mois 3',
-    title: "Construire des workflows IA sans perdre la main",
-    objective: 'Transformer une ressource authentique en séquence complète, avec validation humaine et adaptation finale.',
+    title: "Créer une séquence complète sans perdre la main",
+    objective: "Partir d'une source réelle et produire une séquence complète, relue avant usage.",
     topics: [
-      'Trouver des ressources pertinentes (banque de mots-clés, Perplexity)',
-      'Workflow complet : vidéo → transcription → points de langue → audio',
+      'Trouver des ressources utiles (banque de mots-clés, Perplexity)',
+      'Chaîne de travail : vidéo → transcription → points de langue → audio',
       'Backward Design : objectifs, critères, progression',
-      'Créer fiches prof & élève, puis relire avec une grille qualité',
+      'Créer fiches prof et élève, puis relire avec une grille qualité',
       'Adapter au niveau (B2 → A2) sans perdre le contexte ni la progression',
     ],
     deliverable: '2 séquences complètes (B2 et A2) avec supports, critères de validation et traces de décision',
@@ -77,7 +77,7 @@ const protectedElements = [
   },
   {
     title: "L'autonomie des formateurs",
-    text: 'Ils comprennent la méthode, pas seulement une suite de prompts.',
+    text: "Ils savent pourquoi une consigne fonctionne et comment l'adapter à leur cours.",
   },
   {
     title: 'La progression des apprenants',
@@ -94,13 +94,13 @@ const inclusions = [
     title: 'Formation Live',
     items: [
       '6 à 8 webinaires dédiés à votre équipe',
-      'Sessions pratiques avec vos cas réels',
+      'Sessions pratiques sur vos cas réels',
       'Coaching sur les premiers cours créés',
       'Planning flexible adapté à vos contraintes',
     ],
   },
   {
-    title: 'Outils Exclusifs',
+    title: 'Outils maison',
     items: [
       'Prompt Builder Pro (accès à vie)',
       'Mises à jour automatiques incluses',
@@ -109,7 +109,7 @@ const inclusions = [
   {
     title: 'Ressources',
     items: [
-      'Bibliothèque de leçons créées avec nos méthodes',
+      'Bibliothèque de leçons créées avec la méthode',
       'Templates de prompts prêts à personnaliser',
       'Fiches récapitulatives de chaque module',
     ],
@@ -118,14 +118,14 @@ const inclusions = [
 
 const communityBenefits = [
   'Veille partagée sur les outils et les évolutions',
-  'Échange sur les expérimentations de chacun',
+  'Retours sur les essais de chaque équipe',
   "Questions/réponses avec d'autres formateurs",
   'Webinaires de mise à jour sur les nouveautés',
 ];
 
 const guarantees = [
   { label: 'Support', text: 'Support prioritaire pendant toute la durée de la formation' },
-  { label: 'Bilingue', text: 'Formation bilingue (français/anglais) — idéal pour équipes mixtes' },
+  { label: 'Bilingue', text: 'Formation bilingue français/anglais, pratique pour les équipes mixtes' },
   { label: 'Mises à jour', text: 'Mises à jour des outils et contenus incluses' },
 ];
 
@@ -196,7 +196,7 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                   delay={0.3}
                   triggerStart="top 95%"
                 >
-                  sans perdre le métier
+                  sans abîmer la qualité
                 </KineticHeading>
               </div>
 
@@ -204,19 +204,18 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                 variants={fadeInUp}
                 className="text-xl text-navy/70 mb-4 max-w-2xl leading-relaxed"
               >
-                Un parcours de 3 mois pour installer une pratique IA commune dans votre institut.
+                Trois mois pour donner à vos formateurs une manière commune de travailler avec l'IA.
               </motion.p>
 
               <motion.p
                 variants={fadeInUp}
                 className="text-lg text-navy/60 mb-10 max-w-2xl"
               >
-                Vos formateurs apprennent à transformer n'importe quelle source en cours sur-mesure,
-                avec une méthode qui protège le jugement pédagogique, la qualité des supports et
-                l'autonomie de l'équipe.
+                Ils partent d'une vidéo, d'un podcast ou d'un document métier et en tirent
+                un cours relu, adapté au niveau, prêt à être utilisé.
                 <br />
                 <strong className="text-navy">15 tutoriels vidéo</strong> +{' '}
-                <strong className="text-navy">6 à 8 sessions live</strong>, adaptés à vos cas réels.
+                <strong className="text-navy">6 à 8 sessions live</strong>, à partir de vos cas réels.
               </motion.p>
 
               <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
@@ -284,7 +283,7 @@ function ForWhoSection({ prefersReducedMotion }: { prefersReducedMotion: boolean
           <div className="lg:col-span-4">
             <SectionLabel>Pour qui</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Cette formation est faite pour vous si...
+              Cette formation vous concerne si...
             </h2>
           </div>
 
@@ -324,7 +323,7 @@ function PromiseSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
       <Container>
         <div className="grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
-            <SectionLabel>La promesse</SectionLabel>
+            <SectionLabel>À la fin</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
               Ce que vous saurez faire à la fin
             </h2>
@@ -339,20 +338,20 @@ function PromiseSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
           >
             <div className="bg-white p-8 lg:p-10 border border-navy/10">
               <p className="text-lg text-navy/70 mb-6 leading-relaxed">
-                Prendre n'importe quelle source — une vidéo YouTube, un podcast,
-                un article technique, un document de l'entreprise de votre apprenant —
-                et la transformer en cours exploitable, sans sacrifier la qualité pédagogique.
+                Prendre une vidéo YouTube, un podcast, un article technique ou un document
+                d'entreprise, puis en tirer un cours exploitable sans rogner sur la qualité
+                pédagogique.
               </p>
 
               <p className="text-navy font-medium mb-6">
-                Au bon niveau. Avec le bon vocabulaire.
-                Avec des exercices ciblés. Et avec des décisions pédagogiques qui restent entre
+                Au bon niveau. Avec le bon vocabulaire. Avec des exercices ciblés.
+                Et avec des décisions pédagogiques qui restent entre
                 les mains du formateur.
               </p>
 
               <div className="p-6 bg-yellow/10 border-l-2 border-yellow">
-                <p className="text-navy font-medium">
-                  3h → 30 min, quand le workflow est cadré par un formateur.
+              <p className="text-navy font-medium">
+                  3h → 30 min, quand la méthode est cadrée par un formateur.
                 </p>
               </div>
             </div>
@@ -390,7 +389,7 @@ function ProtectionSection({ prefersReducedMotion }: { prefersReducedMotion: boo
           <div className="lg:col-span-4">
             <SectionLabel>Ce que la formation protège</SectionLabel>
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Une formation IA ne devrait pas seulement apprendre à produire plus vite.
+              Produire plus vite ne suffit pas.
             </h2>
 
             <motion.img
@@ -416,8 +415,8 @@ function ProtectionSection({ prefersReducedMotion }: { prefersReducedMotion: boo
               transition={{ duration: prefersReducedMotion ? 0.01 : 0.5 }}
               className="text-lg text-navy/70 leading-relaxed mb-8"
             >
-              Elle doit installer un cadre d'adoption responsable : pratique, transférable,
-              et suffisamment clair pour que chaque formateur sache quand l'IA aide vraiment.
+              La formation installe des repères simples : quand l'IA fait gagner du temps,
+              quand elle fragilise le support, quand il faut relire à deux fois.
             </motion.p>
 
             <motion.div
@@ -498,7 +497,7 @@ function ModulesSection({ prefersReducedMotion }: { prefersReducedMotion: boolea
           </div>
           <div className="lg:col-span-6 lg:flex lg:items-end">
             <p className="text-navy/60">
-              De l'identification des tâches délégables à la création de séquences complètes.
+              De la première consigne propre à la séquence complète.
               <br />
               Cadence recommandée : 3 mois. Adaptable selon les contraintes de votre équipe.
             </p>
@@ -661,11 +660,12 @@ function InclusionsSection({ prefersReducedMotion }: { prefersReducedMotion: boo
               </div>
 
               <p className="text-cream/70 mb-4">
-                L'IA évolue constamment. De nouveaux outils sortent chaque mois,
-                de plus en plus performants, de moins en moins chers.
+                Les outils bougent tout le temps. De nouveaux modèles arrivent, les tarifs
+                changent, les interfaces aussi.
               </p>
               <p className="text-cream/70 mb-4">
-                Une formation seule ne suffit pas. Il faut pouvoir rester à jour.
+                Une formation isolée vieillit vite. Il faut pouvoir poser une question,
+                comparer une pratique, vérifier qu'on n'a pas raté une option utile.
               </p>
               <p className="text-cream font-medium">
                 Avec l'accès à community.teachinspire.me, vous bénéficiez de :
@@ -683,7 +683,7 @@ function InclusionsSection({ prefersReducedMotion }: { prefersReducedMotion: boo
               <div className="pt-4 mt-4 border-t border-cream/10">
                 <p className="text-sm text-cream/60">
                   Chaque institut a son <strong className="text-cream">espace privé</strong> au sein de la communauté.
-                  L'espace général permet d'échanger plus largement avec tous les membres.
+                L'espace général permet de voir ce que les autres testent.
                 </p>
               </div>
             </div>
@@ -709,7 +709,7 @@ function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boole
               as="h2"
               className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight"
             >
-              Les types d'outils, pas les outils
+              Les familles d'outils avant les noms d'outils
             </KineticHeading>
           </div>
 
@@ -722,17 +722,17 @@ function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boole
           >
             <div className="bg-cream/50 p-8 lg:p-10 border border-navy/10">
               <p className="text-navy/70 mb-6">
-                L'IA évolue vite. Ce qui est le meilleur outil aujourd'hui
-                ne le sera peut-être plus dans 6 mois.
+                L'outil du moment peut changer dans six mois. Le besoin, lui, reste lisible :
+                générer, transcrire, chercher, produire un audio, vérifier une sortie.
               </p>
 
               <p className="text-navy font-medium mb-4">
-                C'est pourquoi on vous apprend à maîtriser chaque TYPE d'outil :
+                On travaille donc par familles :
               </p>
 
               <ul className="space-y-3 mb-6">
                 {[
-                  'Génération de texte (transformer, adapter, créer)',
+                  'Génération de texte (adapter, reformuler, créer)',
                   'Transcription automatique (audio/vidéo → texte)',
                   'Synthèse vocale (texte → audio naturel)',
                 ].map((item, idx) => (
@@ -747,11 +747,10 @@ function ApproachSection({ prefersReducedMotion }: { prefersReducedMotion: boole
 
               <div className="p-6 bg-yellow/10 border-l-2 border-yellow">
                 <p className="text-navy font-medium mb-2">
-                  Vous comprenez ce que chaque brique permet de faire.
+                  Vous savez quelle brique utiliser, et à quel moment.
                 </p>
                 <p className="text-navy/70 text-sm">
-                  Vous savez choisir le bon outil selon vos besoins du moment.
-                  Vous restez autonome, quel que soit l'outil qui domine demain.
+                  Le nom de l'outil peut changer. La logique de travail reste.
                 </p>
               </div>
             </div>
@@ -775,8 +774,8 @@ function FinancementSection({ prefersReducedMotion }: { prefersReducedMotion: bo
               Tarification
             </h2>
             <p className="text-navy-light leading-relaxed">
-              Le tarif dépend de la taille de votre équipe et de vos contraintes.
-              On en discute lors de l'appel découverte.
+              Le tarif dépend de la taille de votre équipe, du rythme souhaité
+              et du niveau d'accompagnement nécessaire.
             </p>
           </div>
 
@@ -796,9 +795,9 @@ function FinancementSection({ prefersReducedMotion }: { prefersReducedMotion: bo
               </div>
 
               <p className="text-navy/70 leading-relaxed mb-6">
-                À la fin, vos formateurs ne repartent pas avec une collection de prompts.
-                Ils repartent avec une méthode commune, des workflows réutilisables,
-                des critères de qualité partagés et une capacité à décider quand l'IA aide vraiment.
+                À la fin, vos formateurs repartent avec une méthode commune, des séquences
+                réutilisables, des critères partagés et une façon plus nette de décider
+                quand l'IA aide vraiment.
               </p>
 
               <div className="pt-6 border-t border-navy/10">
@@ -908,7 +907,7 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
           <p className="text-xl text-cream/70 mb-8">
             Réservez un appel découverte gratuit de 15 minutes.
             <br />
-            On évalue ensemble si c'est adapté à vos besoins.
+            On regarde ensemble si le format colle à votre équipe.
           </p>
 
           <Button variant="cta" size="lg" href={CALENDLY_URL} showArrow>
@@ -928,7 +927,7 @@ export function FormationPage() {
     <ScrollThreadContainer preset="formation">
       <PageMeta
         title="La Formation IA pour formateurs de langues | TeachInspire"
-        description="Un parcours de 3 mois pour installer une pratique IA commune dans votre institut. Gagnez du temps sans perdre le métier."
+        description="Un parcours de 3 mois pour aider vos formateurs à créer des cours avec l'IA, à partir de sources réelles et avec des critères pédagogiques clairs."
         path="/formation"
       />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />

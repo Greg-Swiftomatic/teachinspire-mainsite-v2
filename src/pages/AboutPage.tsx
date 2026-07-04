@@ -50,12 +50,12 @@ const timeline = [
   {
     year: '2022',
     title: "Découverte de l'IA générative",
-    description: "Début de l'exploration et des expérimentations",
+    description: "Premiers essais sur mes propres cours",
   },
   {
     year: '2023',
     title: 'Expérience aux États-Unis',
-    description: "Intégration d'une équipe utilisant l'IA pour automatiser la création de contenu à partir de podcasts",
+    description: "Travail avec une équipe qui créait du contenu à partir de podcasts",
   },
   {
     year: '2024',
@@ -79,21 +79,21 @@ const philosophyPoints = [
   },
   {
     number: '02',
-    title: "Maîtriser les types d'outils, pas un outil en particulier",
+    title: "Comprendre les familles d'outils",
     description:
-      "L'IA évolue vite. Très vite. On vous apprend à comprendre chaque brique (génération de texte, transcription, synthèse vocale) pour que vous puissiez vous adapter, quel que soit l'outil du moment.",
+      "Texte, transcription, synthèse vocale : quand on comprend la brique, on change d'outil plus facilement.",
   },
   {
     number: '03',
-    title: "Ne pas rester prisonnier d'une seule solution",
+    title: "Garder sa liberté de choix",
     description:
-      "Si demain un meilleur outil sort, vous aurez les compétences pour l'évaluer et l'adopter. C'est ça, l'autonomie.",
+      "Si un meilleur outil sort demain, vous savez quoi tester, quoi vérifier et quoi ignorer.",
   },
   {
     number: '04',
     title: 'Rester à jour grâce à la communauté',
     description:
-      "Dans un domaine qui évolue aussi vite, on ne peut pas apprendre une fois et s'arrêter là. La communauté permet de faire une veille ensemble, de partager ce qui fonctionne, d'échanger sur nos expérimentations.",
+      "Les outils changent trop vite pour rester seul dans son coin. La communauté sert à comparer les essais et à faire le tri.",
   },
 ];
 
@@ -138,8 +138,8 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                 variants={fadeInUp}
                 className="mb-6 max-w-4xl text-4xl font-display font-semibold leading-[1.1] tracking-tight text-navy sm:text-5xl lg:text-6xl"
               >
-                L'IA ne doit pas{' '}
-                <span className="text-rust">faire oublier le métier</span>
+                Garder le métier au centre,
+                <span className="text-rust"> même avec l'IA</span>
               </motion.h1>
 
               {/* Subheadline */}
@@ -147,8 +147,9 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
                 variants={fadeInUp}
                 className="text-xl text-navy/70 max-w-2xl leading-relaxed"
               >
-                Avant de former à l'IA, j'ai été formateur de langues. C'est ce qui change tout :
-                je sais ce qu'un outil peut accélérer, et ce qu'il ne doit pas décider à la place du formateur.
+                Avant de former des équipes à l'IA, j'ai passé des années à préparer
+                des cours pour des apprenants très différents. Ça rend assez méfiant
+                devant les solutions trop propres.
               </motion.p>
             </div>
 
@@ -231,7 +232,7 @@ function WhoAmISection({ prefersReducedMotion }: { prefersReducedMotion: boolean
               8 étudiants avec des besoins complètement différents.
               Des profils techniques, des secteurs que je ne maîtrisais pas,
               des contextes culturels variés, un temps limité pour atteindre leurs objectifs.
-              <strong className="text-navy"> Impossible de tout personnaliser. Retour aux manuels standards.</strong>
+              <strong className="text-navy"> À un moment, on revient aux manuels standards. Même quand on sait que ce n'est pas idéal.</strong>
             </motion.p>
 
             <motion.div
@@ -246,7 +247,7 @@ function WhoAmISection({ prefersReducedMotion }: { prefersReducedMotion: boolean
             </motion.div>
 
             <motion.p variants={fadeInUp} className="text-navy font-medium">
-              Comme tant d'autres enseignants, j'ai fini par accepter ce compromis qualité-temps.
+              J'ai accepté ce compromis plus longtemps que je n'aurais voulu.
             </motion.p>
           </motion.div>
         </div>
@@ -299,13 +300,13 @@ function DeclicSection({ prefersReducedMotion }: { prefersReducedMotion: boolean
             <div className="bg-white p-8 lg:p-10 border border-navy/10">
               <p className="text-navy/70 mb-6 leading-relaxed">
                 Novembre 2022. ChatGPT sort. Un ami m'envoie une vidéo.
-                <strong className="text-navy"> Le potentiel est évident.</strong>
+                <strong className="text-navy"> Je vois tout de suite ce que ça peut changer dans la préparation.</strong>
               </p>
 
               <p className="text-navy/70 mb-6 leading-relaxed">
-                Je vois immédiatement ce que l'IA générative peut apporter :
-                transcrire une vidéo, extraire du vocabulaire, adapter un texte,
-                créer des dialogues, produire des variantes d'exercices.
+                Transcrire une vidéo, extraire du vocabulaire, adapter un texte,
+                créer des dialogues, produire des variantes d'exercices : toutes ces
+                petites tâches qui grignotent une soirée entière.
               </p>
 
               <div className="p-6 bg-yellow/10 border-l-2 border-yellow mb-6">
@@ -317,10 +318,10 @@ function DeclicSection({ prefersReducedMotion }: { prefersReducedMotion: boolean
               </div>
 
               <p className="text-navy/70 leading-relaxed">
-                TeachInspire est né de cette frontière : utiliser l'IA pour réduire
-                l'effort périphérique, sans déléguer le jugement pédagogique.
-                C'est aussi ce qui m'a permis de retrouver le plaisir de créer
-                des leçons personnalisées pour des contextes très spécifiques.
+                TeachInspire vient de là : réduire le travail autour du cours,
+                tout en gardant la décision pédagogique dans les mains du formateur.
+                Et, franchement, retrouver le plaisir de créer des leçons pour des
+                contextes très précis.
               </p>
             </div>
           </motion.div>
@@ -354,24 +355,24 @@ function TeachInspireBirthSection({ prefersReducedMotion }: { prefersReducedMoti
             className="lg:col-span-8 space-y-6"
           >
             <p className="text-navy/70 leading-relaxed">
-              En partageant mes découvertes, des collègues enseignants
-              me demandent conseil. L'idée de structurer ces connaissances s'impose.
+              En partageant mes essais, des collègues enseignants commencent à me
+              demander comment faire pareil. Les mêmes questions reviennent.
             </p>
 
             <p className="text-navy font-medium">
-              D'abord une formation. Puis une communauté. Puis des outils.
+              D'abord une formation. Puis une communauté. Puis quelques outils maison.
             </p>
 
             <p className="text-navy/70 leading-relaxed">
-              Ce qui n'était qu'une démarche personnelle pour surmonter
-              mes propres contraintes s'est transformé en projet plus large.
+              Ce qui était au départ une manière de tenir mes propres cours
+              a pris plus de place.
             </p>
 
             <div className="p-6 bg-sage/10 border-l-2 border-sage">
               <p className="text-navy">
                 <strong>L'objectif reste simple :</strong> aider les formateurs à gagner
-                du temps sans perdre le métier : objectifs clairs, supports contrôlés,
-                adaptation fine et autonomie face aux outils qui changent.
+                du temps avec des objectifs clairs, des supports relus et une vraie
+                liberté face aux outils qui changent.
               </p>
             </div>
           </motion.div>
@@ -441,7 +442,7 @@ function PhilosophySection({ prefersReducedMotion }: { prefersReducedMotion: boo
         <div className="grid lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-6">
             <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-              Ce qu'on croit
+              Mes garde-fous
             </h2>
           </div>
         </div>
@@ -507,7 +508,7 @@ function CTASection({ prefersReducedMotion }: { prefersReducedMotion: boolean })
           </KineticHeading>
 
           <p className="text-xl text-cream/70 mb-8">
-            Réservez un appel découverte de 45 minutes. Sans engagement.
+            Réservez un appel découverte de 45 minutes. On verra vite si je peux vous aider.
           </p>
 
           <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
@@ -527,7 +528,7 @@ export function AboutPage() {
     <ScrollThreadContainer preset="about">
       <PageMeta
         title="À propos de Gregory — TeachInspire"
-        description="TeachInspire est né d'une conviction : l'IA peut accélérer la conception pédagogique sans remplacer le jugement du formateur."
+        description="TeachInspire est né d'une pratique de terrain : utiliser l'IA pour préparer plus vite, tout en gardant le jugement pédagogique côté formateur."
         path="/a-propos"
       />
       <HeroSection prefersReducedMotion={prefersReducedMotion} />

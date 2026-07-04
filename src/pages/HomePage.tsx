@@ -118,8 +118,8 @@ export function HomePage() {
   return (
     <ScrollThreadContainer preset="homepage">
       <PageMeta
-        title="TeachInspire — L'IA comme assistant, pas comme remplaçant"
-        description="Formation IA pour instituts de langues. Gagnez du temps sans perdre le métier : méthode transférable, qualité pédagogique, autonomie d'équipe."
+        title="TeachInspire — IA pour formateurs de langues"
+        description="Formation IA pour instituts de langues. Vos formateurs apprennent à créer des cours à partir de sources réelles, avec une méthode commune et des critères pédagogiques clairs."
         path="/"
       />
       <Hero />

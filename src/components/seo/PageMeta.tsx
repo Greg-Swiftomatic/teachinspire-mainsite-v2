@@ -6,6 +6,7 @@
 
 const BASE_URL = 'https://teachinspire.me';
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
+const DEFAULT_IMAGE_ALT = 'TeachInspire — Gagner du temps sans perdre le métier';
 
 interface PageMetaProps {
   title: string;
@@ -14,6 +15,8 @@ interface PageMetaProps {
   path: string;
   /** Overrides the OG/Twitter image. Defaults to /og-image.png */
   image?: string;
+  /** Accessible description for social preview images */
+  imageAlt?: string;
   /** noindex pages (e.g. legal) — defaults to false */
   noindex?: boolean;
 }
@@ -23,6 +26,7 @@ export function PageMeta({
   description,
   path,
   image = DEFAULT_IMAGE,
+  imageAlt = DEFAULT_IMAGE_ALT,
   noindex = false,
 }: PageMetaProps) {
   const canonicalUrl = `${BASE_URL}${path}`;
@@ -42,6 +46,8 @@ export function PageMeta({
       <meta property="og:image" content={image} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:alt" content={imageAlt} />
       <meta property="og:locale" content="fr_FR" />
       <meta property="og:site_name" content="TeachInspire" />
 
@@ -50,6 +56,7 @@ export function PageMeta({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <meta name="twitter:image:alt" content={imageAlt} />
     </>
   );
 }

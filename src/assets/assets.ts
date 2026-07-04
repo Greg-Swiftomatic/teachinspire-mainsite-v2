@@ -47,7 +47,7 @@ export const ILLUSTRATIONS = {
   resultsThreeWins: "https://placehold.co/500x200/85a2a3/ffffff?text=Results",
 
   // About page
-  portraitGregory: "https://placehold.co/300x400/85a2a3/ffffff?text=Gregory",
+  portraitGregory: "/greg-le-dall.webp",
   timelineMilestones: "https://placehold.co/700x180/f1d263/2c3d57?text=Timeline",
 
   // Contact page

@@ -11,19 +11,19 @@ const pillars = [
     number: '01',
     title: "Penser avant d'utiliser",
     description:
-      "Une approche structurée pour évaluer, choisir et adapter les outils IA à chaque contexte d'enseignement.",
+      "Un cadre simple pour choisir ce qu'on confie à l'outil, et ce qu'on garde côté formateur.",
   },
   {
     number: '02',
     title: 'Gratuit ou presque',
     description:
-      'Google AI Studio, transcription en 30 secondes, synthèse vocale pro — des outils puissants à 0€/mois.',
+      'Google AI Studio, transcription rapide, synthèse vocale : de quoi tester sérieusement sans multiplier les abonnements.',
   },
   {
     number: '03',
-    title: 'Pas de dépendance',
+    title: "Autonomie d'outil en outil",
     description:
-      "Vos formateurs apprennent à s'adapter, pas à suivre un mode d'emploi qui sera obsolète dans 6 mois.",
+      "Vos formateurs gardent leurs repères, même quand l'interface change ou qu'un meilleur modèle arrive.",
   },
 ];
 
@@ -57,7 +57,7 @@ export function Approach() {
               as="h2"
               className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-navy leading-tight"
             >
-              On n'enseigne pas un outil.
+              D'abord la méthode.
             </KineticHeading>
             <KineticHeading
               variant="assemble"
@@ -65,7 +65,7 @@ export function Approach() {
               className="block text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-rust leading-tight mt-2"
               delay={0.3}
             >
-              On enseigne à penser l'IA.
+              Ensuite l'outil.
             </KineticHeading>
           </div>
 
@@ -78,13 +78,13 @@ export function Approach() {
               className="space-y-6"
             >
               <p className="text-lg text-navy-light leading-relaxed">
-                La plupart des formations IA vous apprennent à utiliser ChatGPT.
-                Problème : quand ChatGPT change (ou qu'un meilleur outil arrive),
-                vous repartez de zéro.
+                Beaucoup de formations IA restent collées à ChatGPT. Quand l'interface
+                change, ou quand un meilleur outil arrive, l'équipe perd ses repères.
               </p>
               <p className="text-xl text-navy font-medium">
-                TeachInspire enseigne une <span className="text-sage">méthode transférable</span>.
-                Vos formateurs deviennent autonomes — pas utilisateurs captifs.
+                TeachInspire installe un <span className="text-sage">cadre de travail</span> :
+                analyser la source, formuler les contraintes, vérifier le résultat,
+                puis adapter pour les apprenants.
               </p>
             </motion.div>
           </div>
@@ -100,8 +100,7 @@ export function Approach() {
         >
           <div className="max-w-3xl mx-auto text-center">
             <p className="text-2xl lg:text-3xl font-display font-bold leading-relaxed">
-              L'IA comme <span className="text-yellow">assistant</span>, pas comme{' '}
-              <span className="text-cream/50 line-through">remplaçant</span>.
+              L'assistant prépare. <span className="text-yellow">Le formateur tranche.</span>
             </p>
           </div>
         </motion.div>

@@ -139,7 +139,7 @@ export function Hero() {
                       transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
                       className="block text-navy"
                     >
-                      Formez vos équipes à utiliser l'IA sans perdre
+                      Formez vos équipes à créer des cours IA
                     </motion.span>
                     {stage >= 4 && (
                       <motion.span
@@ -148,14 +148,14 @@ export function Hero() {
                         transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
                         className="mt-1 block text-rust"
                       >
-                        leur expertise pédagogique
+                        à partir de sources réelles
                       </motion.span>
                     )}
                   </h1>
                 )}
                 {stage < 3 && (
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy/0 leading-[1.1]" aria-hidden="true">
-                    Formez vos équipes à utiliser l'IA sans perdre leur expertise pédagogique
+                    Formez vos équipes à créer des cours IA à partir de sources réelles
                   </h1>
                 )}
               </div>
@@ -171,7 +171,7 @@ export function Hero() {
               transition={SUB.spring}
               className="text-xl text-navy-light mt-8 max-w-xl leading-relaxed"
             >
-              TeachInspire aide les instituts de langues à transformer n'importe quelle source en cours sur-mesure, avec une méthode qui protège le jugement du formateur, la qualité des supports et l'autonomie de l'équipe.
+              À partir d'un podcast, d'un article ou d'un document métier, vos formateurs apprennent à produire une séquence exploitable, relue et adaptée avant la classe.
             </motion.p>
 
             <motion.p
@@ -183,7 +183,7 @@ export function Hero() {
               transition={{ ...SUB.spring, delay: 0.05 }}
               className="mt-4 text-lg font-display font-semibold text-rust"
             >
-              Gagner du temps sans perdre le métier.
+              Le gain de temps reste sous contrôle pédagogique.
             </motion.p>
 
             {/* CTAs */}
@@ -197,7 +197,7 @@ export function Hero() {
                 transition={{ ...CTAS.spring, delay: 0 }}
               >
                 <Button variant="primary" size="lg" href="https://cal.com/teachinspire.me" showArrow>
-                  Structurer l'usage IA de mon équipe
+                  Cadrer l'usage IA de mon équipe
                 </Button>
               </motion.div>
               <motion.div
