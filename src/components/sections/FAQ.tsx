@@ -16,7 +16,7 @@ const faqs = [
     id: 'faq-1',
     question: 'Ça va coûter cher en abonnements ?',
     answer:
-      "L'objectif est justement d'éviter la pile d'abonnements. On travaille surtout avec Google AI Studio, gratuit aujourd'hui, y compris pour une partie des usages audio.",
+      "Non. La formation s'appuie sur des outils gratuits comme Google AI Studio, et l'accès au TeachInspire Studio — nos ateliers maison pour les prompts, l'audio et les documents — est compris dedans. Rien à empiler.",
   },
   {
     id: 'faq-2',

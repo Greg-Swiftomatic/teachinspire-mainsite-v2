@@ -51,7 +51,7 @@ const modules = [
       'Choisir le modèle selon la tâche, le risque et le niveau attendu',
     ],
     deliverable: 'Un prompt réutilisable, accompagné d’une grille de contrôle pédagogique',
-    bonus: 'App "Prompt Builder" — Structurez vos prompts en quelques clics',
+    bonus: "Promptomatik, l'atelier prompts du TeachInspire Studio — vos prompts structurés en quelques clics",
   },
   {
     number: '03',
@@ -100,10 +100,12 @@ const inclusions = [
     ],
   },
   {
-    title: 'Outils maison',
+    title: 'TeachInspire Studio',
     items: [
-      'Prompt Builder Pro (accès à vie)',
-      'Mises à jour automatiques incluses',
+      'Prompts (Promptomatik) : votre besoin décrit, un prompt structuré en sortie',
+      'Audio : des écoutes sur mesure, 60 minutes incluses chaque mois',
+      'Documents : trois supports imprimables avec corrigés, à partir de vos contenus',
+      'Accès 1 an, mises à jour comprises — crédits audio supplémentaires à tarif préférentiel',
     ],
   },
   {

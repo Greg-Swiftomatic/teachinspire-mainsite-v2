@@ -65,10 +65,11 @@ const resources = [
   },
   {
     icon: Zap,
-    title: 'Outils maison',
+    title: 'TeachInspire Studio',
     items: [
-      'Prompt Builder Pro (accès à vie)',
-      'Mises à jour automatiques incluses',
+      'Prompts (Promptomatik), Audio et Documents : trois ateliers maison',
+      "Accès 1 an — 60 minutes d'audio incluses chaque mois",
+      'Crédits supplémentaires à tarif préférentiel',
     ],
   },
   {
@@ -113,7 +114,7 @@ const pricingTiers = [
     features: [
       'Formation de votre équipe',
       '6 à 8 webinaires en groupe unique',
-      'Outils maison (accès à vie)',
+      'TeachInspire Studio pendant 1 an (prompts, audio, documents)',
       'Accès communauté 1 an',
     ],
     highlighted: false,
