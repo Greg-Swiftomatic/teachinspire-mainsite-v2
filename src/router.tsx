@@ -17,6 +17,11 @@ const OffrePage = lazy(async () => {
   return { default: mod.OffrePage };
 });
 
+const StudioPage = lazy(async () => {
+  const mod = await import('./pages/StudioPage');
+  return { default: mod.StudioPage };
+});
+
 const AboutPage = lazy(async () => {
   const mod = await import('./pages/AboutPage');
   return { default: mod.AboutPage };
@@ -74,6 +79,10 @@ export const router = createBrowserRouter([
         // Hidden page — not in navigation, accessible only via direct URL
         path: 'offre',
         element: withSuspense(<OffrePage />),
+      },
+      {
+        path: 'studio',
+        element: withSuspense(<StudioPage />),
       },
       {
         path: 'a-propos',

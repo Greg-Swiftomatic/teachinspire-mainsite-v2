@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 const navLinks = [
   { label: 'Accueil', href: '/' },
   { label: 'Formation', href: '/formation' },
+  { label: 'Studio', href: '/studio' },
   { label: 'À propos', href: '/a-propos' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -35,6 +36,9 @@ export function Header() {
                 {link.label}
               </a>
             ))}
+            <Button variant="secondary" size="sm" href="https://studio.teachinspire.me">
+              Se connecter
+            </Button>
             <Button
               variant="primary"
               size="sm"
@@ -83,11 +87,19 @@ export function Header() {
                   </a>
                 ))}
                 <Button
+                  variant="secondary"
+                  size="md"
+                  href="https://studio.teachinspire.me"
+                  className="mt-4"
+                >
+                  Se connecter
+                </Button>
+                <Button
                   variant="primary"
                   size="md"
                   href="https://cal.com/teachinspire.me"
                   showArrow
-                  className="mt-4"
+                  className="mt-2"
                 >
                   Réserver un appel
                 </Button>

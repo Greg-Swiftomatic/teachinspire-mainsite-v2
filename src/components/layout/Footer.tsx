@@ -6,6 +6,7 @@ const footerLinks = {
   navigation: [
     { label: 'Accueil', href: '/' },
     { label: 'Formation', href: '/formation' },
+    { label: 'Studio', href: '/studio' },
     { label: 'À propos', href: '/a-propos' },
     { label: 'Contact', href: '/contact' },
   ],
