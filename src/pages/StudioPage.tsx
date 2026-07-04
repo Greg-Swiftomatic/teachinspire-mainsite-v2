@@ -44,15 +44,16 @@ const ateliers = [
 
 const offers = [
   {
-    name: 'Découverte',
+    name: 'Promptomatik',
     price: 'Gratuit',
-    subtitle: 'Sans carte bancaire',
+    subtitle: "Notre outil phare, ouvert à tous — l'atelier prompts",
     features: [
-      'Promptomatik : 5 générations par jour',
-      '3 prompts sauvegardés',
-      'Modèles officiels consultables',
+      'Décrivez votre besoin, repartez avec un prompt structuré',
+      '5 générations par jour, 3 prompts sauvegardés',
+      'Sans carte bancaire, prêt en deux minutes',
+      'Audio et Documents restent réservés à la formation',
     ],
-    cta: { label: 'Créer un compte gratuit', href: SIGNUP_URL },
+    cta: { label: 'Essayer Promptomatik', href: SIGNUP_URL },
     highlighted: false,
   },
   {
@@ -152,7 +153,7 @@ export function StudioPage() {
               </motion.p>
               <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
                 <Button variant="primary" size="lg" href={SIGNUP_URL} showArrow>
-                  Créer un compte gratuit
+                  Essayer Promptomatik gratuitement
                 </Button>
                 <Button variant="secondary" size="lg" href={STUDIO_URL}>
                   Se connecter
