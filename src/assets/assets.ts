@@ -3,6 +3,7 @@ export const CLOUDINARY_BASE = "https://res.cloudinary.com/ducvoebot";
 
 // Logo (already hosted)
 export const LOGO = `${CLOUDINARY_BASE}/image/upload/v1747991665/Teachinspire_logo_transparent_yjt3uf.png`;
+export const SITE_LOGO = '/images/brand/teachinspire-logo.webp';
 
 // Hero video — Cloudinary Video Player embed
 const VIDEO_CLOUD = "dsps9ydcp";

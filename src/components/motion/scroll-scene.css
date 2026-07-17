@@ -1,0 +1,150 @@
+.ti-scroll-scene {
+  --scroll-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ti-scroll-progress {
+  display: none;
+}
+
+.ti-scroll-scene :where(section[id], [id].mp-studio-panel) {
+  scroll-margin-top: 96px;
+}
+
+.mp-home-section :where(
+  .mp-transform-cta,
+  .mp-studio-panel-heading > a,
+  .mp-tool-card > a,
+  .mp-offer-grid article > a,
+  .mp-link-cta,
+  .mp-primary
+) {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    scale 140ms ease;
+}
+
+.mp-home-section :where(
+  .mp-transform-cta,
+  .mp-studio-panel-heading > a,
+  .mp-tool-card > a,
+  .mp-offer-grid article > a,
+  .mp-link-cta,
+  .mp-primary
+) > span:last-child {
+  transition: transform 220ms var(--scroll-ease);
+}
+
+.mp-home-section :where(
+  .mp-transform-cta,
+  .mp-studio-panel-heading > a,
+  .mp-tool-card > a,
+  .mp-offer-grid article > a,
+  .mp-link-cta,
+  .mp-primary
+):active {
+  scale: 0.99;
+}
+
+@media (hover: hover) {
+  .mp-home-section :where(
+    .mp-transform-cta,
+    .mp-studio-panel-heading > a,
+    .mp-tool-card > a,
+    .mp-offer-grid article > a,
+    .mp-link-cta,
+    .mp-primary
+  ):hover > span:last-child {
+    transform: translateX(5px);
+  }
+}
+
+.is-scroll-ready :where([data-scroll-reveal], [data-scroll-item]) {
+  --scroll-x: 0px;
+  --scroll-y: 24px;
+  --scroll-scale: 1;
+  opacity: 0;
+  translate: var(--scroll-x) var(--scroll-y);
+  scale: var(--scroll-scale);
+  transition:
+    opacity 640ms var(--scroll-ease),
+    translate 720ms var(--scroll-ease),
+    scale 720ms var(--scroll-ease);
+  transition-delay: var(--scroll-delay, 0ms);
+  will-change: opacity, translate;
+}
+
+.is-scroll-ready [data-scroll-reveal='left'] {
+  --scroll-x: -30px;
+  --scroll-y: 0px;
+}
+
+.is-scroll-ready [data-scroll-reveal='right'] {
+  --scroll-x: 30px;
+  --scroll-y: 0px;
+}
+
+.is-scroll-ready [data-scroll-reveal='scale'] {
+  --scroll-y: 14px;
+  --scroll-scale: 0.975;
+}
+
+.is-scroll-ready :where([data-scroll-reveal], [data-scroll-item]).is-scroll-visible {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  will-change: auto;
+}
+
+@supports (animation-timeline: scroll()) {
+  .ti-scroll-progress {
+    position: fixed;
+    top: 79px;
+    right: 0;
+    left: 0;
+    z-index: 60;
+    display: block;
+    height: 2px;
+    pointer-events: none;
+    background: var(--ti-rust);
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: ti-scroll-progress linear both;
+    animation-timeline: scroll();
+  }
+}
+
+@keyframes ti-scroll-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .is-scroll-ready :where([data-scroll-reveal], [data-scroll-item]) {
+    --scroll-x: 0px;
+    --scroll-y: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ti-scroll-progress {
+    display: none;
+  }
+
+  .ti-scroll-scene :where([data-scroll-reveal], [data-scroll-item]) {
+    opacity: 1;
+    translate: none;
+    scale: 1;
+    transition: none;
+  }
+}
+
+@media print {
+  .ti-scroll-scene :where([data-scroll-reveal], [data-scroll-item]) {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: 1 !important;
+  }
+}

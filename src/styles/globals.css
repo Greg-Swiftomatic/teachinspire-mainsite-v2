@@ -3,12 +3,31 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --ti-navy: #2c3d57;
+    --ti-ink: #24344d;
+    --ti-cream: #f4f3f0;
+    --ti-paper: #f8f7f2;
+    --ti-sage: #85a2a3;
+    --ti-sage-ink: #526b6c;
+    --ti-yellow: #f1d263;
+    --ti-rust: #b7553d;
+    --ti-sand: #e9dfc6;
+    --ti-line: rgb(44 61 87 / 18%);
+    --ti-shadow: 0 18px 36px rgb(44 61 87 / 12%);
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
     @apply bg-cream text-navy font-sans antialiased;
+  }
+
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 3px solid var(--ti-yellow);
+    outline-offset: 4px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -41,6 +60,28 @@
 }
 
 @layer utilities {
+  .editorial-underline::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    right: -0.05em;
+    bottom: 0.02em;
+    left: -0.05em;
+    height: 0.06em;
+    min-height: 3px;
+    transform: rotate(-1.5deg);
+    transform-origin: left center;
+  }
+
+  .editorial-underline-rust::after {
+    background: #b7553d;
+  }
+
+  .editorial-underline-sage::after {
+    background: #728878;
+    box-shadow: 0 0.08em 0 rgb(114 136 120 / 55%);
+  }
+
   /* Animated number counter utility */
   .animate-counter {
     animation: counter 2s ease-out forwards;
@@ -49,5 +90,11 @@
   /* Tabular nums for metric displays */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

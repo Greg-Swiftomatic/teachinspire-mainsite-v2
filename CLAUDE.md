@@ -29,47 +29,44 @@
 
 ## Design Philosophy
 
-### Swiss Editorial Aesthetic
+### Editorial Collage Aesthetic
 
-The design follows a **sophisticated, authoritative editorial aesthetic** inspired by:
-- High-end business magazines
-- Swiss International Typographic Style
-- Clean, confident typography hierarchy
+The canonical direction is the **July 2026 TeachInspire reference charter**: a calm, precise editorial collage system that makes the pedagogical transformation visible. Swiss editorial structure still informs the grid and typography, but documentary fragments, paper material, arrows, and occasional handwritten annotations are now intentional brand elements.
 
 **Design Principles:**
-- Sharp corners (no rounded-xl cards)
-- 12-column grid system with subtle overlay
-- Asymmetric layouts
-- Large decorative numbers (01, 02, 03...)
-- Section labels with horizontal rules
-- Generous whitespace
-- Professional, not playful
+- Show a legible `source → method → result` transformation in every major visual
+- Keep 60–70% of the composition calm or empty, with one dominant movement
+- Use real-looking documentary fragments, simplified interfaces, and modular CSS/SVG objects
+- Reserve golden yellow for one focal decision, validation, or primary CTA
+- Use Fraunces and DM Sans for the interface; handwritten type is limited to short collage annotations
+- Prefer sharp or subtly softened corners, light printed shadows, asymmetric layouts, and clear editorial numbering
 
 **NOT this style:**
-- ❌ Hand-drawn / doodle illustrations
-- ❌ Playful / childish aesthetics
-- ❌ Rounded corners everywhere
-- ❌ Handwritten fonts (Caveat removed)
+- ❌ Futuristic AI imagery, robots, holograms, glowing brains, or generic gradients
+- ❌ Decorative scrapbooking where paper and texture do not explain a transformation
+- ❌ Cold interchangeable SaaS dashboards or repeated generic card grids
+- ❌ Childish classroom imagery, caricatures, or playful doodles
+- ❌ Front-facing generated portraits or corporate stock photography
 
 ---
 
 ## Design Context
 
 ### Users
-TeachInspire serves B2B decision-makers in language education: institute directors, training managers, and language school owners who need to help teaching teams adopt generative AI without lowering pedagogical standards. Secondary users include independent FLE, English, and Spanish trainers evaluating whether the method fits their own preparation workflow. Their job is to understand the offer quickly, trust the pedagogical framing, and book a discovery call when the approach feels credible.
+TeachInspire primarily serves B2B decision-makers in language education: institute directors, pedagogical managers, and language-school owners responsible for helping teaching teams adopt generative AI without lowering pedagogical standards. They often scan the site between operational tasks and need to understand the offer, its institutional value, and its safeguards quickly enough to decide whether to book a discovery call. Independent FLE, English, and Spanish trainers are a secondary audience evaluating whether the individual pathway and Studio fit their own preparation workflow.
 
 ### Brand Personality
-The brand should feel authoritative, clear, and human. It should evoke confidence, calm control, and professional momentum rather than hype or urgency. The core emotional promise is: AI adoption can be practical and efficient without sacrificing teacher expertise, learner adaptation, or pedagogical judgment.
+Editorial, documentary, precise. The experience should evoke confidence, calm control, and professional momentum rather than hype, technological anxiety, or artificial urgency. TeachInspire should feel independent of short-lived tools: the teacher remains visibly responsible for selecting, structuring, verifying, and using the result.
 
 ### Aesthetic Direction
-The visual direction is Swiss editorial: sharp, typography-led, asymmetric, structured, and premium. Use Fraunces for confident editorial hierarchy and DM Sans for clear UI/body text. The palette is warm but restrained: navy, cream, sage, yellow, and rust. References include high-end business magazines, Swiss International Typographic Style, and the warm editorial restraint noted in the Anthropic-inspired design brief. Anti-references: playful classroom visuals, doodles, generic AI SaaS gradients, rounded card-heavy layouts, purple tech clichés, glassmorphism, and overproduced tool-dashboard aesthetics.
+The approved direction is a light, magazine-like digital editorial collage inspired by contemporary visual journalism, Vox, Medium editorial illustration, and New York Times visual storytelling, with the modular clarity of Notion and Linear. Use Fraunces for campaign headlines, quotations, and editorial numbers; use DM Sans for navigation, body copy, labels, buttons, and interfaces. The core palette is off-white `#F8F7F2`, deep navy `#2C3D57`, sage `#85A2A3`, ink `#24344D`, and a maximum 5% golden yellow `#F1D263`; rust may appear sparingly in editorial emphasis and short annotations. The default experience is light with deliberate navy contrast sections, not a separate dark-mode theme. Paper, tape, grids, arrows, and handwritten annotations are welcome only when they make `source → selection → method → decision → result` easier to understand. Anti-references are futuristic AI imagery, cold SaaS dashboards, decorative scrapbooking, generic card grids, childish school imagery, glassmorphism, corporate stock photography, and visible faces.
 
 ### Design Principles
-1. Lead with judgment, not tooling: every section should reinforce that AI assists the formateur but does not replace pedagogical decision-making.
-2. Preserve editorial restraint: sharp corners, deliberate asymmetry, generous whitespace, strong type hierarchy, and section labels with rules.
-3. Make proof concrete: keep “source → cours”, “3h → 30 min”, modules, pricing, and outcomes visible, but frame them with quality guardrails.
-4. Keep the interface trustworthy: prioritize readable contrast, accessible navigation, visible focus states, reduced-motion support, and no hidden critical actions on mobile.
-5. Avoid AI slop: no generic card grids, gratuitous gradients, decorative glass, playful illustrations, or hype language.
+1. **Make transformation visible.** Every major illustration must identify the source, show the organising method, and end in a usable pedagogical result; collage material never exists as decoration alone.
+2. **Balance density with calm.** Preserve 60–70% breathing room, alternate quiet editorial sections with denser documentary moments, and allow only one clear movement and one yellow focal point per composition.
+3. **Keep the system modular and reproducible.** Build cards, documents, labels, and lesson packs in HTML/CSS; use SVG for arrows, connectors, and annotations; reserve image assets for genuine paper or print texture.
+4. **Keep pedagogical judgment central.** The interface should communicate that AI assists while the formateur selects, verifies, and decides. Concrete proof such as `3h → 30 min`, real sources, outputs, pricing, and institutional capital should remain easy to scan.
+5. **Earn trust through usability.** Maintain WCAG AA contrast for meaningful text, 44px touch targets, complete mobile navigation, visible focus states, semantic structure, reduced-motion support, functional CTAs, and readable diagrams without microtext.
 
 ---
 

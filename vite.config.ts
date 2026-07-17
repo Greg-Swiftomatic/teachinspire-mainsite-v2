@@ -7,11 +7,21 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          react: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
-          gsap: ['gsap', '@gsap/react'],
-          icons: ['lucide-react'],
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return undefined
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('/react-router')
+          ) return 'react'
+          if (
+            id.includes('/framer-motion/') ||
+            id.includes('/motion-dom/') ||
+            id.includes('/motion-utils/')
+          ) return 'motion'
+          if (id.includes('/gsap/') || id.includes('/@gsap/')) return 'gsap'
+          if (id.includes('/lucide-react/')) return 'icons'
+          return undefined
         },
       },
     },

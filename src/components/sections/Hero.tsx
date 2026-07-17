@@ -1,284 +1,205 @@
-/* ─────────────────────────────────────────────────────────
- * ANIMATION STORYBOARD — Homepage Hero
- *
- * Read top-to-bottom. Each `at` value is ms after mount.
- *
- *    0ms   Grid overlay visible (static)
- *  120ms   Category label slides from left
- *  180ms   Decorative "01" materializes
- *  240ms   Headline fades in with restrained editorial motion
- *  460ms   Rust accent line fades in
- *  620ms   Subheadline fades up
- *  780ms   CTA buttons slide up (staggered 100ms)
- *  920ms   Video player enters from right
- * ───────────────────────────────────────────────────────── */
-
-import { useRef, useState, useEffect } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Play, X } from 'lucide-react';
+import { HERO_VIDEO_EMBED } from '../../assets/assets';
+import { EditorialHighlight } from '../hero/EditorialHighlight';
+import { HeroProofStrip } from '../hero/HeroProofStrip';
+import { SourceFlowCollage } from '../hero/SourceFlowCollage';
 import { Container } from '../layout/Container';
 import { Button } from '../ui/Button';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { GridOverlay } from '../ui/GridOverlay';
-import { HERO_VIDEO_EMBED, HERO_VIDEO_POSTER } from '../../assets/assets';
 
-/* ── Timing ─────────────────────────────────────────────── */
-const TIMING = {
-  grid:       0,      // squares background immediate
-  label:      120,    // category label slides in
-  number:     180,    // decorative "01" fades
-  headline:   240,    // headline begins
-  accent:     460,    // rust accent headline
-  sub:        620,    // subheadline fades up
-  ctas:       780,    // buttons slide up
-  card:       920,    // info card enters
-};
-
-/* ── Element Configs ────────────────────────────────────── */
-const LABEL = {
-  offsetX: -20,       // px slide from left
-  spring: { type: 'spring' as const, stiffness: 300, damping: 30 },
-};
-
-const NUMBER = {
-  initialOpacity: 0,
-  finalOpacity: 1,
-  spring: { type: 'spring' as const, stiffness: 200, damping: 25 },
-};
-
-const SUB = {
-  offsetY: 15,        // px slide up from
-  spring: { type: 'spring' as const, stiffness: 300, damping: 30 },
-};
-
-const CTAS = {
-  offsetY: 20,        // px slide up from
-  stagger: 0.1,       // seconds between buttons
-  spring: { type: 'spring' as const, stiffness: 350, damping: 28 },
-};
-
-const VIDEO = {
-  offsetX: 40,        // px slide from right
-  spring: { type: 'spring' as const, stiffness: 250, damping: 28 },
-};
-
-const EASE_OUT = [0.16, 1, 0.3, 1] as const;
-
-/* ── Component ──────────────────────────────────────────── */
 export function Hero() {
-  const prefersReducedMotion = useReducedMotion();
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [stage, setStage] = useState(() => (prefersReducedMotion ? 8 : 0));
   const [showPlayer, setShowPlayer] = useState(false);
+  const playerTriggerRef = useRef<HTMLButtonElement>(null);
+  const playerDialogRef = useRef<HTMLDivElement>(null);
+  const playerCloseRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+
+  const closePlayer = useCallback(() => setShowPlayer(false), []);
 
   useEffect(() => {
-    if (!isInView) return;
+    if (!showPlayer) return;
 
-    if (prefersReducedMotion) {
-      const reducedMotionFrame = window.requestAnimationFrame(() => setStage(8));
-      return () => window.cancelAnimationFrame(reducedMotionFrame);
-    }
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusFrame = window.requestAnimationFrame(() => playerCloseRef.current?.focus());
 
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setStage(0), 0));
+    const keepFocusInside = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closePlayer();
+        return;
+      }
+      if (event.key !== 'Tab' || !playerDialogRef.current) return;
 
-    timers.push(setTimeout(() => setStage(1), TIMING.label));
-    timers.push(setTimeout(() => setStage(2), TIMING.number));
-    timers.push(setTimeout(() => setStage(3), TIMING.headline));
-    timers.push(setTimeout(() => setStage(4), TIMING.accent));
-    timers.push(setTimeout(() => setStage(5), TIMING.sub));
-    timers.push(setTimeout(() => setStage(6), TIMING.ctas));
-    timers.push(setTimeout(() => setStage(7), TIMING.card));
+      const focusable = Array.from(
+        playerDialogRef.current.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+        ),
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
 
-    return () => timers.forEach(clearTimeout);
-  }, [isInView, prefersReducedMotion]);
+    window.addEventListener('keydown', keepFocusInside);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener('keydown', keepFocusInside);
+      document.body.style.overflow = previousOverflow;
+      previouslyFocusedRef.current?.focus();
+    };
+  }, [closePlayer, showPlayer]);
 
   return (
-    <section ref={ref} className="bg-cream min-h-[90vh] relative overflow-hidden">
-      <GridOverlay />
+    <section
+      className="relative isolate min-h-[calc(100svh-5rem)] overflow-hidden bg-cream"
+    >
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 opacity-35 [background-image:radial-gradient(circle_at_center,rgba(44,61,87,0.08)_0_0.55px,transparent_0.75px)] [background-size:8px_8px]"
+      />
 
-      <Container>
-        <div className="grid lg:grid-cols-12 gap-10 items-center py-24">
-          {/* Left column — main content */}
-          <div className="lg:col-span-6">
-            {/* Category label */}
-            <motion.div
-              initial={{ opacity: 0, x: LABEL.offsetX }}
-              animate={{
-                opacity: stage >= 1 ? 1 : 0,
-                x: stage >= 1 ? 0 : LABEL.offsetX,
-              }}
-              transition={LABEL.spring}
-              className="flex items-center gap-4 mb-12"
+      <Container size="wide" className="py-10 lg:py-12 xl:max-w-[94rem] xl:px-10">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-5 xl:gap-8">
+          <div className="lg:col-span-5 xl:pr-3">
+            <p
+              className="relative mb-9 inline-block max-w-sm animate-fade-in-up text-xs font-semibold uppercase leading-[1.55] tracking-[0.16em] text-[var(--ti-sage-ink)] sm:text-sm motion-reduce:animate-none"
             >
-              <div className="w-12 h-px bg-rust" />
-              <span className="text-rust font-medium text-sm tracking-wide">
-                Formation IA · Instituts de langues
-              </span>
-            </motion.div>
+              Formation IA et outils<br />de création pour les équipes pédagogiques
+              <span className="absolute -bottom-2 left-0 h-px w-40 -rotate-2 bg-[#728878]" aria-hidden="true" />
+            </p>
 
-            {/* Headline */}
-            <div className="relative">
-              {/* Large decorative number */}
-              <motion.span
-                initial={{ opacity: NUMBER.initialOpacity }}
-                animate={{ opacity: stage >= 2 ? NUMBER.finalOpacity : NUMBER.initialOpacity }}
-                transition={NUMBER.spring}
-                className="absolute -left-4 -top-16 text-[12rem] font-display font-bold text-sage/10 leading-none select-none pointer-events-none hidden lg:block"
-                aria-hidden="true"
+            <h1
+              className="relative animate-fade-in-up font-display text-[2.5rem] font-semibold leading-[0.98] tracking-[-0.025em] text-navy [animation-delay:80ms] sm:text-[clamp(3.25rem,4.2vw,4.3rem)] sm:leading-[0.96] motion-reduce:animate-none"
+            >
+              <svg className="absolute -left-9 top-2 hidden h-12 w-8 text-navy xl:block" viewBox="0 0 32 48" fill="none" aria-hidden="true">
+                <path d="M27 7L17 18M29 23L14 25M23 39L11 32" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+              </svg>
+              <span className="block sm:whitespace-nowrap">Donnez à vos</span>
+              <span className="block sm:whitespace-nowrap"><EditorialHighlight tone="sage">formateurs</EditorialHighlight></span>
+              <span className="block sm:whitespace-nowrap">les moyens</span>
+              <span className="block sm:whitespace-nowrap">de créer des cours</span>
+              <span className="block sm:whitespace-nowrap">plus <EditorialHighlight tone="rust-underline">précis</EditorialHighlight>,</span>
+              <span className="block sm:whitespace-nowrap">plus <EditorialHighlight tone="sage">actuels</EditorialHighlight></span>
+              <span className="block sm:whitespace-nowrap">et mieux <EditorialHighlight tone="sage-underline">adaptés</EditorialHighlight></span>
+            </h1>
+
+            <p
+              className="mt-8 max-w-[36rem] animate-fade-in-up text-base leading-[1.55] text-navy-light [animation-delay:160ms] sm:text-[1.05rem] motion-reduce:animate-none"
+            >
+              TeachInspire aide les instituts de langues à installer une méthode commune pour
+              travailler avec l&apos;IA. Vos formateurs apprennent à transformer une vidéo, un
+              podcast, un article ou un document métier en une séquence adaptée au niveau, au
+              contexte et aux objectifs de leurs apprenants.
+            </p>
+
+            <p
+              className="mt-4 max-w-xl animate-fade-in-up font-display text-lg italic leading-relaxed text-navy [animation-delay:220ms] sm:text-xl motion-reduce:animate-none"
+            >
+              Le temps de préparation diminue.<br />
+              La qualité reste une{' '}
+              <EditorialHighlight tone="sage">
+                décision pédagogique.
+              </EditorialHighlight>
+            </p>
+
+            <div
+              className="mt-8 flex animate-fade-in-up flex-col gap-4 [animation-delay:280ms] sm:flex-row sm:items-center motion-reduce:animate-none"
+            >
+              <Button
+                variant="cta"
+                size="lg"
+                href="https://cal.com/teachinspire.me"
+                showArrow
+                className="shadow-[0_8px_20px_rgba(181,128,13,0.14)]"
               >
-                01
-              </motion.span>
-
-              <div className="relative z-10">
-                {stage >= 3 && (
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">
-                    <motion.span
-                      initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 14 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
-                      className="block text-navy"
-                    >
-                      Formez vos équipes à créer des cours IA
-                    </motion.span>
-                    {stage >= 4 && (
-                      <motion.span
-                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: prefersReducedMotion ? 0.01 : 0.45, ease: EASE_OUT }}
-                        className="mt-1 block text-rust"
-                      >
-                        à partir de sources réelles
-                      </motion.span>
-                    )}
-                  </h1>
-                )}
-                {stage < 3 && (
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-navy/0 leading-[1.1]" aria-hidden="true">
-                    Formez vos équipes à créer des cours IA à partir de sources réelles
-                  </h1>
-                )}
-              </div>
+                Réserver un appel découverte
+              </Button>
+              <button
+                ref={playerTriggerRef}
+                type="button"
+                onClick={() => setShowPlayer(true)}
+                className="group inline-flex min-h-11 items-center justify-center gap-3 border-b border-navy/30 text-sm font-semibold text-navy transition-colors hover:border-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-cream sm:justify-start"
+              >
+                Découvrir la méthode en 90 secondes
+                <span className="grid size-9 place-items-center rounded-full border border-navy/25 transition-colors group-hover:bg-navy group-hover:text-cream">
+                  <Play className="ml-0.5 size-4 fill-current" aria-hidden="true" />
+                </span>
+              </button>
             </div>
 
-            {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0, y: SUB.offsetY }}
-              animate={{
-                opacity: stage >= 5 ? 1 : 0,
-                y: stage >= 5 ? 0 : SUB.offsetY,
-              }}
-              transition={SUB.spring}
-              className="text-xl text-navy-light mt-8 max-w-xl leading-relaxed"
+            <div
+              className="mt-8 animate-fade-in-up [animation-delay:340ms] motion-reduce:animate-none"
             >
-              À partir d'un podcast, d'un article ou d'un document métier, vos formateurs apprennent à produire une séquence exploitable, relue et adaptée avant la classe.
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: SUB.offsetY }}
-              animate={{
-                opacity: stage >= 5 ? 1 : 0,
-                y: stage >= 5 ? 0 : SUB.offsetY,
-              }}
-              transition={{ ...SUB.spring, delay: 0.05 }}
-              className="mt-4 text-lg font-display font-semibold text-rust"
-            >
-              Le gain de temps reste sous contrôle pédagogique.
-            </motion.p>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mt-10">
-              <motion.div
-                initial={{ opacity: 0, y: CTAS.offsetY }}
-                animate={{
-                  opacity: stage >= 6 ? 1 : 0,
-                  y: stage >= 6 ? 0 : CTAS.offsetY,
-                }}
-                transition={{ ...CTAS.spring, delay: 0 }}
-              >
-                <Button variant="primary" size="lg" href="https://cal.com/teachinspire.me" showArrow>
-                  Cadrer l'usage IA de mon équipe
-                </Button>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: CTAS.offsetY }}
-                animate={{
-                  opacity: stage >= 6 ? 1 : 0,
-                  y: stage >= 6 ? 0 : CTAS.offsetY,
-                }}
-                transition={{ ...CTAS.spring, delay: CTAS.stagger }}
-              >
-                <Button variant="secondary" size="lg" href="#methode">
-                  Voir la méthode
-                </Button>
-              </motion.div>
+              <HeroProofStrip />
             </div>
+
+            <p
+              className="mt-5 animate-fade-in-up text-sm text-navy-light [animation-delay:400ms] motion-reduce:animate-none"
+            >
+              Formateur indépendant ?{' '}
+              <a
+                href="/offre"
+                className="inline-flex min-h-11 items-center font-semibold text-navy underline decoration-rust/60 underline-offset-4 transition-colors hover:text-rust"
+              >
+                → Découvrir le parcours individuel
+              </a>
+            </p>
           </div>
 
-          {/* Right column — video showcase */}
-          <motion.div
-            initial={{ opacity: 0, x: VIDEO.offsetX }}
-            animate={{
-              opacity: stage >= 7 ? 1 : 0,
-              x: stage >= 7 ? 0 : VIDEO.offsetX,
-            }}
-            transition={VIDEO.spring}
-            className="lg:col-span-6"
+          <div
+            className="relative animate-fade-in-up [animation-delay:180ms] lg:col-span-7 lg:-mr-7 lg:mt-4 xl:-mr-3 xl:-mt-1 motion-reduce:animate-none"
           >
-            <div className="relative border border-navy/10 overflow-hidden">
-              {/* Decorative corner accents */}
-              <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-rust z-10" />
-              <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-rust z-10" />
-
-              {showPlayer ? (
-                /* Cloudinary Video Player iframe — loaded on click */
-                <iframe
-                  src={`${HERO_VIDEO_EMBED}&player[autoplay]=true`}
-                  className="w-full aspect-video"
-                  allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                  style={{ border: 0 }}
-                  title="TeachInspire — présentation vidéo"
-                />
-              ) : (
-                /* Thumbnail with play button — click to load player */
-                <button
-                  type="button"
-                  className="relative group cursor-pointer w-full text-left"
-                  onClick={() => setShowPlayer(true)}
-                  aria-label="Lancer la vidéo de présentation"
-                >
-                  <img
-                    src={HERO_VIDEO_POSTER}
-                    alt="TeachInspire — présentation vidéo"
-                    width={1920}
-                    height={1080}
-                    loading="eager"
-                    decoding="async"
-                    className="w-full aspect-video object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/50 via-navy/5 to-transparent" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 bg-yellow flex items-center justify-center group-hover:bg-yellow/90 transition-colors duration-150">
-                      <svg className="w-5 h-5 text-navy ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                    <span className="bg-navy/80 backdrop-blur-sm text-cream text-xs font-medium tracking-wide px-2.5 py-1 rounded-sm">
-                      1:28
-                    </span>
-                  </div>
-                </button>
-              )}
-            </div>
-            <p className="text-xs text-navy-light/60 mt-4 tracking-wide uppercase">
-              Découvrez TeachInspire en 90 secondes
-            </p>
-          </motion.div>
+            <SourceFlowCollage onPlay={() => setShowPlayer(true)} />
+          </div>
         </div>
       </Container>
+
+      {showPlayer && (
+          <div
+            className="fixed inset-0 z-[80] grid place-items-center bg-navy/85 p-4 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Présentation vidéo TeachInspire"
+            aria-labelledby="hero-video-title"
+            ref={playerDialogRef}
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) closePlayer();
+            }}
+          >
+            <div
+              className="relative w-full max-w-5xl bg-navy"
+            >
+              <button
+                ref={playerCloseRef}
+                type="button"
+                onClick={closePlayer}
+                className="absolute -top-12 right-0 grid size-10 place-items-center text-cream transition-colors hover:text-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow"
+                aria-label="Fermer la vidéo"
+              >
+                <X aria-hidden="true" />
+              </button>
+              <h2 id="hero-video-title" className="sr-only">La méthode TeachInspire en 90 secondes</h2>
+              <iframe
+                src={`${HERO_VIDEO_EMBED}&player[autoplay]=true`}
+                tabIndex={-1}
+                className="aspect-video w-full"
+                allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+                allowFullScreen
+                style={{ border: 0 }}
+                title="TeachInspire — présentation vidéo"
+              />
+            </div>
+          </div>
+      )}
     </section>
   );
 }

@@ -116,7 +116,7 @@ export function MentionsLegalesPage() {
                 </h2>
                 <ul className="space-y-1">
                   <li>
-                    Polices : Fraunces et DM Sans, servies via{' '}
+                    Polices : Fraunces, DM Sans et Caveat, servies via{' '}
                     <a
                       href="https://fonts.google.com"
                       target="_blank"

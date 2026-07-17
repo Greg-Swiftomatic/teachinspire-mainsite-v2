@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LOGO } from '../../assets/assets';
+import { LOGO, SITE_LOGO } from '../../assets/assets';
 import { Container } from './Container';
 
 const footerLinks = {
@@ -16,8 +16,57 @@ const footerLinks = {
   ],
 };
 
-export function Footer() {
+export function Footer({ compact = false }: { compact?: boolean }) {
   const currentYear = new Date().getFullYear();
+
+  if (compact) {
+    return (
+      <footer className="border-t border-navy/15 bg-[#e7e8de] text-navy">
+        <Container>
+          <div className="grid gap-8 py-9 md:grid-cols-[1fr_auto] md:items-center">
+            <div>
+              <a
+                href="/"
+                className="inline-flex min-h-11 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+                aria-label="TeachInspire — Accueil"
+              >
+                <img
+                  src={SITE_LOGO}
+                  alt=""
+                  width={384}
+                  height={246}
+                  className="h-12 w-auto object-contain object-left"
+                />
+              </a>
+              <p className="mt-2 max-w-md font-display text-lg text-navy/85">
+                Formation IA pour formateurs en langues.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 text-sm md:items-end">
+              <a
+                href="mailto:greg@teachinspire.me"
+                className="inline-flex min-h-11 items-center font-medium hover:text-rust focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+              >
+                greg@teachinspire.me
+              </a>
+              <nav className="flex flex-wrap gap-x-6 gap-y-1" aria-label="Informations légales">
+                {footerLinks.legal.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="inline-flex min-h-11 items-center text-navy/65 hover:text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+              <p className="text-navy/55">© {currentYear} TeachInspire</p>
+            </div>
+          </div>
+        </Container>
+      </footer>
+    );
+  }
 
   return (
     <footer className="bg-navy text-cream">

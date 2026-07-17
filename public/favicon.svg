@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" fill="#2c3d57"/>
-  <path d="M14 17 h36 v7 h-14 v26 h-8 v-26 h-14 z" fill="#F4F3F0"/>
-  <rect x="46" y="44" width="6" height="6" fill="#B7553D"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TeachInspire">
+  <rect width="64" height="64" rx="13" fill="#173653"/>
+  <path d="M12 14h26v6H28v29h-7V20h-9z" fill="#F7F3EB"/>
+  <path d="M41 5h4v6h-4zM41 29h4v6h-4zM28 18h6v4h-6zM52 18h6v4h-6zM32 9l3-3 4 4-3 3zM49 27l3-3 4 4-3 3zM50 9l3 3-4 4-3-3zM33 26l3 3-4 4-3-3z" fill="#F0BE28"/>
+  <circle cx="43" cy="20" r="8.5" fill="#F0BE28"/>
+  <path d="M12 48c7-11 17-12 26-4 6 6 11 6 16-3l4 5c-8 13-17 14-26 5-5-5-10-5-15 2z" fill="#87AFA8"/>
 </svg>
+

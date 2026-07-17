@@ -132,7 +132,7 @@ export function PolitiqueConfidentialitePage() {
                   </li>
                   <li>
                     <strong>Google Fonts</strong> — Chargement des polices de caractères
-                    (Fraunces, DM Sans)
+                    (Fraunces, DM Sans, Caveat)
                   </li>
                 </ul>
               </div>
