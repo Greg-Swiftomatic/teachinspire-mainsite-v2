@@ -75,7 +75,7 @@ export function PolitiqueConfidentialitePage() {
                 <p>Dans le cadre de l'utilisation de ce site, les données suivantes peuvent être collectées :</p>
                 <ul className="mt-3 space-y-1 list-disc list-inside">
                   <li>
-                    <strong>Adresse email</strong> — lorsque vous prenez rendez-vous via Cal.com
+                    <strong>Adresse email</strong> — lorsque vous prenez rendez-vous via Zoom Scheduler
                   </li>
                   <li>
                     <strong>Adresse IP</strong> — via les journaux serveur (logs) de l'hébergeur
@@ -124,7 +124,7 @@ export function PolitiqueConfidentialitePage() {
                 </p>
                 <ul className="mt-3 space-y-2">
                   <li>
-                    <strong>Cal.com</strong> — Gestion des rendez-vous en ligne
+                    <strong>Zoom Video Communications, Inc.</strong> — Gestion des rendez-vous en ligne via Zoom Scheduler
                   </li>
                   <li>
                     <strong>Cloudflare, Inc.</strong> — Hébergement du site et réseau de
@@ -143,7 +143,7 @@ export function PolitiqueConfidentialitePage() {
                   6. Transferts de données hors de l'Union européenne
                 </h2>
                 <p>
-                  Certains de nos sous-traitants (Cal.com, Cloudflare, Google) sont
+                  Certains de nos sous-traitants (Zoom, Cloudflare, Google) sont
                   basés aux États-Unis. Ces transferts sont encadrés par des clauses
                   contractuelles types (CCT) approuvées par la Commission européenne,
                   conformément à l'article 46 du RGPD.

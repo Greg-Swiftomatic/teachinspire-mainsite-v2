@@ -230,7 +230,7 @@ teachinspire/
 | `/` | HomePage | Main landing page |
 | `/formation` | FormationPage | Detailed program, modules, pricing |
 | `/a-propos` | AboutPage | Bio, timeline, philosophy |
-| `/contact` | ContactPage | Cal.com embed + email |
+| `/contact` | ContactPage | Zoom Scheduler + email |
 
 **Note:** Plateforme page has been removed. Focus is solely on Formation.
 
@@ -394,7 +394,7 @@ const fadeInUp = {
 
 | Resource | URL |
 |----------|-----|
-| Calendly | `https://cal.com/teachinspire.me` |
+| Zoom Scheduler | `https://scheduler.zoom.us/greg-le-dall/decouverte` |
 | Email | `greg@teachinspire.me` |
 
 ---

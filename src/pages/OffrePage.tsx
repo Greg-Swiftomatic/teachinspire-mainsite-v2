@@ -8,8 +8,6 @@ import { PageMeta } from '../components/seo/PageMeta';
 
 import { BOOKING_URL } from '../assets/assets';
 
-const CALENDLY_URL = BOOKING_URL;
-
 // ── Data ──────────────────────────────────────────────────
 
 const problems = [
@@ -222,7 +220,7 @@ function HeroSection({ prefersReducedMotion }: { prefersReducedMotion: boolean }
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
-              <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
+              <Button variant="primary" size="lg" href={BOOKING_URL} showArrow>
                 Réserver ma session découverte
               </Button>
               <Button variant="secondary" size="lg" href="#tarification">
@@ -673,13 +671,13 @@ function FinalCTASection({ prefersReducedMotion }: { prefersReducedMotion: boole
           </h2>
 
           <p className="text-xl text-cream/70 mb-4">
-            Réservez une session découverte gratuite de 45 minutes.
+            Réservez une session découverte gratuite de 15 minutes.
           </p>
           <p className="text-cream/50 mb-8">
             On regarde votre équipe, vos besoins, puis le bon format.
           </p>
 
-          <Button variant="cta" size="lg" href={CALENDLY_URL} showArrow>
+          <Button variant="cta" size="lg" href={BOOKING_URL} showArrow>
             Réserver ma session découverte gratuite
           </Button>
 

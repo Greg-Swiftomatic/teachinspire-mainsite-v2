@@ -8,7 +8,6 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 import { BOOKING_URL } from '../assets/assets';
 
-const CALENDLY_URL = BOOKING_URL;
 const EMAIL = 'greg@teachinspire.me';
 const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 
@@ -119,7 +118,7 @@ export function ContactPage() {
                     Sans engagement. Sans relance insistante.
                   </p>
 
-                  <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
+                  <Button variant="primary" size="lg" href={BOOKING_URL} showArrow>
                     Réserver un appel (15 min)
                   </Button>
                 </motion.div>

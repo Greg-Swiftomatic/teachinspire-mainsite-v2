@@ -10,8 +10,6 @@ const STUDIO_URL = 'https://studio.teachinspire.me';
 const SIGNUP_URL = `${STUDIO_URL}/signup`;
 import { BOOKING_URL } from '../assets/assets';
 
-const CALENDLY_URL = BOOKING_URL;
-
 // ── Data ──────────────────────────────────────────────────
 
 const ateliers = [
@@ -69,7 +67,7 @@ const offers = [
       'Office hours 2 fois par mois',
       'Communauté pendant 1 an',
     ],
-    cta: { label: 'En parler avec Greg', href: CALENDLY_URL },
+    cta: { label: 'En parler avec Greg', href: BOOKING_URL },
     highlighted: true,
   },
   {
@@ -83,7 +81,7 @@ const offers = [
       'Espace privé dans la communauté',
       'Éligible financement OPCO',
     ],
-    cta: { label: 'Réserver un appel découverte', href: CALENDLY_URL },
+    cta: { label: 'Réserver un appel découverte', href: BOOKING_URL },
     highlighted: false,
   },
 ];

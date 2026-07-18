@@ -418,7 +418,7 @@ Pas de pitch commercial — juste une conversation.
 ### CTA
 ```
 [Réserver mon appel découverte]
-→ cal.com/greg-teachinspire/decouverte-teachinspire
+→ scheduler.zoom.us/greg-le-dall/decouverte
 ```
 
 ### Note de réassurance
@@ -472,11 +472,11 @@ TeachInspire — L'IA comme assistant, pas comme remplaçant
 | Position | CTA | Lien |
 |----------|-----|------|
 | Hero (primaire) | Voir le programme complet | /formation |
-| Hero (secondaire) | Réserver mon appel (15 min, gratuit) | cal.com |
-| Après Résultats | Réserver un appel découverte | cal.com |
-| Après "À qui s'adresse" | Parlons-en — 15 min, gratuit | cal.com |
-| Après Fondateur | Réserver un appel avec Greg | cal.com |
-| Final | Réserver mon appel découverte | cal.com |
+| Hero (secondaire) | Réserver mon appel (15 min, gratuit) | Zoom Scheduler |
+| Après Résultats | Réserver un appel découverte | Zoom Scheduler |
+| Après "À qui s'adresse" | Parlons-en — 15 min, gratuit | Zoom Scheduler |
+| Après Fondateur | Réserver un appel avec Greg | Zoom Scheduler |
+| Final | Réserver mon appel découverte | Zoom Scheduler |
 
 ---
 

@@ -22,7 +22,7 @@ et les fondamentaux pour rester autonome, quel que soit l'outil.
 ```
 
 **CTA Principal :** `Découvrir la formation` → /formation
-**CTA Secondaire :** `Réserver un appel découverte` → Calendly (45 min)
+**CTA Secondaire :** `Réserver un appel découverte` → Zoom Scheduler (15 min)
 
 ---
 
@@ -201,9 +201,9 @@ Depuis, j'expérimente, je teste, j'applique directement à l'enseignement.
 
 **Titre :** `Prêt à transformer votre pédagogie ?`
 
-**Sous-titre :** `Réservez un appel découverte gratuit de 45 minutes. Sans engagement.`
+**Sous-titre :** `Réservez un appel découverte gratuit de 15 minutes. Sans engagement.`
 
-**CTA Principal :** `Réserver mon appel` → https://cal.com/greg-teachinspire/decouverte-teachinspire
+**CTA Principal :** `Réserver mon appel` → https://scheduler.zoom.us/greg-le-dall/decouverte
 **CTA Secondaire :** `Voir le programme` → /formation
 
 **Texte réassurance :** `Questions ? greg@teachinspire.me`
@@ -225,7 +225,7 @@ et 6 à 8 sessions live adaptées au niveau de votre équipe.
 Cadence recommandée : 3 mois. Adaptable selon vos contraintes.
 ```
 
-**CTA :** `Réserver un appel découverte` → Calendly
+**CTA :** `Réserver un appel découverte` → Zoom Scheduler
 
 ---
 
@@ -400,7 +400,7 @@ Tarification adaptée à la taille de votre équipe.
 Devis personnalisé sur demande.
 ```
 
-**CTA :** `Demander un devis` → Calendly ou formulaire
+**CTA :** `Demander un devis` → Zoom Scheduler ou formulaire
 
 ---
 
@@ -421,8 +421,8 @@ Devis personnalisé sur demande.
 
 **Titre :** `Prêt à former vos équipes ?`
 
-**CTA Principal :** `Réserver un appel découverte` → Calendly (45 min)
-**Texte :** `45 minutes pour évaluer si c'est adapté à votre institut.`
+**CTA Principal :** `Réserver un appel découverte` → Zoom Scheduler (15 min)
+**Texte :** `15 minutes pour évaluer si c'est adapté à votre institut.`
 
 ---
 
@@ -540,7 +540,7 @@ sans compromis sur la qualité.
 
 **Titre :** `Intéressé par la plateforme ?`
 
-**CTA :** `Demander une démo` → Calendly ou formulaire
+**CTA :** `Demander une démo` → Zoom Scheduler ou formulaire
 **Texte :** `On vous montre le produit en 20 minutes.`
 
 ---
@@ -681,7 +681,7 @@ Vous avez des questions sur la formation ou la plateforme ?
 Vous voulez savoir si c'est adapté à votre institut ?
 ```
 
-**CTA Principal :** `Réserver un appel découverte (45 min)` → Calendly
+**CTA Principal :** `Réserver un appel découverte (15 min)` → Zoom Scheduler
 
 **Alternative :**
 ```
@@ -725,15 +725,15 @@ L'IA comme assistant, pas comme remplaçant.
 | Contexte | CTA principal | Destination |
 |----------|---------------|-------------|
 | Homepage | "Découvrir la formation" | /formation |
-| Homepage | "Réserver un appel découverte" | Calendly |
-| Formation | "Réserver un appel découverte" | Calendly |
-| Formation | "Demander un devis" | Calendly ou formulaire |
-| Plateforme | "Demander une démo" | Calendly |
-| Contact | "Réserver un appel découverte" | Calendly |
+| Homepage | "Réserver un appel découverte" | Zoom Scheduler |
+| Formation | "Réserver un appel découverte" | Zoom Scheduler |
+| Formation | "Demander un devis" | Zoom Scheduler ou formulaire |
+| Plateforme | "Demander une démo" | Zoom Scheduler |
+| Contact | "Réserver un appel découverte" | Zoom Scheduler |
 
-### Lien Calendly
+### Lien Zoom Scheduler
 ```
-https://cal.com/greg-teachinspire/decouverte-teachinspire
+https://scheduler.zoom.us/greg-le-dall/decouverte
 ```
 
 ---
