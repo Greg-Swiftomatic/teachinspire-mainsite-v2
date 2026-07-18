@@ -133,6 +133,26 @@
     display: none;
   }
 
+  .ref-video-trigger {
+    min-height: 58px;
+    gap: 9px;
+    padding: 8px 14px 8px 9px;
+  }
+
+  .ref-video-trigger svg {
+    width: 18px;
+    height: 18px;
+    padding: 8px;
+  }
+
+  .ref-video-trigger-copy strong {
+    font-size: 14px;
+  }
+
+  .ref-video-trigger-copy small {
+    font-size: 9px;
+  }
+
   .ref-hero-mobile-tags {
     display: flex;
     justify-content: center;

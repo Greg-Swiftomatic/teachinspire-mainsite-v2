@@ -123,7 +123,7 @@ export function TargetAudience() {
           <Button
             variant="primary"
             size="lg"
-            href="https://cal.com/teachinspire.me"
+            href="https://scheduler.zoom.us/greg-le-dall/decouverte"
             showArrow
           >
             Parlons-en, 15 min, gratuit

@@ -6,7 +6,9 @@ import { Button } from '../components/ui/Button';
 import { GridOverlay } from '../components/ui/GridOverlay';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+import { BOOKING_URL } from '../assets/assets';
+
+const CALENDLY_URL = BOOKING_URL;
 const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f9ff1fc5d4e87fe22ae3f932d6f/watch';
 
 const previewPoints = [

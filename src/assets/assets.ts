@@ -5,6 +5,9 @@ export const CLOUDINARY_BASE = "https://res.cloudinary.com/ducvoebot";
 export const LOGO = `${CLOUDINARY_BASE}/image/upload/v1747991665/Teachinspire_logo_transparent_yjt3uf.png`;
 export const SITE_LOGO = '/images/brand/teachinspire-logo.webp';
 
+// Discovery-call booking (Zoom Scheduler — single source of truth)
+export const BOOKING_URL = 'https://scheduler.zoom.us/greg-le-dall/decouverte';
+
 // Hero video — Cloudinary Video Player embed
 const VIDEO_CLOUD = "dsps9ydcp";
 const VIDEO_ID = "teachinspire_qloczl";

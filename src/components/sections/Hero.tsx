@@ -117,7 +117,7 @@ export function Hero() {
               <Button
                 variant="cta"
                 size="lg"
-                href="https://cal.com/teachinspire.me"
+                href="https://scheduler.zoom.us/greg-le-dall/decouverte"
                 showArrow
                 className="shadow-[0_8px_20px_rgba(181,128,13,0.14)]"
               >

@@ -8,7 +8,9 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const STUDIO_URL = 'https://studio.teachinspire.me';
 const SIGNUP_URL = `${STUDIO_URL}/signup`;
-const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+import { BOOKING_URL } from '../assets/assets';
+
+const CALENDLY_URL = BOOKING_URL;
 
 // ── Data ──────────────────────────────────────────────────
 

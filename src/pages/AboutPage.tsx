@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { PageMeta } from '../components/seo/PageMeta';
 import { Container } from '../components/layout/Container';
 import { Button } from '../components/ui/Button';
-import { ILLUSTRATIONS } from '../assets/assets';
+import { ILLUSTRATIONS, BOOKING_URL } from '../assets/assets';
 import { GridOverlay } from '../components/ui/GridOverlay';
 import { KineticHeading } from '../components/animation/KineticHeading';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
@@ -10,7 +10,7 @@ import { ScrollThreadContainer } from '../components/animation/ScrollThreadConta
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SpotlightCard from '../components/reactbits/SpotlightCard';
 
-const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+const CALENDLY_URL = BOOKING_URL;
 const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 const ABOUT_HUMAN_JUDGMENT_ILLUSTRATION = '/illustrations/about-human-judgment.png';
 

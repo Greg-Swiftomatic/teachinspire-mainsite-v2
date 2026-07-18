@@ -6,7 +6,9 @@ import { GridOverlay } from '../components/ui/GridOverlay';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { PageMeta } from '../components/seo/PageMeta';
 
-const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+import { BOOKING_URL } from '../assets/assets';
+
+const CALENDLY_URL = BOOKING_URL;
 
 // ── Data ──────────────────────────────────────────────────
 

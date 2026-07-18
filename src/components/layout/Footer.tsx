@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LOGO, SITE_LOGO } from '../../assets/assets';
+import { LOGO, SITE_LOGO, BOOKING_URL } from '../../assets/assets';
 import { Container } from './Container';
 
 const footerLinks = {
@@ -25,8 +25,8 @@ export function Footer({ compact = false }: { compact?: boolean }) {
         <Container>
           <div className="grid gap-8 py-9 md:grid-cols-[1fr_auto] md:items-center">
             <div>
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="inline-flex min-h-11 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
                 aria-label="TeachInspire — Accueil"
               >
@@ -37,7 +37,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
                   height={246}
                   className="h-12 w-auto object-contain object-left"
                 />
-              </a>
+              </Link>
               <p className="mt-2 max-w-md font-display text-lg text-navy/85">
                 Formation IA pour formateurs en langues.
               </p>
@@ -99,15 +99,15 @@ export function Footer({ compact = false }: { compact?: boolean }) {
             <ul className="space-y-3">
               {footerLinks.navigation.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="flex min-h-11 items-center gap-2 text-cream/80 transition-colors hover:text-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy group"
                   >
                     <span className="text-sage-light group-hover:text-yellow transition-colors">
                       →
                     </span>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -129,7 +129,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               </li>
               <li>
                 <a
-                  href="https://cal.com/teachinspire.me"
+                  href={BOOKING_URL}
                   className="mt-2 inline-flex min-h-11 items-center gap-2 bg-cream/15 px-4 py-2 text-cream transition-colors hover:bg-yellow hover:text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
                 >
                   Réserver un appel

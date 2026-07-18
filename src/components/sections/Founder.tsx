@@ -186,7 +186,7 @@ export function Founder() {
             <Button
               variant="primary"
               size="lg"
-              href="https://cal.com/teachinspire.me"
+              href="https://scheduler.zoom.us/greg-le-dall/decouverte"
               showArrow
             >
               Réserver un appel avec Greg

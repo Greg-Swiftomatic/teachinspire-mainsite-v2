@@ -1,0 +1,434 @@
+.form-tools {
+  padding-block: clamp(70px, 7vw, 92px);
+  background: var(--form-paper);
+}
+
+.form-tools-heading {
+  max-width: 940px;
+  margin-bottom: 40px;
+}
+
+.form-tools-heading p {
+  max-width: 860px;
+  margin-top: 24px;
+  color: rgb(23 54 83 / 74%);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.form-tools-grid {
+  display: grid;
+  grid-template-columns: minmax(560px, 1.16fr) minmax(380px, 0.84fr);
+  gap: clamp(38px, 5vw, 70px);
+  align-items: center;
+}
+
+.form-studio-shot {
+  overflow: hidden;
+  border: 1px solid rgb(23 54 83 / 14%);
+  clip-path: polygon(1% 2%, 99% 0, 100% 97%, 2% 100%, 0 45%);
+  filter: drop-shadow(0 18px 24px rgb(23 54 83 / 14%));
+}
+
+.form-studio-shot img {
+  width: 100%;
+}
+
+.form-tool-list {
+  border-top: 1px solid rgb(23 54 83 / 20%);
+}
+
+.form-tool-list article {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 20px;
+  padding-block: 24px;
+  border-bottom: 1px solid rgb(23 54 83 / 20%);
+}
+
+.form-tool-icon,
+.form-delivery-icon {
+  display: grid;
+  width: 60px;
+  height: 60px;
+  place-items: center;
+  color: var(--form-paper);
+  background: var(--form-navy);
+}
+
+.form-tool-icon.form-tone-sage,
+.form-delivery-icon.form-tone-sage { background: var(--form-sage); }
+.form-tool-icon.form-tone-yellow,
+.form-delivery-icon.form-tone-yellow { background: var(--form-yellow); }
+.form-tool-icon.form-tone-rust,
+.form-delivery-icon.form-tone-rust { background: var(--form-rust); }
+.form-tool-icon.form-tone-navy,
+.form-delivery-icon.form-tone-navy { background: var(--form-navy); }
+
+.form-tool-icon svg,
+.form-delivery-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--form-paper);
+}
+
+.form-tool-list h3 {
+  margin-bottom: 8px;
+  font-size: 29px;
+}
+
+.form-tool-list p {
+  color: rgb(23 54 83 / 72%);
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.form-tools-close {
+  margin: 30px 0 22px;
+  color: var(--form-navy);
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.form-audio-included {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 24px 32px;
+  color: var(--form-cream);
+  background: var(--form-navy);
+  clip-path: polygon(0 2%, 99% 0, 100% 96%, 1% 100%);
+}
+
+.form-audio-included > span {
+  color: var(--form-yellow);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.form-audio-included p {
+  padding-left: 28px;
+  border-left: 1px solid rgb(247 243 235 / 38%);
+  color: rgb(247 243 235 / 78%);
+  line-height: 1.55;
+}
+
+.form-audio-included strong {
+  color: var(--form-cream);
+  font-family: 'Fraunces', serif;
+  font-size: 23px;
+}
+
+.form-delivery {
+  padding-block: clamp(70px, 7vw, 90px);
+  background: var(--form-sage-pale);
+}
+
+.form-delivery h2 {
+  max-width: 900px;
+}
+
+.form-delivery-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 34px;
+  margin-top: 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.form-delivery-legend > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 650;
+}
+
+.form-delivery-legend i {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.form-delivery-legend svg {
+  width: 18px;
+  height: 18px;
+}
+
+.form-schedule {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 36px auto 20px;
+  filter: drop-shadow(0 18px 22px rgb(23 54 83 / 12%));
+}
+
+.form-schedule img {
+  width: 100%;
+}
+
+.form-marker {
+  position: absolute;
+  left: var(--marker-x);
+  display: grid;
+  width: clamp(16px, 1.8vw, 26px);
+  height: clamp(16px, 1.8vw, 26px);
+  place-items: center;
+  border-radius: 50%;
+  color: var(--form-paper);
+  transform: translate(-50%, -50%);
+}
+
+.form-marker svg {
+  width: 64%;
+  height: 64%;
+  stroke-width: 2;
+}
+
+.form-marker-tutorial { top: 43%; background: var(--form-sage); }
+.form-marker-live { top: 64%; background: var(--form-yellow); color: var(--form-navy); }
+.form-marker-deliverable { top: 52%; background: var(--form-rust); }
+
+.form-delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgb(23 54 83 / 20%);
+}
+
+.form-delivery-grid article {
+  padding: 24px 24px 0;
+  border-left: 1px solid rgb(23 54 83 / 20%);
+}
+
+.form-delivery-grid article:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.form-delivery-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+}
+
+.form-delivery-grid h3 {
+  margin-bottom: 12px;
+  font-size: 23px;
+  line-height: 1.15;
+}
+
+.form-delivery-grid p {
+  color: rgb(23 54 83 / 72%);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.form-pricing {
+  padding-block: clamp(70px, 7vw, 90px);
+  color: var(--form-cream);
+  background: var(--form-navy);
+}
+
+.form-pricing .form-rule {
+  background: var(--form-rust);
+}
+
+.form-pricing h2 {
+  margin-bottom: 34px;
+}
+
+.form-price-ledger {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 36px 38px;
+  color: var(--form-navy);
+  background: var(--form-paper);
+  clip-path: polygon(0 1%, 8% 0, 18% 1%, 31% 0, 47% 1%, 59% 0, 74% 1%, 88% 0, 100% 1%, 99% 99%, 84% 100%, 68% 99%, 53% 100%, 37% 99%, 21% 100%, 0 99%);
+}
+
+.form-price {
+  min-width: 0;
+  padding: 0 38px;
+  border-left: 1px solid rgb(23 54 83 / 45%);
+}
+
+.form-price:first-child {
+  padding-left: 12px;
+  border-left: 0;
+}
+
+.form-price:last-child {
+  padding-right: 12px;
+}
+
+.form-price-number {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--form-sage);
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 650;
+}
+
+.form-price-number span {
+  width: 32px;
+  height: 14px;
+  background: currentColor;
+}
+
+.form-price-yellow .form-price-number,
+.form-price-yellow .form-price-detail { color: #ac7e08; }
+.form-price-rust .form-price-number,
+.form-price-rust .form-price-detail { color: var(--form-rust); }
+
+.form-price h3 {
+  margin-top: 26px;
+  font-size: clamp(27px, 2.2vw, 35px);
+}
+
+.form-price-audience {
+  margin-top: 10px;
+  color: currentColor;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.form-price-value {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid currentColor;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 3.4vw, 54px);
+  font-weight: 650;
+  line-height: 1;
+}
+
+.form-price-detail {
+  min-height: 48px;
+  margin-top: 12px;
+  color: var(--form-sage);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.form-price-text {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid currentColor;
+  color: rgb(23 54 83 / 76%);
+  line-height: 1.55;
+}
+
+.form-modalities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 22px;
+  color: var(--form-navy);
+  background: var(--form-paper);
+}
+
+.form-modalities p {
+  display: flex;
+  min-height: 80px;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 34px;
+  font-size: 17px;
+}
+
+.form-modalities p + p {
+  border-left: 1px solid rgb(23 54 83 / 28%);
+}
+
+.form-modalities svg {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  color: var(--form-sage);
+}
+
+.form-final {
+  padding-block: clamp(88px, 10vw, 138px);
+  background: var(--form-cream);
+}
+
+.form-final-grid {
+  display: grid;
+  grid-template-columns: minmax(460px, 1fr) minmax(460px, 0.9fr);
+  gap: clamp(56px, 8vw, 108px);
+  align-items: center;
+}
+
+.form-final-copy > p {
+  max-width: 620px;
+  margin-top: 28px;
+  color: rgb(23 54 83 / 76%);
+  font-size: 20px;
+  line-height: 1.65;
+}
+
+.form-final-action {
+  padding: 42px;
+  color: var(--form-cream);
+  background: var(--form-navy);
+  clip-path: polygon(1% 2%, 99% 0, 100% 96%, 2% 100%, 0 36%);
+}
+
+.form-call-length {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  color: var(--form-yellow);
+  font-weight: 700;
+}
+
+.form-call-length svg {
+  width: 20px;
+  height: 20px;
+}
+
+.form-final-action > a {
+  width: 100%;
+}
+
+.form-final-action > p:last-child {
+  margin-top: 22px;
+  color: rgb(247 243 235 / 76%);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.form-final-action a:not([class]) {
+  color: var(--form-cream);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.form-final-action a:not([class]):focus-visible {
+  outline: 3px solid var(--form-yellow);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-page *,
+  .form-page *::before,
+  .form-page *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

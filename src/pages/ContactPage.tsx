@@ -6,7 +6,9 @@ import { GridOverlay } from '../components/ui/GridOverlay';
 import { GeometricAccentGroup } from '../components/animation/GeometricAccentGroup';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const CALENDLY_URL = 'https://cal.com/teachinspire.me';
+import { BOOKING_URL } from '../assets/assets';
+
+const CALENDLY_URL = BOOKING_URL;
 const EMAIL = 'greg@teachinspire.me';
 const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 
@@ -108,7 +110,7 @@ export function ContactPage() {
                   </h2>
 
                   <p className="text-navy/70 mb-2">
-                    45 minutes.
+                    15 minutes.
                     <br />
                     Vos outils et vos cours.
                   </p>
@@ -118,7 +120,7 @@ export function ContactPage() {
                   </p>
 
                   <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
-                    Réserver un appel (45 min)
+                    Réserver un appel (15 min)
                   </Button>
                 </motion.div>
 

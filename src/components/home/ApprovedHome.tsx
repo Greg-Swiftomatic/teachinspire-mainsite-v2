@@ -10,7 +10,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { HERO_VIDEO_EMBED } from '../../assets/assets';
+import { HERO_VIDEO_EMBED, BOOKING_URL } from '../../assets/assets';
 import { Button } from '../ui/Button';
 import './approved-home.css';
 import './approved-home-sections.css';
@@ -177,7 +177,7 @@ export function ApprovedHome() {
             </p>
             <p className="ref-promise">Le gain de temps reste sous contrôle pédagogique.</p>
             <div className="ref-actions">
-              <Button variant="primary" size="lg" href="https://cal.com/teachinspire.me" showArrow>
+              <Button variant="primary" size="lg" href={BOOKING_URL} showArrow>
                 Cadrer l&apos;usage IA de mon équipe
               </Button>
               <Button variant="secondary" size="lg" href="#methode">
@@ -187,32 +187,38 @@ export function ApprovedHome() {
           </div>
 
           <figure className="ref-hero-art" data-scroll-reveal="right">
-            <picture>
-              <source
-                srcSet="/images/homepage/hero-collage-alpha-900.webp 900w, /images/homepage/hero-collage-alpha-1536.webp 1536w"
-                sizes="(max-width: 900px) 96vw, 62vw"
-                type="image/webp"
-              />
-              <img
-                src="/images/homepage/hero-collage-alpha-1536.webp"
-                width="1536"
-                height="1024"
-                alt="Un podcast, un article et des documents deviennent une séquence prête pour la classe"
-                fetchPriority="high"
-                decoding="async"
-              />
-            </picture>
-            <span className="ref-hero-label ref-hero-label--one" aria-hidden="true">Objectif</span>
-            <span className="ref-hero-label ref-hero-label--two" aria-hidden="true">Contexte</span>
-            <span className="ref-hero-label ref-hero-label--three" aria-hidden="true">Consigne</span>
             <button
               ref={triggerRef}
               type="button"
-              className="ref-video-trigger"
+              className="ref-video-trigger-zone"
               onClick={() => setVideoOpen(true)}
-              aria-label="Découvrir TeachInspire en 90 secondes"
+              aria-label="Regarder la vidéo de présentation (90 secondes)"
             >
-              <Play aria-hidden="true" />
+              <picture>
+                <source
+                  srcSet="/images/homepage/hero-collage-alpha-900.webp 900w, /images/homepage/hero-collage-alpha-1536.webp 1536w"
+                  sizes="(max-width: 900px) 96vw, 62vw"
+                  type="image/webp"
+                />
+                <img
+                  src="/images/homepage/hero-collage-alpha-1536.webp"
+                  width="1536"
+                  height="1024"
+                  alt=""
+                  fetchPriority="high"
+                  decoding="async"
+                />
+              </picture>
+              <span className="ref-hero-label ref-hero-label--one" aria-hidden="true">Objectif</span>
+              <span className="ref-hero-label ref-hero-label--two" aria-hidden="true">Contexte</span>
+              <span className="ref-hero-label ref-hero-label--three" aria-hidden="true">Consigne</span>
+              <span className="ref-video-trigger" aria-hidden="true">
+                <Play />
+                <span className="ref-video-trigger-copy">
+                  <strong>Regarder la vidéo</strong>
+                  <small>La méthode en 90 secondes</small>
+                </span>
+              </span>
             </button>
             <div className="ref-hero-mobile-tags" aria-label="La méthode cadre trois éléments">
               <span>Objectif</span>
@@ -291,6 +297,8 @@ export function ApprovedHome() {
                 <div className={`ref-process-step-art ref-process-step-art--${index + 1}`} aria-hidden="true">
                   <img
                     src="/images/homepage/method-blended-alpha-1024.webp"
+                    width="1024"
+                    height="384"
                     alt=""
                     loading="lazy"
                     decoding="async"
@@ -341,10 +349,10 @@ export function ApprovedHome() {
         <div className="ref-shell ref-final-grid" data-scroll-stagger="100">
           <div data-scroll-item>
             <h2 id="ref-final-title">Prêt à former vos équipes&nbsp;?</h2>
-            <p>Réservez un appel de 15 minutes pour en parler et voir si TeachInspire est fait pour vous.</p>
+            <p>Réservez un appel de 15&nbsp;minutes pour en parler et voir si TeachInspire est fait pour vous.</p>
           </div>
           <div className="ref-actions" data-scroll-item>
-            <Button variant="primary" size="lg" href="https://cal.com/teachinspire.me" showArrow>
+            <Button variant="primary" size="lg" href={BOOKING_URL} showArrow>
               Cadrer l&apos;usage IA de mon équipe
             </Button>
             <Button variant="secondary" size="lg" href="#methode">
