@@ -42,7 +42,7 @@ const timeline = [
     description: 'Cambridge, Université de Solihull, Birmingham',
   },
   {
-    year: '2016—2022',
+    year: '2016-2022',
     title: 'Enseignement FLE/Anglais',
     description: 'Cours individuels et collectifs',
   },
@@ -526,7 +526,7 @@ export function AboutPage() {
   return (
     <ScrollThreadContainer preset="about">
       <PageMeta
-        title="À propos de Gregory — TeachInspire"
+        title="À propos de Gregory : TeachInspire"
         description="TeachInspire est né d'une pratique de terrain : utiliser l'IA pour préparer plus vite, tout en gardant le jugement pédagogique côté formateur."
         path="/a-propos"
       />

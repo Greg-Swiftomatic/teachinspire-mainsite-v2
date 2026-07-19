@@ -195,7 +195,7 @@ export function Hero() {
                 allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
                 allowFullScreen
                 style={{ border: 0 }}
-                title="TeachInspire — présentation vidéo"
+                title="TeachInspire : présentation vidéo"
               />
             </div>
           </div>

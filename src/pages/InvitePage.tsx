@@ -56,7 +56,7 @@ export function InvitePage() {
   return (
     <main className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
-        title="Aperçu privé — TeachInspire"
+        title="Aperçu privé : TeachInspire"
         description="Aperçu vidéo privé de la formation TeachInspire pour instituts de langues."
         path="/invite"
         noindex
@@ -128,7 +128,7 @@ export function InvitePage() {
                 <div className="aspect-video bg-navy/5 border border-navy/10 overflow-hidden">
                   <iframe
                     src={VIDEO_URL}
-                    title="TeachInspire — aperçu privé de la formation"
+                    title="TeachInspire : aperçu privé de la formation"
                     className="w-full h-full"
                     allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                     allowFullScreen

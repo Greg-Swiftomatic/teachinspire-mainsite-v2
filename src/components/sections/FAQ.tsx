@@ -16,7 +16,7 @@ const faqs = [
     id: 'faq-1',
     question: 'Ça va coûter cher en abonnements ?',
     answer:
-      "Non. La formation s'appuie sur des outils gratuits comme Google AI Studio, et l'accès au TeachInspire Studio — nos ateliers maison pour les prompts, l'audio et les documents — est compris dedans. Rien à empiler.",
+      "Non. La formation s'appuie sur des outils gratuits comme Google AI Studio, et l'accès au TeachInspire Studio (nos ateliers maison pour les prompts, l'audio et les documents) est compris dedans. Rien à empiler.",
   },
   {
     id: 'faq-2',
@@ -46,7 +46,7 @@ const faqs = [
     id: 'faq-6',
     question: 'Combien ça coûte ?',
     answer:
-      "Le tarif dépend de la taille de votre équipe. Standard (≤10 formateurs) : à partir de 4 200€ HT. On en parle lors de l'appel découverte, sans engagement.",
+      "Le tarif dépend de la taille de votre équipe. Standard (1 à 15 formateurs) : à partir de 4 200 € HT. On en parle lors de l'appel découverte, sans engagement.",
   },
   {
     id: 'faq-7',

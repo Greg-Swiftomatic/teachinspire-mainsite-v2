@@ -68,8 +68,8 @@ const resources = [
     title: 'TeachInspire Studio',
     items: [
       'Prompts (Promptomatik), Audio et Documents : trois ateliers maison',
-      "Accès 1 an — 60 minutes d'audio incluses chaque mois",
-      'Crédits supplémentaires à tarif préférentiel',
+      "Accès 1 an, 60 minutes d'audio par mois pendant 6 mois",
+      'Crédits supplémentaires à la demande : 9 € les 60 minutes',
     ],
   },
   {
@@ -108,9 +108,9 @@ const communityPrivate = [
 const pricingTiers = [
   {
     name: 'Formule Standard',
-    subtitle: 'Jusqu\'à 10 formateurs',
-    price: '4 200€ HT',
-    perPerson: '420€/personne pour 10',
+    subtitle: '1 à 15 formateurs',
+    price: '4 200 € HT',
+    perPerson: '280 € par formateur pour 15',
     features: [
       'Formation de votre équipe',
       '6 à 8 webinaires en groupe unique',
@@ -121,9 +121,9 @@ const pricingTiers = [
   },
   {
     name: 'Formule Étendue',
-    subtitle: '11 à 25 formateurs',
-    price: '4 200€ HT + 250€ HT',
-    perPerson: 'par formateur supplémentaire — ex. : 15 formateurs = 5 450€ HT (363€/pers.)',
+    subtitle: '16 à 25 formateurs',
+    price: '4 200 € HT + 250 € HT',
+    perPerson: 'par formateur supplémentaire',
     features: [
       'Tous les éléments de la formule Standard',
       'Sessions en groupes plus restreints',
@@ -133,7 +133,7 @@ const pricingTiers = [
   },
   {
     name: 'Formule Sur-Mesure',
-    subtitle: '25+ formateurs',
+    subtitle: '25 formateurs et plus',
     price: 'Sur devis',
     perPerson: 'Tarif préférentiel',
     features: [

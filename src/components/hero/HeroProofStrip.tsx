@@ -10,7 +10,7 @@ const proofItems: ProofItem[] = [
   { icon: 'award', label: 'Certifié Qualiopi', value: 'éligible au financement OPCO' },
   { icon: 'calendar', label: 'Programme', value: 'de 3 mois' },
   { icon: 'screen', label: 'Studio inclus', value: 'pendant 1 an' },
-  { icon: 'team', label: "Formation d'équipe", value: "jusqu'à 10 formateurs" },
+  { icon: 'team', label: "Formation d'équipe", value: '1 à 15 formateurs' },
 ];
 
 export function HeroProofStrip() {
