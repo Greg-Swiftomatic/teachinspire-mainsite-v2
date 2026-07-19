@@ -148,13 +148,13 @@ export function StudioPage() {
                 variants={fadeInUp}
                 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.1] tracking-tight mb-6"
               >
-                La méthode d'abord,
-                <span className="text-rust"> les ateliers ensuite</span>
+                Trois ateliers pour préparer vos cours
+                <span className="text-rust"> avec l'IA</span>
               </motion.h1>
               <motion.p variants={fadeInUp} className="text-xl text-navy/70 mb-10 max-w-2xl leading-relaxed">
-                La formation vous apprend à piloter l'IA sur des outils ouverts. Le Studio
-                vous fait gagner du temps une fois la méthode en place : trois ateliers
-                pensés pour l'enseignement des langues, dans un simple navigateur.
+                Prompts, audio, documents : des outils pensés pour l'enseignement des langues,
+                dans un simple navigateur. La formation vous apprend la méthode ; le Studio
+                vous fait gagner du temps une fois qu'elle est en place.
               </motion.p>
               <motion.div variants={fadeInUp} className="flex flex-wrap gap-4">
                 <Button variant="primary" size="lg" href={SIGNUP_URL} showArrow>
