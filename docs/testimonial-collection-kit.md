@@ -1,293 +1,274 @@
 # Kit de collecte de témoignages
 
-> Créé juillet 2026. Objectif : transformer 2 instituts clients en 10–20 retours
-> exploitables, dont plusieurs publiables et vérifiables.
+> Créé juillet 2026, resserré après retour de Greg.
 >
-> Le formulaire sert **d'abord de recherche client**. Les citations publiables
-> sont un sous-produit. Les réponses aux questions « hésitation » et « avant »
-> alimentent directement la garantie, la copy du site et le lead magnet.
+> **Deux publics, deux dispositifs différents.** Le formateur n'a pas acheté la
+> formation : c'est sa direction qui l'a inscrit. On ne peut donc pas lui poser
+> de questions d'acheteur (« qu'est-ce qui vous a fait hésiter à vous engager »,
+> « comment avez-vous justifié la dépense »). Sa décision à lui n'a pas été
+> d'acheter, mais **d'adopter ou non la méthode une fois la formation imposée** —
+> et c'est justement ce qui intéresse un directeur qui hésite.
+
+| Public | Nombre | Dispositif | Durée |
+|---|---|---|---|
+| **Formateurs** | 15–25 | Formulaire en ligne (ci-dessous) | **< 8 min** |
+| **Directeurs / responsables pédagogiques** | 2 | **Appel enregistré de 20 min**, pas de formulaire | 20 min |
+
+Pourquoi un appel pour les directeurs : ils sont deux. Un formulaire sert à
+passer à l'échelle, et il n'y a pas d'échelle ici. Un appel donne des réponses
+plus riches, permet de relancer, et fournit un extrait audio ou vidéo
+réutilisable.
 
 ---
 
 ## 1. Les trois règles non négociables
 
 **Règle 1 — Les crédits sont offerts à tous ceux qui répondent, quoi qu'ils écrivent.**
-Ne jamais conditionner la contrepartie à un témoignage positif, ni même à
-l'autorisation de publier. Sinon : témoignage incentivé → obligation de
-divulgation (directive Omnibus transposée en droit français) **et** perte de
-crédibilité si un prospect l'apprend. En découplant, la contrepartie rémunère
-le temps passé, pas le contenu. À faire valider par un juriste avant envoi.
+Jamais conditionnés à un avis positif ni à l'autorisation de publier. Sinon :
+témoignage incentivé → obligation de divulgation (directive Omnibus transposée
+en droit français) **et** perte de crédibilité. À faire valider par un juriste.
 
-**Règle 2 — On n'invente jamais un mot.**
-On peut couper, resserrer, retirer les hésitations, corriger l'orthographe.
-On ne peut pas ajouter de mots, changer le sens, ni fusionner deux réponses
-distinctes en une seule citation.
+**Règle 2 — On n'invente jamais un mot.** On coupe, on resserre, on corrige
+l'orthographe. On n'ajoute rien, on ne change pas le sens, on ne fusionne pas
+deux réponses en une citation.
 
 **Règle 3 — Rien n'est publié sans validation écrite de la version finale.**
-L'accord sur la version éditée est à la fois la règle éthique, la preuve de
-consentement RGPD, et la protection juridique. Un simple « oui, publiez ça »
-par email suffit, mais il faut l'avoir.
+C'est à la fois la règle éthique, la preuve de consentement RGPD et la
+protection juridique.
 
 ---
 
-## 2. À qui l'envoyer
+## 2. Garder le formulaire court : où passe réellement le temps
 
-| Cible | Pourquoi | Ce qu'on en attend |
-|---|---|---|
-| Direction / responsable pédagogique | C'est l'acheteur. Le prospect s'identifie à lui. | Décision, budget, OPCO, adoption d'équipe |
-| **Chaque formateur participant** | Prouve que la méthode est réellement utilisée | Verbatims concrets, chiffres avant/après |
+Le coût pour le répondant, ce n'est pas le nombre de questions — c'est le nombre
+de **champs libres**. Douze questions dont huit à cliquer se remplissent plus
+vite que six questions ouvertes.
 
-Avec 2 instituts, cela représente potentiellement 15 à 25 destinataires, pas 2.
-**C'est le vrai gisement.** Ne pas se limiter aux deux contacts principaux.
+Le formulaire ci-dessous : **12 questions, dont 4 champs libres.** ≈ 7 minutes.
 
 ---
 
-## 3. Quand l'envoyer
+## 3. Formulaire formateurs
 
-Ne pas attendre la fin des 3 mois pour tout collecter d'un coup.
+Outil : **Tally** (hébergement UE, RGPD correct, gratuit). Ne pas développer de
+formulaire maison.
 
-| Moment | Ce qu'on capte | Format |
-|---|---|---|
-| Fin du Mois 1 | La première victoire, à chaud (« j'ai créé mon premier exercice d'écoute ») | 2 questions en fin de session live |
-| Fin de formation | La transformation complète | **Le formulaire ci-dessous** |
-| +3 mois après | L'usage durable — le témoignage le plus crédible | Relance courte, 3 questions |
-
-**À vérifier tout de suite :** les sessions live Zoom sont-elles enregistrées ?
-Une réaction spontanée de 30 secondes en vidéo vaut plus que n'importe quel
-formulaire. Si des enregistrements existent, vérifier ce que couvre le
-consentement initial avant toute réutilisation.
-
----
-
-## 4. Le formulaire
-
-Outil recommandé : **Tally** (hébergement UE, RGPD correct, gratuit). Ne pas
-développer de formulaire maison pour 2 clients.
-
-Champs marqués 🅳 = direction uniquement · 🅕 = formateur uniquement · le reste = tous.
-
-### Introduction du formulaire
+### Introduction
 
 > **Votre retour sur la formation TeachInspire**
 >
-> Ce questionnaire prend une douzaine de minutes. Il sert à améliorer la
-> formation et, si vous le souhaitez, à partager votre expérience avec d'autres
-> instituts.
+> 7 minutes, pas plus. L'objectif est de comprendre ce que la formation a changé
+> — ou pas — dans votre façon de préparer vos cours.
 >
 > **60 minutes de crédits audio vous sont offertes dès l'envoi de vos réponses**,
-> quel que soit leur contenu et que vous acceptiez ou non d'être cité. Les
-> critiques nous sont plus utiles que les compliments : répondez franchement.
+> quel que soit leur contenu, et que vous acceptiez ou non d'être cité·e.
+> Les critiques nous sont plus utiles que les compliments.
 
-### Section 1 — Vous
+### Vous
 
-1. Prénom
-2. Nom
-3. Institut / organisme
-4. Votre rôle : ☐ Direction ☐ Responsable pédagogique ☐ Formateur·rice ☐ Autre
-5. 🅕 Langue(s) que vous enseignez
-6. 🅕 Depuis combien de temps enseignez-vous ?
+1. Prénom et nom
+2. Institut
+3. Langue(s) que vous enseignez
 
-### Section 2 — Avant la formation
+### Au départ
 
-7. Avant la formation, combien de temps vous prenait la préparation d'un cours
+4. **Quand votre direction vous a annoncé cette formation IA, qu'est-ce que vous
+   vous êtes dit ?** *(une seule réponse)*
+   - ☐ Curieux·se, plutôt partant·e
+   - ☐ Sceptique — j'avais déjà essayé l'IA sans résultat convaincant
+   - ☐ Réticent·e — je ne voyais pas ce que l'IA venait faire dans mon métier
+   - ☐ Inquiet·e pour l'avenir du métier
+   - ☐ « Encore une formation » — je n'avais pas le temps
+   - ☐ Autre : ______
+
+5. Avant la formation, combien de temps vous prenait la préparation d'un cours
    à partir d'une ressource authentique (podcast, article, vidéo) ?
-8. Qu'est-ce qui vous posait le plus de difficulté dans cette préparation ?
-9. Aviez-vous déjà essayé d'utiliser une IA pour préparer vos cours ?
-   Si oui, qu'est-ce qui n'avait pas fonctionné ?
-10. 🅳 Qu'est-ce qui vous a poussé à chercher une solution à ce moment-là ?
+   - ☐ Moins d'1h ☐ 1 à 2h ☐ 2 à 3h ☐ Plus de 3h ☐ Je n'en faisais pas
 
-### Section 3 — L'hésitation *(la section la plus utile — ne pas la supprimer)*
+### Aujourd'hui
 
-11. **Qu'est-ce qui vous a fait hésiter avant de vous engager ?**
-    *Soyez franc·he : c'est la réponse qui nous sert le plus.*
-12. Qu'est-ce qui a levé cette hésitation ?
-13. 🅳 Comment avez-vous justifié la dépense en interne ? Qu'est-ce qui a été
-    déterminant pour convaincre ?
-14. 🅳 Le financement OPCO a-t-il joué un rôle dans la décision ? Le montage
-    a-t-il été simple ou compliqué ?
+6. Le même cours, aujourd'hui, vous prend :
+   - ☐ Moins de 30 min ☐ 30 min à 1h ☐ 1 à 2h ☐ Plus de 2h ☐ Je n'utilise pas la méthode
 
-### Section 4 — Le déclic
+7. À quelle fréquence utilisez-vous la méthode ?
+   - ☐ Chaque semaine ☐ Quelques fois par mois ☐ Rarement ☐ Plus du tout
 
-15. Quel est le premier support que vous avez créé avec la méthode, et à partir
-    de quelle source ?
-16. Y a-t-il eu un moment précis où vous vous êtes dit « ça marche » ?
-    Racontez-le en quelques phrases.
-17. Qu'est-ce qui vous a surpris — en bien ou en mal ?
+8. ⭐ **Qu'est-ce qui a changé concrètement dans votre façon de préparer vos cours ?**
+   *C'est la question qui compte le plus. Soyez concret : qu'est-ce que vous
+   faites aujourd'hui que vous ne faisiez pas avant ? Qu'est-ce que vous avez
+   arrêté de faire ? Sur quoi passez-vous le temps gagné ?*
+   → champ libre
 
-### Section 5 — Aujourd'hui *(chiffres — indispensable)*
+9. Quel est le premier support que vous avez créé avec la méthode, et à partir
+   de quelle source ? → champ libre court
 
-18. Aujourd'hui, combien de temps vous prend la préparation d'un cours équivalent ?
-19. À quelle fréquence utilisez-vous la méthode ?
-    ☐ Chaque semaine ☐ Quelques fois par mois ☐ Rarement ☐ Plus du tout
-20. Que faites-vous maintenant que vous ne faisiez pas avant ?
-21. 🅳 Combien de vos formateurs utilisent la méthode régulièrement, sur combien
-    de formés ?
-22. Avez-vous constaté un changement du côté des apprenants (engagement,
-    retours, résultats) ?
+### Pour vos collègues
 
-### Section 6 — Recommandation
+10. **Un formateur sceptique vous dit « l'IA, ce n'est pas pour nous ».
+    Qu'est-ce que vous lui répondez ?** → champ libre
 
-23. À quel type d'institut ou de formateur recommanderiez-vous cette formation ?
-24. À qui ne la recommanderiez-vous **pas** ?
-25. Si un directeur hésitant vous appelait demain, que lui diriez-vous ?
-26. Sur 10, quelle est la probabilité que vous recommandiez TeachInspire ? (0–10)
+11. Qu'est-ce qui vous a manqué dans la formation ? Qu'est-ce qu'on devrait
+    améliorer en priorité ? → champ libre
 
-### Section 7 — Ce qui doit être amélioré
+### Publication
 
-27. Qu'est-ce qui vous a manqué dans la formation ?
-28. Qu'est-ce qu'on devrait changer en priorité ?
-
-### Section 8 — Aperçu avant consentement
-
-> Insérer ici une capture de `docs/testimonial-section-mockup.html` (variante A).
+> *(insérer ici une capture de la variante A du fichier
+> `docs/testimonial-section-mockup.html`)*
 >
-> **Voici à quoi ressemblerait une citation publiée sur notre site.**
-> Vous validerez le texte exact avant toute mise en ligne — rien n'est publié
-> sans votre accord écrit.
+> **Voici à quoi ressemblerait une citation publiée sur notre site.** Vous
+> reliriez le texte exact avant toute mise en ligne.
 
-### Section 9 — Consentement *(cases séparées, aucune pré-cochée)*
+12. **Autorisation** *(cases séparées, aucune pré-cochée)*
+    - ☐ J'autorise TeachInspire à publier tout ou partie de mes réponses.
+      *Sans cette case, vos réponses restent internes — les crédits vous sont
+      offerts de la même façon.*
 
-29. ☐ **J'autorise TeachInspire à publier tout ou partie de mes réponses**
-    (site web, LinkedIn, documents commerciaux).
-    *Si cette case n'est pas cochée, vos réponses restent strictement internes —
-    et les crédits vous sont offerts de la même façon.*
+    Si oui, jusqu'où :
+    - ☐ Prénom seul ☐ Prénom + initiale ☐ Prénom + nom
+    - ☐ Nom de l'institut ☐ Ma fonction ☐ Lien LinkedIn ☐ Ma photo
 
-30. Si vous avez coché ci-dessus, jusqu'où pouvons-nous aller ? *(cochez tout ce
-    qui vous convient)*
-    - ☐ Mon prénom seul
-    - ☐ Mon prénom et l'initiale de mon nom
-    - ☐ Mon prénom et mon nom
-    - ☐ Le nom de mon institut
-    - ☐ Ma fonction
-    - ☐ Un lien vers mon profil LinkedIn
-    - ☐ Ma photo
+    - Lien LinkedIn (facultatif) : ______
+    - ☐ Je veux relire la version éditée avant publication
+    - ☐ Je serais prêt·e à faire un témoignage vidéo de 2 min
+    - ☐ Je serais prêt·e à publier moi-même un retour sur LinkedIn
 
-31. Lien de votre profil LinkedIn (facultatif) : ______
-    *Un profil consultable rend un témoignage nettement plus crédible pour un
-    directeur qui hésite.*
+    - Email pour créditer les 60 minutes : ______
 
-32. ☐ J'accepte d'être recontacté·e pour valider la version éditée avant publication.
-33. ☐ Je serais prêt·e à enregistrer un témoignage vidéo court (2 minutes).
-34. ☐ Je serais prêt·e à publier moi-même un retour sur LinkedIn.
-
-> Vous pouvez retirer votre autorisation à tout moment en écrivant à
-> greg@teachinspire.me : la citation sera retirée du site sous 7 jours.
-> Vos réponses sont conservées 3 ans. Voir notre politique de confidentialité.
-
-### Section 10 — Crédits
-
-35. Email sur lequel créditer les 60 minutes : ______
+> Autorisation révocable à tout moment sur simple message à greg@teachinspire.me
+> (retrait sous 7 jours). Réponses conservées 3 ans.
 
 ---
 
-## 5. Email d'invitation
+## 4. Guide d'appel directeurs (20 min, enregistré)
 
-> **Objet :** Votre retour sur la formation (12 min) + 60 min de crédits audio
+Demander l'autorisation d'enregistrer **au début**, et redemander à la fin pour
+l'usage des extraits.
+
+1. Qu'est-ce qui vous a poussé à chercher une solution IA à ce moment-là ?
+2. **Qu'est-ce qui vous a fait hésiter avant de vous engager ?**
+   *La réponse la plus utile de tout le dispositif : elle dit quelle garantie
+   construire. Laisser le silence faire son travail, ne pas enchaîner trop vite.*
+3. Comment avez-vous justifié la dépense en interne ? Le montage OPCO a-t-il été
+   simple ?
+4. Comment vos formateurs ont-ils réagi quand vous leur avez annoncé la
+   formation ? Y a-t-il eu des résistances ?
+5. Aujourd'hui, combien de vos formateurs utilisent la méthode régulièrement,
+   sur combien de formés ?
+6. Qu'est-ce que vous diriez à un directeur d'institut qui hésite ?
+7. Qu'est-ce qui vous a manqué ?
+
+La question 4 est le pont entre les deux dispositifs : la réponse du directeur
+sur les résistances doit pouvoir être confrontée à la question 4 du formulaire
+formateurs. Si les deux concordent, c'est une preuve d'adoption très solide.
+
+---
+
+## 5. Quand collecter
+
+| Moment | Quoi | Comment |
+|---|---|---|
+| Fin du Mois 1 | La première victoire, à chaud | 1 question en fin de session live |
+| Fin de formation | Le formulaire ci-dessus | Email + demande de vive voix avant |
+| +3 mois après | L'usage durable — le plus crédible | Relance : questions 7 et 8 seulement |
+
+**À vérifier tout de suite :** les sessions live Zoom sont-elles enregistrées ?
+Une réaction spontanée de 30 secondes vaut plus que n'importe quel formulaire.
+Vérifier ce que couvre le consentement initial avant toute réutilisation.
+
+---
+
+## 6. Email d'invitation (formateurs)
+
+> **Objet :** 7 minutes sur la formation + 60 min de crédits audio
 >
 > Bonjour {Prénom},
 >
-> Vous venez de terminer les trois mois de formation. J'aimerais savoir ce que
-> ça a donné concrètement de votre côté — ce qui a marché, et surtout ce qui
-> n'a pas marché.
+> Vous venez de terminer la formation. J'aimerais savoir ce que ça a donné
+> concrètement de votre côté — ce qui a changé dans votre préparation de cours,
+> et ce qui n'a pas marché.
 >
-> J'ai préparé un questionnaire d'une douzaine de minutes :
+> Le questionnaire prend 7 minutes, la plupart des questions sont à cocher :
 > {lien}
 >
-> Deux choses :
->
-> — **60 minutes de crédits audio vous sont offertes dès que vous répondez**,
+> **60 minutes de crédits audio vous sont offertes dès que vous répondez**,
 > quel que soit le contenu de vos réponses. C'est pour le temps que vous y
 > passez, pas pour dire du bien.
 >
-> — Une question porte sur ce qui vous a fait hésiter avant de vous engager.
-> C'est celle qui m'intéresse le plus. Répondez-y franchement.
->
-> Si certaines de vos réponses peuvent aider d'autres instituts, je vous
-> demanderai votre accord — et vous relirez le texte exact avant toute
-> publication.
+> Si vous avez été sceptique au départ, dites-le : c'est justement ce qui
+> m'intéresse le plus.
 >
 > Merci,
 > Grégory
 
-**Avant l'envoi :** demander de vive voix (dernière session live ou appel) que
-le formulaire arrive. Avec deux clients, on n'a qu'une seule bonne occasion de
-demander — ne pas la gâcher avec un envoi froid.
+**Avant l'envoi :** annoncer le formulaire de vive voix en dernière session.
 
-## 6. Relance (J+7, uniquement aux non-répondants)
+### Relance J+7 (non-répondants)
 
-> **Objet :** Petite relance — votre retour sur la formation
->
 > Bonjour {Prénom},
 >
-> Juste un rappel au cas où le message serait passé à la trappe : {lien}
+> Petit rappel au cas où : {lien}
 >
-> Si vous manquez de temps, répondez uniquement à la question 11 (ce qui vous a
-> fait hésiter) — c'est déjà très utile. Les crédits vous seront offerts
-> quand même.
+> Si vous manquez de temps, répondez seulement aux questions 6, 7 et 8 — c'est
+> déjà très utile. Les crédits vous seront offerts quand même.
 >
 > Grégory
 
-## 7. Email de validation avant publication
+### Validation avant publication
 
-> **Objet :** Validation avant publication — votre témoignage
->
 > Bonjour {Prénom},
 >
-> Merci pour vos réponses. J'aimerais publier l'extrait ci-dessous. Je l'ai
-> resserré pour le web, sans rien ajouter ni changer au sens :
+> Merci pour vos réponses. J'aimerais publier l'extrait ci-dessous, resserré
+> pour le web, sans rien ajouter ni changer au sens :
 >
 > > « {citation éditée} »
 > > {Prénom Nom}, {fonction}, {institut}
 >
 > *(vos mots d'origine : « {citation brute} »)*
 >
-> Il apparaîtrait comme sur l'aperçu joint, sur la page {page}.
->
 > Me confirmez-vous par retour de mail que je peux le publier ainsi ? Si vous
 > préférez une autre formulation, une version plus courte, ou finalement ne pas
-> apparaître, dites-le simplement — aucun souci.
+> apparaître, dites-le simplement.
 >
 > Grégory
 
-**Conserver la réponse.** C'est la preuve de consentement.
+**Conserver la réponse** — c'est la preuve de consentement.
 
 ---
 
-## 8. Règles d'édition
+## 7. Règles d'édition
 
-**Autorisé**
-- Couper le début/la fin, marquer les coupes internes par « … »
-- Supprimer « euh », « en fait », répétitions, digressions
-- Corriger orthographe et ponctuation
-- Réduire une réponse de 200 mots à une citation de 25 mots
+**Autorisé** — couper le début/la fin, marquer les coupes par « … », supprimer
+les hésitations et répétitions, corriger orthographe et ponctuation, réduire
+200 mots à 25.
 
-**Interdit**
-- Ajouter un mot non prononcé (même un adjectif « évident »)
-- Fusionner deux réponses en une seule citation entre guillemets
-- Changer un « plutôt utile » en « très utile »
-- Publier un chiffre que la personne n'a pas donné
+**Interdit** — ajouter un mot non prononcé, fusionner deux réponses en une
+citation, transformer « plutôt utile » en « très utile », publier un chiffre
+que la personne n'a pas donné.
 
-**Bonne longueur** : 15 à 35 mots pour une citation site. Au-delà, on perd le
-lecteur ; en deçà, ça sonne fabriqué.
+**Longueur cible** : 15 à 35 mots.
 
 **Un bon témoignage est précis et un peu surprenant, pas élogieux.** Le meilleur
-qu'on ait aujourd'hui est celui de la DRH — il ne contient aucun compliment,
-seulement de l'étonnement concret.
+qu'on ait aujourd'hui — celui de la DRH — ne contient aucun compliment, seulement
+de l'étonnement concret.
+
+**Le format le plus utile pour vendre** : le sceptique converti. Question 4
+(« j'étais sceptique ») + question 8 (« ce qui a changé ») donnent l'arc complet
+en deux phrases. C'est exactement ce qu'un directeur inquiet de l'adoption a
+besoin de lire.
 
 ---
 
-## 9. Ce qu'on en fait ensuite
+## 8. Ce qu'on en fait
 
-1. **Publier tout de suite** la variante A avec le témoignage DRH validé —
-   la page d'accueil n'a aujourd'hui aucune preuve sociale.
-2. **Alimenter la garantie** avec les réponses à la question 11 : les hésitations
-   réelles indiquent quel risque lever (l'audit offre a identifié le renversement
-   du risque comme le vecteur le plus faible).
-3. **Réécrire la copy** avec les mots exacts des questions 8, 20 et 25 — le
-   vocabulaire des clients bat toujours le nôtre.
-4. **Chiffrer** : les paires question 7 / question 18 donnent un vrai « avant →
-   après » sourcé, à la place du « 3h → 30 min » actuel qui n'est adossé à rien.
-5. **Activer LinkedIn** : recontacter ceux qui ont coché la case 34.
+1. **Publier tout de suite** la variante A avec le témoignage DRH validé — la
+   page d'accueil n'a aujourd'hui aucune preuve sociale.
+2. **Construire la garantie** à partir de la question 2 de l'appel directeur
+   (l'audit offre a identifié le renversement du risque comme le vecteur le plus
+   faible).
+3. **Réécrire la copy** avec les mots exacts des questions 8 et 10.
+4. **Chiffrer** le « avant → après » avec les questions 5 et 6, à la place du
+   « 3h → 30 min » actuel qui n'est adossé à rien.
+5. **Activer LinkedIn** auprès de ceux qui ont coché la dernière case.
 
 ---
 
