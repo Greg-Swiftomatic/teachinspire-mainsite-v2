@@ -10,7 +10,6 @@ import { ScrollThreadContainer } from '../components/animation/ScrollThreadConta
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SpotlightCard from '../components/reactbits/SpotlightCard';
 
-const CALENDLY_URL = BOOKING_URL;
 const CONTACT_CONVERSATION_ILLUSTRATION = '/illustrations/contact-conversation.png';
 const ABOUT_HUMAN_JUDGMENT_ILLUSTRATION = '/illustrations/about-human-judgment.png';
 
@@ -43,7 +42,7 @@ const timeline = [
     description: 'Cambridge, Université de Solihull, Birmingham',
   },
   {
-    year: '2016—2022',
+    year: '2016-2022',
     title: 'Enseignement FLE/Anglais',
     description: 'Cours individuels et collectifs',
   },
@@ -508,10 +507,10 @@ function CTASection({ prefersReducedMotion }: { prefersReducedMotion: boolean })
           </KineticHeading>
 
           <p className="text-xl text-cream/70 mb-8">
-            Réservez un appel découverte de 45 minutes. On verra vite si je peux vous aider.
+            Réservez un appel découverte de 15 minutes. On verra vite si je peux vous aider.
           </p>
 
-          <Button variant="primary" size="lg" href={CALENDLY_URL} showArrow>
+          <Button variant="primary" size="lg" href={BOOKING_URL} showArrow>
             Réserver un appel
           </Button>
         </motion.div>
@@ -527,7 +526,7 @@ export function AboutPage() {
   return (
     <ScrollThreadContainer preset="about">
       <PageMeta
-        title="À propos de Gregory — TeachInspire"
+        title="À propos de Gregory : TeachInspire"
         description="TeachInspire est né d'une pratique de terrain : utiliser l'IA pour préparer plus vite, tout en gardant le jugement pédagogique côté formateur."
         path="/a-propos"
       />

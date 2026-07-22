@@ -8,7 +8,6 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 import { BOOKING_URL } from '../assets/assets';
 
-const CALENDLY_URL = BOOKING_URL;
 const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f9ff1fc5d4e87fe22ae3f932d6f/watch';
 
 const previewPoints = [
@@ -57,7 +56,7 @@ export function InvitePage() {
   return (
     <main className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
-        title="Aperçu privé — TeachInspire"
+        title="Aperçu privé : TeachInspire"
         description="Aperçu vidéo privé de la formation TeachInspire pour instituts de langues."
         path="/invite"
         noindex
@@ -118,7 +117,7 @@ export function InvitePage() {
                 <Button variant="primary" size="lg" href="/formation" showArrow>
                   Voir le programme complet
                 </Button>
-                <Button variant="secondary" size="lg" href={CALENDLY_URL} showArrow>
+                <Button variant="secondary" size="lg" href={BOOKING_URL} showArrow>
                   Réserver un appel
                 </Button>
               </motion.div>
@@ -129,7 +128,7 @@ export function InvitePage() {
                 <div className="aspect-video bg-navy/5 border border-navy/10 overflow-hidden">
                   <iframe
                     src={VIDEO_URL}
-                    title="TeachInspire — aperçu privé de la formation"
+                    title="TeachInspire : aperçu privé de la formation"
                     className="w-full h-full"
                     allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                     allowFullScreen
@@ -199,7 +198,7 @@ export function InvitePage() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
-                  <Button variant="cta" size="lg" href={CALENDLY_URL} showArrow>
+                  <Button variant="cta" size="lg" href={BOOKING_URL} showArrow>
                     Réserver un appel découverte
                   </Button>
                   <Button variant="secondary" size="lg" href="/contact" className="border-cream/20 text-cream hover:bg-cream/10 hover:border-cream/40 focus-visible:ring-cream focus-visible:ring-offset-navy">

@@ -17,7 +17,7 @@ export function MentionsLegalesPage() {
     <section className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
         title="Mentions légales | TeachInspire"
-        description="Mentions légales de TeachInspire — informations légales, éditeur, hébergeur et conditions d'utilisation."
+        description="Mentions légales de TeachInspire : informations légales, éditeur, hébergeur et conditions d'utilisation."
         path="/mentions-legales"
         noindex
       />
@@ -51,7 +51,7 @@ export function MentionsLegalesPage() {
                   Le site <strong>teachinspire.me</strong> est édité par :
                 </p>
                 <ul className="mt-3 space-y-1">
-                  <li>Gregory [NOM] — Auto-entrepreneur</li>
+                  <li>Gregory [NOM] : Auto-entrepreneur</li>
                   <li>SIRET : [À COMPLÉTER]</li>
                   <li>Siège social : [À COMPLÉTER]</li>
                   <li>

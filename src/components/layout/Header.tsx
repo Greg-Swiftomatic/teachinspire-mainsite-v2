@@ -42,7 +42,7 @@ export function Header() {
       <Container size="wide" className="xl:max-w-[94rem] xl:px-10">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex min-h-11 items-center" aria-label="TeachInspire — Accueil">
+          <Link to="/" className="flex min-h-11 items-center" aria-label="TeachInspire : Accueil">
             <img
               src={SITE_LOGO}
               alt=""

@@ -127,7 +127,7 @@ function VideoDialog({ open, onClose }: VideoDialogProps) {
             src={`${HERO_VIDEO_EMBED}&player[autoplay]=true`}
             allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
             allowFullScreen
-            title="TeachInspire — présentation vidéo"
+            title="TeachInspire : présentation vidéo"
           />
         )}
       </div>

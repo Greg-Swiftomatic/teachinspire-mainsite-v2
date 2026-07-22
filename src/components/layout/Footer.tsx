@@ -28,7 +28,7 @@ export function Footer({ compact = false }: { compact?: boolean }) {
               <Link
                 to="/"
                 className="inline-flex min-h-11 items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-navy"
-                aria-label="TeachInspire — Accueil"
+                aria-label="TeachInspire : Accueil"
               >
                 <img
                   src={SITE_LOGO}

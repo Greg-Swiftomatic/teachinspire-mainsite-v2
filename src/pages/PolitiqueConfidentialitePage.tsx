@@ -17,7 +17,7 @@ export function PolitiqueConfidentialitePage() {
     <section className="bg-cream min-h-screen relative overflow-hidden">
       <PageMeta
         title="Politique de confidentialité | TeachInspire"
-        description="Politique de confidentialité de TeachInspire — comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD."
+        description="Politique de confidentialité de TeachInspire : comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD."
         path="/confidentialite"
         noindex
       />
@@ -52,7 +52,7 @@ export function PolitiqueConfidentialitePage() {
                   sur ce site est :
                 </p>
                 <ul className="mt-3 space-y-1">
-                  <li>Gregory [NOM] — Auto-entrepreneur</li>
+                  <li>Gregory [NOM] : Auto-entrepreneur</li>
                   <li>SIRET : [À COMPLÉTER]</li>
                   <li>Siège social : [À COMPLÉTER]</li>
                   <li>
@@ -75,10 +75,10 @@ export function PolitiqueConfidentialitePage() {
                 <p>Dans le cadre de l'utilisation de ce site, les données suivantes peuvent être collectées :</p>
                 <ul className="mt-3 space-y-1 list-disc list-inside">
                   <li>
-                    <strong>Adresse email</strong> — lorsque vous prenez rendez-vous via Cal.com
+                    <strong>Adresse email</strong> : lorsque vous prenez rendez-vous via Zoom Scheduler
                   </li>
                   <li>
-                    <strong>Adresse IP</strong> — via les journaux serveur (logs) de l'hébergeur
+                    <strong>Adresse IP</strong> : via les journaux serveur (logs) de l'hébergeur
                   </li>
                 </ul>
               </div>
@@ -104,11 +104,11 @@ export function PolitiqueConfidentialitePage() {
                 <p>Le traitement de vos données repose sur :</p>
                 <ul className="mt-3 space-y-1 list-disc list-inside">
                   <li>
-                    <strong>Votre consentement</strong> (Article 6.1.a du RGPD) — lorsque
+                    <strong>Votre consentement</strong> (Article 6.1.a du RGPD) : lorsque
                     vous prenez rendez-vous ou nous contactez
                   </li>
                   <li>
-                    <strong>L'intérêt légitime</strong> (Article 6.1.f du RGPD) — pour
+                    <strong>L'intérêt légitime</strong> (Article 6.1.f du RGPD) : pour
                     la sécurité du site et l'analyse des journaux serveur
                   </li>
                 </ul>
@@ -124,14 +124,14 @@ export function PolitiqueConfidentialitePage() {
                 </p>
                 <ul className="mt-3 space-y-2">
                   <li>
-                    <strong>Cal.com</strong> — Gestion des rendez-vous en ligne
+                    <strong>Zoom Video Communications, Inc.</strong> : gestion des rendez-vous en ligne via Zoom Scheduler
                   </li>
                   <li>
-                    <strong>Cloudflare, Inc.</strong> — Hébergement du site et réseau de
+                    <strong>Cloudflare, Inc.</strong> : hébergement du site et réseau de
                     diffusion de contenu (CDN)
                   </li>
                   <li>
-                    <strong>Google Fonts</strong> — Chargement des polices de caractères
+                    <strong>Google Fonts</strong> : chargement des polices de caractères
                     (Fraunces, DM Sans, Caveat)
                   </li>
                 </ul>
@@ -143,7 +143,7 @@ export function PolitiqueConfidentialitePage() {
                   6. Transferts de données hors de l'Union européenne
                 </h2>
                 <p>
-                  Certains de nos sous-traitants (Cal.com, Cloudflare, Google) sont
+                  Certains de nos sous-traitants (Zoom, Cloudflare, Google) sont
                   basés aux États-Unis. Ces transferts sont encadrés par des clauses
                   contractuelles types (CCT) approuvées par la Commission européenne,
                   conformément à l'article 46 du RGPD.
@@ -157,11 +157,11 @@ export function PolitiqueConfidentialitePage() {
                 </h2>
                 <ul className="space-y-1 list-disc list-inside">
                   <li>
-                    <strong>Données de contact</strong> — 3 ans à compter du dernier
+                    <strong>Données de contact</strong> : 3 ans à compter du dernier
                     échange
                   </li>
                   <li>
-                    <strong>Journaux serveur (logs)</strong> — 12 mois
+                    <strong>Journaux serveur (logs)</strong> : 12 mois
                   </li>
                 </ul>
               </div>

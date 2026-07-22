@@ -6,7 +6,7 @@
 
 const BASE_URL = 'https://teachinspire.me';
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
-const DEFAULT_IMAGE_ALT = 'TeachInspire — Gagner du temps sans perdre le métier';
+const DEFAULT_IMAGE_ALT = 'TeachInspire : gagner du temps sans perdre le métier';
 
 interface PageMetaProps {
   title: string;

@@ -6,7 +6,7 @@ export function HomePage() {
   return (
     <>
       <PageMeta
-        title="TeachInspire — IA pour formateurs de langues"
+        title="TeachInspire : IA pour formateurs de langues"
         description="Formation IA pour instituts de langues. Vos formateurs apprennent à créer des cours à partir de sources réelles, avec une méthode commune et des critères pédagogiques clairs."
         path="/"
       />
