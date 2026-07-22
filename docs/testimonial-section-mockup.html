@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TeachInspire — Maquette section témoignages</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ti-navy:#2c3d57;
+    --ti-navy-deep:#153454;
+    --ti-paper:#f7f3eb;
+    --ti-paper-warm:#f3eee7;
+    --ti-rust:#b7553d;
+    --ti-yellow:#e8b92f;
+    --ti-sage:#85a2a3;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:'DM Sans',system-ui,sans-serif;
+    color:var(--ti-navy);
+    background:var(--ti-paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  .shell{position:relative;z-index:1;width:min(1240px,calc(100% - 48px));margin-inline:auto}
+
+  /* ---- annotation chrome (mockup only, not part of the site) ---- */
+  .note{
+    background:var(--ti-navy-deep);color:#f7f3eb;padding:14px 0;
+    font-size:13px;letter-spacing:.02em;
+  }
+  .note .shell{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .note b{color:var(--ti-yellow);font-weight:600}
+  .variant-tag{
+    display:inline-block;margin-bottom:6px;padding:5px 10px;
+    background:var(--ti-navy);color:var(--ti-paper);
+    font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .variant-head{border-top:1px solid rgba(44,61,87,.14);padding-top:22px;margin-top:0}
+  .variant-head p{margin:6px 0 0;font-size:14px;color:rgba(44,61,87,.7);max-width:70ch}
+  .fake{
+    display:inline-block;margin-left:8px;padding:3px 7px;
+    background:var(--ti-rust);color:#fff;font-size:10px;font-weight:700;
+    letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;
+  }
+
+  /* ---- shared editorial primitives (mirrors approved-home) ---- */
+  .eyebrow{
+    display:flex;align-items:center;gap:14px;margin:0 0 24px;
+    color:var(--ti-rust);font-size:12px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;
+  }
+  .eyebrow::after{content:'';flex:1;height:1px;background:rgba(44,61,87,.14)}
+  .section{position:relative;overflow:hidden;padding-block:clamp(52px,6vw,86px)}
+  .section.paper{background:var(--ti-paper-warm)}
+  .section.grid12::before{
+    position:absolute;inset:0;content:'';pointer-events:none;
+    background-image:linear-gradient(90deg,rgb(44 61 87 / 4%) 1px,transparent 1px);
+    background-size:calc(100% / 12) 100%;
+  }
+
+  /* ---- A. featured single quote ---- */
+  .featured{display:grid;grid-template-columns:minmax(280px,.62fr) minmax(420px,1.38fr);gap:clamp(28px,5vw,72px);align-items:start}
+  .featured .mark{
+    font-family:'Fraunces',Georgia,serif;font-size:150px;line-height:.6;
+    color:var(--ti-yellow);margin:0;
+  }
+  .featured blockquote{
+    margin:0;font-family:'Fraunces',Georgia,serif;
+    font-size:clamp(28px,3vw,42px);line-height:1.18;font-weight:600;
+    text-wrap:balance;
+  }
+  .featured .context{
+    margin:24px 0 0;font-size:16px;line-height:1.6;color:rgba(44,61,87,.78);max-width:60ch;
+  }
+  .attrib{display:flex;align-items:center;gap:14px;margin-top:28px;flex-wrap:wrap}
+  .avatar{
+    width:46px;height:46px;flex:none;background:var(--ti-sage);
+    display:grid;place-items:center;color:#fff;font-weight:700;font-size:15px;
+  }
+  .attrib .who{font-size:15px;font-weight:600;line-height:1.35}
+  .attrib .role{font-size:14px;color:rgba(44,61,87,.68);line-height:1.35}
+  .verified{
+    display:inline-flex;align-items:center;gap:6px;margin-top:3px;
+    font-size:12.5px;font-weight:600;color:var(--ti-rust);text-decoration:none;
+    border-bottom:1px solid rgba(183,85,61,.35);padding-bottom:1px;
+  }
+  .verified svg{width:13px;height:13px}
+  .stamp{
+    display:inline-block;margin-top:26px;padding:8px 12px;
+    border:1px solid rgba(44,61,87,.22);
+    font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(44,61,87,.66);
+  }
+
+  /* ---- B. three-up grid ---- */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(44,61,87,.12);margin-top:8px}
+  .trio article{background:var(--ti-paper-warm);padding:clamp(24px,2.4vw,34px);display:flex;flex-direction:column}
+  .trio .num{font-family:'Fraunces',Georgia,serif;font-size:42px;font-weight:700;color:rgba(44,61,87,.13);line-height:1;margin:0 0 14px}
+  .trio blockquote{margin:0 0 auto;font-family:'Fraunces',Georgia,serif;font-size:19px;line-height:1.35;font-weight:600}
+  .trio .attrib{margin-top:24px;gap:11px}
+  .trio .avatar{width:38px;height:38px;font-size:13px}
+  .trio .who{font-size:14px}
+  .trio .role{font-size:13px}
+
+  /* ---- C. director band with metric ---- */
+  .band{background:var(--ti-navy-deep);color:var(--ti-paper);padding-block:clamp(48px,5.5vw,74px)}
+  .band .eyebrow{color:var(--ti-yellow)}
+  .band .eyebrow::after{background:rgba(247,243,235,.2)}
+  .band-grid{display:grid;grid-template-columns:minmax(220px,.5fr) minmax(400px,1.5fr);gap:clamp(28px,5vw,66px);align-items:center}
+  .metric{font-family:'Fraunces',Georgia,serif;font-size:clamp(56px,6vw,84px);line-height:.95;font-weight:700;color:var(--ti-yellow);margin:0;font-variant-numeric:tabular-nums}
+  .metric-label{margin:12px 0 0;font-size:15px;line-height:1.5;color:rgba(247,243,235,.8)}
+  .band blockquote{margin:0;font-family:'Fraunces',Georgia,serif;font-size:clamp(22px,2.2vw,30px);line-height:1.28;font-weight:600;color:var(--ti-paper);text-wrap:balance}
+  .band .who{color:var(--ti-paper)}
+  .band .role{color:rgba(247,243,235,.7)}
+  .band .verified{color:var(--ti-yellow);border-bottom-color:rgba(232,185,47,.4)}
+  .band .avatar{background:rgba(247,243,235,.16)}
+
+  @media (max-width:900px){
+    .featured,.band-grid{grid-template-columns:1fr}
+    .trio{grid-template-columns:1fr}
+    .featured .mark{font-size:96px}
+  }
+</style>
+</head>
+<body>
+
+<div class="note">
+  <div class="shell">
+    <b>MAQUETTE INTERNE</b>
+    <span>Trois emplacements possibles pour les témoignages sur teachinspire.me — à choisir, pas à cumuler tels quels.</span>
+  </div>
+</div>
+
+<!-- ============ A ============ -->
+<section class="section grid12">
+  <div class="shell">
+    <div class="variant-head">
+      <span class="variant-tag">Variante A · Témoignage mis en avant</span>
+      <p>Un seul témoignage, traité comme une citation éditoriale. C'est le format à utiliser tant qu'il n'y a qu'une poignée de retours : un témoignage précis et vérifiable vaut mieux que trois vagues. Emplacement recommandé : page d'accueil, juste après « Ce que ça change dans la semaine ».</p>
+    </div>
+  </div>
+  <div class="shell" style="margin-top:44px">
+    <p class="eyebrow">Sur le terrain</p>
+    <div class="featured">
+      <div>
+        <p class="mark">&ldquo;</p>
+        <span class="stamp">Testé en institut</span>
+      </div>
+      <div>
+        <blockquote>Je suis étonnée d'entendre des situations qu'on vit vraiment au travail.</blockquote>
+        <p class="context">Retour d'une DRH, après une séquence créée avec la méthode pour un traiteur éthique en pleine internationalisation — un secteur que la formatrice ne connaissait pas.</p>
+        <div class="attrib">
+          <div class="avatar">?</div>
+          <div>
+            <div class="who">Prénom Nom <span class="fake">à confirmer</span></div>
+            <div class="role">DRH · Nom de l'entreprise</div>
+            <a class="verified" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              Vérifier sur LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ B ============ -->
+<section class="section paper grid12">
+  <div class="shell">
+    <div class="variant-head">
+      <span class="variant-tag">Variante B · Trois retours formateurs</span>
+      <p>À activer quand vous aurez 3 à 6 retours de formateurs. Prouve l'adoption dans l'équipe, pas seulement la satisfaction du décideur. Emplacement : page <code>/formation</code>, après « Comment la formation se déroule ».</p>
+    </div>
+  </div>
+  <div class="shell" style="margin-top:40px">
+    <p class="eyebrow">Ce qu'en disent les formateurs</p>
+    <div class="trio">
+      <article>
+        <p class="num">01</p>
+        <blockquote>Placeholder — remplacer par un vrai verbatim de formateur.<span class="fake">exemple</span></blockquote>
+        <div class="attrib">
+          <div class="avatar">–</div>
+          <div><div class="who">Prénom N.</div><div class="role">Formatrice FLE · Institut</div></div>
+        </div>
+      </article>
+      <article>
+        <p class="num">02</p>
+        <blockquote>Placeholder — remplacer par un vrai verbatim de formateur.<span class="fake">exemple</span></blockquote>
+        <div class="attrib">
+          <div class="avatar">–</div>
+          <div><div class="who">Prénom N.</div><div class="role">Formateur anglais · Institut</div></div>
+        </div>
+      </article>
+      <article>
+        <p class="num">03</p>
+        <blockquote>Placeholder — remplacer par un vrai verbatim de formateur.<span class="fake">exemple</span></blockquote>
+        <div class="attrib">
+          <div class="avatar">–</div>
+          <div><div class="who">Prénom N.</div><div class="role">Formatrice espagnol · Institut</div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ C ============ -->
+<section class="band">
+  <div class="shell">
+    <p class="eyebrow">Résultat institut</p>
+    <div class="band-grid">
+      <div>
+        <p class="metric">— / —</p>
+        <p class="metric-label">formateurs utilisent la méthode chaque semaine<br><span style="opacity:.65">chiffre à collecter via le formulaire</span></p>
+      </div>
+      <div>
+        <blockquote>Placeholder — citation du directeur / de la responsable pédagogique sur l'adoption dans l'équipe.<span class="fake">exemple</span></blockquote>
+        <div class="attrib">
+          <div class="avatar">–</div>
+          <div>
+            <div class="who">Prénom Nom</div>
+            <div class="role">Direction · Institut</div>
+            <a class="verified" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+              Vérifier sur LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="note" style="background:var(--ti-navy)">
+  <div class="shell">
+    <b>RAPPEL</b>
+    <span>Les blocs marqués « exemple » sont des placeholders de mise en page — aucun n'est un vrai témoignage. Seule la citation DRH de la variante A est authentique, et elle reste à valider par son autrice avant publication.</span>
+  </div>
+</div>
+
+</body>
+</html>
