@@ -6,12 +6,12 @@
 > formation : c'est sa direction qui l'a inscrit. On ne peut donc pas lui poser
 > de questions d'acheteur (« qu'est-ce qui vous a fait hésiter à vous engager »,
 > « comment avez-vous justifié la dépense »). Sa décision à lui n'a pas été
-> d'acheter, mais **d'adopter ou non la méthode une fois la formation imposée** —
+> d'acheter, mais **d'adopter ou non la méthode une fois la formation imposée**,
 > et c'est justement ce qui intéresse un directeur qui hésite.
 
 | Public | Nombre | Dispositif | Durée |
 |---|---|---|---|
-| **Formateurs** | 15–25 | Formulaire en ligne (ci-dessous) | **< 8 min** |
+| **Formateurs** | 15 à 25 | Formulaire en ligne (ci-dessous) | **< 8 min** |
 | **Directeurs / responsables pédagogiques** | 2 | **Appel enregistré de 20 min**, pas de formulaire | 20 min |
 
 Pourquoi un appel pour les directeurs : ils sont deux. Un formulaire sert à
@@ -23,16 +23,16 @@ réutilisable.
 
 ## 1. Les trois règles non négociables
 
-**Règle 1 — Les crédits sont offerts à tous ceux qui répondent, quoi qu'ils écrivent.**
+**Règle 1 : les crédits sont offerts à tous ceux qui répondent, quoi qu'ils écrivent.**
 Jamais conditionnés à un avis positif ni à l'autorisation de publier. Sinon :
 témoignage incentivé → obligation de divulgation (directive Omnibus transposée
 en droit français) **et** perte de crédibilité. À faire valider par un juriste.
 
-**Règle 2 — On n'invente jamais un mot.** On coupe, on resserre, on corrige
+**Règle 2 : on n'invente jamais un mot.** On coupe, on resserre, on corrige
 l'orthographe. On n'ajoute rien, on ne change pas le sens, on ne fusionne pas
 deux réponses en une citation.
 
-**Règle 3 — Rien n'est publié sans validation écrite de la version finale.**
+**Règle 3 : rien n'est publié sans validation écrite de la version finale.**
 C'est à la fois la règle éthique, la preuve de consentement RGPD et la
 protection juridique.
 
@@ -40,7 +40,7 @@ protection juridique.
 
 ## 2. Garder le formulaire court : où passe réellement le temps
 
-Le coût pour le répondant, ce n'est pas le nombre de questions — c'est le nombre
+Le coût pour le répondant, ce n'est pas le nombre de questions, c'est le nombre
 de **champs libres**. Douze questions dont huit à cliquer se remplissent plus
 vite que six questions ouvertes.
 
@@ -58,7 +58,7 @@ formulaire maison.
 > **Votre retour sur la formation TeachInspire**
 >
 > 7 minutes, pas plus. L'objectif est de comprendre ce que la formation a changé
-> — ou pas — dans votre façon de préparer vos cours.
+> (ou pas) dans votre façon de préparer vos cours.
 >
 > **60 minutes de crédits audio vous sont offertes dès l'envoi de vos réponses**,
 > quel que soit leur contenu, et que vous acceptiez ou non d'être cité·e.
@@ -75,10 +75,10 @@ formulaire maison.
 4. **Quand votre direction vous a annoncé cette formation IA, qu'est-ce que vous
    vous êtes dit ?** *(une seule réponse)*
    - ☐ Curieux·se, plutôt partant·e
-   - ☐ Sceptique — j'avais déjà essayé l'IA sans résultat convaincant
-   - ☐ Réticent·e — je ne voyais pas ce que l'IA venait faire dans mon métier
+   - ☐ Sceptique : j'avais déjà essayé l'IA sans résultat convaincant
+   - ☐ Réticent·e : je ne voyais pas ce que l'IA venait faire dans mon métier
    - ☐ Inquiet·e pour l'avenir du métier
-   - ☐ « Encore une formation » — je n'avais pas le temps
+   - ☐ « Encore une formation » : je n'avais pas le temps
    - ☐ Autre : ______
 
 5. Avant la formation, combien de temps vous prenait la préparation d'un cours
@@ -120,7 +120,7 @@ formulaire maison.
 
 12. **Autorisation** *(cases séparées, aucune pré-cochée)*
     - ☐ J'autorise TeachInspire à publier tout ou partie de mes réponses.
-      *Sans cette case, vos réponses restent internes — les crédits vous sont
+      *Sans cette case, vos réponses restent internes, et les crédits vous sont
       offerts de la même façon.*
 
     Si oui, jusqu'où :
@@ -169,7 +169,7 @@ formateurs. Si les deux concordent, c'est une preuve d'adoption très solide.
 |---|---|---|
 | Fin du Mois 1 | La première victoire, à chaud | 1 question en fin de session live |
 | Fin de formation | Le formulaire ci-dessus | Email + demande de vive voix avant |
-| +3 mois après | L'usage durable — le plus crédible | Relance : questions 7 et 8 seulement |
+| +3 mois après | L'usage durable, le plus crédible | Relance : questions 7 et 8 seulement |
 
 **À vérifier tout de suite :** les sessions live Zoom sont-elles enregistrées ?
 Une réaction spontanée de 30 secondes vaut plus que n'importe quel formulaire.
@@ -184,7 +184,7 @@ Vérifier ce que couvre le consentement initial avant toute réutilisation.
 > Bonjour {Prénom},
 >
 > Vous venez de terminer la formation. J'aimerais savoir ce que ça a donné
-> concrètement de votre côté — ce qui a changé dans votre préparation de cours,
+> concrètement de votre côté : ce qui a changé dans votre préparation de cours,
 > et ce qui n'a pas marché.
 >
 > Le questionnaire prend 7 minutes, la plupart des questions sont à cocher :
@@ -208,7 +208,7 @@ Vérifier ce que couvre le consentement initial avant toute réutilisation.
 >
 > Petit rappel au cas où : {lien}
 >
-> Si vous manquez de temps, répondez seulement aux questions 6, 7 et 8 — c'est
+> Si vous manquez de temps, répondez seulement aux questions 6, 7 et 8, c'est
 > déjà très utile. Les crédits vous seront offerts quand même.
 >
 > Grégory
@@ -231,24 +231,24 @@ Vérifier ce que couvre le consentement initial avant toute réutilisation.
 >
 > Grégory
 
-**Conserver la réponse** — c'est la preuve de consentement.
+**Conserver la réponse** : c'est la preuve de consentement.
 
 ---
 
 ## 7. Règles d'édition
 
-**Autorisé** — couper le début/la fin, marquer les coupes par « … », supprimer
+**Autorisé** : couper le début/la fin, marquer les coupes par « … », supprimer
 les hésitations et répétitions, corriger orthographe et ponctuation, réduire
 200 mots à 25.
 
-**Interdit** — ajouter un mot non prononcé, fusionner deux réponses en une
+**Interdit** : ajouter un mot non prononcé, fusionner deux réponses en une
 citation, transformer « plutôt utile » en « très utile », publier un chiffre
 que la personne n'a pas donné.
 
 **Longueur cible** : 15 à 35 mots.
 
 **Un bon témoignage est précis et un peu surprenant, pas élogieux.** Le meilleur
-qu'on ait aujourd'hui — celui de la DRH — ne contient aucun compliment, seulement
+qu'on ait aujourd'hui, celui de la DRH, ne contient aucun compliment, seulement
 de l'étonnement concret.
 
 **Le format le plus utile pour vendre** : le sceptique converti. Question 4
@@ -260,7 +260,7 @@ besoin de lire.
 
 ## 8. Ce qu'on en fait
 
-1. **Publier tout de suite** la variante A avec le témoignage DRH validé — la
+1. **Publier tout de suite** la variante A avec le témoignage DRH validé : la
    page d'accueil n'a aujourd'hui aucune preuve sociale.
 2. **Construire la garantie** à partir de la question 2 de l'appel directeur
    (l'audit offre a identifié le renversement du risque comme le vecteur le plus
@@ -274,5 +274,5 @@ besoin de lire.
 
 ## Fichiers liés
 
-- `docs/testimonial-section-mockup.html` — maquette des 3 emplacements
-- `docs/salvaged-copy-from-dead-code.md` — le témoignage DRH d'origine
+- `docs/testimonial-section-mockup.html` : maquette des 3 emplacements
+- `docs/salvaged-copy-from-dead-code.md` : le témoignage DRH d'origine

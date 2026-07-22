@@ -1,4 +1,4 @@
-# TeachInspire — CLAUDE.md v2.0
+# TeachInspire, CLAUDE.md v2.0
 
 > Last updated: February 2025
 
@@ -35,7 +35,7 @@ The canonical direction is the **July 2026 TeachInspire reference charter**: a c
 
 **Design Principles:**
 - Show a legible `source → method → result` transformation in every major visual
-- Keep 60–70% of the composition calm or empty, with one dominant movement
+- Keep 60-70% of the composition calm or empty, with one dominant movement
 - Use real-looking documentary fragments, simplified interfaces, and modular CSS/SVG objects
 - Reserve golden yellow for one focal decision, validation, or primary CTA
 - Use Fraunces and DM Sans for the interface; handwritten type is limited to short collage annotations
@@ -63,7 +63,7 @@ The approved direction is a light, magazine-like digital editorial collage inspi
 
 ### Design Principles
 1. **Make transformation visible.** Every major illustration must identify the source, show the organising method, and end in a usable pedagogical result; collage material never exists as decoration alone.
-2. **Balance density with calm.** Preserve 60–70% breathing room, alternate quiet editorial sections with denser documentary moments, and allow only one clear movement and one yellow focal point per composition.
+2. **Balance density with calm.** Preserve 60-70% breathing room, alternate quiet editorial sections with denser documentary moments, and allow only one clear movement and one yellow focal point per composition.
 3. **Keep the system modular and reproducible.** Build cards, documents, labels, and lesson packs in HTML/CSS; use SVG for arrows, connectors, and annotations; reserve image assets for genuine paper or print texture.
 4. **Keep pedagogical judgment central.** The interface should communicate that AI assists while the formateur selects, verifies, and decides. Concrete proof such as `3h → 30 min`, real sources, outputs, pricing, and institutional capital should remain easy to scan.
 5. **Earn trust through usability.** Maintain WCAG AA contrast for meaningful text, 44px touch targets, complete mobile navigation, visible focus states, semantic structure, reduced-motion support, functional CTAs, and readable diagrams without microtext.
@@ -257,10 +257,10 @@ teachinspire/
 |-------|------|---------|
 | `/` | HomePage | Main landing page |
 | `/formation` | FormationPage | Detailed program, modules, pricing |
-| `/offre` | OffrePage | Full pricing tiers — **hidden**, no nav link |
+| `/offre` | OffrePage | Full pricing tiers. **Hidden**, no nav link |
 | `/studio` | StudioPage | The three Studio ateliers + free tier |
 | `/a-propos` | AboutPage | Bio, timeline, philosophy |
-| `/invite` | InvitePage | Private video preview — **hidden**, `noindex` |
+| `/invite` | InvitePage | Private video preview. **Hidden**, `noindex` |
 | `/contact` | ContactPage | Zoom Scheduler + email |
 | `/mentions-legales`, `/confidentialite` | Legal | Footer only |
 
@@ -271,12 +271,12 @@ teachinspire/
 Homepage content lives in a single component, `components/home/ApprovedHome.tsx`
 (not one file per section):
 
-1. **Hero** — Value proposition + CTA + video modal
-2. **La frontière à garder en tête** — what stays human: Cadrer / Vérifier / Adapter
-3. **Comment ça fonctionne** (`#methode`) — source → traitement cadré → support
-4. **Ce que ça change dans la semaine** — three concrete wins
-5. **Conviction band** — "L'IA comme assistant, pas comme remplaçant"
-6. **Final CTA** — book the 15-min call
+1. **Hero** : value proposition + CTA + video modal
+2. **La frontière à garder en tête** : what stays human: Cadrer / Vérifier / Adapter
+3. **Comment ça fonctionne** (`#methode`) : source → traitement cadré → support
+4. **Ce que ça change dans la semaine** : three concrete wins
+5. **Conviction band** : "L'IA comme assistant, pas comme remplaçant"
+6. **Final CTA** : book the 15-min call
 
 ---
 
@@ -388,10 +388,10 @@ const fadeInUp = {
 
 ### Tone
 
-- **Direct** — No fluff, get to the point
-- **Authoritative** — Confident, expert positioning
-- **Professional** — B2B appropriate, not casual
-- **Honest** — Acknowledge AI limitations
+- **Direct** : no fluff, get to the point
+- **Authoritative** : confident, expert positioning
+- **Professional** : B2B appropriate, not casual
+- **Honest** : acknowledge AI limitations
 
 ### Forbidden Words/Phrases
 
@@ -401,6 +401,10 @@ const fadeInUp = {
 - "Libérez le potentiel", "Passez au niveau supérieur"
 - Generic tech buzzwords
 - Overly casual/playful language
+- **Em dashes (—) and en dashes (–) as punctuation.** Banned in all copy,
+  documentation, emails and commit messages. Use a colon, a comma,
+  parentheses, or split the sentence. Hyphens in compound words and the
+  arrow → are fine.
 
 ✅ Prefer:
 - Concrete metrics: "3h → 30min"
@@ -418,7 +422,7 @@ const fadeInUp = {
 > "Formez vos équipes à créer des leçons à partir de n'importe quelle source"
 
 **Subheadline:**
-> "La méthode IA pour vos formateurs de langues — sans expertise, sans budget."
+> "La méthode IA pour vos formateurs de langues, sans expertise, sans budget."
 
 ---
 
@@ -467,4 +471,4 @@ git merge feat/section-name
 
 ---
 
-*TeachInspire — CLAUDE.md v2.0*
+*TeachInspire, CLAUDE.md v2.0*
