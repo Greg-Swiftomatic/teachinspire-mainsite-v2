@@ -206,31 +206,42 @@ teachinspire/
     │   │   ├── Footer.tsx
     │   │   └── Container.tsx
     │   │
-    │   ├── sections/
-    │   │   ├── Hero.tsx
-    │   │   ├── Problem.tsx
-    │   │   ├── Possibility.tsx
-    │   │   ├── Approach.tsx
-    │   │   ├── Modules.tsx
-    │   │   ├── Results.tsx
-    │   │   ├── Philosophy.tsx
-    │   │   ├── Founder.tsx
-    │   │   └── FinalCTA.tsx
+    │   ├── home/
+    │   │   ├── ApprovedHome.tsx      ← homepage content + its CSS
+    │   │   └── approved-home*.css
+    │   │
+    │   ├── formation/
+    │   │   ├── ApprovedFormation.tsx ← /formation content
+    │   │   ├── formation-content.ts  ← programme + pricing data
+    │   │   └── approved-formation*.css
+    │   │
+    │   ├── animation/                ← GeometricAccent, KineticHeading, ScrollThread
+    │   ├── motion/ScrollScene.tsx
+    │   ├── seo/PageMeta.tsx
+    │   ├── errors/RouteErrorPage.tsx
+    │   ├── reactbits/SpotlightCard.tsx
     │   │
     │   └── ui/
     │       ├── Button.tsx
-    │       ├── Card.tsx
-    │       ├── Badge.tsx
-    │       └── PremiumSourceDiagram.tsx  ← GSAP animated diagram
+    │       └── GridOverlay.tsx
     │
-    ├── pages/
-    │   ├── HomePage.tsx
-    │   ├── FormationPage.tsx
+    ├── pages/                        ← thin route wrappers; content lives in components/
+    │   ├── HomePage.tsx              → ApprovedHome
+    │   ├── FormationPage.tsx         → ApprovedFormation
+    │   ├── OffrePage.tsx             ← hidden, direct URL only
+    │   ├── StudioPage.tsx
     │   ├── AboutPage.tsx
-    │   └── ContactPage.tsx
+    │   ├── InvitePage.tsx            ← hidden, noindex
+    │   ├── ContactPage.tsx
+    │   ├── MentionsLegalesPage.tsx
+    │   ├── PolitiqueConfidentialitePage.tsx
+    │   └── NotFoundPage.tsx
     │
     ├── hooks/
-    │   └── useReducedMotion.ts
+    │   ├── useReducedMotion.ts
+    │   └── useIsMobile.ts
+    │
+    ├── lib/utils.ts
     │
     └── styles/
         └── globals.css
@@ -246,22 +257,26 @@ teachinspire/
 |-------|------|---------|
 | `/` | HomePage | Main landing page |
 | `/formation` | FormationPage | Detailed program, modules, pricing |
+| `/offre` | OffrePage | Full pricing tiers — **hidden**, no nav link |
+| `/studio` | StudioPage | The three Studio ateliers + free tier |
 | `/a-propos` | AboutPage | Bio, timeline, philosophy |
+| `/invite` | InvitePage | Private video preview — **hidden**, `noindex` |
 | `/contact` | ContactPage | Zoom Scheduler + email |
+| `/mentions-legales`, `/confidentialite` | Legal | Footer only |
 
 **Note:** Plateforme page has been removed. Focus is solely on Formation.
 
 ### Homepage Sections (in order)
 
-1. **Hero** — Value proposition + CTA
-2. **Problem** — Pain points (3h prep time, generic content)
-3. **Possibility** — Source transformation diagram (GSAP animated)
-4. **Approach** — Solution preview (AI as assistant)
-5. **Modules** — 3 modules overview
-6. **Results** — Concrete benefits
-7. **Philosophy** — "L'IA comme assistant, pas comme remplaçant"
-8. **Founder** — Brief intro to Gregory
-9. **FinalCTA** — Closing call-to-action
+Homepage content lives in a single component, `components/home/ApprovedHome.tsx`
+(not one file per section):
+
+1. **Hero** — Value proposition + CTA + video modal
+2. **La frontière à garder en tête** — what stays human: Cadrer / Vérifier / Adapter
+3. **Comment ça fonctionne** (`#methode`) — source → traitement cadré → support
+4. **Ce que ça change dans la semaine** — three concrete wins
+5. **Conviction band** — "L'IA comme assistant, pas comme remplaçant"
+6. **Final CTA** — book the 15-min call
 
 ---
 
