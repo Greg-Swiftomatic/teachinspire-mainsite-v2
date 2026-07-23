@@ -6,8 +6,6 @@ const DRAFT_KEY = 'ti-temoignage-draft-v1';
 const TOTAL_STEPS = 5;
 
 export interface FormData {
-  firstName: string;
-  lastName: string;
   institute: string;
   languages: string;
   role: string;
@@ -30,17 +28,15 @@ export interface FormData {
   consentReviewBeforePublish: boolean;
   willingVideo: boolean;
   willingLinkedinPost: boolean;
-  creditEmail: string;
 }
 
 const EMPTY: FormData = {
-  firstName: '', lastName: '', institute: '', languages: '', role: 'formateur',
+  institute: '', languages: '', role: 'formateur',
   initialReaction: '', initialReactionOther: '', prepTimeBefore: '',
   prepTimeNow: '', usageFrequency: '', whatChanged: '', firstArtifact: '',
   toASkeptic: '', whatWasMissing: '',
   consentPublish: false, consentScope: [], linkedinUrl: '',
   consentReviewBeforePublish: false, willingVideo: false, willingLinkedinPost: false,
-  creditEmail: '',
 };
 
 const REACTIONS = [
@@ -145,10 +141,12 @@ function CheckList({
 
 export function TestimonialForm({
   token,
+  session,
   onSuccess,
 }: {
   token: string | null;
-  onSuccess: (creditEmail?: string) => void;
+  session: string;
+  onSuccess: () => void;
 }) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>(EMPTY);
@@ -197,7 +195,7 @@ export function TestimonialForm({
 
   const canAdvance = (): boolean => {
     switch (step) {
-      case 1: return data.firstName.trim().length > 0;
+      case 1: return true;
       case 2: return data.initialReaction !== '' && data.prepTimeBefore !== '';
       case 3: return data.prepTimeNow !== '' && data.usageFrequency !== '' && data.whatChanged.trim().length > 0;
       case 4: return true;
@@ -211,7 +209,10 @@ export function TestimonialForm({
     try {
       const res = await fetch('/api/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session}`,
+        },
         body: JSON.stringify({ ...data, token, website: honeypot }),
       });
       if (!res.ok) {
@@ -219,7 +220,7 @@ export function TestimonialForm({
         throw new Error(body.error || 'Échec de l’envoi');
       }
       try { localStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
-      onSuccess(data.creditEmail.trim() || undefined);
+      onSuccess();
     } catch (e) {
       setError(
         e instanceof Error && e.message
@@ -276,20 +277,11 @@ export function TestimonialForm({
               <>
                 <div>
                   <span className="ti-label">Vous</span>
-                  <label htmlFor="firstName" className="ti-question">Votre prénom</label>
-                  <input id="firstName" className="ti-input" value={data.firstName}
-                         onChange={(e) => set('firstName', e.target.value)}
-                         autoComplete="given-name" required />
-                </div>
-                <div>
-                  <label htmlFor="lastName" className="ti-question">Votre nom</label>
-                  <span className="ti-hint">Facultatif. Vous choisirez plus tard ce qui peut être publié.</span>
-                  <input id="lastName" className="ti-input" value={data.lastName}
-                         onChange={(e) => set('lastName', e.target.value)}
-                         autoComplete="family-name" />
-                </div>
-                <div>
                   <label htmlFor="institute" className="ti-question">Votre institut</label>
+                  <span className="ti-hint">
+                    Votre nom et votre email viennent de votre compte Studio,
+                    inutile de les ressaisir.
+                  </span>
                   <input id="institute" className="ti-input" value={data.institute}
                          onChange={(e) => set('institute', e.target.value)}
                          autoComplete="organization" />
@@ -499,20 +491,11 @@ export function TestimonialForm({
                   </motion.div>
                 )}
 
-                <div>
-                  <label htmlFor="creditEmail" className="ti-question">
-                    Sur quel email créditer vos 30 minutes ?
-                  </label>
-                  <span className="ti-hint">
-                    Offertes quoi que vous ayez répondu, et que vous ayez accepté
-                    ou non d&apos;être cité·e.
-                  </span>
-                  <input id="creditEmail" className="ti-input" type="email"
-                         inputMode="email" autoComplete="email"
-                         value={data.creditEmail}
-                         onChange={(e) => set('creditEmail', e.target.value)}
-                         placeholder="vous@institut.fr" />
-                </div>
+                <p className="border-l-2 border-yellow bg-yellow/10 px-4 py-3 text-[15px] leading-relaxed text-navy/80">
+                  Vos 30 minutes de crédits audio seront ajoutées au compte
+                  Studio avec lequel vous êtes connecté·e, quoi que vous ayez
+                  répondu.
+                </p>
 
                 <p className="text-[13px] leading-relaxed text-navy/55">
                   Vous pouvez retirer votre autorisation à tout moment en écrivant

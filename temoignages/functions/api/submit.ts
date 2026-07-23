@@ -1,21 +1,24 @@
 /**
  * Enregistre une réponse au questionnaire.
  *
- * Public : le formulaire doit pouvoir poster ici. Les protections sont donc
- * côté serveur (leurre, longueurs bornées, valeurs contrôlées) plutôt que
- * derrière une authentification.
+ * Exige une session ouverte par /api/login (compte Studio vérifié).
+ * L'identité (id, email, prénom) vient exclusivement du jeton de session,
+ * jamais des champs du formulaire, et un index unique garantit une seule
+ * réponse par compte : les 30 minutes offertes ne peuvent être obtenues
+ * qu'une fois, et uniquement par un utilisateur existant.
  */
+
+import { bearer, verifySession } from '../lib/session';
 
 interface Env {
   DB: D1Database;
+  TI_SESSION_SECRET?: string;
 }
 
 interface Payload {
   token?: string | null;
   website?: string; // leurre
 
-  firstName?: string;
-  lastName?: string;
   institute?: string;
   languages?: string;
   role?: string;
@@ -38,7 +41,6 @@ interface Payload {
   consentReviewBeforePublish?: boolean;
   willingVideo?: boolean;
   willingLinkedinPost?: boolean;
-  creditEmail?: string;
 }
 
 const REACTIONS = ['curieux', 'sceptique', 'reticent', 'inquiet', 'pas_le_temps', 'autre'];
@@ -73,17 +75,25 @@ const isSafeLinkedIn = (v: string | null): string | null => {
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
+    const secret = context.env.TI_SESSION_SECRET;
+    if (!secret) {
+      return Response.json({ error: 'Service non configuré.' }, { status: 503 });
+    }
+
+    const raw = bearer(context.request);
+    const session = raw ? await verifySession(raw, secret) : null;
+    if (!session) {
+      return Response.json(
+        { error: 'Session expirée. Reconnectez-vous avec votre compte Studio.' },
+        { status: 401 }
+      );
+    }
+
     const body = (await context.request.json()) as Payload;
 
     // Un robot remplit tous les champs, y compris celui que personne ne voit.
-    // On répond 201 pour ne rien lui apprendre, sans rien écrire en base.
     if (typeof body.website === 'string' && body.website.trim().length > 0) {
       return Response.json({ success: true }, { status: 201 });
-    }
-
-    const firstName = clean(body.firstName, 80);
-    if (!firstName) {
-      return Response.json({ error: 'Le prénom est requis.' }, { status: 400 });
     }
 
     const whatChanged = clean(body.whatChanged, 5000);
@@ -94,6 +104,20 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       );
     }
 
+    // Vérification anticipée pour un message clair (l'index unique reste la
+    // garantie finale en cas de course).
+    const dup = await context.env.DB.prepare(
+      'SELECT id FROM responses WHERE studio_user_id = ? LIMIT 1'
+    )
+      .bind(session.sub)
+      .first();
+    if (dup) {
+      return Response.json(
+        { error: 'Une réponse existe déjà pour ce compte. Merci !' },
+        { status: 409 }
+      );
+    }
+
     const token = clean(body.token, 64);
     const safeToken = token && /^[A-Za-z0-9_-]{6,64}$/.test(token) ? token : null;
 
@@ -101,7 +125,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const scope = Array.isArray(body.consentScope)
       ? body.consentScope.filter((s) => SCOPES.includes(s))
       : [];
-    // Sans autorisation de publier, aucune portée ne peut être retenue.
     const has = (s: string) => (consentPublish === 1 && scope.includes(s) ? 1 : 0);
 
     const linkedin =
@@ -111,7 +134,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     const stmt = context.env.DB.prepare(`
       INSERT INTO responses (
-        submitted_at, token,
+        submitted_at, token, studio_user_id, studio_email,
         first_name, last_name, institute, languages, role,
         initial_reaction, initial_reaction_other, prep_time_before,
         prep_time_now, usage_frequency, what_changed, first_artifact,
@@ -120,15 +143,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         consent_institute, consent_role, consent_linkedin, consent_photo,
         consent_review_before_publish, willing_video, willing_linkedin_post,
         linkedin_url, credit_email, locale, user_agent
-      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     `);
 
     const result = await stmt
       .bind(
         new Date().toISOString(),
         safeToken,
-        firstName,
-        clean(body.lastName, 80),
+        session.sub,
+        session.email,
+        session.firstName || session.email.split('@')[0],
+        null,
         clean(body.institute, 160),
         clean(body.languages, 160),
         oneOf(body.role, ROLES) ?? 'formateur',
@@ -153,7 +178,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         bit(body.willingVideo),
         bit(body.willingLinkedinPost),
         linkedin,
-        clean(body.creditEmail, 200),
+        session.email, // les crédits vont au compte connecté, pas à un email saisi
         clean(context.request.headers.get('accept-language'), 40),
         clean(context.request.headers.get('user-agent'), 300)
       )
@@ -161,7 +186,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     if (!result.success) throw new Error('Insert failed');
 
-    // Marque l'invitation comme honorée, pour ne relancer que les autres.
     if (safeToken) {
       await context.env.DB
         .prepare('UPDATE invites SET responded_at = ? WHERE token = ? AND responded_at IS NULL')
@@ -172,6 +196,13 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     return Response.json({ success: true, id: result.meta.last_row_id }, { status: 201 });
   } catch (err) {
+    // L'index unique peut claquer en cas de double envoi simultané.
+    if (err instanceof Error && /UNIQUE/i.test(err.message)) {
+      return Response.json(
+        { error: 'Une réponse existe déjà pour ce compte. Merci !' },
+        { status: 409 }
+      );
+    }
     console.error('submit error', err);
     return Response.json({ error: "L'enregistrement a échoué." }, { status: 500 });
   }

@@ -31,6 +31,11 @@ CREATE TABLE IF NOT EXISTS responses (
   submitted_at  TEXT NOT NULL,
   token         TEXT,                       -- nullable : une réponse sans invitation reste acceptée
 
+  -- Identité vérifiée : issue du compte Studio (JWT), jamais des champs du
+  -- formulaire. Un compte = une réponse (index unique ci-dessous).
+  studio_user_id  TEXT NOT NULL,
+  studio_email    TEXT NOT NULL,
+
   -- Qui
   first_name    TEXT NOT NULL,
   last_name     TEXT,
@@ -89,3 +94,4 @@ CREATE INDEX IF NOT EXISTS idx_responses_submitted ON responses(submitted_at);
 CREATE INDEX IF NOT EXISTS idx_responses_consent   ON responses(consent_publish);
 CREATE INDEX IF NOT EXISTS idx_responses_status    ON responses(quote_status);
 CREATE INDEX IF NOT EXISTS idx_responses_token     ON responses(token);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_responses_one_per_user ON responses(studio_user_id);

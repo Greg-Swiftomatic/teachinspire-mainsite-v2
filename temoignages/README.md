@@ -4,7 +4,10 @@ Formulaire de recueil de témoignages de fin de formation. Cloudflare Pages +
 D1, sur son propre sous-domaine. Les questions viennent de
 `docs/testimonial-collection-kit.md`.
 
-- Formulaire public en 5 étapes, environ 7 minutes, brouillon sauvegardé en local
+- Formulaire en 5 étapes, environ 7 minutes, brouillon sauvegardé en local
+- **Réservé aux participants** : connexion obligatoire avec le compte
+  studio.teachinspire.me ; identité et email viennent du compte, une seule
+  réponse par compte, crédits attachés au compte connecté
 - Lien personnel par participant, pour savoir qui a répondu
 - Consentement de publication à granularité fine
 - Endpoints de lecture protégés par mot de passe
@@ -35,6 +38,8 @@ Settings > Environment variables, ajouter :
 | `TI_ADMIN_BASIC_USER` | identifiant de consultation |
 | `TI_ADMIN_BASIC_PASS` | mot de passe de consultation |
 | `TI_TEMOIGNAGES_API_KEY` | facultatif, pour un export scripté |
+| `TI_SESSION_SECRET` | signe les sessions ouvertes après connexion Studio (obligatoire : sans lui, /api/login et /api/submit répondent 503) |
+| `STUDIO_LOGIN_URL` | facultatif, remplace https://studio.teachinspire.me/api/auth/login (utile en test) |
 
 Tant que ces variables ne sont pas définies, `/api/responses` et `/api/export`
 répondent 404. C'est volontaire : une instance non configurée ne doit jamais
@@ -93,6 +98,16 @@ appliquer le schéma directement au fichier utilisé par le serveur :
 sqlite3 .wrangler/state/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite < schema.sql
 ```
 
+## Authentification
+
+`/api/login` transmet les identifiants au point d'authentification officiel du
+Studio (ils ne sont ni journalisés ni stockés ici), puis émet une session
+propre au formulaire (HS256, 2 h, `TI_SESSION_SECRET`). `/api/submit` n'accepte
+que cette session : l'identité enregistrée (id, email, prénom) vient du jeton,
+jamais des champs du formulaire, et l'index unique `idx_responses_one_per_user`
+garantit une réponse par compte. À la connexion, un compte ayant déjà répondu
+est prévenu immédiatement plutôt qu'au moment de l'envoi.
+
 ## Ce qui reste à faire
 
 - **Interface d'administration.** Aujourd'hui la lecture passe par l'API et le
@@ -102,7 +117,9 @@ sqlite3 .wrangler/state/v3/d1/miniflare-D1DatabaseObject/<hash>.sqlite < schema.
   personnes, un envoi personnel depuis la boîte de Grégory obtient un bien
   meilleur taux de réponse. À reconsidérer à la troisième cohorte.
 - **Attribution des crédits.** `credited_at` existe en base mais n'est pas
-  encore alimenté ; l'attribution est manuelle.
+  encore alimenté ; l'attribution est manuelle. Aucun système de crédits audio
+  n'existe dans les dépôts locaux (Promptomatik ne gère que les prompts) :
+  l'automatisation attendra que ce système existe quelque part.
 
 ## Notes de conception
 

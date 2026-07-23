@@ -60,15 +60,22 @@ formulaire maison.
 > 7 minutes, pas plus. L'objectif est de comprendre ce que la formation a changé
 > (ou pas) dans votre façon de préparer vos cours.
 >
-> **30 minutes de crédits audio vous sont offertes dès l'envoi de vos réponses**,
-> quel que soit leur contenu, et que vous acceptiez ou non d'être cité·e.
-> Les critiques nous sont plus utiles que les compliments.
+> **30 minutes de crédits audio offertes sur votre compte Studio dès l'envoi
+> de vos réponses**, quel que soit leur contenu, et que vous acceptiez ou non
+> d'être cité·e. Les critiques nous sont plus utiles que les compliments.
+> Connexion requise avec votre compte studio.teachinspire.me.
+
+### Connexion (avant tout accès au formulaire)
+
+Le formulaire est réservé aux participants : il exige une connexion avec le
+compte **studio.teachinspire.me**. Le prénom et l'email viennent du compte
+(accueil « Bonjour {Prénom} »), les crédits sont attachés à ce compte, et un
+compte ne peut répondre qu'une seule fois.
 
 ### Vous
 
-1. Prénom et nom
-2. Institut
-3. Langue(s) que vous enseignez
+1. Institut
+2. Langue(s) que vous enseignez
 
 ### Au départ
 
@@ -131,8 +138,6 @@ formulaire maison.
     - ☐ Je veux relire la version éditée avant publication
     - ☐ Je serais prêt·e à faire un témoignage vidéo de 2 min
     - ☐ Je serais prêt·e à publier moi-même un retour sur LinkedIn
-
-    - Email pour créditer les 30 minutes : ______
 
 > Autorisation révocable à tout moment sur simple message à greg@teachinspire.me
 > (retrait sous 7 jours). Réponses conservées 3 ans.
