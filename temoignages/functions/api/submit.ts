@@ -9,12 +9,15 @@
  */
 
 import { bearer, verifySession } from '../lib/session';
+import { notifyNewResponse } from '../lib/notify';
 
 interface Env {
   DB: D1Database;
   TI_SESSION_SECRET?: string;
   TESTIMONIAL_GRANT_SECRET?: string;
   STUDIO_GRANT_URL?: string;
+  STUDIO_NOTIFY_URL?: string;
+  NOTIFY_EMAIL?: string;
 }
 
 const DEFAULT_GRANT_URL = 'https://studio.teachinspire.me/api/internal/testimonial-grant';
@@ -26,9 +29,9 @@ const GRANT_SECONDS = 1800; // 30 minutes offertes
  * credited_at est rempli ; sinon il reste NULL et signale un crédit à faire à
  * la main (SELECT ... WHERE credited_at IS NULL).
  */
-async function grantCredits(env: Env, responseId: number, studioUserId: string): Promise<void> {
+async function grantCredits(env: Env, responseId: number, studioUserId: string): Promise<boolean> {
   const secret = env.TESTIMONIAL_GRANT_SECRET;
-  if (!secret) return;
+  if (!secret) return false;
   try {
     const res = await fetch(env.STUDIO_GRANT_URL || DEFAULT_GRANT_URL, {
       method: 'POST',
@@ -37,13 +40,15 @@ async function grantCredits(env: Env, responseId: number, studioUserId: string):
     });
     if (!res.ok) {
       console.error('credit grant failed', res.status, await res.text().catch(() => ''));
-      return;
+      return false;
     }
     await env.DB.prepare('UPDATE responses SET credited_at = ? WHERE id = ?')
       .bind(new Date().toISOString(), responseId)
       .run();
+    return true;
   } catch (err) {
     console.error('credit grant error', err);
+    return false;
   }
 }
 
@@ -252,7 +257,29 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // L'unicité par compte est déjà acquise (index + 409 ci-dessus) : ce
     // crédit ne peut donc être déclenché qu'une seule fois par utilisateur.
-    await grantCredits(context.env, Number(result.meta.last_row_id), session.sub);
+    const credited = await grantCredits(context.env, Number(result.meta.last_row_id), session.sub);
+
+    await notifyNewResponse(context.env, {
+      id: Number(result.meta.last_row_id),
+      firstName: session.firstName || session.email.split('@')[0],
+      email: session.email,
+      institute,
+      languages: clean(body.languages, 160),
+      initialReaction,
+      prepTimeBefore,
+      prepTimeNow,
+      usageFrequency,
+      whatChanged,
+      firstArtifact: clean(body.firstArtifact, 3000),
+      toASkeptic: clean(body.toASkeptic, 3000),
+      whatWasMissing: clean(body.whatWasMissing, 3000),
+      consentPublish: consentPublish === 1,
+      consentScopes: scope,
+      linkedinUrl: linkedin,
+      willingVideo: body.willingVideo === true,
+      willingLinkedinPost: body.willingLinkedinPost === true,
+      credited,
+    });
 
     return Response.json({ success: true, id: result.meta.last_row_id }, { status: 201 });
   } catch (err) {

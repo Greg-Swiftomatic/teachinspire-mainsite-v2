@@ -42,6 +42,8 @@ Settings > Environment variables, ajouter :
 | `STUDIO_LOGIN_URL` | facultatif, remplace https://studio.teachinspire.me/api/auth/login (utile en test) |
 | `TESTIMONIAL_GRANT_SECRET` | secret partagé avec le worker Studio pour créditer automatiquement les 30 minutes |
 | `STUDIO_GRANT_URL` | facultatif, remplace https://studio.teachinspire.me/api/internal/testimonial-grant |
+| `STUDIO_NOTIFY_URL` | facultatif, remplace https://studio.teachinspire.me/api/internal/notify |
+| `NOTIFY_EMAIL` | facultatif, destinataire des notifications (défaut greg@teachinspire.me) |
 
 Tant que ces variables ne sont pas définies, `/api/responses` et `/api/export`
 répondent 404. C'est volontaire : une instance non configurée ne doit jamais
@@ -126,6 +128,16 @@ est prévenu immédiatement plutôt qu'au moment de l'envoi.
   conservée et `credited_at` reste NULL — la liste des crédits à faire à la
   main est `SELECT studio_email FROM responses WHERE credited_at IS NULL`.
   L'unicité est garantie en amont (une réponse par compte).
+
+## Notification par email
+
+Chaque réponse déclenche un email récapitulatif à greg@teachinspire.me
+(réponses complètes, consentement, état du crédit, reply-to sur l'email du
+participant). L'envoi passe par le relais `/api/internal/notify` du worker
+Studio, qui détient la clé Resend et le domaine expéditeur vérifié
+(noreply@promptomatik.com) ; ce projet n'a aucune clé email en propre. Le
+relais n'accepte que des destinataires TeachInspire. Best effort : un envoi
+raté ne bloque jamais l'enregistrement.
 
 ## Notes de conception
 
