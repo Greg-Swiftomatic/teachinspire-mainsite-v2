@@ -40,6 +40,8 @@ Settings > Environment variables, ajouter :
 | `TI_TEMOIGNAGES_API_KEY` | facultatif, pour un export scripté |
 | `TI_SESSION_SECRET` | signe les sessions ouvertes après connexion Studio (obligatoire : sans lui, /api/login et /api/submit répondent 503) |
 | `STUDIO_LOGIN_URL` | facultatif, remplace https://studio.teachinspire.me/api/auth/login (utile en test) |
+| `TESTIMONIAL_GRANT_SECRET` | secret partagé avec le worker Studio pour créditer automatiquement les 30 minutes |
+| `STUDIO_GRANT_URL` | facultatif, remplace https://studio.teachinspire.me/api/internal/testimonial-grant |
 
 Tant que ces variables ne sont pas définies, `/api/responses` et `/api/export`
 répondent 404. C'est volontaire : une instance non configurée ne doit jamais
@@ -116,10 +118,14 @@ est prévenu immédiatement plutôt qu'au moment de l'envoi.
 - **Envoi automatique des emails.** Volontairement absent : pour 15 à 25
   personnes, un envoi personnel depuis la boîte de Grégory obtient un bien
   meilleur taux de réponse. À reconsidérer à la troisième cohorte.
-- **Attribution des crédits.** `credited_at` existe en base mais n'est pas
-  encore alimenté ; l'attribution est manuelle. Aucun système de crédits audio
-  n'existe dans les dépôts locaux (Promptomatik ne gère que les prompts) :
-  l'automatisation attendra que ce système existe quelque part.
+- **Attribution des crédits : automatisée.** Après l'enregistrement, le
+  formulaire appelle `POST /api/internal/testimonial-grant` du worker Studio
+  (dépôt `~/Documents/GitHub/teach/promptomatik`, secret partagé
+  `TESTIMONIAL_GRANT_SECRET`) qui ajoute 1800 s via `grantAudioCredits`
+  (balance + ledger). Best effort : si l'appel échoue, la réponse est
+  conservée et `credited_at` reste NULL — la liste des crédits à faire à la
+  main est `SELECT studio_email FROM responses WHERE credited_at IS NULL`.
+  L'unicité est garantie en amont (une réponse par compte).
 
 ## Notes de conception
 

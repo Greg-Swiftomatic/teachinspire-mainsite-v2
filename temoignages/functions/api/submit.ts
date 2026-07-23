@@ -13,6 +13,38 @@ import { bearer, verifySession } from '../lib/session';
 interface Env {
   DB: D1Database;
   TI_SESSION_SECRET?: string;
+  TESTIMONIAL_GRANT_SECRET?: string;
+  STUDIO_GRANT_URL?: string;
+}
+
+const DEFAULT_GRANT_URL = 'https://studio.teachinspire.me/api/internal/testimonial-grant';
+const GRANT_SECONDS = 1800; // 30 minutes offertes
+
+/**
+ * Crédite les 30 minutes sur le compte Studio. Best effort : un échec ne doit
+ * jamais faire échouer l'enregistrement de la réponse. Si le crédit passe,
+ * credited_at est rempli ; sinon il reste NULL et signale un crédit à faire à
+ * la main (SELECT ... WHERE credited_at IS NULL).
+ */
+async function grantCredits(env: Env, responseId: number, studioUserId: string): Promise<void> {
+  const secret = env.TESTIMONIAL_GRANT_SECRET;
+  if (!secret) return;
+  try {
+    const res = await fetch(env.STUDIO_GRANT_URL || DEFAULT_GRANT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': secret },
+      body: JSON.stringify({ userId: studioUserId, seconds: GRANT_SECONDS }),
+    });
+    if (!res.ok) {
+      console.error('credit grant failed', res.status, await res.text().catch(() => ''));
+      return;
+    }
+    await env.DB.prepare('UPDATE responses SET credited_at = ? WHERE id = ?')
+      .bind(new Date().toISOString(), responseId)
+      .run();
+  } catch (err) {
+    console.error('credit grant error', err);
+  }
 }
 
 interface Payload {
@@ -193,6 +225,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         .run()
         .catch(() => undefined);
     }
+
+    // L'unicité par compte est déjà acquise (index + 409 ci-dessus) : ce
+    // crédit ne peut donc être déclenché qu'une seule fois par utilisateur.
+    await grantCredits(context.env, Number(result.meta.last_row_id), session.sub);
 
     return Response.json({ success: true, id: result.meta.last_row_id }, { status: 201 });
   } catch (err) {

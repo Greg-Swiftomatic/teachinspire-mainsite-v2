@@ -62,7 +62,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     );
   }
 
-  let data: { user?: { id?: string; email?: string; firstName?: string } };
+  // Le Studio actuel renvoie user.name ; d'anciennes versions renvoyaient
+  // user.firstName. On accepte les deux.
+  let data: { user?: { id?: string; email?: string; firstName?: string; name?: string } };
   try {
     data = (await upstream.json()) as typeof data;
   } catch {
@@ -82,14 +84,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     .bind(user.id)
     .first();
 
+  const firstName = (user.firstName || user.name || '').trim().split(/\s+/)[0] || '';
   const session = await signSession(
-    { sub: user.id, email: user.email, firstName: user.firstName || '' },
+    { sub: user.id, email: user.email, firstName },
     secret
   );
 
   return Response.json({
     session,
-    firstName: user.firstName || '',
+    firstName,
     email: user.email,
     alreadySubmitted: Boolean(existing),
   });
