@@ -11,20 +11,23 @@
 -- consentement.
 
 CREATE TABLE IF NOT EXISTS invites (
-  token         TEXT PRIMARY KEY,
-  first_name    TEXT,
-  last_name     TEXT,
-  email         TEXT,
-  institute     TEXT,
-  role          TEXT,                       -- 'formateur' | 'direction'
-  cohort        TEXT,
-  created_at    TEXT NOT NULL,
-  sent_at       TEXT,
-  responded_at  TEXT
+  token           TEXT PRIMARY KEY,
+  studio_user_id  TEXT,                     -- lie l'invitation au compte Studio
+  first_name      TEXT,
+  last_name       TEXT,
+  email           TEXT,
+  institute       TEXT,
+  role            TEXT,                     -- 'formateur' | 'direction'
+  cohort          TEXT,
+  created_at      TEXT NOT NULL,
+  sent_at         TEXT,                     -- rempli quand le SYSTÈME envoie (relance)
+  reminders_sent  INTEGER NOT NULL DEFAULT 0,
+  responded_at    TEXT
 );
 
 CREATE INDEX IF NOT EXISTS idx_invites_responded ON invites(responded_at);
 CREATE INDEX IF NOT EXISTS idx_invites_cohort    ON invites(cohort);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_invites_studio_user ON invites(studio_user_id);
 
 CREATE TABLE IF NOT EXISTS responses (
   id            INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -22,7 +22,7 @@ interface Env {
   TI_TEMOIGNAGES_API_KEY?: string;
 }
 
-const PROTECTED = ['/api/responses', '/api/export'];
+const PROTECTED = ['/api/responses', '/api/export', '/api/admin'];
 
 function unauthorized(): Response {
   return new Response('Unauthorized', {

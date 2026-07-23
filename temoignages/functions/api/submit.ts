@@ -247,13 +247,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     if (!result.success) throw new Error('Insert failed');
 
-    if (safeToken) {
-      await context.env.DB
-        .prepare('UPDATE invites SET responded_at = ? WHERE token = ? AND responded_at IS NULL')
-        .bind(new Date().toISOString(), safeToken)
-        .run()
-        .catch(() => undefined);
-    }
+    // Marque l'invitation comme honorée par compte (fiable même si la
+    // personne est arrivée sans son lien) et, à défaut, par jeton.
+    await context.env.DB
+      .prepare(
+        'UPDATE invites SET responded_at = ? WHERE responded_at IS NULL AND (studio_user_id = ? OR token = ?)'
+      )
+      .bind(new Date().toISOString(), session.sub, safeToken)
+      .run()
+      .catch(() => undefined);
 
     // L'unicité par compte est déjà acquise (index + 409 ci-dessus) : ce
     // crédit ne peut donc être déclenché qu'une seule fois par utilisateur.

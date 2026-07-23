@@ -55,14 +55,30 @@ Custom domains > `temoignages.teachinspire.me`. Cloudflare crée le CNAME.
 
 ## Envoyer les invitations
 
+La liste vient du Studio (participants actifs), pas d'un CSV. Une seule
+commande prépare les jetons, enregistre les invitations et écrit un brouillon
+d'email personnel par personne :
+
 ```bash
-# participants.csv : prenom,nom,email,institut,role
-node scripts/generate-tokens.mjs participants.csv "Cohorte 2026-09"
-npx wrangler d1 execute teachinspire-temoignages --remote --file=./invites.sql
+TI_ADMIN_USER=greg TI_ADMIN_PASS=... \
+  npm run invite -- "Cohorte 2026-09"
 ```
 
-Produit `invites.csv` avec un lien par personne, prêt pour un publipostage.
-Le texte de l'email est dans `docs/testimonial-collection-kit.md`.
+Cela appelle `POST /api/admin/prepare-invites` (protégé Basic Auth), qui
+interroge `GET /api/internal/participants` du Studio, ignore les personnes
+déjà invitées ou ayant déjà répondu, crée les invitations manquantes, puis
+renvoie les brouillons. Le script écrit `drafts.md` : un email prêt à
+copier/coller par participant.
+
+**Prepare-only, par choix.** Le premier contact n'est PAS envoyé
+automatiquement : pour une petite cohorte, un envoi personnel de Greg
+convertit bien mieux. Les invitations sont enregistrées (jeton + suivi) ;
+les relances aux non-répondants seront, elles, automatisées (cron, à venir).
+
+`drafts.md` contient des données personnelles : il est gitignoré.
+
+L'ancien flux CSV (`scripts/generate-tokens.mjs`) reste disponible pour un
+envoi hors Studio, mais n'est plus la voie principale.
 
 Le jeton n'est pas un mot de passe : il sert à savoir qui a répondu. Une
 réponse sans jeton reste acceptée, pour qu'un lien transféré fonctionne quand
