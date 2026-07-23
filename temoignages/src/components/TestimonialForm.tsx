@@ -4,6 +4,10 @@ import { Loader2, ChevronRight, ChevronLeft, Check } from 'lucide-react';
 
 const DRAFT_KEY = 'ti-temoignage-draft-v1';
 const TOTAL_STEPS = 5;
+const WHAT_CHANGED_MIN = 30;
+
+const isValidLinkedin = (v: string): boolean =>
+  /^https:\/\/([a-z0-9-]+\.)*linkedin\.com\//i.test(v.trim());
 
 export interface FormData {
   institute: string;
@@ -193,13 +197,22 @@ export function TestimonialForm({
         : [...p.consentScope, v],
     }));
 
+  const linkedinBlocked =
+    data.consentPublish &&
+    data.consentScope.includes('linkedin') &&
+    !isValidLinkedin(data.linkedinUrl);
+
   const canAdvance = (): boolean => {
     switch (step) {
-      case 1: return true;
+      case 1: return data.institute.trim().length > 0;
       case 2: return data.initialReaction !== '' && data.prepTimeBefore !== '';
-      case 3: return data.prepTimeNow !== '' && data.usageFrequency !== '' && data.whatChanged.trim().length > 0;
+      case 3: return (
+        data.prepTimeNow !== '' &&
+        data.usageFrequency !== '' &&
+        data.whatChanged.trim().length >= WHAT_CHANGED_MIN
+      );
       case 4: return true;
-      default: return true;
+      default: return !linkedinBlocked;
     }
   };
 
@@ -284,7 +297,7 @@ export function TestimonialForm({
                   </span>
                   <input id="institute" className="ti-input" value={data.institute}
                          onChange={(e) => set('institute', e.target.value)}
-                         autoComplete="organization" />
+                         autoComplete="organization" required />
                 </div>
                 <div>
                   <label htmlFor="languages" className="ti-question">
@@ -359,6 +372,14 @@ export function TestimonialForm({
                   </span>
                   <textarea id="whatChanged" className="ti-textarea" value={data.whatChanged}
                             onChange={(e) => set('whatChanged', e.target.value)} required />
+                  {data.whatChanged.trim().length > 0 &&
+                    data.whatChanged.trim().length < WHAT_CHANGED_MIN && (
+                    <p className="mt-2 text-[13px] text-rust">
+                      Encore quelques mots : c&apos;est la réponse qui nous sert
+                      le plus ({data.whatChanged.trim().length}/{WHAT_CHANGED_MIN}
+                      {' '}caractères minimum).
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="firstArtifact" className="ti-question">
@@ -465,7 +486,13 @@ export function TestimonialForm({
                         <input id="linkedinUrl" className="ti-input" type="url"
                                inputMode="url" placeholder="https://www.linkedin.com/in/…"
                                value={data.linkedinUrl}
-                               onChange={(e) => set('linkedinUrl', e.target.value)} />
+                               onChange={(e) => set('linkedinUrl', e.target.value)}
+                               aria-invalid={linkedinBlocked} required />
+                        {linkedinBlocked && data.linkedinUrl.trim().length > 0 && (
+                          <p className="mt-2 text-[13px] text-rust">
+                            Le lien doit commencer par https://www.linkedin.com/
+                          </p>
+                        )}
                       </div>
                     )}
 
@@ -521,6 +548,13 @@ export function TestimonialForm({
         </p>
       )}
 
+      {step === TOTAL_STEPS && linkedinBlocked && (
+        <p className="mt-8 border-l-2 border-rust bg-rust/10 px-4 py-3 text-[14px]">
+          Renseignez votre lien LinkedIn, ou décochez « Un lien vers mon profil
+          LinkedIn » pour envoyer sans.
+        </p>
+      )}
+
       <div className="mt-12 flex items-center justify-between gap-4 border-t border-navy/10 pt-6">
         {step > 1 ? (
           <button type="button" className="ti-btn-ghost" onClick={() => setStep((s) => s - 1)}>
@@ -534,7 +568,8 @@ export function TestimonialForm({
             Continuer <ChevronRight className="h-4 w-4" />
           </button>
         ) : (
-          <button type="button" className="ti-btn-primary" disabled={submitting}
+          <button type="button" className="ti-btn-primary"
+                  disabled={submitting || !canAdvance()}
                   onClick={submit}>
             {submitting ? (
               <>

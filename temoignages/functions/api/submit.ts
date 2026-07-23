@@ -128,10 +128,26 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return Response.json({ success: true }, { status: 201 });
     }
 
+    const institute = clean(body.institute, 160);
+    if (!institute) {
+      return Response.json({ error: "L'institut est requis." }, { status: 400 });
+    }
+
     const whatChanged = clean(body.whatChanged, 5000);
-    if (!whatChanged) {
+    if (!whatChanged || whatChanged.length < 30) {
       return Response.json(
-        { error: 'La question sur ce qui a changé est requise.' },
+        { error: 'La question sur ce qui a changé est requise (30 caractères minimum).' },
+        { status: 400 }
+      );
+    }
+
+    const initialReaction = oneOf(body.initialReaction, REACTIONS);
+    const prepTimeBefore = oneOf(body.prepTimeBefore, TIME_BEFORE);
+    const prepTimeNow = oneOf(body.prepTimeNow, TIME_NOW);
+    const usageFrequency = oneOf(body.usageFrequency, FREQUENCY);
+    if (!initialReaction || !prepTimeBefore || !prepTimeNow || !usageFrequency) {
+      return Response.json(
+        { error: 'Les questions à choix des étapes 2 et 3 sont requises.' },
         { status: 400 }
       );
     }
@@ -163,6 +179,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       consentPublish === 1 && scope.includes('linkedin')
         ? isSafeLinkedIn(clean(body.linkedinUrl, 300))
         : null;
+    // Cocher « lien LinkedIn » sans fournir de lien valide est incohérent :
+    // on refuse plutôt que d'enregistrer un consentement sans objet.
+    if (consentPublish === 1 && scope.includes('linkedin') && !linkedin) {
+      return Response.json(
+        { error: 'Le lien LinkedIn est requis, ou décochez cette option.' },
+        { status: 400 }
+      );
+    }
 
     const stmt = context.env.DB.prepare(`
       INSERT INTO responses (
@@ -186,14 +210,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         session.email,
         session.firstName || session.email.split('@')[0],
         null,
-        clean(body.institute, 160),
+        institute,
         clean(body.languages, 160),
         oneOf(body.role, ROLES) ?? 'formateur',
-        oneOf(body.initialReaction, REACTIONS),
+        initialReaction,
         clean(body.initialReactionOther, 500),
-        oneOf(body.prepTimeBefore, TIME_BEFORE),
-        oneOf(body.prepTimeNow, TIME_NOW),
-        oneOf(body.usageFrequency, FREQUENCY),
+        prepTimeBefore,
+        prepTimeNow,
+        usageFrequency,
         whatChanged,
         clean(body.firstArtifact, 3000),
         clean(body.toASkeptic, 3000),
