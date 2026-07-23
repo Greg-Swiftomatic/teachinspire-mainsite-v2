@@ -1,0 +1,11 @@
+name = "teachinspire-temoignages"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-02-02"
+compatibility_flags = ["nodejs_compat"]
+
+# Créer la base puis coller l'id renvoyé ci-dessous :
+#   npm run db:create
+[[d1_databases]]
+binding = "DB"
+database_name = "teachinspire-temoignages"
+database_id = "PLACEHOLDER_RUN_npm_run_db_create"

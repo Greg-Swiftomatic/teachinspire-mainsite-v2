@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-navy font-sans antialiased;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+
+  /* Le style éditorial TeachInspire : angles nets, pas de coins arrondis. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-rust ring-offset-2 ring-offset-cream;
+  }
+}
+
+@layer components {
+  .ti-label {
+    @apply block text-[11px] font-bold uppercase tracking-[0.14em] text-rust mb-3;
+  }
+
+  .ti-question {
+    @apply block font-display text-xl md:text-2xl font-semibold leading-snug mb-2;
+  }
+
+  .ti-hint {
+    @apply block text-[15px] leading-relaxed text-navy/65 mb-4;
+  }
+
+  .ti-input {
+    @apply w-full px-4 py-3 rounded-sm border border-navy/20 bg-white text-[16px]
+           transition-colors duration-150
+           placeholder:text-navy/35
+           focus:border-rust focus:outline-none;
+  }
+
+  .ti-textarea {
+    @apply ti-input min-h-[140px] leading-relaxed resize-y;
+  }
+
+  /* Cible tactile >= 44px, exigence du guide qualité. */
+  .ti-choice {
+    @apply flex items-start gap-3 w-full min-h-[52px] px-4 py-3 rounded-sm
+           border border-navy/15 bg-white text-left text-[15px] leading-snug
+           cursor-pointer transition-colors duration-150
+           hover:border-rust/45 hover:bg-rust/[0.03];
+  }
+
+  .ti-choice[aria-checked='true'],
+  .ti-choice[data-selected='true'] {
+    @apply border-rust bg-rust/[0.07];
+  }
+
+  .ti-marker {
+    @apply mt-[3px] h-[18px] w-[18px] flex-none border border-navy/30 bg-white;
+  }
+
+  .ti-choice[aria-checked='true'] .ti-marker,
+  .ti-choice[data-selected='true'] .ti-marker {
+    @apply border-rust bg-rust;
+  }
+
+  .ti-radio .ti-marker {
+    @apply rounded-full;
+  }
+
+  .ti-btn {
+    @apply inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3
+           rounded-sm font-medium text-[15px] transition-colors duration-150
+           disabled:opacity-45 disabled:cursor-not-allowed;
+  }
+
+  .ti-btn-primary {
+    @apply ti-btn bg-navy text-cream hover:bg-navy-deep;
+  }
+
+  .ti-btn-ghost {
+    @apply ti-btn border border-navy/20 text-navy hover:bg-navy/[0.04];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
