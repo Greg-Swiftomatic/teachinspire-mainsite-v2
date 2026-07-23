@@ -60,7 +60,7 @@ formulaire maison.
 > 7 minutes, pas plus. L'objectif est de comprendre ce que la formation a changé
 > (ou pas) dans votre façon de préparer vos cours.
 >
-> **60 minutes de crédits audio vous sont offertes dès l'envoi de vos réponses**,
+> **30 minutes de crédits audio vous sont offertes dès l'envoi de vos réponses**,
 > quel que soit leur contenu, et que vous acceptiez ou non d'être cité·e.
 > Les critiques nous sont plus utiles que les compliments.
 
@@ -132,7 +132,7 @@ formulaire maison.
     - ☐ Je serais prêt·e à faire un témoignage vidéo de 2 min
     - ☐ Je serais prêt·e à publier moi-même un retour sur LinkedIn
 
-    - Email pour créditer les 60 minutes : ______
+    - Email pour créditer les 30 minutes : ______
 
 > Autorisation révocable à tout moment sur simple message à greg@teachinspire.me
 > (retrait sous 7 jours). Réponses conservées 3 ans.
@@ -179,7 +179,7 @@ Vérifier ce que couvre le consentement initial avant toute réutilisation.
 
 ## 6. Email d'invitation (formateurs)
 
-> **Objet :** 7 minutes sur la formation + 60 min de crédits audio
+> **Objet :** 7 minutes sur la formation + 30 min de crédits audio
 >
 > Bonjour {Prénom},
 >
@@ -190,7 +190,7 @@ Vérifier ce que couvre le consentement initial avant toute réutilisation.
 > Le questionnaire prend 7 minutes, la plupart des questions sont à cocher :
 > {lien}
 >
-> **60 minutes de crédits audio vous sont offertes dès que vous répondez**,
+> **30 minutes de crédits audio vous sont offertes dès que vous répondez**,
 > quel que soit le contenu de vos réponses. C'est pour le temps que vous y
 > passez, pas pour dire du bien.
 >

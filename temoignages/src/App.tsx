@@ -49,7 +49,7 @@ export default function App() {
                   </p>
                   <p className="mt-4 border-l-2 border-yellow bg-yellow/10 px-4 py-3 text-[15px] leading-relaxed text-navy/80">
                     <strong className="font-semibold">
-                      60 minutes de crédits audio vous sont offertes
+                      30 minutes de crédits audio vous sont offertes
                     </strong>{' '}
                     dès l&apos;envoi de vos réponses, quel que soit leur contenu,
                     et que vous acceptiez ou non d&apos;être cité·e.

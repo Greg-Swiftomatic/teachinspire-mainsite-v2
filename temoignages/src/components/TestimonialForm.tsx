@@ -501,7 +501,7 @@ export function TestimonialForm({
 
                 <div>
                   <label htmlFor="creditEmail" className="ti-question">
-                    Sur quel email créditer vos 60 minutes ?
+                    Sur quel email créditer vos 30 minutes ?
                   </label>
                   <span className="ti-hint">
                     Offertes quoi que vous ayez répondu, et que vous ayez accepté

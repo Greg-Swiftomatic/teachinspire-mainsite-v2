@@ -24,7 +24,7 @@ export function SuccessScreen({ creditEmail }: { creditEmail?: string }) {
 
       <div className="mb-6 border-l-2 border-sage bg-sage/10 px-5 py-4">
         <p className="text-[15px] leading-relaxed text-navy/80">
-          <strong className="font-semibold">Vos 60 minutes de crédits audio</strong>{' '}
+          <strong className="font-semibold">Vos 30 minutes de crédits audio</strong>{' '}
           seront ajoutées à votre compte Studio sous 48 heures
           {creditEmail ? <> , sur <span className="font-medium">{creditEmail}</span></> : null}.
         </p>
