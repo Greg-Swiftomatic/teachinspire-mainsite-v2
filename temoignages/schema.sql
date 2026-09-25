@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS invites (
   institute       TEXT,
   role            TEXT,                     -- 'formateur' | 'direction'
   cohort          TEXT,
+  form_version    TEXT,                     -- mi-parcours | fin-de-parcours
   created_at      TEXT NOT NULL,
   sent_at         TEXT,                     -- rempli quand le SYSTÈME envoie (relance)
   reminders_sent  INTEGER NOT NULL DEFAULT 0,
@@ -45,6 +46,9 @@ CREATE TABLE IF NOT EXISTS responses (
   institute     TEXT,
   languages     TEXT,
   role          TEXT NOT NULL DEFAULT 'formateur',
+                -- direction | independant | salarie ('formateur' : réponses antérieures)
+  city          TEXT,
+  learner_sectors TEXT,
 
   -- Au départ
   initial_reaction        TEXT,             -- curieux | sceptique | reticent | inquiet | pas_le_temps | autre
@@ -58,11 +62,20 @@ CREATE TABLE IF NOT EXISTS responses (
   -- Champs libres
   what_changed      TEXT,                   -- la question centrale
   first_artifact    TEXT,
-  to_a_skeptic      TEXT,
+  learner_feedback  TEXT,
+  to_a_skeptic      TEXT,                   -- « un collègue ou un directeur hésite »
+  keep_one          TEXT,
   what_was_missing  TEXT,
+  recommend_score   INTEGER,                -- 0 à 10
+
+  -- Réseau
+  institutes_worked_with TEXT,
+  intro_ok               TEXT,              -- oui | peut_etre | non
 
   -- Consentement (0/1). consent_publish commande tout le reste.
   consent_publish               INTEGER NOT NULL DEFAULT 0,
+  consent_anonymous             INTEGER NOT NULL DEFAULT 0,
+  consent_city                  INTEGER NOT NULL DEFAULT 0,
   consent_first_name            INTEGER NOT NULL DEFAULT 0,
   consent_initial               INTEGER NOT NULL DEFAULT 0,
   consent_full_name             INTEGER NOT NULL DEFAULT 0,
@@ -74,6 +87,8 @@ CREATE TABLE IF NOT EXISTS responses (
   willing_video                 INTEGER NOT NULL DEFAULT 0,
   willing_linkedin_post         INTEGER NOT NULL DEFAULT 0,
   linkedin_url                  TEXT,
+  display_name                  TEXT,       -- nom tel qu'il doit apparaître
+  display_title                 TEXT,       -- fonction telle qu'elle doit apparaître
 
   -- Contrepartie
   credit_email      TEXT,
@@ -89,6 +104,7 @@ CREATE TABLE IF NOT EXISTS responses (
   admin_notes         TEXT,
 
   -- Traces techniques
+  form_version  TEXT,                       -- mi-parcours | fin-de-parcours
   locale        TEXT,
   user_agent    TEXT
 );

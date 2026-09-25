@@ -7,12 +7,14 @@
  * porte l'identité vérifiée ; /api/submit ne fait confiance qu'à ce jeton.
  */
 
+import { versionFor } from '../lib/version';
 import { signSession } from '../lib/session';
 
 interface Env {
   DB: D1Database;
   TI_SESSION_SECRET?: string;
   STUDIO_LOGIN_URL?: string;
+  FORM_VERSION?: string;
 }
 
 const DEFAULT_STUDIO_LOGIN = 'https://studio.teachinspire.me/api/auth/login';
@@ -84,15 +86,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     .bind(user.id)
     .first();
 
-  const firstName = (user.firstName || user.name || '').trim().split(/\s+/)[0] || '';
+  const fullName = (user.name || user.firstName || '').trim().replace(/\s+/g, ' ').slice(0, 120);
+  const firstName = fullName.split(' ')[0] || '';
   const session = await signSession(
-    { sub: user.id, email: user.email, firstName },
+    { sub: user.id, email: user.email, firstName, fullName },
     secret
   );
 
   return Response.json({
     session,
     firstName,
+    fullName,
+    formVersion: await versionFor(context.env.DB, user.id, context.env.FORM_VERSION),
     email: user.email,
     alreadySubmitted: Boolean(existing),
   });

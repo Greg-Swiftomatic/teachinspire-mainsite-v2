@@ -2,8 +2,8 @@
  * Protects the read endpoints of the testimonial app.
  *
  * /api/submit stays public: the form has to be able to post to it.
- * /api/responses and /api/export return every respondent's name, institute and
- * free-text answers, so they require credentials.
+ * /api/responses, /api/export and the /admin page return every respondent's
+ * name, institute and free-text answers, so they require credentials.
  *
  * Same pattern as the main site's functions/_middleware.ts: Basic Auth for a
  * browser, X-API-Key for scripts, timing-safe comparison, fail closed.
@@ -22,7 +22,7 @@ interface Env {
   TI_TEMOIGNAGES_API_KEY?: string;
 }
 
-const PROTECTED = ['/api/responses', '/api/export', '/api/admin'];
+const PROTECTED = ['/api/responses', '/api/export', '/api/admin', '/admin'];
 
 function unauthorized(): Response {
   return new Response('Unauthorized', {

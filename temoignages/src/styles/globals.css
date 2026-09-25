@@ -19,6 +19,12 @@
   :focus-visible {
     @apply outline-none ring-2 ring-rust ring-offset-2 ring-offset-cream;
   }
+
+  /* Le conteneur d'étape reçoit le focus pour les lecteurs d'écran à chaque
+     changement d'étape ; il n'a pas à être encadré visuellement. */
+  [tabindex='-1']:focus-visible {
+    @apply ring-0 ring-offset-0;
+  }
 }
 
 @layer components {
@@ -69,6 +75,17 @@
 
   .ti-radio .ti-marker {
     @apply rounded-full;
+  }
+
+  /* Échelle 0 à 10 : cases égales, nombres alignés. */
+  .ti-scale {
+    @apply grid h-11 place-items-center rounded-sm border border-navy/15 bg-white
+           text-[15px] font-medium tabular-nums transition-colors duration-150
+           hover:border-rust/45 hover:bg-rust/[0.03];
+  }
+
+  .ti-scale[aria-checked='true'] {
+    @apply border-rust bg-rust text-white;
   }
 
   .ti-btn {

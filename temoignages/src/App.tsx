@@ -5,7 +5,8 @@ import { SuccessScreen } from './components/SuccessScreen';
 import { LoginGate, type Session } from './components/LoginGate';
 
 const LOGO_URL =
-  'https://res.cloudinary.com/ducvoebot/image/upload/v1747991665/Teachinspire_logo_transparent_yjt3uf.png';
+  // Recadré sur le logo : l'image source a de larges marges transparentes.
+  'https://res.cloudinary.com/ducvoebot/image/upload/c_crop,x_110,y_246,w_830,h_540/v1747991665/Teachinspire_logo_transparent_yjt3uf.png';
 
 function readToken(): string | null {
   const t = new URLSearchParams(window.location.search).get('t');
@@ -16,7 +17,10 @@ function readToken(): string | null {
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
   const [done, setDone] = useState(false);
+  const [credited, setCredited] = useState(false);
+  const [step, setStep] = useState(1);
   const token = readToken();
+  const finished = session?.formVersion === 'fin-de-parcours';
 
   const phase: 'login' | 'already' | 'form' | 'done' = done
     ? 'done'
@@ -30,7 +34,7 @@ export default function App() {
     <div className="flex min-h-screen flex-col bg-cream">
       <header className="border-b border-navy/10 px-5 py-5">
         <div className="mx-auto flex w-full max-w-[680px] items-center justify-between">
-          <img src={LOGO_URL} alt="TeachInspire" className="h-9 w-auto" />
+          <img src={LOGO_URL} alt="TeachInspire" className="h-11 w-auto" />
           {session && <span className="text-[13px] text-navy/55">{session.email}</span>}
         </div>
       </header>
@@ -38,7 +42,7 @@ export default function App() {
       <main className="flex-1 px-5 py-10 md:py-14">
         <div className="mx-auto w-full max-w-[680px]">
           {phase === 'done' ? (
-            <SuccessScreen creditEmail={session?.email} />
+            <SuccessScreen creditEmail={session?.email} credited={credited} finished={finished} />
           ) : phase === 'already' ? (
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -69,17 +73,19 @@ export default function App() {
             >
               <div className="mb-10">
                 <span className="mb-4 block text-[11px] font-bold uppercase tracking-[0.14em] text-rust">
-                  Formation TeachInspire
+                  Parcours « Créez des cours sur mesure »
                 </span>
                 <h1 className="mb-4 font-display text-3xl font-semibold leading-tight md:text-[42px]">
                   {phase === 'form' && session?.firstName
                     ? `Bonjour ${session.firstName}, votre retour compte.`
-                    : 'Votre retour sur la formation'}
+                    : 'Votre retour sur le parcours'}
                 </h1>
+                {step === 1 && (<>
                 <p className="text-[17px] leading-relaxed text-navy/75">
-                  7 minutes, pas plus. La plupart des questions sont à cocher.
-                  L&apos;objectif est de comprendre ce que la formation a changé
-                  (ou pas) dans votre façon de préparer vos cours.
+                  Environ 8 minutes, et la plupart des questions sont à cocher.
+                  {finished
+                    ? " L'objectif : comprendre ce que le parcours a changé (ou pas) dans votre façon de préparer vos cours, maintenant que vous avez du recul."
+                    : " L'objectif : comprendre ce que le parcours a déjà changé (ou pas) dans votre façon de préparer vos cours, et ce qu'il faut améliorer d'ici la fin."}
                 </p>
                 <p className="mt-4 border-l-2 border-yellow bg-yellow/10 px-4 py-3 text-[15px] leading-relaxed text-navy/80">
                   <strong className="font-semibold">
@@ -88,6 +94,7 @@ export default function App() {
                   dès l&apos;envoi de vos réponses, quel que soit leur contenu,
                   et que vous acceptiez ou non d&apos;être cité·e.
                 </p>
+                </>)}
               </div>
 
               {phase === 'login' ? (
@@ -96,7 +103,13 @@ export default function App() {
                 <TestimonialForm
                   token={token}
                   session={session!.session}
-                  onSuccess={() => setDone(true)}
+                  fullName={session!.fullName}
+                  onStepChange={setStep}
+                  finished={finished}
+                  onSuccess={(c) => {
+                    setCredited(c);
+                    setDone(true);
+                  }}
                 />
               )}
             </motion.div>

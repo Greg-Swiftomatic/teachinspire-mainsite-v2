@@ -11,6 +11,7 @@ export interface SessionClaims {
   sub: string;    // id utilisateur Studio
   email: string;
   firstName: string;
+  fullName?: string; // nom complet du compte Studio, absent des sessions plus anciennes
   iat: number;
   exp: number;
 }

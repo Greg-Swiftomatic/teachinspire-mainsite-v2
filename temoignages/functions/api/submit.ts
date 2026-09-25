@@ -10,6 +10,7 @@
 
 import { bearer, verifySession } from '../lib/session';
 import { notifyNewResponse } from '../lib/notify';
+import { versionFor } from '../lib/version';
 
 interface Env {
   DB: D1Database;
@@ -18,6 +19,7 @@ interface Env {
   STUDIO_GRANT_URL?: string;
   STUDIO_NOTIFY_URL?: string;
   NOTIFY_EMAIL?: string;
+  FORM_VERSION?: string;
 }
 
 const DEFAULT_GRANT_URL = 'https://studio.teachinspire.me/api/internal/testimonial-grant';
@@ -56,9 +58,11 @@ interface Payload {
   token?: string | null;
   website?: string; // leurre
 
-  institute?: string;
-  languages?: string;
   role?: string;
+  institute?: string;
+  city?: string;
+  languages?: string;
+  learnerSectors?: string;
 
   initialReaction?: string;
   initialReactionOther?: string;
@@ -68,24 +72,34 @@ interface Payload {
   usageFrequency?: string;
   whatChanged?: string;
   firstArtifact?: string;
+  learnerFeedback?: string;
 
   toASkeptic?: string;
+  keepOne?: string;
   whatWasMissing?: string;
+  recommendScore?: number | null;
+
+  institutesWorkedWith?: string;
+  introOk?: string;
 
   consentPublish?: boolean;
+  naming?: string;
+  displayName?: string;
   consentScope?: string[];
+  displayTitle?: string;
   linkedinUrl?: string;
-  consentReviewBeforePublish?: boolean;
   willingVideo?: boolean;
   willingLinkedinPost?: boolean;
 }
 
+const ROLES = ['direction', 'independant', 'salarie'];
 const REACTIONS = ['curieux', 'sceptique', 'reticent', 'inquiet', 'pas_le_temps', 'autre'];
 const TIME_BEFORE = ['moins_1h', '1_2h', '2_3h', 'plus_3h', 'aucune'];
 const TIME_NOW = ['moins_30', '30_60', '1_2h', 'plus_2h', 'non_utilise'];
 const FREQUENCY = ['hebdo', 'mensuel', 'rare', 'jamais'];
-const ROLES = ['formateur', 'direction'];
-const SCOPES = ['first_name', 'initial', 'full_name', 'institute', 'role', 'linkedin', 'photo'];
+const INTRO = ['oui', 'peut_etre', 'non'];
+const NAMING = ['full_name', 'initial', 'first_name', 'anonymous'];
+const SCOPES = ['institute', 'role', 'city', 'linkedin', 'photo'];
 
 const clean = (v: unknown, max: number): string | null => {
   if (typeof v !== 'string') return null;
@@ -98,6 +112,9 @@ const oneOf = (v: unknown, allowed: string[]): string | null =>
 
 const bit = (v: unknown): number => (v === true ? 1 : 0);
 
+const score = (v: unknown): number | null =>
+  typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 10 ? v : null;
+
 const isSafeLinkedIn = (v: string | null): string | null => {
   if (!v) return null;
   try {
@@ -109,6 +126,8 @@ const isSafeLinkedIn = (v: string | null): string | null => {
     return null;
   }
 };
+
+const bad = (error: string) => Response.json({ error }, { status: 400 });
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
@@ -133,17 +152,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return Response.json({ success: true }, { status: 201 });
     }
 
+    const role = oneOf(body.role, ROLES);
+    if (!role) return bad('Indiquez votre situation (étape 1).');
+
     const institute = clean(body.institute, 160);
-    if (!institute) {
-      return Response.json({ error: "L'institut est requis." }, { status: 400 });
-    }
+    if (!institute) return bad('Le nom de votre structure est requis (étape 1).');
 
     const whatChanged = clean(body.whatChanged, 5000);
     if (!whatChanged || whatChanged.length < 30) {
-      return Response.json(
-        { error: 'La question sur ce qui a changé est requise (30 caractères minimum).' },
-        { status: 400 }
-      );
+      return bad('La question sur ce qui a changé est requise (30 caractères minimum).');
     }
 
     const initialReaction = oneOf(body.initialReaction, REACTIONS);
@@ -151,10 +168,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const prepTimeNow = oneOf(body.prepTimeNow, TIME_NOW);
     const usageFrequency = oneOf(body.usageFrequency, FREQUENCY);
     if (!initialReaction || !prepTimeBefore || !prepTimeNow || !usageFrequency) {
-      return Response.json(
-        { error: 'Les questions à choix des étapes 2 et 3 sont requises.' },
-        { status: 400 }
-      );
+      return bad('Les questions à choix des étapes 2 et 3 sont requises.');
     }
 
     // Vérification anticipée pour un message clair (l'index unique reste la
@@ -173,79 +187,98 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     const token = clean(body.token, 64);
     const safeToken = token && /^[A-Za-z0-9_-]{6,64}$/.test(token) ? token : null;
+    const city = clean(body.city, 80);
 
+    // Consentement. Le serveur décide de ce qui est publiable, jamais le client :
+    // sans consent_publish tout reste à 0, et « aucun nom » exclut tout ce qui
+    // permettrait de retrouver la personne (structure, LinkedIn, photo).
     const consentPublish = bit(body.consentPublish);
-    const scope = Array.isArray(body.consentScope)
+    const naming = consentPublish ? oneOf(body.naming, NAMING) : null;
+    if (consentPublish && !naming) return bad('Choisissez comment vous nommer, ou décochez la publication.');
+    const anonymous = naming === 'anonymous';
+
+    const scope = consentPublish && Array.isArray(body.consentScope)
       ? body.consentScope.filter((s) => SCOPES.includes(s))
       : [];
-    const has = (s: string) => (consentPublish === 1 && scope.includes(s) ? 1 : 0);
+    const has = (s: string) =>
+      consentPublish === 1 && scope.includes(s) &&
+      !(anonymous && ['institute', 'linkedin', 'photo'].includes(s)) ? 1 : 0;
 
-    const linkedin =
-      consentPublish === 1 && scope.includes('linkedin')
-        ? isSafeLinkedIn(clean(body.linkedinUrl, 300))
-        : null;
+    const displayName = naming === 'full_name' ? clean(body.displayName, 120) : null;
+    if (naming === 'full_name' && !displayName) return bad('Indiquez votre nom tel qu’il doit apparaître.');
+
+    const displayTitle = has('role') ? clean(body.displayTitle, 160) : null;
+    if (has('role') && !displayTitle) return bad('Indiquez votre fonction, ou décochez « Ma fonction ».');
+    if (has('city') && !city) return bad('Indiquez votre ville, ou décochez « Ma ville ».');
+
+    const linkedin = has('linkedin') ? isSafeLinkedIn(clean(body.linkedinUrl, 300)) : null;
     // Cocher « lien LinkedIn » sans fournir de lien valide est incohérent :
     // on refuse plutôt que d'enregistrer un consentement sans objet.
-    if (consentPublish === 1 && scope.includes('linkedin') && !linkedin) {
-      return Response.json(
-        { error: 'Le lien LinkedIn est requis, ou décochez cette option.' },
-        { status: 400 }
-      );
-    }
+    if (has('linkedin') && !linkedin) return bad('Le lien LinkedIn est requis, ou décochez cette option.');
 
-    const stmt = context.env.DB.prepare(`
-      INSERT INTO responses (
-        submitted_at, token, studio_user_id, studio_email,
-        first_name, last_name, institute, languages, role,
-        initial_reaction, initial_reaction_other, prep_time_before,
-        prep_time_now, usage_frequency, what_changed, first_artifact,
-        to_a_skeptic, what_was_missing,
-        consent_publish, consent_first_name, consent_initial, consent_full_name,
-        consent_institute, consent_role, consent_linkedin, consent_photo,
-        consent_review_before_publish, willing_video, willing_linkedin_post,
-        linkedin_url, credit_email, locale, user_agent
-      ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
-    `);
+    const fullName = (session.fullName || '').trim();
+    const lastName = fullName.split(/\s+/).slice(1).join(' ') || null;
+    const firstName = session.firstName || session.email.split('@')[0];
+    const formVersion = await versionFor(context.env.DB, session.sub, context.env.FORM_VERSION);
 
-    const result = await stmt
-      .bind(
-        new Date().toISOString(),
-        safeToken,
-        session.sub,
-        session.email,
-        session.firstName || session.email.split('@')[0],
-        null,
-        institute,
-        clean(body.languages, 160),
-        oneOf(body.role, ROLES) ?? 'formateur',
-        initialReaction,
-        clean(body.initialReactionOther, 500),
-        prepTimeBefore,
-        prepTimeNow,
-        usageFrequency,
-        whatChanged,
-        clean(body.firstArtifact, 3000),
-        clean(body.toASkeptic, 3000),
-        clean(body.whatWasMissing, 3000),
-        consentPublish,
-        has('first_name'),
-        has('initial'),
-        has('full_name'),
-        has('institute'),
-        has('role'),
-        has('linkedin'),
-        has('photo'),
-        bit(body.consentReviewBeforePublish),
-        bit(body.willingVideo),
-        bit(body.willingLinkedinPost),
-        linkedin,
-        session.email, // les crédits vont au compte connecté, pas à un email saisi
-        clean(context.request.headers.get('accept-language'), 40),
-        clean(context.request.headers.get('user-agent'), 300)
-      )
+    const row: Record<string, unknown> = {
+      submitted_at: new Date().toISOString(),
+      token: safeToken,
+      studio_user_id: session.sub,
+      studio_email: session.email,
+      first_name: firstName,
+      last_name: lastName,
+      institute,
+      city,
+      languages: clean(body.languages, 160),
+      learner_sectors: clean(body.learnerSectors, 300),
+      role,
+      initial_reaction: initialReaction,
+      initial_reaction_other: clean(body.initialReactionOther, 500),
+      prep_time_before: prepTimeBefore,
+      prep_time_now: prepTimeNow,
+      usage_frequency: usageFrequency,
+      what_changed: whatChanged,
+      first_artifact: clean(body.firstArtifact, 3000),
+      learner_feedback: clean(body.learnerFeedback, 3000),
+      to_a_skeptic: clean(body.toASkeptic, 3000),
+      keep_one: clean(body.keepOne, 500),
+      what_was_missing: clean(body.whatWasMissing, 3000),
+      recommend_score: score(body.recommendScore),
+      institutes_worked_with: clean(body.institutesWorkedWith, 2000),
+      intro_ok: oneOf(body.introOk, INTRO),
+      consent_publish: consentPublish,
+      consent_anonymous: anonymous ? 1 : 0,
+      consent_first_name: naming === 'first_name' ? 1 : 0,
+      consent_initial: naming === 'initial' ? 1 : 0,
+      consent_full_name: naming === 'full_name' ? 1 : 0,
+      consent_institute: has('institute'),
+      consent_role: has('role'),
+      consent_city: has('city'),
+      consent_linkedin: has('linkedin'),
+      consent_photo: has('photo'),
+      // Engagement affiché dans le formulaire : rien n'est publié sans
+      // validation écrite de la version finale.
+      consent_review_before_publish: consentPublish,
+      willing_video: bit(body.willingVideo),
+      willing_linkedin_post: bit(body.willingLinkedinPost),
+      linkedin_url: linkedin,
+      display_name: displayName,
+      display_title: displayTitle,
+      credit_email: session.email, // les crédits vont au compte connecté, pas à un email saisi
+      form_version: formVersion,
+      locale: clean(context.request.headers.get('accept-language'), 40),
+      user_agent: clean(context.request.headers.get('user-agent'), 300),
+    };
+
+    const cols = Object.keys(row);
+    const result = await context.env.DB
+      .prepare(`INSERT INTO responses (${cols.join(', ')}) VALUES (${cols.map(() => '?').join(', ')})`)
+      .bind(...cols.map((c) => row[c] ?? null))
       .run();
 
     if (!result.success) throw new Error('Insert failed');
+    const id = Number(result.meta.last_row_id);
 
     // Marque l'invitation comme honorée par compte (fiable même si la
     // personne est arrivée sans son lien) et, à défaut, par jeton.
@@ -259,31 +292,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     // L'unicité par compte est déjà acquise (index + 409 ci-dessus) : ce
     // crédit ne peut donc être déclenché qu'une seule fois par utilisateur.
-    const credited = await grantCredits(context.env, Number(result.meta.last_row_id), session.sub);
+    const credited = await grantCredits(context.env, id, session.sub);
 
-    await notifyNewResponse(context.env, {
-      id: Number(result.meta.last_row_id),
-      firstName: session.firstName || session.email.split('@')[0],
-      email: session.email,
-      institute,
-      languages: clean(body.languages, 160),
-      initialReaction,
-      prepTimeBefore,
-      prepTimeNow,
-      usageFrequency,
-      whatChanged,
-      firstArtifact: clean(body.firstArtifact, 3000),
-      toASkeptic: clean(body.toASkeptic, 3000),
-      whatWasMissing: clean(body.whatWasMissing, 3000),
-      consentPublish: consentPublish === 1,
-      consentScopes: scope,
-      linkedinUrl: linkedin,
-      willingVideo: body.willingVideo === true,
-      willingLinkedinPost: body.willingLinkedinPost === true,
-      credited,
-    });
+    await notifyNewResponse(context.env, { id, fullName: fullName || firstName, credited, row });
 
-    return Response.json({ success: true, id: result.meta.last_row_id }, { status: 201 });
+    return Response.json({ success: true, id, credited }, { status: 201 });
   } catch (err) {
     // L'index unique peut claquer en cas de double envoi simultané.
     if (err instanceof Error && /UNIQUE/i.test(err.message)) {

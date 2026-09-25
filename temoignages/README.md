@@ -1,10 +1,17 @@
 # teachinspire-temoignages
 
-Formulaire de recueil de témoignages de fin de formation. Cloudflare Pages +
+Formulaire de recueil de témoignages des participants au parcours, utilisable à
+mi-parcours comme en fin de parcours (colonne `form_version`, variable
+`FORM_VERSION`, défaut `mi-parcours`). Cloudflare Pages +
 D1, sur son propre sous-domaine. Les questions viennent de
 `docs/testimonial-collection-kit.md`.
 
-- Formulaire en 5 étapes, environ 7 minutes, brouillon sauvegardé en local
+- Formulaire en 6 étapes, environ 8 minutes, brouillon sauvegardé en local
+- Questions adaptées à la situation (direction, indépendant, salarié d'un
+  institut), note de recommandation, instituts pour lesquels la personne
+  intervient et accord de mise en relation
+- Aperçu en direct de la citation et de sa signature avant consentement
+- Page de suivi protégée : https://temoignages.teachinspire.me/admin
 - **Réservé aux participants** : connexion obligatoire avec le compte
   studio.teachinspire.me ; identité et email viennent du compte, une seule
   réponse par compte, crédits attachés au compte connecté
@@ -53,6 +60,14 @@ exposer de données personnelles. Le formulaire, lui, fonctionne sans elles.
 
 Custom domains > `temoignages.teachinspire.me`. Cloudflare crée le CNAME.
 
+### Migration à mi-parcours (octobre 2026)
+
+Une seule fois, avant de déployer cette version :
+
+```bash
+npx wrangler d1 execute teachinspire-temoignages --remote --file=./migrations/0002_mi_parcours.sql
+```
+
 ## Envoyer les invitations
 
 La liste vient du Studio (participants actifs), pas d'un CSV. Une seule
@@ -85,6 +100,10 @@ réponse sans jeton reste acceptée, pour qu'un lien transféré fonctionne quan
 même.
 
 ## Consulter les réponses
+
+Le plus simple : https://temoignages.teachinspire.me/admin (mêmes identifiants
+que ci-dessous). Filtres « publiables », « vidéo », « mise en relation »,
+export CSV et liste des personnes à relancer.
 
 ```bash
 # JSON
@@ -130,9 +149,9 @@ est prévenu immédiatement plutôt qu'au moment de l'envoi.
 
 ## Ce qui reste à faire
 
-- **Interface d'administration.** Aujourd'hui la lecture passe par l'API et le
-  CSV. Une page protégée permettrait de suivre le cycle
-  `new → drafted → awaiting_approval → approved → published`.
+- **Cycle de publication dans /admin.** La page de suivi est en lecture seule ;
+  le cycle `new → drafted → awaiting_approval → approved → published` se tient
+  encore à la main dans la base.
 - **Envoi automatique des emails.** Volontairement absent : pour 15 à 25
   personnes, un envoi personnel depuis la boîte de Grégory obtient un bien
   meilleur taux de réponse. À reconsidérer à la troisième cohorte.

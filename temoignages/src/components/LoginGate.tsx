@@ -5,6 +5,8 @@ import { Loader2, LogIn } from 'lucide-react';
 export interface Session {
   session: string;
   firstName: string;
+  fullName: string;
+  formVersion: string;
   email: string;
   alreadySubmitted: boolean;
 }
@@ -33,6 +35,8 @@ export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
       onLogin({
         session: data.session,
         firstName: data.firstName ?? '',
+        fullName: data.fullName ?? data.firstName ?? '',
+        formVersion: data.formVersion ?? 'mi-parcours',
         email: data.email ?? email,
         alreadySubmitted: Boolean(data.alreadySubmitted),
       });

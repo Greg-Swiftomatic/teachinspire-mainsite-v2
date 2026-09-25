@@ -8,3 +8,6 @@ invites.sql
 participants.csv
 tsconfig.tsbuildinfo
 drafts.md
+.dev.vars
+drafts-*.md
+groupes/

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
-export function SuccessScreen({ creditEmail }: { creditEmail?: string }) {
+export function SuccessScreen({
+  creditEmail, credited, finished,
+}: { creditEmail?: string; credited?: boolean; finished?: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -18,14 +20,16 @@ export function SuccessScreen({ creditEmail }: { creditEmail?: string }) {
       </h1>
 
       <p className="mb-6 text-[17px] leading-relaxed text-navy/75">
-        Vos réponses nous servent à améliorer la formation. Les critiques
-        comptent autant que les compliments.
+        {finished
+          ? 'Vos réponses servent directement à améliorer les prochaines sessions.'
+          : 'Vos réponses servent directement à améliorer la fin du parcours et les prochaines sessions.'}{' '}
+        Les critiques comptent autant que les compliments.
       </p>
 
       <div className="mb-6 border-l-2 border-sage bg-sage/10 px-5 py-4">
         <p className="text-[15px] leading-relaxed text-navy/80">
           <strong className="font-semibold">Vos 30 minutes de crédits audio</strong>{' '}
-          seront ajoutées sous 48 heures à votre compte Studio
+          {credited ? 'ont été ajoutées' : 'seront ajoutées sous 48 heures'} à votre compte Studio
           {creditEmail ? <> (<span className="font-medium">{creditEmail}</span>)</> : null}.
         </p>
       </div>
