@@ -36,7 +36,7 @@ n'affiche aucune preuve sociale.
   - Formation complète en e-learning
   - Studio pendant 1 an, avec 60 minutes d'audio par mois pendant 6 mois
   - Communauté pendant 1 an et office hours deux fois par mois
-- **Tarif :** Cohorte de septembre — **490 € HT en tarif fondateur (590 € ensuite).**
+- **Tarif :** Cohorte de septembre : **490 € HT en tarif fondateur (590 € ensuite).**
   La formation peut être suivie en français ou en anglais.
 - **CTA :** « Rejoindre la liste d'attente »
 
@@ -46,12 +46,12 @@ n'affiche aucune preuve sociale.
 
 ---
 
-## Offre « Programme institut » — mentions absentes du site live
+## Offre « Programme institut », mentions absentes du site live
 
 Le contenu principal existe déjà sur `/formation` et `/offre`. Deux éléments
 n'apparaissent nulle part sur les pages rendues :
 
-- **« Certifié Qualiopi : financement OPCO »** — la certification n'est affichée
+- **« Certifié Qualiopi : financement OPCO »** : la certification n'est affichée
   comme argument sur aucune page live (seule l'éligibilité OPCO est mentionnée).
 - **« La formation peut être animée en français ou en anglais. »**
 

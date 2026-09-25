@@ -1,0 +1,10 @@
+name = "teachinspire-temoignages"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-02-02"
+compatibility_flags = ["nodejs_compat"]
+
+# Base créée le 2026-07-23, région WEUR.
+[[d1_databases]]
+binding = "DB"
+database_name = "teachinspire-temoignages"
+database_id = "72940936-e2a3-4276-aff8-2aee55f0e440"

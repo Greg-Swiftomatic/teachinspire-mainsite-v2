@@ -1,4 +1,4 @@
-# TeachInspire — AGENTS.md v2.0
+# TeachInspire, AGENTS.md v2.0
 
 > Last updated: February 2025
 
@@ -240,10 +240,10 @@ teachinspire/
 |-------|------|---------|
 | `/` | HomePage | Main landing page |
 | `/formation` | FormationPage | Detailed program, modules, pricing |
-| `/offre` | OffrePage | Full pricing tiers — **hidden**, no nav link |
+| `/offre` | OffrePage | Full pricing tiers. **Hidden**, no nav link |
 | `/studio` | StudioPage | The three Studio ateliers + free tier |
 | `/a-propos` | AboutPage | Bio, timeline, philosophy |
-| `/invite` | InvitePage | Private video preview — **hidden**, `noindex` |
+| `/invite` | InvitePage | Private video preview. **Hidden**, `noindex` |
 | `/contact` | ContactPage | Zoom Scheduler + email |
 | `/mentions-legales`, `/confidentialite` | Legal | Footer only |
 
@@ -254,12 +254,12 @@ teachinspire/
 Homepage content lives in a single component, `components/home/ApprovedHome.tsx`
 (not one file per section):
 
-1. **Hero** — Value proposition + CTA + video modal
-2. **La frontière à garder en tête** — what stays human: Cadrer / Vérifier / Adapter
-3. **Comment ça fonctionne** (`#methode`) — source → traitement cadré → support
-4. **Ce que ça change dans la semaine** — three concrete wins
-5. **Conviction band** — "L'IA comme assistant, pas comme remplaçant"
-6. **Final CTA** — book the 15-min call
+1. **Hero** : value proposition + CTA + video modal
+2. **La frontière à garder en tête** : what stays human: Cadrer / Vérifier / Adapter
+3. **Comment ça fonctionne** (`#methode`) : source → traitement cadré → support
+4. **Ce que ça change dans la semaine** : three concrete wins
+5. **Conviction band** : "L'IA comme assistant, pas comme remplaçant"
+6. **Final CTA** : book the 15-min call
 
 ---
 
@@ -371,10 +371,10 @@ const fadeInUp = {
 
 ### Tone
 
-- **Direct** — No fluff, get to the point
-- **Authoritative** — Confident, expert positioning
-- **Professional** — B2B appropriate, not casual
-- **Honest** — Acknowledge AI limitations
+- **Direct** : no fluff, get to the point
+- **Authoritative** : confident, expert positioning
+- **Professional** : B2B appropriate, not casual
+- **Honest** : acknowledge AI limitations
 
 ### Forbidden Words/Phrases
 
@@ -384,6 +384,10 @@ const fadeInUp = {
 - "Libérez le potentiel", "Passez au niveau supérieur"
 - Generic tech buzzwords
 - Overly casual/playful language
+- **Em dashes (—) and en dashes (–) as punctuation.** Banned in all copy,
+  documentation, emails and commit messages. Use a colon, a comma,
+  parentheses, or split the sentence. Hyphens in compound words and the
+  arrow → are fine.
 
 ✅ Prefer:
 - Concrete metrics: "3h → 30min"
@@ -401,7 +405,7 @@ const fadeInUp = {
 > "Formez vos équipes à créer des leçons à partir de n'importe quelle source"
 
 **Subheadline:**
-> "La méthode IA pour vos formateurs de langues — sans expertise, sans budget."
+> "La méthode IA pour vos formateurs de langues, sans expertise, sans budget."
 
 ---
 
@@ -450,4 +454,4 @@ git merge feat/section-name
 
 ---
 
-*TeachInspire — AGENTS.md v2.0*
+*TeachInspire, AGENTS.md v2.0*
