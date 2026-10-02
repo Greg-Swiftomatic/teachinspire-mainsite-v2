@@ -187,12 +187,14 @@ function WhoAmISection({ prefersReducedMotion }: { prefersReducedMotion: boolean
             transition={{ duration: prefersReducedMotion ? 0.01 : 0.6 }}
             className="lg:col-span-4"
           >
-            <div className="aspect-[3/4] bg-sage/20 border border-navy/10 overflow-hidden">
+            <div className="aspect-square bg-sage/20 border border-navy/10 overflow-hidden">
               <img
                 src={ILLUSTRATIONS.portraitGregory}
-                alt="Grégory - Fondateur de TeachInspire"
-                width={400}
-                height={533}
+                srcSet="/images/papier/greg-bureau-600.webp 600w, /images/papier/greg-bureau-1000.webp 1000w"
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                alt="Grégory, fondateur de TeachInspire, à son bureau devant son ordinateur"
+                width={1000}
+                height={1000}
                 loading="lazy"
                 className="w-full h-full object-cover"
               />
