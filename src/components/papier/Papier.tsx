@@ -217,7 +217,16 @@ export function AppelFinal({ lienOffre = false, photo = false }: { lienOffre?: b
       <div className="pe-cadre pe-appel-cadre">
         {photo ? (
           <figure className="pe-appel-photo" data-monte>
-            <img src="/greg-le-dall.webp" width={800} height={800} alt="Greg Le Dall, fondateur de TeachInspire" loading="lazy" decoding="async" />
+            <img
+              src="/images/papier/greg-bureau-1000.webp"
+              srcSet="/images/papier/greg-bureau-600.webp 600w, /images/papier/greg-bureau-1000.webp 1000w"
+              sizes="320px"
+              width={1000}
+              height={1000}
+              alt="Greg Le Dall, fondateur de TeachInspire, à son bureau devant son ordinateur"
+              loading="lazy"
+              decoding="async"
+            />
             <figcaption className="pe-annot">Greg, qui animera vos ateliers</figcaption>
           </figure>
         ) : null}

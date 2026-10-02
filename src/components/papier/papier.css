@@ -418,22 +418,20 @@
 /* Photo de l'appel final */
 
 .pe-appel-photo {
-  width: 280px;
-  margin: 0 auto 34px;
+  width: min(320px, 100%);
+  margin: 0 auto 40px;
 }
 
 .pe-appel-photo img {
   display: block;
-  margin: 0 auto;
-  width: 168px;
-  height: 168px;
-  border-radius: 50% !important;
-  object-fit: cover;
-  filter: grayscale(1) contrast(1.05);
+  width: 100%;
+  height: auto;
+  box-shadow: var(--ombre-calque);
+  transform: rotate(-1.5deg);
 }
 
 .pe-appel-photo figcaption {
-  margin-top: 8px;
+  margin-top: 14px;
   font-size: 21px;
   transform: rotate(-3deg);
 }
