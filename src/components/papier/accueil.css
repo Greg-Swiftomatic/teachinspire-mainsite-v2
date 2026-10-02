@@ -1,0 +1,285 @@
+/* Page d'accueil */
+
+.ac-hero {
+  padding-top: clamp(56px, 8vw, 96px);
+}
+
+.ac-hero-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.ac-reperes {
+  margin-top: 20px !important;
+  font-size: 15px;
+  color: var(--encre-3);
+}
+
+/* La vidéo : l'illustration sert d'affiche */
+
+.ac-video {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.ac-video-image {
+  display: block;
+  overflow: hidden;
+  box-shadow: var(--ombre-calque);
+  transform: rotate(1.2deg);
+}
+
+.ac-video-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s ease;
+}
+
+.ac-video:hover .ac-video-image img {
+  transform: scale(1.03);
+}
+
+.ac-video:focus-visible {
+  outline: 2px solid var(--rouille);
+  outline-offset: 6px;
+}
+
+.ac-video-lire {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 18px 10px 10px;
+  background: var(--feuille);
+  box-shadow: var(--ombre-document);
+  color: var(--encre);
+}
+
+.ac-video-rond {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50% !important;
+  background: var(--marine);
+  color: var(--papier);
+  font-size: 15px;
+  animation: ac-pouls 2.2s ease-in-out infinite;
+}
+
+@keyframes ac-pouls {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.ac-video-lire strong {
+  display: block;
+  font-size: 15px;
+}
+
+.ac-video-lire small {
+  display: block;
+  font-size: 13px;
+  color: var(--encre-3);
+}
+
+.ac-dialogue {
+  width: min(1000px, 94vw);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: var(--encre);
+}
+
+.ac-dialogue::backdrop {
+  background: rgb(11 23 38 / 80%);
+}
+
+.ac-dialogue iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.ac-dialogue-fermer {
+  display: block;
+  margin-left: auto;
+  min-height: 44px;
+  padding: 0 18px;
+  background: transparent;
+  color: var(--papier);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Le problème */
+
+.ac-probleme-grille,
+.ac-principe-grille,
+.ac-obtenu-grille,
+.ac-apprenant-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.ac-probleme h2 {
+  font-size: clamp(30px, 3.4vw, 44px) !important;
+}
+
+.ac-constats {
+  margin: 34px 0 0;
+  border-top: 1.5px solid var(--encre);
+}
+
+.ac-constats > div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.ac-constats dt {
+  font-weight: 700;
+}
+
+.ac-constats dd {
+  margin: 0;
+  color: var(--encre-2);
+}
+
+.ac-constats > div:last-child dt {
+  color: var(--rouille);
+}
+
+/* La méthode */
+
+.ac-methode .pe-intro {
+  max-width: 660px;
+}
+
+/* Ce que vous obtenez */
+
+.ac-livrables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px 32px;
+  margin: 34px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ac-livrables li {
+  border-top: 1.5px solid var(--encre);
+  padding-top: 14px;
+}
+
+.ac-livrables h3 {
+  font-size: 21px !important;
+}
+
+.ac-livrables p {
+  margin-top: 6px !important;
+  font-size: 15px;
+  color: var(--encre-2);
+}
+
+/* L'équipe */
+
+.ac-chiffres {
+  margin-top: 46px;
+}
+
+/* La preuve */
+
+.ac-preuves {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 46px;
+}
+
+.ac-preuves h3 {
+  font-size: 22px !important;
+}
+
+.ac-preuves p:not(.pe-annot) {
+  margin-top: 10px !important;
+  font-size: 15px;
+  color: var(--encre-2);
+}
+
+.ac-bientot {
+  padding: 26px;
+  border: 1.5px dashed var(--trait-fort);
+}
+
+.ac-bientot .pe-annot {
+  margin-bottom: 6px !important;
+  font-size: 22px;
+}
+
+/* Les questions */
+
+.ac-questions-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+@media (max-width: 999px) {
+  .ac-hero-grille,
+  .ac-probleme-grille,
+  .ac-principe-grille,
+  .ac-obtenu-grille,
+  .ac-apprenant-grille,
+  .ac-questions-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .ac-preuves {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ac-constats > div,
+  .ac-livrables {
+    grid-template-columns: 1fr;
+  }
+
+  .ac-constats > div {
+    gap: 4px;
+  }
+
+  .ac-video-lire {
+    bottom: 10px;
+    left: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ac-video-rond {
+    animation: none;
+  }
+
+  .ac-video-image img {
+    transition: none;
+  }
+}

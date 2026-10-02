@@ -1,18 +1,15 @@
-import { ApprovedHome } from '../components/home/ApprovedHome';
-import { ScrollScene } from '../components/motion/ScrollScene';
+import { Accueil } from '../components/papier/Accueil';
 import { PageMeta } from '../components/seo/PageMeta';
 
 export function HomePage() {
   return (
     <>
       <PageMeta
-        title="TeachInspire : IA pour formateurs de langues"
-        description="Formation IA pour instituts de langues. Vos formateurs apprennent à créer des cours à partir de sources réelles, avec une méthode commune et des critères pédagogiques clairs."
+        title="TeachInspire : formation IA pour instituts de langues"
+        description="Vos formateurs créent un cours sur mesure pour chaque apprenant avec l'IA : une méthode en quatre étapes, l'IA prépare, le formateur décide. 4 200 € HT jusqu'à 10 formateurs, finançable OPCO."
         path="/"
       />
-      <ScrollScene>
-        <ApprovedHome />
-      </ScrollScene>
+      <Accueil />
     </>
   );
 }
