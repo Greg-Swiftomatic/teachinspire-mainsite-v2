@@ -102,7 +102,7 @@ export function usePapierMotion(ref: RefObject<HTMLElement | null>, avant?: Avan
     return () => {
       window.removeEventListener('load', rafraichir);
       mm.revert();
-      gsap.set(scope.querySelectorAll('.pe-w, [data-monte], [data-devoile], [data-devoile] img, [data-sombre], .fo-doc, .fo-tampon, .fo-rail i'), { clearProps: 'transform,opacity,clipPath,translate,rotate,scale' });
+      gsap.set(scope.querySelectorAll('.pe-w, [data-monte], [data-devoile], [data-devoile] img, [data-sombre], .ds-doc, .ds-tampon, .ds-rail i'), { clearProps: 'transform,opacity,clipPath,translate,rotate,scale' });
       scope.querySelector('.est-epingle')?.classList.remove('est-epingle');
     };
   }, [ref, avant]);

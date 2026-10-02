@@ -1,7 +1,7 @@
 import { Fragment, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { BOOKING_URL } from '../../assets/assets';
-import { modules, questions, rythmes } from './offre-data';
+import { FORMATEURS_INCLUS, PRIX_BASE, PRIX_SUPPLEMENTAIRE, modules, questions, rythmes } from './offre-data';
 import './papier.css';
 
 // Un titre dont les mots montent un par un. `jaune` met un mot en valeur
@@ -17,18 +17,20 @@ export function Titre({
 }: {
   as?: 'h1' | 'h2' | 'h3';
   texte: string;
-  jaune?: string;
-  souligne?: string;
+  jaune?: string | string[];
+  souligne?: string | string[];
   immediat?: boolean;
   className?: string;
   id?: string;
 }) {
   const mots = texte.split(' ');
+  const enJaune = ([] as string[]).concat(jaune ?? []);
+  const soulignes = ([] as string[]).concat(souligne ?? []);
   return (
     <Balise id={id} className={className} data-mots={immediat ? 'immediat' : ''}>
       {mots.map((mot, i) => {
         const propre = mot.replace(/[.,:;!?]$/, '');
-        const classes = ['pe-w', jaune && propre === jaune ? 'pe-jaune' : '', souligne && propre === souligne ? 'pe-souligne' : '']
+        const classes = ['pe-w', enJaune.includes(propre) ? 'pe-jaune' : '', soulignes.includes(propre) ? 'pe-souligne' : '']
           .filter(Boolean)
           .join(' ');
         return (
@@ -100,6 +102,43 @@ export function Bouton({
   );
 }
 
+export function LienSuite({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link to={href} className="pe-lien" data-monte>
+      {children} <span aria-hidden="true">→</span>
+    </Link>
+  );
+}
+
+// Le prix en résumé, sur fond marine : l'accueil et Formation renvoient vers l'Offre.
+export function PrixResume() {
+  return (
+    <section className="pe-section pe-sombre pe-prix" data-sombre aria-labelledby="pe-prix-titre">
+      <div className="pe-cadre pe-prix-grille">
+        <div>
+          <Sur>Le prix</Sur>
+          <Titre id="pe-prix-titre" texte="Un prix par institut, pas par formateur." />
+        </div>
+        <div>
+          <p className="pe-prix-montant">
+            <span data-compte={PRIX_BASE}>{PRIX_BASE.toLocaleString('fr-FR')}</span>&nbsp;€&nbsp;HT
+            <small>jusqu&apos;à {FORMATEURS_INCLUS} formateurs</small>
+          </p>
+          <ul className="pe-prix-points">
+            <li data-monte>Puis {PRIX_SUPPLEMENTAIRE}&nbsp;€&nbsp;HT par formateur supplémentaire.</li>
+            <li data-monte>Finançable par votre OPCO, avec le portage administratif d&apos;un organisme partenaire certifié Qualiopi.</li>
+            <li data-monte>Paiement en 3 fois sans frais possible.</li>
+          </ul>
+          <div className="pe-actions" data-monte>
+            <Bouton href="/offre" variante="clair">Voir l&apos;offre détaillée →</Bouton>
+            <Bouton href={BOOKING_URL} variante="trait">Réserver 15 minutes</Bouton>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Les deux rythmes possibles, sur une même frise : le lancement, les six
 // modules et les six ateliers. Le bouton change l'espacement des ateliers.
 export function Rythme({ detaille = false }: { detaille?: boolean }) {
@@ -155,10 +194,11 @@ export function Rythme({ detaille = false }: { detaille?: boolean }) {
   );
 }
 
-export function Questions() {
+export function Questions({ indices }: { indices?: number[] }) {
+  const liste = indices ? indices.map((i) => questions[i]) : questions;
   return (
     <div className="pe-questions">
-      {questions.map((item) => (
+      {liste.map((item) => (
         <details key={item.q} data-monte>
           <summary>
             {item.q}
@@ -171,11 +211,17 @@ export function Questions() {
   );
 }
 
-export function AppelFinal({ lienOffre = false }: { lienOffre?: boolean }) {
+export function AppelFinal({ lienOffre = false, photo = false }: { lienOffre?: boolean; photo?: boolean }) {
   return (
     <section className="pe-section pe-appel" aria-labelledby="pe-appel-titre">
       <div className="pe-cadre pe-appel-cadre">
-        <Titre id="pe-appel-titre" texte="Quinze minutes, un avis honnête." souligne="minutes," />
+        {photo ? (
+          <figure className="pe-appel-photo" data-monte>
+            <img src="/greg-le-dall.webp" width={800} height={800} alt="Greg Le Dall, fondateur de TeachInspire" loading="lazy" decoding="async" />
+            <figcaption className="pe-annot">Greg, qui animera vos ateliers</figcaption>
+          </figure>
+        ) : null}
+        <Titre id="pe-appel-titre" texte="Quinze minutes, un avis honnête." souligne="minutes" />
         <p data-monte>
           Vous repartez avec une idée précise de ce que la méthode peut apporter à votre équipe,
           que vous travailliez avec nous ou non.

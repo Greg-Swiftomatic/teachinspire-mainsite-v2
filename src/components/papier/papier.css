@@ -296,6 +296,148 @@
   color: var(--encre-2);
 }
 
+/* Le prix en résumé */
+
+.pe-prix-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
+}
+
+.pe-prix-montant {
+  font-family: var(--display);
+  font-size: clamp(60px, 8vw, 104px);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.pe-prix-montant small {
+  display: block;
+  margin-top: 12px;
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--sable);
+}
+
+.pe-prix-points {
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pe-prix-points li {
+  padding: 10px 0;
+  border-top: 1px solid rgb(248 247 242 / 18%);
+  color: #d6d1c4;
+}
+
+/* Liens vers la suite */
+
+.pe-lien {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: 34px;
+  font-weight: 600;
+  color: var(--encre);
+  text-decoration: underline;
+  text-decoration-color: var(--rouille);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.pe-lien span {
+  color: var(--rouille);
+  transition: transform 0.2s;
+}
+
+.pe-lien:hover span {
+  transform: translateX(4px);
+}
+
+.pe-lien:focus-visible {
+  outline: 2px solid var(--rouille);
+  outline-offset: 4px;
+}
+
+.pe-section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Animations au trait */
+
+.pe-anim {
+  position: relative;
+  margin: 0;
+  padding: clamp(14px, 2vw, 24px);
+  background: var(--papier);
+  box-shadow: var(--ombre-calque);
+}
+
+.pe-anim-dessin svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pe-anim-dessin:not(.est-lance) svg {
+  opacity: 0;
+}
+
+.pe-anim .titre-doc {
+  font-family: var(--display);
+  font-weight: 600;
+  fill: var(--encre);
+}
+
+.pe-anim .main-ecrite {
+  font-family: var(--main);
+  font-weight: 600;
+}
+
+.pe-anim-rejouer {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--encre-3);
+  background: var(--papier);
+  color: var(--encre);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pe-anim-rejouer:focus-visible {
+  outline: 2px solid var(--rouille);
+  outline-offset: 3px;
+}
+
+/* Photo de l'appel final */
+
+.pe-appel-photo {
+  width: 280px;
+  margin: 0 auto 34px;
+}
+
+.pe-appel-photo img {
+  display: block;
+  margin: 0 auto;
+  width: 168px;
+  height: 168px;
+  border-radius: 50% !important;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+}
+
+.pe-appel-photo figcaption {
+  margin-top: 8px;
+  font-size: 21px;
+  transform: rotate(-3deg);
+}
+
 /* Rythme : deux frises, un choix */
 
 .pe-rythme {
@@ -535,6 +677,10 @@
 }
 
 @media (max-width: 999px) {
+  .pe-prix-grille {
+    grid-template-columns: 1fr;
+  }
+
   .pe-chiffres {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

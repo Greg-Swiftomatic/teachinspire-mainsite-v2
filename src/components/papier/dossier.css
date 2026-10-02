@@ -1,0 +1,289 @@
+/* Le dossier de Katrin : séquence épinglée, partagée par l'accueil et Formation. Préfixe ds-. */
+
+/* La séquence */
+
+.ds-programme .pe-intro {
+  max-width: 700px;
+}
+
+.ds-sequence {
+  position: relative;
+  margin-top: clamp(48px, 6vw, 80px);
+}
+
+.ds-etapes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ds-etape {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 90px);
+  align-items: center;
+  padding-block: 36px;
+  border-top: 1px solid var(--trait-fort);
+}
+
+.ds-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rouille);
+}
+
+.ds-etape h3 {
+  margin-top: 6px !important;
+  font-size: clamp(24px, 2.3vw, 32px) !important;
+}
+
+.ds-corps {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.45s ease, opacity 0.45s ease;
+}
+
+.ds-corps > div {
+  overflow: hidden;
+}
+
+.ds-corps p {
+  margin-top: 10px !important;
+  color: var(--encre-2);
+}
+
+.ds-remis {
+  font-size: 15px;
+}
+
+.ds-remis b {
+  color: var(--encre);
+}
+
+.ds-rail {
+  display: none;
+}
+
+/* Les documents du dossier */
+
+.ds-doc {
+  width: min(420px, 100%);
+  justify-self: center;
+}
+
+.ds-doc h4 {
+  margin: 6px 0 14px;
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.ds-note {
+  position: absolute;
+  right: 18px;
+  bottom: -30px;
+  transform: rotate(-4deg);
+}
+
+.ds-fiche {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  margin: 0;
+  font-size: 15px;
+}
+
+.ds-fiche dt {
+  color: var(--encre-3);
+}
+
+.ds-fiche dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.ds-calendrier,
+.ds-sources,
+.ds-criteres,
+.ds-pack {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+
+.ds-calendrier li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--trait);
+}
+
+.ds-calendrier b {
+  color: var(--encre-3);
+}
+
+.ds-calendrier .ds-cible {
+  background: rgb(241 210 99 / 35%);
+  font-weight: 600;
+}
+
+.ds-sources li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--trait);
+}
+
+.ds-sources span {
+  color: var(--rouille);
+  font-size: 12px;
+  padding-top: 3px;
+}
+
+.ds-petit {
+  margin-top: 12px !important;
+  font-size: 13px;
+  color: var(--encre-3);
+}
+
+.ds-tache {
+  margin-top: 10px !important;
+  font-size: 15px;
+}
+
+.ds-criteres li {
+  position: relative;
+  padding: 7px 0 7px 28px;
+}
+
+.ds-criteres li::before {
+  content: '✓';
+  position: absolute;
+  left: 4px;
+  color: var(--sauge-encre);
+  font-weight: 700;
+}
+
+.ds-onde {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.ds-onde i {
+  flex: 1;
+  background: var(--sauge);
+}
+
+.ds-replique {
+  margin-top: 14px !important;
+  font-family: var(--display);
+  font-style: italic;
+}
+
+.ds-pack li {
+  padding: 9px 0 9px 26px;
+  border-bottom: 1px solid var(--trait);
+  font-weight: 600;
+  background: linear-gradient(var(--sauge), var(--sauge)) 4px 50% / 10px 10px no-repeat;
+}
+
+.ds-tampon {
+  position: absolute;
+  right: -18px;
+  bottom: -26px;
+}
+
+/* Épinglée sur grand écran : le texte à gauche, le dossier à droite */
+
+.ds-sequence.est-epingle {
+  height: calc(100vh - 140px);
+  min-height: 560px;
+}
+
+.est-epingle .ds-etapes {
+  display: flex;
+  width: 46%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 34px;
+}
+
+.est-epingle .ds-etape {
+  display: block;
+  padding-block: 12px;
+  border-top: 0;
+}
+
+.est-epingle .ds-texte {
+  opacity: 0.38;
+  transition: opacity 0.35s;
+}
+
+.est-epingle .ds-etape.est-actif .ds-texte {
+  opacity: 1;
+}
+
+.est-epingle .ds-etape h3 {
+  font-size: clamp(21px, 1.9vw, 26px) !important;
+}
+
+.est-epingle .ds-etape:not(.est-actif) .ds-corps {
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.est-epingle .ds-note {
+  transition: opacity 0.3s;
+}
+
+.est-epingle .ds-etape:not(.est-actif) .ds-note {
+  opacity: 0;
+}
+
+.est-epingle .ds-doc {
+  position: absolute;
+  top: 50%;
+  right: 4%;
+  width: min(400px, 38%);
+}
+
+.est-epingle .ds-rail {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  left: 0;
+  display: block;
+  width: 2px;
+  background: var(--trait-fort);
+}
+
+.est-epingle .ds-rail i {
+  position: absolute;
+  inset: 0;
+  background: var(--rouille);
+  transform: scaleY(0.1667);
+  transform-origin: top;
+}
+
+@media (max-width: 999px) {
+  .ds-etape {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .ds-doc {
+    width: calc(100% - 12px);
+  }
+
+  .ds-tampon {
+    right: -6px;
+  }
+}

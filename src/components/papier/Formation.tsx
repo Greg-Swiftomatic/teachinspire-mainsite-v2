@@ -1,139 +1,19 @@
 import { useRef } from 'react';
-import { gsap } from 'gsap';
 import { BOOKING_URL } from '../../assets/assets';
-import { AppelFinal, Bouton, Illustration, Rythme, Sur, Titre } from './Papier';
+import { AppelFinal, Bouton, Illustration, PrixResume, Rythme, Sur, Titre } from './Papier';
 import { chiffres, garde, livrables, modules, publicCible } from './offre-data';
+import { Dossier, type DocType } from './Dossier';
+import { epinglerDossier } from './epinglerDossier';
+import { useAncre } from './useAncre';
 import { usePapierMotion } from './usePapierMotion';
 import './formation.css';
 
-// Le dossier de Katrin : un document par module, avec son vrai contenu.
-function DocModule({ i }: { i: number }) {
-  switch (i) {
-    case 0:
-      return (
-        <>
-          <p className="pe-doc-type">Fiche apprenant</p>
-          <h4>Katrin V.</h4>
-          <dl className="fo-fiche">
-            <dt>Métier</dt><dd>Coordinatrice logistique</dd>
-            <dt>Niveau</dt><dd>B1+ en français</dd>
-            <dt>Situations</dt><dd>Appels de transporteurs, retards, réclamations</dd>
-          </dl>
-          <p className="pe-annot fo-note">son vrai besoin&nbsp;!</p>
-        </>
-      );
-    case 1:
-      return (
-        <>
-          <p className="pe-doc-type">Calendrier · 8 semaines · 24&nbsp;h</p>
-          <ol className="fo-calendrier">
-            <li><b>S1</b> Se présenter, présenter son poste</li>
-            <li><b>S2</b> Suivre une commande</li>
-            <li className="fo-cible"><b>S3</b> Prendre un appel, clarifier un retard</li>
-            <li><b>S4</b> Négocier un nouveau créneau</li>
-          </ol>
-          <p className="pe-annot fo-note">séance choisie</p>
-        </>
-      );
-    case 2:
-      return (
-        <>
-          <p className="pe-doc-type">Sources retenues</p>
-          <ul className="fo-sources">
-            <li><span>▶</span>Vlog d&apos;un chauffeur routier : les temps de conduite</li>
-            <li><span>▶</span>Témoignage : une tournée pleine d&apos;imprévus</li>
-          </ul>
-          <p className="fo-petit">Transcrites, passages utiles repérés</p>
-        </>
-      );
-    case 3:
-      return (
-        <>
-          <p className="pe-doc-type">Fiche de séance 3 · 90&nbsp;min</p>
-          <p className="fo-tache"><b>Tâche finale :</b> simuler l&apos;appel d&apos;un transporteur qui annonce un retard.</p>
-          <ul className="fo-criteres">
-            <li>comprend le problème</li>
-            <li>demande une précision utile</li>
-            <li>confirme la suite</li>
-          </ul>
-        </>
-      );
-    case 4:
-      return (
-        <>
-          <p className="pe-doc-type">Dialogue audio · 2 voix</p>
-          <div className="fo-onde" aria-hidden="true">
-            {Array.from({ length: 34 }, (_, k) => (
-              <i key={k} style={{ height: `${18 + Math.round(Math.abs(Math.sin(k * 1.7)) * 26)}px` }} />
-            ))}
-          </div>
-          <p className="fo-replique">« Je vous appelle pour la livraison de jeudi… »</p>
-          <p className="fo-petit">+ exercices de compréhension, entraînement, simulation</p>
-        </>
-      );
-    default:
-      return (
-        <>
-          <p className="pe-doc-type">Pack final</p>
-          <ul className="fo-pack">
-            <li>Support apprenant</li>
-            <li>Dialogue audio</li>
-            <li>Guide enseignant</li>
-            <li>Plan de cours</li>
-          </ul>
-          <span className="pe-tampon fo-tampon">validé</span>
-        </>
-      );
-  }
-}
-
-// La séquence épinglée : à chaque module, un document se pose sur le dossier.
-function sequence(scope: HTMLElement, bureau: boolean) {
-  if (!bureau) return;
-  const zone = scope.querySelector<HTMLElement>('.fo-sequence');
-  if (!zone) return;
-  const docs = gsap.utils.toArray<HTMLElement>('.fo-doc', zone);
-  const items = gsap.utils.toArray<HTMLElement>('.fo-module', zone);
-  const n = docs.length;
-
-  zone.classList.add('est-epingle');
-  gsap.set(docs, { yPercent: -50, xPercent: 0 });
-  gsap.set(docs.slice(1), { x: 160, y: 40, rotate: 7, opacity: 0 });
-  gsap.set(docs[0], { rotate: -1.5 });
-  gsap.set(zone.querySelector('.fo-tampon'), { scale: 2.4, opacity: 0, rotate: 10 });
-
-  const actif = (k: number) => items.forEach((item, j) => item.classList.toggle('est-actif', j === k));
-  actif(0);
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: zone,
-      start: 'top top+=96',
-      end: `+=${n * 70}%`,
-      pin: true,
-      scrub: 0.6,
-      // le texte change quand le document du module est presque posé
-      onUpdate: (self) => actif(Math.min(n - 1, Math.floor(self.progress * tl.duration() + 0.7))),
-      onLeaveBack: () => actif(0),
-    },
-  });
-
-  for (let i = 1; i < n; i++) {
-    tl.to(docs[i], { x: 0, y: 0, rotate: i % 2 ? 1.5 : -1.5, duration: 1, ease: 'power2.out' }, i - 1);
-    tl.to(docs[i], { opacity: 1, duration: 0.2, ease: 'none' }, i - 1);
-    docs.slice(0, i).forEach((precedent, k) => {
-      const recul = i - k;
-      tl.to(precedent, { x: -recul * 22, y: -recul * 16, scale: 1 - recul * 0.04, duration: 1, ease: 'power2.out' }, i - 1);
-    });
-    tl.to(zone.querySelector('.fo-rail i'), { scaleY: (i + 1) / n, duration: 1, ease: 'none' }, i - 1);
-  }
-  tl.to(zone.querySelector('.fo-tampon'), { scale: 1, opacity: 1, rotate: -12, duration: 0.4, ease: 'power3.in' }, n - 1.3);
-  tl.to({}, { duration: 0.5 });
-}
+const DOCS_MODULES: DocType[] = ['fiche', 'calendrier', 'sources', 'seance', 'audio', 'pack'];
 
 export function Formation() {
   const ref = useRef<HTMLDivElement>(null);
-  usePapierMotion(ref, sequence);
+  usePapierMotion(ref, epinglerDossier);
+  useAncre();
 
   return (
     <div className="pe-page fo" ref={ref}>
@@ -141,7 +21,7 @@ export function Formation() {
         <div className="pe-cadre fo-hero-grille">
           <div>
             <p className="pe-sur">La formation · Créez des Cours Sur-Mesure</p>
-            <Titre as="h1" id="fo-titre" texte="Du besoin de l'apprenant au cours validé, en six modules." souligne="validé," immediat />
+            <Titre as="h1" id="fo-titre" texte="Du besoin de l'apprenant au cours validé, en six modules." souligne="validé" immediat />
             <p className="pe-intro" data-monte>
               Un parcours pour toute l&apos;équipe. Chaque formateur part d&apos;un vrai apprenant et
               repart avec son cours complet, et une méthode à refaire pour le suivant. L&apos;IA
@@ -196,28 +76,15 @@ export function Formation() {
             suit son propre apprenant. À chaque module, son dossier s&apos;enrichit d&apos;un document.
           </p>
         </div>
-        <div className="pe-cadre fo-sequence">
-          <span className="fo-rail" aria-hidden="true"><i /></span>
-          <ol className="fo-modules">
-            {modules.map((m, i) => (
-              <li className="fo-module" key={m.numero}>
-                <div className="fo-module-texte" data-monte>
-                  <p className="fo-module-num">Module {m.numero}</p>
-                  <h3>{m.nom}</h3>
-                  <div className="fo-module-corps">
-                    <div>
-                      <p>{m.resume}</p>
-                      <p className="fo-remis"><b>Chaque formateur remet :</b> {m.remis}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="pe-doc fo-doc" data-monte>
-                  <DocModule i={i} />
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <Dossier
+          etapes={modules.map((m, i) => ({
+            num: `Module ${m.numero}`,
+            nom: m.nom,
+            texte: m.resume,
+            remis: m.remis,
+            doc: DOCS_MODULES[i],
+          }))}
+        />
       </section>
 
       <section className="pe-section pe-calme fo-garde" aria-labelledby="fo-garde-titre">
@@ -302,29 +169,7 @@ export function Formation() {
         </div>
       </section>
 
-      <section className="pe-section pe-sombre fo-prix" data-sombre aria-labelledby="fo-prix-titre">
-        <div className="pe-cadre fo-prix-grille">
-          <div>
-            <Sur>Le prix</Sur>
-            <Titre id="fo-prix-titre" texte="Un prix par institut, pas par formateur." />
-          </div>
-          <div>
-            <p className="fo-prix-montant">
-              <span data-compte="4200">4&nbsp;200</span>&nbsp;€&nbsp;HT
-              <small>jusqu&apos;à 10 formateurs</small>
-            </p>
-            <ul className="fo-prix-points">
-              <li data-monte>Puis 250&nbsp;€&nbsp;HT par formateur supplémentaire.</li>
-              <li data-monte>Finançable par votre OPCO, avec le portage administratif d&apos;un organisme partenaire certifié Qualiopi.</li>
-              <li data-monte>Paiement en 3 fois sans frais possible.</li>
-            </ul>
-            <div className="pe-actions" data-monte>
-              <Bouton href="/offre" variante="clair">Voir l&apos;offre détaillée →</Bouton>
-              <Bouton href={BOOKING_URL} variante="trait">Réserver 15 minutes</Bouton>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PrixResume />
 
       <AppelFinal lienOffre />
     </div>

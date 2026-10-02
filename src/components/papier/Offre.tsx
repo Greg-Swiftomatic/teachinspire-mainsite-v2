@@ -16,6 +16,7 @@ import {
   modules,
   prixEquipe,
 } from './offre-data';
+import { useAncre } from './useAncre';
 import { usePapierMotion } from './usePapierMotion';
 import './offre.css';
 
@@ -107,6 +108,7 @@ function Calculateur() {
 export function Offre() {
   const ref = useRef<HTMLDivElement>(null);
   usePapierMotion(ref);
+  useAncre();
 
   return (
     <div className="pe-page of" ref={ref}>
@@ -114,7 +116,7 @@ export function Offre() {
         <div className="pe-cadre of-hero-grille">
           <div>
             <p className="pe-sur">L&apos;offre</p>
-            <Titre as="h1" id="of-titre" texte="Tout ce que comprend la formation, en détail." souligne="détail." immediat />
+            <Titre as="h1" id="of-titre" texte="Tout ce que comprend la formation, en détail." souligne="détail" immediat />
             <p className="pe-intro" data-monte>
               Pour un institut de langues qui veut former toute son équipe à créer des cours sur
               mesure avec l&apos;IA. Le prix, le contenu, le rythme et le financement : tout est sur
@@ -273,7 +275,7 @@ export function Offre() {
         </div>
       </section>
 
-      <section className="pe-section pe-calme of-questions" aria-labelledby="of-questions-titre">
+      <section id="questions" className="pe-section pe-calme of-questions" aria-labelledby="of-questions-titre">
         <div className="pe-cadre of-questions-grille">
           <div>
             <Sur>Vos questions</Sur>
