@@ -245,23 +245,14 @@ export function Formation() {
         </div>
       </section>
 
-      <section className="pe-section pe-sombre fo-principe" data-sombre aria-labelledby="fo-principe-titre">
-        <div className="pe-cadre fo-principe-grille">
-          <div>
-            <Sur>Le principe</Sur>
-            <Titre id="fo-principe-titre" texte="L'IA prépare. Le formateur décide." jaune="décide" />
-            <ul className="fo-principe-points">
-              <li data-monte><b>Il cadre.</b> Le contexte, l&apos;objectif, le niveau : c&apos;est lui qui sait ce que l&apos;apprenant doit réussir.</li>
-              <li data-monte><b>Il vérifie.</b> Il relit chaque résultat contre les sources et corrige ce qui ne tient pas.</li>
-              <li data-monte><b>Il adapte.</b> Il garde, coupe, réécrit, puis valide la version qu&apos;il utilisera en cours.</li>
-            </ul>
-          </div>
-          <Illustration nom="03-ia-prepare" alt="Un brouillon produit par l'IA à l'écran, corrigé au stylo rouge par le formateur, puis validé." />
-        </div>
-        <div className="pe-cadre fo-outils">
-          <p className="fo-outils-intro" data-monte>
-            Les démonstrations se font sur Gemini, et un compte gratuit suffit. La méthode marche
-            aussi avec ChatGPT, Claude ou Mistral. Pour la production, le Studio est inclus pendant 6&nbsp;mois :
+      <section className="pe-section fo-outils" aria-labelledby="fo-outils-titre">
+        <div className="pe-cadre">
+          <Sur>Les outils</Sur>
+          <Titre id="fo-outils-titre" texte="N'importe quelle IA, et le Studio inclus." />
+          <p className="pe-intro" data-monte>
+            Les démonstrations se font sur Gemini, avec un compte gratuit. La méthode marche aussi
+            avec ChatGPT, Claude ou Mistral : elle ne dépend pas d&apos;un outil. Pour la
+            production, le Studio est inclus pendant 6&nbsp;mois.
           </p>
           <ul className="fo-studio">
             <li data-monte><b>Prompts</b><span>en accès libre</span></li>
@@ -269,45 +260,43 @@ export function Formation() {
             <li data-monte><b>Transcription</b><span>10&nbsp;h par mois</span></li>
             <li data-monte><b>Documents</b><span>mise en forme et export PDF</span></li>
           </ul>
-        </div>
-      </section>
-
-      <section className="pe-section fo-apprenant" aria-labelledby="fo-apprenant-titre">
-        <div className="pe-cadre fo-apprenant-grille">
-          <Illustration nom="04-resultat-apprenant" alt="Un formateur et un chef de chantier devant un support de cours sur le briefing sécurité." />
-          <div>
-            <Sur>Pour l&apos;apprenant</Sur>
-            <Titre id="fo-apprenant-titre" texte="Le cours parle de son métier." />
-            <p className="pe-intro" data-monte>
-              Un chef de chantier n&apos;a pas besoin du même anglais qu&apos;une infirmière. Avec la
-              méthode, son cours porte sur son briefing sécurité, ses interlocuteurs, ses mots. Il
-              reconnaît sa réalité dès la première séance, et il parle plus vite.
-            </p>
+          <div className="fo-decide" data-monte>
+            <p>À chaque étape, l&apos;IA prépare et le formateur décide :</p>
+            <ul>
+              <li><b>Il cadre</b> le contexte, l&apos;objectif et le niveau.</li>
+              <li><b>Il vérifie</b> chaque résultat contre les sources.</li>
+              <li><b>Il adapte</b>, puis valide la version qu&apos;il utilisera en cours.</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <section className="pe-section pe-calme fo-deroule" aria-labelledby="fo-deroule-titre">
         <div className="pe-cadre">
-          <Sur>Le déroulé</Sur>
-          <Titre id="fo-deroule-titre" texte="Une formation d'équipe, à votre rythme." />
-          <div className="fo-formats">
-            <article data-monte>
-              <h3>25 capsules vidéo</h3>
-              <p>Courtes, environ 3&nbsp;h&nbsp;40 au total. Chaque formateur avance entre les ateliers, sur son propre temps.</p>
-            </article>
-            <article data-monte>
-              <h3>10&nbsp;h en direct</h3>
-              <p>Un lancement d&apos;1&nbsp;h, puis 6 ateliers de 1&nbsp;h&nbsp;30 sur vos cas réels. Les replays restent dans la communauté.</p>
-            </article>
-            <article data-monte>
-              <h3>6 mises en pratique</h3>
-              <p>Une par module, sur l&apos;apprenant de chaque formateur. Pas de quiz : des documents utilisables en classe.</p>
-            </article>
-            <article data-monte>
-              <h3>Un campus pendant 12 mois</h3>
-              <p>La formation, la communauté et le Studio sous un seul lien, pour partager les créations de l&apos;équipe.</p>
-            </article>
+          <div className="fo-deroule-grille">
+            <div>
+              <Sur>Le déroulé</Sur>
+              <Titre id="fo-deroule-titre" texte="Une formation d'équipe, à votre rythme." />
+              <div className="fo-formats">
+                <article data-monte>
+                  <h3>25 capsules vidéo</h3>
+                  <p>Courtes, environ 3&nbsp;h&nbsp;40 au total. Chaque formateur avance entre les ateliers, sur son propre temps.</p>
+                </article>
+                <article data-monte>
+                  <h3>10&nbsp;h en direct</h3>
+                  <p>Un lancement d&apos;1&nbsp;h, puis 6 ateliers de 1&nbsp;h&nbsp;30 sur vos cas réels. Les replays restent dans la communauté.</p>
+                </article>
+                <article data-monte>
+                  <h3>6 mises en pratique</h3>
+                  <p>Une par module, sur l&apos;apprenant de chaque formateur. Pas de quiz : des documents utilisables en classe.</p>
+                </article>
+                <article data-monte>
+                  <h3>Un campus pendant 12 mois</h3>
+                  <p>La formation, la communauté et le Studio sous un seul lien, pour partager les créations de l&apos;équipe.</p>
+                </article>
+              </div>
+            </div>
+            <Illustration nom="05-equipe-B" alt="Un atelier en direct sur un ordinateur portable : le calendrier de formation à l'écran, l'équipe de l'institut connectée." />
           </div>
           <Rythme />
         </div>
