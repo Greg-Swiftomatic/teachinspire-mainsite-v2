@@ -17,8 +17,8 @@ const previewPoints = [
 ];
 
 const courseIncludes = [
-  '15 tutoriels vidéo pour donner des bases solides à vos formateurs',
-  '6 à 8 sessions live à partir de vos cas de cours',
+  '25 capsules vidéo, organisées en six modules, à suivre à son rythme',
+  "10 h d'ateliers en direct, à partir de vos cas de cours",
   "Une méthode qui reste utile quand les outils changent d'interface",
 ];
 
