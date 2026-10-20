@@ -8,7 +8,8 @@
  *
  * Ciblage : `emails` limite la préparation à une liste choisie (une cohorte,
  * un groupe d'actifs), `version` fixe le questionnaire présenté
- * (« mi-parcours » ou « fin-de-parcours ») et le brouillon d'email associé.
+ * (« mi-parcours » ou « fin-de-parcours ») et le brouillon d'email associé,
+ * `lang` la langue du formulaire et de l'email (« fr » par défaut, « en »).
  * Sans `emails`, tous les participants du Studio sont préparés.
  *
  * Volontairement « prepare-only » : ce endpoint N'ENVOIE PAS le premier email.
@@ -19,6 +20,7 @@
  */
 
 import { isVersion, type FormVersion } from '../../lib/version';
+import { isLang, type Lang } from '../../lib/lang';
 
 interface Env {
   DB: D1Database;
@@ -52,8 +54,10 @@ const firstNameOf = (name: string): string =>
 function draft(
   firstName: string,
   link: string,
-  version: FormVersion
+  version: FormVersion,
+  lang: Lang
 ): { subject: string; body: string } {
+  if (lang === 'en') return draftEn(firstName, link, version);
   const hi = firstName ? `Bonjour ${firstName},` : 'Bonjour,';
   const consent = [
     'À la fin, vous pourrez aussi, si vous le souhaitez, m’autoriser à citer',
@@ -112,6 +116,69 @@ function draft(
   };
 }
 
+/** Le même email en anglais, écrit pour des formateurs anglophones. */
+function draftEn(
+  firstName: string,
+  link: string,
+  version: FormVersion
+): { subject: string; body: string } {
+  const hi = firstName ? `Hi ${firstName},` : 'Hello,';
+  const consent = [
+    'At the end, you can also, if you wish, let me quote an excerpt from your',
+    'answers. You choose what appears (your name, organisation, LinkedIn link…),',
+    'and I’ll send you the exact text before anything is published.',
+  ];
+  const credits = [
+    'You sign in with your Studio account, and 30 minutes of audio credits are',
+    'added to it as soon as you send your answers, whatever they say.',
+  ];
+
+  if (version === 'fin-de-parcours') {
+    return {
+      subject: 'A few months after the course: your feedback (8 min)',
+      body: [
+        hi,
+        '',
+        'It’s been a few months since you took the course. I’d like to know what',
+        'has stayed with you day to day: what you still use, what has changed in',
+        'the way you prepare your lessons, and what didn’t last. Your answers will',
+        'go straight into shaping the next sessions.',
+        '',
+        'The questionnaire takes about 8 minutes, and most questions are multiple choice:',
+        link,
+        '',
+        ...credits,
+        '',
+        ...consent,
+        '',
+        'Thank you in advance,',
+        'Grégory',
+      ].join('\n'),
+    };
+  }
+
+  return {
+    subject: 'Your mid-course feedback (8 min, 30 free minutes of audio credits)',
+    body: [
+      hi,
+      '',
+      'We’re now halfway through the course. Before the final workshops, I’d like',
+      'to hear what the method has already changed for you, what’s helping, and',
+      'what’s still missing. I’ll use your answers to fine-tune the rest of the course.',
+      '',
+      'The questionnaire takes about 8 minutes, and most questions are multiple choice:',
+      link,
+      '',
+      ...credits,
+      '',
+      ...consent,
+      '',
+      'Thank you in advance,',
+      'Grégory',
+    ].join('\n'),
+  };
+}
+
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const secret = context.env.TESTIMONIAL_GRANT_SECRET;
   if (!secret) {
@@ -122,9 +189,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     cohort?: string;
     emails?: unknown;
     version?: unknown;
+    lang?: unknown;
   };
   const cohort = typeof input.cohort === 'string' ? input.cohort.trim().slice(0, 80) : '';
   const version: FormVersion = isVersion(input.version) ? input.version : 'mi-parcours';
+  const lang: Lang = isLang(input.lang) ? input.lang : 'fr';
   const wanted = Array.isArray(input.emails)
     ? new Set(
         input.emails
@@ -179,14 +248,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     const token = makeToken();
     const firstName = firstNameOf(p.name);
-    const link = `${base}/?t=${token}`;
-    const { subject, body } = draft(firstName, link, version);
+    // La langue voyage aussi dans le lien : la page de connexion s'affiche
+    // déjà dans la bonne langue, avant que l'invitation ne soit retrouvée.
+    const link = lang === 'fr' ? `${base}/?t=${token}` : `${base}/?t=${token}&lang=${lang}`;
+    const { subject, body } = draft(firstName, link, version, lang);
 
     inserts.push(
       context.env.DB.prepare(
-        `INSERT INTO invites (token, studio_user_id, first_name, email, cohort, form_version, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`
-      ).bind(token, p.id, firstName || null, p.email, cohort || null, version, now)
+        `INSERT INTO invites (token, studio_user_id, first_name, email, cohort, form_version, lang, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+      ).bind(token, p.id, firstName || null, p.email, cohort || null, version, lang, now)
     );
     created.push({ name: p.name, email: p.email, link, subject, body });
   }
@@ -198,6 +269,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   return Response.json({
     cohort: cohort || null,
     version,
+    lang,
     participants: participants.length,
     // Emails demandés mais sans compte participant actif au Studio : ces
     // personnes ne pourront pas répondre tant qu'elles n'ont pas de compte.

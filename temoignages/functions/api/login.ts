@@ -8,6 +8,7 @@
  */
 
 import { versionFor } from '../lib/version';
+import { isLang, langFor, say, type Lang } from '../lib/lang';
 import { signSession } from '../lib/session';
 
 interface Env {
@@ -20,23 +21,33 @@ interface Env {
 const DEFAULT_STUDIO_LOGIN = 'https://studio.teachinspire.me/api/auth/login';
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const secret = context.env.TI_SESSION_SECRET;
-  if (!secret) {
-    // Refus explicite plutôt qu'un formulaire ouvert sans identité vérifiée.
-    return Response.json({ error: 'Service non configuré.' }, { status: 503 });
-  }
-
   let email = '';
   let password = '';
+  // Langue affichée avant connexion (celle du lien) : sert aux messages d'erreur.
+  let lang: Lang = 'fr';
   try {
-    const body = (await context.request.json()) as { email?: string; password?: string };
+    const body = (await context.request.json()) as { email?: string; password?: string; lang?: string };
     email = typeof body.email === 'string' ? body.email.trim().slice(0, 200) : '';
     password = typeof body.password === 'string' ? body.password.slice(0, 200) : '';
+    if (isLang(body.lang)) lang = body.lang;
   } catch {
     return Response.json({ error: 'Requête invalide.' }, { status: 400 });
   }
+  const t = say(lang);
+
+  const secret = context.env.TI_SESSION_SECRET;
+  if (!secret) {
+    // Refus explicite plutôt qu'un formulaire ouvert sans identité vérifiée.
+    return Response.json(
+      { error: t('Service non configuré.', 'This form isn’t available right now.') },
+      { status: 503 }
+    );
+  }
   if (!email || !password) {
-    return Response.json({ error: 'Email et mot de passe requis.' }, { status: 400 });
+    return Response.json(
+      { error: t('Email et mot de passe requis.', 'Please enter your email and password.') },
+      { status: 400 }
+    );
   }
 
   let upstream: Response;
@@ -47,7 +58,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       body: JSON.stringify({ email, password }),
     });
   } catch {
-    return Response.json({ error: 'Le Studio est injoignable. Réessayez.' }, { status: 502 });
+    return Response.json(
+      { error: t('Le Studio est injoignable. Réessayez.', 'We can’t reach the Studio right now. Please try again.') },
+      { status: 502 }
+    );
   }
 
   if (!upstream.ok) {
@@ -57,8 +71,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       {
         error:
           status === 429
-            ? 'Trop de tentatives. Patientez quelques minutes.'
-            : 'Identifiants incorrects. Utilisez votre compte studio.teachinspire.me.',
+            ? t('Trop de tentatives. Patientez quelques minutes.', 'Too many attempts. Please wait a few minutes.')
+            : t(
+                'Identifiants incorrects. Utilisez votre compte studio.teachinspire.me.',
+                'Incorrect email or password. Please use your studio.teachinspire.me account.'
+              ),
       },
       { status }
     );
@@ -70,12 +87,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   try {
     data = (await upstream.json()) as typeof data;
   } catch {
-    return Response.json({ error: 'Réponse du Studio illisible.' }, { status: 502 });
+    return Response.json(
+      { error: t('Réponse du Studio illisible.', 'The Studio sent an unexpected reply. Please try again.') },
+      { status: 502 }
+    );
   }
 
   const user = data.user;
   if (!user?.id || !user.email) {
-    return Response.json({ error: 'Réponse du Studio incomplète.' }, { status: 502 });
+    return Response.json(
+      { error: t('Réponse du Studio incomplète.', 'The Studio sent an incomplete reply. Please try again.') },
+      { status: 502 }
+    );
   }
 
   // Une réponse par compte : on prévient dès la connexion, pas au moment
@@ -98,6 +121,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     firstName,
     fullName,
     formVersion: await versionFor(context.env.DB, user.id, context.env.FORM_VERSION),
+    // Langue de l'invitation : elle prime sur celle du lien une fois connecté.
+    lang: await langFor(context.env.DB, user.id),
     email: user.email,
     alreadySubmitted: Boolean(existing),
   });

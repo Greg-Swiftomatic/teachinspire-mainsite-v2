@@ -7,6 +7,8 @@ D1, sur son propre sous-domaine. Les questions viennent de
 `docs/testimonial-collection-kit.md`.
 
 - Formulaire en 6 étapes, environ 8 minutes, brouillon sauvegardé en local
+- En français par défaut, en anglais pour un groupe anglophone (langue portée
+  par l'invitation, voir « Formulaire en anglais »)
 - Questions adaptées à la situation (direction, indépendant, salarié d'un
   institut), note de recommandation, instituts pour lesquels la personne
   intervient et accord de mise en relation
@@ -68,6 +70,15 @@ Une seule fois, avant de déployer cette version :
 npx wrangler d1 execute teachinspire-temoignages --remote --file=./migrations/0002_mi_parcours.sql
 ```
 
+### Migration anglais (octobre 2026)
+
+Une seule fois, **avant** de déployer la version qui gère l'anglais (elle
+écrit la colonne `lang` à chaque réponse) :
+
+```bash
+npx wrangler d1 execute teachinspire-temoignages --remote --file=./migrations/0003_lang.sql
+```
+
 ## Envoyer les invitations
 
 La liste vient du Studio (participants actifs), pas d'un CSV. Une seule
@@ -91,6 +102,31 @@ convertit bien mieux. Les invitations sont enregistrées (jeton + suivi) ;
 les relances aux non-répondants seront, elles, automatisées (cron, à venir).
 
 `drafts.md` contient des données personnelles : il est gitignoré.
+
+### Formulaire en anglais
+
+Pour un groupe anglophone, ajouter `--lang en` :
+
+```bash
+TI_ADMIN_USER=greg TI_ADMIN_PASS=... \
+  npm run invite -- "Arrimage 2026-04" --lang en --emails groupes/arrimage-en.txt
+```
+
+La langue est enregistrée sur l'invitation (`invites.lang`), comme la version
+du questionnaire, et le lien porte aussi `&lang=en` pour que la page de
+connexion s'affiche déjà en anglais. Une fois la personne connectée, c'est la
+langue de son invitation qui fait foi ; sans invitation, celle du lien
+(`?lang=en`). Les brouillons d'email sont en anglais, pour `mi-parcours`
+comme pour `fin-de-parcours`.
+
+Seuls les libellés changent : les valeurs des choix (`salarie`, `sceptique`,
+`moins_30`…) sont identiques dans les deux langues, donc la page de suivi, les
+statistiques et l'export CSV mélangent les réponses sans conversion. La réponse
+garde la langue dans laquelle elle a été écrite (`responses.lang`) : badge
+« En anglais » dans /admin, mention « EN » dans l'email de notification.
+
+Les textes du formulaire vivent dans `src/i18n/fr.ts` et `src/i18n/en.ts` ;
+le type impose les mêmes clés, un texte manquant fait échouer le build.
 
 L'ancien flux CSV (`scripts/generate-tokens.mjs`) reste disponible pour un
 envoi hors Studio, mais n'est plus la voie principale.

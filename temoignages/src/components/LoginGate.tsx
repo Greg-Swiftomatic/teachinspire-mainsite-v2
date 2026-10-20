@@ -1,17 +1,21 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, LogIn } from 'lucide-react';
+import { isLang, useCopy, type Lang } from '../i18n';
 
 export interface Session {
   session: string;
   firstName: string;
   fullName: string;
   formVersion: string;
+  /** Langue de l'invitation, null sans invitation (on garde celle du lien). */
+  lang: Lang | null;
   email: string;
   alreadySubmitted: boolean;
 }
 
-export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
+export function LoginGate({ lang, onLogin }: { lang: Lang; onLogin: (s: Session) => void }) {
+  const c = useCopy().login;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
@@ -26,22 +30,26 @@ export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
       const res = await fetch('/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, lang }),
       });
-      const data = (await res.json().catch(() => ({}))) as Partial<Session> & { error?: string };
+      const data = (await res.json().catch(() => ({}))) as Partial<Omit<Session, 'lang'>> & {
+        lang?: unknown;
+        error?: string;
+      };
       if (!res.ok || !data.session) {
-        throw new Error(data.error || 'Connexion impossible.');
+        throw new Error(data.error || c.failed);
       }
       onLogin({
         session: data.session,
         firstName: data.firstName ?? '',
         fullName: data.fullName ?? data.firstName ?? '',
         formVersion: data.formVersion ?? 'mi-parcours',
+        lang: isLang(data.lang) ? data.lang : null,
         email: data.email ?? email,
         alreadySubmitted: Boolean(data.alreadySubmitted),
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Connexion impossible.');
+      setError(err instanceof Error ? err.message : c.failed);
       setBusy(false);
     }
   };
@@ -53,20 +61,19 @@ export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
       transition={{ duration: 0.3 }}
     >
       <div className="mb-8 border border-navy/12 bg-white p-6 md:p-8">
-        <span className="ti-label">Réservé aux participants</span>
+        <span className="ti-label">{c.label}</span>
         <h2 className="mb-3 font-display text-2xl font-semibold leading-snug">
-          Connectez-vous avec votre compte Studio
+          {c.title}
         </h2>
         <p className="mb-6 text-[15px] leading-relaxed text-navy/70">
-          Le questionnaire (et les 30 minutes de crédits audio offertes) est
-          réservé aux participants de la formation. Utilisez les identifiants de
-          votre compte <strong className="font-medium">studio.teachinspire.me</strong>.
+          {c.introBefore} <strong className="font-medium">studio.teachinspire.me</strong>
+          {c.introAfter}
         </p>
 
         <form onSubmit={submit} className="grid gap-4">
           <div>
             <label htmlFor="login-email" className="mb-2 block text-[14px] font-medium">
-              Email du compte
+              {c.email}
             </label>
             <input
               id="login-email"
@@ -81,7 +88,7 @@ export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
           </div>
           <div>
             <label htmlFor="login-password" className="mb-2 block text-[14px] font-medium">
-              Mot de passe
+              {c.password}
             </label>
             <input
               id="login-password"
@@ -107,19 +114,18 @@ export function LoginGate({ onLogin }: { onLogin: (s: Session) => void }) {
               target="_blank"
               rel="noreferrer"
             >
-              Mot de passe oublié ?
+              {c.forgot}
             </a>
             <button type="submit" className="ti-btn-primary" disabled={busy}>
               {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
-              Se connecter
+              {c.submit}
             </button>
           </div>
         </form>
       </div>
 
       <p className="text-[13px] leading-relaxed text-navy/50">
-        Vos identifiants sont vérifiés directement auprès du Studio et ne sont
-        ni enregistrés ni conservés par ce formulaire.
+        {c.privacy}
       </p>
     </motion.div>
   );

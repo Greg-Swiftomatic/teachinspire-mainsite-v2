@@ -42,6 +42,7 @@ export async function notifyNewResponse(env: NotifyEnv, n: NewResponse): Promise
     `Structure : ${text(r.institute)}${r.city ? `, ${r.city}` : ''}`,
     `Langues : ${text(r.languages)} · Secteurs des apprenants : ${text(r.learner_sectors)}`,
     `Crédits (30 min) : ${n.credited ? 'crédités automatiquement' : 'A CREDITER A LA MAIN'}`,
+    r.lang === 'en' ? 'Formulaire rempli en anglais : réponses et citation en anglais.' : '',
     '',
     `Au départ : ${label(r.initial_reaction)}${r.initial_reaction_other ? ` (${r.initial_reaction_other})` : ''}`,
     `Temps de préparation : ${label(r.prep_time_before)} → ${label(r.prep_time_now)}`,
@@ -84,7 +85,7 @@ export async function notifyNewResponse(env: NotifyEnv, n: NewResponse): Promise
       body: JSON.stringify({
         to,
         replyTo: email,
-        subject: `Témoignage reçu : ${n.fullName} (${r.institute})${publishable ? ' · publiable' : ''}`,
+        subject: `Témoignage reçu : ${n.fullName} (${r.institute})${r.lang === 'en' ? ' · EN' : ''}${publishable ? ' · publiable' : ''}`,
         text: lines.join('\n'),
       }),
     });
