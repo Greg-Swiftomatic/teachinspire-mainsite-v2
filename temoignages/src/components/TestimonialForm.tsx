@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, ChevronRight, ChevronLeft, Check } from 'lucide-react';
+import { useCopy, type Copy, type Lang } from '../i18n';
 
 const DRAFT_KEY = 'ti-temoignage-draft-v2';
 const TOTAL_STEPS = 6;
@@ -56,71 +57,18 @@ const EMPTY: FormData = {
 
 type Option = { value: string; label: string };
 
-const ROLES: Option[] = [
-  { value: 'direction', label: 'Je dirige un institut ou un organisme de formation' },
-  { value: 'independant', label: 'Je suis formateur ou formatrice indépendant·e' },
-  { value: 'salarie', label: 'Je suis formateur ou formatrice au sein d’un institut' },
-];
+// Valeurs stockées, identiques dans toutes les langues : seuls les libellés
+// (src/i18n) changent, pour que les réponses restent comparables.
+const ROLES = ['direction', 'independant', 'salarie'] as const;
+const REACTIONS = ['curieux', 'sceptique', 'reticent', 'inquiet', 'pas_le_temps', 'autre'] as const;
+const TIME_BEFORE = ['moins_1h', '1_2h', '2_3h', 'plus_3h', 'aucune'] as const;
+const TIME_NOW = ['moins_30', '30_60', '1_2h', 'plus_2h', 'non_utilise'] as const;
+const FREQUENCY = ['hebdo', 'mensuel', 'rare', 'jamais'] as const;
+const INTRO = ['oui', 'peut_etre', 'non'] as const;
+const NAMING = ['full_name', 'initial', 'first_name', 'anonymous'] as const;
 
-const REACTIONS_ASSIGNED: Option[] = [
-  { value: 'curieux', label: 'Curieux ou curieuse, plutôt partant·e' },
-  { value: 'sceptique', label: "Sceptique : j'avais déjà essayé l'IA sans résultat convaincant" },
-  { value: 'reticent', label: "Réticent·e : je ne voyais pas ce que l'IA venait faire dans mon métier" },
-  { value: 'inquiet', label: "Inquiet ou inquiète pour l'avenir du métier" },
-  { value: 'pas_le_temps', label: '« Encore une formation » : je n’avais pas le temps' },
-  { value: 'autre', label: 'Autre' },
-];
-
-const REACTIONS_CHOSEN: Option[] = [
-  { value: 'curieux', label: 'Curieux ou curieuse, sans idée précise de ce que j’allais en tirer' },
-  { value: 'sceptique', label: "Sceptique : j'avais déjà essayé l'IA sans résultat convaincant" },
-  { value: 'reticent', label: "Réservé·e : je ne voyais pas bien ce que l'IA venait faire dans mon métier" },
-  { value: 'inquiet', label: "Inquiet ou inquiète pour l'avenir du métier" },
-  { value: 'pas_le_temps', label: 'Intéressé·e, mais pas sûr·e d’avoir le temps de suivre' },
-  { value: 'autre', label: 'Autre' },
-];
-
-const TIME_BEFORE: Option[] = [
-  { value: 'moins_1h', label: "Moins d'1 h" },
-  { value: '1_2h', label: '1 à 2 h' },
-  { value: '2_3h', label: '2 à 3 h' },
-  { value: 'plus_3h', label: 'Plus de 3 h' },
-  { value: 'aucune', label: 'Je ne préparais pas de cours sur mesure' },
-];
-
-const TIME_NOW: Option[] = [
-  { value: 'moins_30', label: 'Moins de 30 min' },
-  { value: '30_60', label: '30 min à 1 h' },
-  { value: '1_2h', label: '1 à 2 h' },
-  { value: 'plus_2h', label: 'Plus de 2 h' },
-  { value: 'non_utilise', label: "Je n'ai pas encore utilisé la méthode sur un vrai cours" },
-];
-
-const FREQUENCY: Option[] = [
-  { value: 'hebdo', label: 'Chaque semaine' },
-  { value: 'mensuel', label: 'Quelques fois par mois' },
-  { value: 'rare', label: 'Rarement' },
-  { value: 'jamais', label: 'Pas encore' },
-];
-
-const INTRO: Option[] = [
-  { value: 'oui', label: 'Oui, volontiers' },
-  { value: 'peut_etre', label: 'Peut-être, parlons-en' },
-  { value: 'non', label: 'Non merci' },
-];
-
-const NAMING: Option[] = [
-  { value: 'full_name', label: 'Mon prénom et mon nom' },
-  { value: 'initial', label: 'Mon prénom et l’initiale de mon nom' },
-  { value: 'first_name', label: 'Mon prénom seul' },
-  { value: 'anonymous', label: 'Aucun nom : seulement ma fonction et ma ville' },
-];
-
-const TITLE_PLACEHOLDER: Record<string, string> = {
-  direction: 'Directrice de Langues & Co',
-  independant: 'Formatrice d’anglais indépendante',
-  salarie: 'Formateur FLE chez Langues & Co',
-};
+const options = <V extends string>(values: readonly V[], labels: Record<V, string>): Option[] =>
+  values.map((value) => ({ value, label: labels[value] }));
 
 function Radio({
   name, options, value, onChange,
@@ -167,9 +115,10 @@ function Toggle({
 }
 
 function Scale({ value, onChange }: { value: number | null; onChange: (v: number) => void }) {
+  const c = useCopy().form;
   return (
     <div>
-      <div role="radiogroup" aria-label="Note de 0 à 10" className="grid grid-cols-6 gap-1.5 sm:grid-cols-11">
+      <div role="radiogroup" aria-label={c.scaleAria} className="grid grid-cols-6 gap-1.5 sm:grid-cols-11">
         {Array.from({ length: 11 }, (_, n) => (
           <button
             key={n}
@@ -184,8 +133,8 @@ function Scale({ value, onChange }: { value: number | null; onChange: (v: number
         ))}
       </div>
       <div className="mt-2 flex justify-between text-[13px] text-navy/50">
-        <span>0 : pas du tout</span>
-        <span>10 : sans hésiter</span>
+        <span>{c.scaleLow}</span>
+        <span>{c.scaleHigh}</span>
       </div>
     </div>
   );
@@ -200,9 +149,9 @@ function excerpt(text: string, max = 170): string {
   return `${space > 80 ? cut.slice(0, space) : cut}…`;
 }
 
-export function attribution(d: FormData, fullName: string): string {
+export function attribution(d: FormData, fullName: string, c: Copy['form']): string {
   const words = fullName.trim().split(/\s+/).filter(Boolean);
-  const first = words[0] || 'Prénom';
+  const first = words[0] || c.firstNamePlaceholder;
   const last = words.slice(1).join(' ');
   const has = (s: string) => d.consentScope.includes(s);
   const anonymous = d.naming === 'anonymous';
@@ -210,7 +159,7 @@ export function attribution(d: FormData, fullName: string): string {
   const institute = d.institute.trim();
 
   const name =
-    d.naming === 'full_name' ? (d.displayName.trim() || fullName || 'Prénom Nom')
+    d.naming === 'full_name' ? (d.displayName.trim() || fullName || c.fullNamePlaceholder)
     : d.naming === 'initial' ? `${first}${last ? ` ${last[0].toUpperCase()}.` : ''}`
     : d.naming === 'first_name' ? first
     : '';
@@ -222,7 +171,7 @@ export function attribution(d: FormData, fullName: string): string {
     has('city') ? d.city.trim() : '',
   ].filter(Boolean);
 
-  return parts.length ? parts.join(', ') : 'Participant·e au parcours';
+  return parts.length ? parts.join(', ') : c.anonymousSignature;
 }
 
 export function TestimonialForm({
@@ -231,6 +180,7 @@ export function TestimonialForm({
   fullName,
   onStepChange,
   finished = false,
+  lang,
   onSuccess,
 }: {
   token: string | null;
@@ -238,8 +188,10 @@ export function TestimonialForm({
   fullName: string;
   onStepChange?: (step: number) => void;
   finished?: boolean;
+  lang: Lang;
   onSuccess: (credited: boolean) => void;
 }) {
+  const c = useCopy().form;
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>({ ...EMPTY, displayName: fullName });
   const [submitting, setSubmitting] = useState(false);
@@ -292,24 +244,21 @@ export function TestimonialForm({
   const scopeOn = (s: string) => data.consentScope.includes(s);
   const assigned = data.role === 'salarie';
   // Même questionnaire, deux moments : pendant le parcours, ou après.
-  const timeNow = finished
-    ? TIME_NOW.map((o) => (o.value === 'non_utilise' ? { ...o, label: "Je n'utilise pas la méthode" } : o))
-    : TIME_NOW;
-  const frequency = finished
-    ? FREQUENCY.map((o) => (o.value === 'jamais' ? { ...o, label: 'Plus du tout' } : o))
-    : FREQUENCY;
+  const timeNow = options(TIME_NOW, finished
+    ? { ...c.timeNow, non_utilise: c.timeNowUnusedFinished }
+    : c.timeNow);
+  const frequency = options(FREQUENCY, finished
+    ? { ...c.frequency, jamais: c.frequencyNeverFinished }
+    : c.frequency);
 
   const publishProblem = (): string => {
     if (!data.consentPublish) return '';
-    if (!data.naming) return 'Choisissez comment vous nommer, ou décochez l’autorisation de publier.';
-    if (data.naming === 'full_name' && !data.displayName.trim())
-      return 'Indiquez votre nom tel qu’il doit apparaître.';
-    if (scopeOn('role') && !data.displayTitle.trim())
-      return 'Indiquez votre fonction, ou décochez « Ma fonction ».';
-    if (scopeOn('city') && !data.city.trim())
-      return 'Indiquez votre ville à l’étape 1, ou décochez « Ma ville ».';
+    if (!data.naming) return c.namingMissing;
+    if (data.naming === 'full_name' && !data.displayName.trim()) return c.displayNameMissing;
+    if (scopeOn('role') && !data.displayTitle.trim()) return c.titleMissing;
+    if (scopeOn('city') && !data.city.trim()) return c.cityMissing;
     if (!anonymous && scopeOn('linkedin') && !isValidLinkedin(data.linkedinUrl))
-      return 'Le lien LinkedIn doit commencer par https://www.linkedin.com/, ou décochez cette option.';
+      return c.linkedinInvalid;
     return '';
   };
 
@@ -338,34 +287,33 @@ export function TestimonialForm({
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session}`,
         },
-        body: JSON.stringify({ ...data, token, website: honeypot }),
+        body: JSON.stringify({ ...data, token, lang, website: honeypot }),
       });
       const body = (await res.json().catch(() => ({}))) as { error?: string; credited?: boolean };
-      if (!res.ok) throw new Error(body.error || 'Échec de l’envoi');
+      if (!res.ok) throw new Error(body.error || c.sendFailed);
       try { localStorage.removeItem(DRAFT_KEY); } catch { /* ignore */ }
       onSuccess(Boolean(body.credited));
     } catch (e) {
       setError(
         e instanceof Error && e.message
           ? e.message
-          : "L'envoi a échoué. Vérifiez votre connexion et réessayez."
+          : c.networkFailed
       );
       setSubmitting(false);
     }
   };
 
   const pct = Math.round(((step - 1) / TOTAL_STEPS) * 100);
-  const quote = excerpt(data.toASkeptic || data.whatChanged)
-    || 'Votre réponse à la question « un collègue ou un directeur hésite » apparaîtra ici.';
+  const quote = excerpt(data.toASkeptic || data.whatChanged) || c.quotePlaceholder;
 
   return (
     <div>
       <div className="mb-8">
         <div className="mb-2 flex items-baseline justify-between">
           <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-rust">
-            Étape {step} sur {TOTAL_STEPS}
+            {c.step(step, TOTAL_STEPS)}
           </span>
-          <span className="text-[13px] tabular-nums text-navy/50">{pct} %</span>
+          <span className="text-[13px] tabular-nums text-navy/50">{c.percent(pct)}</span>
         </div>
         <div className="h-[3px] w-full bg-navy/10" role="progressbar"
              aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
@@ -379,8 +327,7 @@ export function TestimonialForm({
 
       {restored && step === 1 && (
         <p className="mb-6 border-l-2 border-sage bg-sage/10 px-4 py-3 text-[14px] text-navy/75">
-          Vos réponses précédentes ont été retrouvées. Vous pouvez reprendre où
-          vous en étiez.
+          {c.restored}
         </p>
       )}
 
@@ -400,23 +347,18 @@ export function TestimonialForm({
           {step === 1 && (
             <>
               <div>
-                <span className="ti-label">Vous</span>
-                <p className="ti-question">Quelle est votre situation ?</p>
-                <span className="ti-hint">
-                  Votre nom et votre email viennent de votre compte Studio,
-                  inutile de les ressaisir.
-                </span>
-                <Radio name="Situation" options={ROLES} value={data.role}
+                <span className="ti-label">{c.youLabel}</span>
+                <p className="ti-question">{c.roleQuestion}</p>
+                <span className="ti-hint">{c.roleHint}</span>
+                <Radio name={c.roleAria} options={options(ROLES, c.roles)} value={data.role}
                        onChange={(v) => set('role', v)} />
               </div>
               <div>
                 <label htmlFor="institute" className="ti-question">
-                  {data.role === 'salarie' ? 'Votre institut' : 'Le nom de votre structure'}
+                  {data.role === 'salarie' ? c.instituteEmployed : c.instituteOther}
                 </label>
                 <span className="ti-hint">
-                  {data.role === 'independant'
-                    ? 'Le nom sous lequel vous exercez. Si vous exercez à votre nom, indiquez-le simplement.'
-                    : 'Tel que vos clients le connaissent.'}
+                  {data.role === 'independant' ? c.instituteHintIndependent : c.instituteHint}
                 </span>
                 <input id="institute" className="ti-input" value={data.institute}
                        onChange={(e) => set('institute', e.target.value)}
@@ -424,23 +366,23 @@ export function TestimonialForm({
               </div>
               <div className="grid gap-10 sm:grid-cols-2 sm:gap-5">
                 <div>
-                  <label htmlFor="city" className="ti-question">Votre ville</label>
+                  <label htmlFor="city" className="ti-question">{c.city}</label>
                   <input id="city" className="ti-input" value={data.city}
                          onChange={(e) => set('city', e.target.value)}
-                         autoComplete="address-level2" placeholder="Nantes" />
+                         autoComplete="address-level2" placeholder={c.cityPlaceholder} />
                 </div>
                 <div>
-                  <label htmlFor="languages" className="ti-question">Langue(s) enseignée(s)</label>
+                  <label htmlFor="languages" className="ti-question">{c.languages}</label>
                   <input id="languages" className="ti-input" value={data.languages}
                          onChange={(e) => set('languages', e.target.value)}
-                         placeholder="Anglais, FLE…" />
+                         placeholder={c.languagesPlaceholder} />
                 </div>
               </div>
               <div>
                 <label htmlFor="learnerSectors" className="ti-question">
-                  Dans quels secteurs travaillent vos apprenants ?
+                  {c.sectors}
                 </label>
-                <span className="ti-hint">Juridique, industrie, santé, hôtellerie…</span>
+                <span className="ti-hint">{c.sectorsHint}</span>
                 <input id="learnerSectors" className="ti-input" value={data.learnerSectors}
                        onChange={(e) => set('learnerSectors', e.target.value)} />
               </div>
@@ -450,37 +392,25 @@ export function TestimonialForm({
           {step === 2 && (
             <>
               <div>
-                <span className="ti-label">Au départ</span>
+                <span className="ti-label">{c.startLabel}</span>
                 <p className="ti-question">
-                  {assigned
-                    ? 'Quand votre direction vous a annoncé ce parcours, qu’est-ce que vous vous êtes dit ?'
-                    : 'Au moment de vous inscrire, où en étiez-vous avec l’IA ?'}
+                  {assigned ? c.reactionAssigned : c.reactionChosen}
                 </p>
-                <span className="ti-hint">
-                  Répondez franchement : les réserves nous intéressent autant
-                  que l&apos;enthousiasme.
-                </span>
-                <Radio name="Réaction initiale"
-                       options={assigned ? REACTIONS_ASSIGNED : REACTIONS_CHOSEN}
+                <span className="ti-hint">{c.reactionHint}</span>
+                <Radio name={c.reactionAria}
+                       options={options(REACTIONS, assigned ? c.reactionsAssigned : c.reactionsChosen)}
                        value={data.initialReaction}
                        onChange={(v) => set('initialReaction', v)} />
                 {data.initialReaction === 'autre' && (
                   <input className="ti-input mt-3" value={data.initialReactionOther}
                          onChange={(e) => set('initialReactionOther', e.target.value)}
-                         placeholder="En une phrase" aria-label="Précisez" />
+                         placeholder={c.reactionOtherPlaceholder} aria-label={c.reactionOtherAria} />
                 )}
               </div>
               <div>
-                <p className="ti-question">
-                  Avant le parcours, combien de temps vous prenait la préparation
-                  d&apos;une séance sur mesure ?
-                </p>
-                <span className="ti-hint">
-                  Une séance construite pour un apprenant ou un secteur précis, à
-                  partir d&apos;un article, d&apos;un podcast ou d&apos;un document
-                  de l&apos;entreprise.
-                </span>
-                <Radio name="Temps avant" options={TIME_BEFORE}
+                <p className="ti-question">{c.timeBeforeQuestion}</p>
+                <span className="ti-hint">{c.timeBeforeHint}</span>
+                <Radio name={c.timeBeforeAria} options={options(TIME_BEFORE, c.timeBefore)}
                        value={data.prepTimeBefore}
                        onChange={(v) => set('prepTimeBefore', v)} />
               </div>
@@ -490,54 +420,46 @@ export function TestimonialForm({
           {step === 3 && (
             <>
               <div>
-                <span className="ti-label">{finished ? 'Aujourd’hui' : 'Jusqu’ici'}</span>
-                <p className="ti-question">Aujourd&apos;hui, la même séance vous prend :</p>
-                <Radio name="Temps aujourd'hui" options={timeNow}
+                <span className="ti-label">{finished ? c.nowLabelFinished : c.nowLabelOngoing}</span>
+                <p className="ti-question">{c.timeNowQuestion}</p>
+                <Radio name={c.timeNowAria} options={timeNow}
                        value={data.prepTimeNow}
                        onChange={(v) => set('prepTimeNow', v)} />
               </div>
               <div>
-                <p className="ti-question">À quelle fréquence utilisez-vous la méthode ?</p>
-                <Radio name="Fréquence" options={frequency}
+                <p className="ti-question">{c.frequencyQuestion}</p>
+                <Radio name={c.frequencyAria} options={frequency}
                        value={data.usageFrequency}
                        onChange={(v) => set('usageFrequency', v)} />
               </div>
               <div>
                 <label htmlFor="whatChanged" className="ti-question">
-                  Qu&apos;est-ce qui a changé concrètement dans votre façon de
-                  préparer vos cours ?
+                  {c.changedQuestion}
                 </label>
-                <span className="ti-hint">
-                  C&apos;est la question qui compte le plus. Qu&apos;est-ce que
-                  vous faites aujourd&apos;hui que vous ne faisiez pas avant ?
-                  Qu&apos;est-ce que vous avez arrêté de faire ? Si rien n&apos;a
-                  encore changé, dites-le aussi.
-                </span>
+                <span className="ti-hint">{c.changedHint}</span>
                 <textarea id="whatChanged" className="ti-textarea" value={data.whatChanged}
                           onChange={(e) => set('whatChanged', e.target.value)} required />
                 {data.whatChanged.trim().length > 0 &&
                   data.whatChanged.trim().length < WHAT_CHANGED_MIN && (
                   <p className="mt-2 text-[13px] text-rust">
-                    Encore quelques mots : c&apos;est la réponse qui nous sert
-                    le plus ({data.whatChanged.trim().length}/{WHAT_CHANGED_MIN}
-                    {' '}caractères minimum).
+                    {c.changedTooShort(data.whatChanged.trim().length, WHAT_CHANGED_MIN)}
                   </p>
                 )}
               </div>
               <div>
                 <label htmlFor="firstArtifact" className="ti-question">
-                  Qu&apos;avez-vous déjà créé avec la méthode ?
+                  {c.artifactQuestion}
                 </label>
-                <span className="ti-hint">Pour quel apprenant ou quel secteur, et à partir de quelle source ?</span>
+                <span className="ti-hint">{c.artifactHint}</span>
                 <textarea id="firstArtifact" className="ti-textarea min-h-[100px]"
                           value={data.firstArtifact}
                           onChange={(e) => set('firstArtifact', e.target.value)} />
               </div>
               <div>
                 <label htmlFor="learnerFeedback" className="ti-question">
-                  Un apprenant a-t-il réagi à un cours créé avec la méthode ?
+                  {c.feedbackQuestion}
                 </label>
-                <span className="ti-hint">Facultatif. Ce qu&apos;il ou elle a dit, même en quelques mots.</span>
+                <span className="ti-hint">{c.feedbackHint}</span>
                 <textarea id="learnerFeedback" className="ti-textarea min-h-[100px]"
                           value={data.learnerFeedback}
                           onChange={(e) => set('learnerFeedback', e.target.value)} />
@@ -548,41 +470,33 @@ export function TestimonialForm({
           {step === 4 && (
             <>
               <div>
-                <span className="ti-label">Votre avis</span>
+                <span className="ti-label">{c.opinionLabel}</span>
                 <label htmlFor="toASkeptic" className="ti-question">
-                  Un collègue formateur ou un directeur d&apos;institut vous demande
-                  si le parcours vaut le coup. Que lui répondez-vous ?
+                  {c.skepticQuestion}
                 </label>
-                <span className="ti-hint">
-                  En quelques phrases, comme vous le lui diriez.
-                </span>
+                <span className="ti-hint">{c.skepticHint}</span>
                 <textarea id="toASkeptic" className="ti-textarea" value={data.toASkeptic}
                           onChange={(e) => set('toASkeptic', e.target.value)} />
               </div>
               <div>
                 <label htmlFor="keepOne" className="ti-question">
-                  Si vous ne deviez garder qu&apos;une chose du parcours, laquelle ?
+                  {c.keepQuestion}
                 </label>
                 <input id="keepOne" className="ti-input" value={data.keepOne}
                        onChange={(e) => set('keepOne', e.target.value)}
-                       placeholder="Un module, un outil, un prompt, un atelier…" />
+                       placeholder={c.keepPlaceholder} />
               </div>
               <div>
                 <label htmlFor="whatWasMissing" className="ti-question">
-                  {finished ? 'Qu’est-ce qui vous a manqué ?' : 'Qu’est-ce qui vous manque pour l’instant ?'}
+                  {finished ? c.missingFinished : c.missingOngoing}
                 </label>
-                <span className="ti-hint">
-                  Ce qu&apos;on devrait améliorer en priorité. Les critiques nous
-                  sont plus utiles que les compliments.
-                </span>
+                <span className="ti-hint">{c.missingHint}</span>
                 <textarea id="whatWasMissing" className="ti-textarea min-h-[110px]"
                           value={data.whatWasMissing}
                           onChange={(e) => set('whatWasMissing', e.target.value)} />
               </div>
               <div>
-                <p className="ti-question">
-                  Recommanderiez-vous le parcours à un collègue ?
-                </p>
+                <p className="ti-question">{c.recommendQuestion}</p>
                 <Scale value={data.recommendScore} onChange={(v) => set('recommendScore', v)} />
               </div>
             </>
@@ -591,27 +505,19 @@ export function TestimonialForm({
           {step === 5 && (
             <>
               <div>
-                <span className="ti-label">Votre réseau</span>
+                <span className="ti-label">{c.networkLabel}</span>
                 <label htmlFor="institutesWorkedWith" className="ti-question">
-                  {data.role === 'direction'
-                    ? 'Connaissez-vous d’autres dirigeants d’instituts que ce parcours pourrait intéresser ?'
-                    : 'Intervenez-vous pour d’autres instituts ou organismes de formation ?'}
+                  {data.role === 'direction' ? c.networkDirection : c.networkOther}
                 </label>
-                <span className="ti-hint">
-                  Facultatif. Indiquez leurs noms si vous le souhaitez.
-                </span>
+                <span className="ti-hint">{c.networkHint}</span>
                 <textarea id="institutesWorkedWith" className="ti-textarea min-h-[100px]"
                           value={data.institutesWorkedWith}
                           onChange={(e) => set('institutesWorkedWith', e.target.value)} />
               </div>
               <div>
-                <p className="ti-question">
-                  Accepteriez-vous que Grégory vous demande de le présenter à l&apos;un d&apos;eux ?
-                </p>
-                <span className="ti-hint">
-                  Il vous écrira d&apos;abord pour en parler. Rien ne se fera sans votre accord.
-                </span>
-                <Radio name="Mise en relation" options={INTRO} value={data.introOk}
+                <p className="ti-question">{c.introQuestion}</p>
+                <span className="ti-hint">{c.introHint}</span>
+                <Radio name={c.introAria} options={options(INTRO, c.intro)} value={data.introOk}
                        onChange={(v) => set('introOk', v)} />
               </div>
             </>
@@ -620,23 +526,14 @@ export function TestimonialForm({
           {step === 6 && (
             <>
               <div>
-                <span className="ti-label">Publication</span>
-                <p className="ti-question">Pouvons-nous citer vos réponses ?</p>
-                <span className="ti-hint">
-                  Les témoignages aident d&apos;autres formateurs et instituts à
-                  comprendre ce que le parcours apporte vraiment. Vous choisissez
-                  ce qui apparaît.
-                </span>
+                <span className="ti-label">{c.publishLabel}</span>
+                <p className="ti-question">{c.publishQuestion}</p>
+                <span className="ti-hint">{c.publishHint}</span>
                 <Toggle on={data.consentPublish}
                         onClick={() => set('consentPublish', !data.consentPublish)}>
-                  <strong className="font-semibold">
-                    J&apos;autorise TeachInspire à publier un extrait de mes réponses.
-                  </strong>
+                  <strong className="font-semibold">{c.publishToggle}</strong>
                   <br />
-                  <span className="text-navy/60">
-                    Sans cette case, vos réponses restent internes, et les
-                    crédits vous sont offerts de la même façon.
-                  </span>
+                  <span className="text-navy/60">{c.publishToggleNote}</span>
                 </Toggle>
               </div>
 
@@ -647,13 +544,13 @@ export function TestimonialForm({
                   className="grid gap-10 overflow-hidden"
                 >
                   <div>
-                    <p className="ti-question">Comment vous nommer ?</p>
-                    <Radio name="Nom affiché" options={NAMING} value={data.naming}
+                    <p className="ti-question">{c.namingQuestion}</p>
+                    <Radio name={c.namingAria} options={options(NAMING, c.naming)} value={data.naming}
                            onChange={(v) => set('naming', v)} />
                     {data.naming === 'full_name' && (
                       <div className="mt-4">
                         <label htmlFor="displayName" className="mb-2 block text-[14px] font-medium">
-                          Votre nom tel qu&apos;il doit apparaître
+                          {c.displayNameLabel}
                         </label>
                         <input id="displayName" className="ti-input" value={data.displayName}
                                onChange={(e) => set('displayName', e.target.value)}
@@ -663,39 +560,39 @@ export function TestimonialForm({
                   </div>
 
                   <div>
-                    <p className="ti-question">Ce qui peut accompagner votre témoignage</p>
-                    <span className="ti-hint">Cochez tout ce qui vous convient.</span>
+                    <p className="ti-question">{c.scopeQuestion}</p>
+                    <span className="ti-hint">{c.scopeHint}</span>
                     <div className="grid gap-2">
                       <Toggle on={scopeOn('role')} onClick={() => toggleScope('role')}>
-                        Ma fonction
+                        {c.scopeRole}
                       </Toggle>
                       {scopeOn('role') && (
                         <div className="mb-2 ml-1 border-l-2 border-navy/10 pl-4 pt-1">
                           <label htmlFor="displayTitle" className="mb-2 block text-[14px] font-medium">
-                            Votre fonction telle qu&apos;elle doit apparaître
+                            {c.displayTitleLabel}
                           </label>
                           <input id="displayTitle" className="ti-input" value={data.displayTitle}
                                  onChange={(e) => set('displayTitle', e.target.value)}
-                                 placeholder={TITLE_PLACEHOLDER[data.role] ?? 'Formatrice d’anglais'} />
+                                 placeholder={c.titlePlaceholder[data.role] ?? c.titlePlaceholderDefault} />
                         </div>
                       )}
                       {!anonymous && (
                         <Toggle on={scopeOn('institute')} onClick={() => toggleScope('institute')}>
-                          Le nom de ma structure{data.institute.trim() ? ` (${data.institute.trim()})` : ''}
+                          {c.scopeInstitute}{data.institute.trim() ? ` (${data.institute.trim()})` : ''}
                         </Toggle>
                       )}
                       <Toggle on={scopeOn('city')} onClick={() => toggleScope('city')}>
-                        Ma ville{data.city.trim() ? ` (${data.city.trim()})` : ''}
+                        {c.scopeCity}{data.city.trim() ? ` (${data.city.trim()})` : ''}
                       </Toggle>
                       {!anonymous && (
                         <>
                           <Toggle on={scopeOn('linkedin')} onClick={() => toggleScope('linkedin')}>
-                            Un lien vers mon profil LinkedIn
+                            {c.scopeLinkedin}
                           </Toggle>
                           {scopeOn('linkedin') && (
                             <div className="mb-2 ml-1 border-l-2 border-navy/10 pl-4 pt-1">
                               <label htmlFor="linkedinUrl" className="mb-2 block text-[14px] font-medium">
-                                Lien de votre profil
+                                {c.linkedinLabel}
                               </label>
                               <input id="linkedinUrl" className="ti-input" type="url"
                                      inputMode="url" placeholder="https://www.linkedin.com/in/…"
@@ -705,9 +602,9 @@ export function TestimonialForm({
                             </div>
                           )}
                           <Toggle on={scopeOn('photo')} onClick={() => toggleScope('photo')}>
-                            Ma photo
+                            {c.scopePhoto}
                             <span className="block text-[13.5px] text-navy/55">
-                              Celle de votre profil LinkedIn, ou une photo que Grégory vous demandera.
+                              {c.scopePhotoNote}
                             </span>
                           </Toggle>
                         </>
@@ -717,44 +614,38 @@ export function TestimonialForm({
 
                   <figure className="border border-navy/12 bg-white p-5 md:p-6" aria-live="polite">
                     <figcaption className="mb-3 text-[11px] font-bold uppercase tracking-[0.14em] text-rust">
-                      Aperçu de votre témoignage
+                      {c.previewTitle}
                     </figcaption>
                     <blockquote className="font-display text-[20px] font-semibold leading-snug md:text-[22px]">
-                      « {quote} »
+                      {c.quote(quote)}
                     </blockquote>
                     <p className="mt-3 flex flex-wrap items-center gap-x-2 text-[14.5px] text-navy/65">
-                      <span>{data.naming ? attribution(data, fullName) : 'Choisissez comment vous nommer'}</span>
+                      <span>{data.naming ? attribution(data, fullName, c) : c.namingPending}</span>
                       {!anonymous && scopeOn('linkedin') && isValidLinkedin(data.linkedinUrl) && (
-                        <span className="text-[13px] font-medium text-rust">· profil LinkedIn</span>
+                        <span className="text-[13px] font-medium text-rust">{c.linkedinBadge}</span>
                       )}
                     </p>
                     <p className="mt-4 text-[13px] leading-relaxed text-navy/55">
-                      L&apos;extrait final sera choisi et raccourci avec vous :
-                      Grégory vous enverra le texte exact, et rien ne sera publié
-                      sans votre accord écrit. Aucun mot n&apos;est ajouté à ce
-                      que vous avez écrit.
+                      {c.previewNote}
                     </p>
                   </figure>
 
                   <div>
-                    <p className="ti-question">Où il pourrait apparaître</p>
+                    <p className="ti-question">{c.whereQuestion}</p>
                     <ul className="grid list-disc gap-1.5 pl-5 text-[15px] leading-relaxed text-navy/75">
-                      <li>Le site teachinspire.me</li>
-                      <li>Les publications LinkedIn de TeachInspire</li>
-                      <li>Les documents de présentation envoyés aux instituts</li>
+                      {c.where.map((w) => <li key={w}>{w}</li>)}
                     </ul>
                   </div>
 
                   <div>
-                    <p className="ti-question">Et si vous le souhaitez</p>
+                    <p className="ti-question">{c.extrasQuestion}</p>
                     <div className="grid gap-2">
                       <Toggle on={data.willingVideo} onClick={() => set('willingVideo', !data.willingVideo)}>
-                        Je veux bien enregistrer une courte vidéo (1 à 2 min) en visio
-                        avec Grégory, en montrant un cours que j&apos;ai créé
+                        {c.willingVideo}
                       </Toggle>
                       <Toggle on={data.willingLinkedinPost}
                               onClick={() => set('willingLinkedinPost', !data.willingLinkedinPost)}>
-                        Je veux bien publier moi-même un retour sur LinkedIn
+                        {c.willingLinkedinPost}
                       </Toggle>
                     </div>
                   </div>
@@ -762,16 +653,11 @@ export function TestimonialForm({
               )}
 
               <p className="border-l-2 border-yellow bg-yellow/10 px-4 py-3 text-[15px] leading-relaxed text-navy/80">
-                Vos 30 minutes de crédits audio seront ajoutées au compte
-                Studio avec lequel vous êtes connecté·e, quoi que vous ayez
-                répondu.
+                {c.creditsNote}
               </p>
 
               <p className="text-[13px] leading-relaxed text-navy/55">
-                Vos réponses sont conservées par TeachInspire pendant 3 ans et ne
-                sont transmises à personne. Pour modifier ou retirer votre
-                autorisation à tout moment, écrivez à greg@teachinspire.me : la
-                citation sera retirée sous 7 jours.
+                {c.privacy}
               </p>
             </>
           )}
@@ -780,7 +666,7 @@ export function TestimonialForm({
 
       {/* Leurre anti-robot, invisible et hors du parcours au clavier. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-px w-px overflow-hidden">
-        <label htmlFor="website">Ne pas remplir</label>
+        <label htmlFor="website">{c.honeypot}</label>
         <input id="website" tabIndex={-1} autoComplete="off" value={honeypot}
                onChange={(e) => setHoneypot(e.target.value)} />
       </div>
@@ -800,14 +686,14 @@ export function TestimonialForm({
       <div className="mt-12 flex items-center justify-between gap-4 border-t border-navy/10 pt-6">
         {step > 1 ? (
           <button type="button" className="ti-btn-ghost" onClick={() => setStep((s) => s - 1)}>
-            <ChevronLeft className="h-4 w-4" /> Retour
+            <ChevronLeft className="h-4 w-4" /> {c.back}
           </button>
         ) : <span />}
 
         {step < TOTAL_STEPS ? (
           <button type="button" className="ti-btn-primary" disabled={!canAdvance()}
                   onClick={() => setStep((s) => s + 1)}>
-            Continuer <ChevronRight className="h-4 w-4" />
+            {c.next} <ChevronRight className="h-4 w-4" />
           </button>
         ) : (
           <button type="button" className="ti-btn-primary"
@@ -815,10 +701,10 @@ export function TestimonialForm({
                   onClick={submit}>
             {submitting ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Envoi…
+                <Loader2 className="h-4 w-4 animate-spin" /> {c.sending}
               </>
             ) : (
-              <>Envoyer mes réponses</>
+              <>{c.send}</>
             )}
           </button>
         )}

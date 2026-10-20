@@ -11,6 +11,7 @@
 import { bearer, verifySession } from '../lib/session';
 import { notifyNewResponse } from '../lib/notify';
 import { versionFor } from '../lib/version';
+import { isLang, say, type Lang } from '../lib/lang';
 
 interface Env {
   DB: D1Database;
@@ -57,6 +58,7 @@ async function grantCredits(env: Env, responseId: number, studioUserId: string):
 interface Payload {
   token?: string | null;
   website?: string; // leurre
+  lang?: string;    // langue dans laquelle le formulaire a été rempli
 
   role?: string;
   institute?: string;
@@ -130,22 +132,33 @@ const isSafeLinkedIn = (v: string | null): string | null => {
 const bad = (error: string) => Response.json({ error }, { status: 400 });
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
+  let lang: Lang = 'fr';
+  const t = (fr: string, en: string) => say(lang)(fr, en);
   try {
+    const body = (await context.request.json()) as Payload;
+    if (isLang(body.lang)) lang = body.lang;
+
     const secret = context.env.TI_SESSION_SECRET;
     if (!secret) {
-      return Response.json({ error: 'Service non configuré.' }, { status: 503 });
+      return Response.json(
+        { error: t('Service non configuré.', 'This form isn’t available right now.') },
+        { status: 503 }
+      );
     }
 
     const raw = bearer(context.request);
     const session = raw ? await verifySession(raw, secret) : null;
     if (!session) {
       return Response.json(
-        { error: 'Session expirée. Reconnectez-vous avec votre compte Studio.' },
+        {
+          error: t(
+            'Session expirée. Reconnectez-vous avec votre compte Studio.',
+            'Your session has expired. Please sign in again with your Studio account.'
+          ),
+        },
         { status: 401 }
       );
     }
-
-    const body = (await context.request.json()) as Payload;
 
     // Un robot remplit tous les champs, y compris celui que personne ne voit.
     if (typeof body.website === 'string' && body.website.trim().length > 0) {
@@ -153,14 +166,17 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     const role = oneOf(body.role, ROLES);
-    if (!role) return bad('Indiquez votre situation (étape 1).');
+    if (!role) return bad(t('Indiquez votre situation (étape 1).', 'Please tell us which best describes you (step 1).'));
 
     const institute = clean(body.institute, 160);
-    if (!institute) return bad('Le nom de votre structure est requis (étape 1).');
+    if (!institute) return bad(t('Le nom de votre structure est requis (étape 1).', 'The name of your organisation is required (step 1).'));
 
     const whatChanged = clean(body.whatChanged, 5000);
     if (!whatChanged || whatChanged.length < 30) {
-      return bad('La question sur ce qui a changé est requise (30 caractères minimum).');
+      return bad(t(
+        'La question sur ce qui a changé est requise (30 caractères minimum).',
+        'The question about what has changed is required (30 characters minimum).'
+      ));
     }
 
     const initialReaction = oneOf(body.initialReaction, REACTIONS);
@@ -168,7 +184,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const prepTimeNow = oneOf(body.prepTimeNow, TIME_NOW);
     const usageFrequency = oneOf(body.usageFrequency, FREQUENCY);
     if (!initialReaction || !prepTimeBefore || !prepTimeNow || !usageFrequency) {
-      return bad('Les questions à choix des étapes 2 et 3 sont requises.');
+      return bad(t(
+        'Les questions à choix des étapes 2 et 3 sont requises.',
+        'The multiple-choice questions in steps 2 and 3 are required.'
+      ));
     }
 
     // Vérification anticipée pour un message clair (l'index unique reste la
@@ -180,7 +199,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       .first();
     if (dup) {
       return Response.json(
-        { error: 'Une réponse existe déjà pour ce compte. Merci !' },
+        { error: t('Une réponse existe déjà pour ce compte. Merci !', 'We already have a response from this account. Thank you!') },
         { status: 409 }
       );
     }
@@ -194,7 +213,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     // permettrait de retrouver la personne (structure, LinkedIn, photo).
     const consentPublish = bit(body.consentPublish);
     const naming = consentPublish ? oneOf(body.naming, NAMING) : null;
-    if (consentPublish && !naming) return bad('Choisissez comment vous nommer, ou décochez la publication.');
+    if (consentPublish && !naming) {
+      return bad(t(
+        'Choisissez comment vous nommer, ou décochez la publication.',
+        'Choose how you’d like to be named, or untick the permission to publish.'
+      ));
+    }
     const anonymous = naming === 'anonymous';
 
     const scope = consentPublish && Array.isArray(body.consentScope)
@@ -205,16 +229,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       !(anonymous && ['institute', 'linkedin', 'photo'].includes(s)) ? 1 : 0;
 
     const displayName = naming === 'full_name' ? clean(body.displayName, 120) : null;
-    if (naming === 'full_name' && !displayName) return bad('Indiquez votre nom tel qu’il doit apparaître.');
+    if (naming === 'full_name' && !displayName) {
+      return bad(t('Indiquez votre nom tel qu’il doit apparaître.', 'Enter your name as it should appear.'));
+    }
 
     const displayTitle = has('role') ? clean(body.displayTitle, 160) : null;
-    if (has('role') && !displayTitle) return bad('Indiquez votre fonction, ou décochez « Ma fonction ».');
-    if (has('city') && !city) return bad('Indiquez votre ville, ou décochez « Ma ville ».');
+    if (has('role') && !displayTitle) {
+      return bad(t('Indiquez votre fonction, ou décochez « Ma fonction ».', 'Enter your role, or untick “My role”.'));
+    }
+    if (has('city') && !city) {
+      return bad(t('Indiquez votre ville, ou décochez « Ma ville ».', 'Enter your city, or untick “My city”.'));
+    }
 
     const linkedin = has('linkedin') ? isSafeLinkedIn(clean(body.linkedinUrl, 300)) : null;
     // Cocher « lien LinkedIn » sans fournir de lien valide est incohérent :
     // on refuse plutôt que d'enregistrer un consentement sans objet.
-    if (has('linkedin') && !linkedin) return bad('Le lien LinkedIn est requis, ou décochez cette option.');
+    if (has('linkedin') && !linkedin) {
+      return bad(t('Le lien LinkedIn est requis, ou décochez cette option.', 'The LinkedIn link is required, or untick this option.'));
+    }
 
     const fullName = (session.fullName || '').trim();
     const lastName = fullName.split(/\s+/).slice(1).join(' ') || null;
@@ -267,6 +299,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       display_title: displayTitle,
       credit_email: session.email, // les crédits vont au compte connecté, pas à un email saisi
       form_version: formVersion,
+      lang,
       locale: clean(context.request.headers.get('accept-language'), 40),
       user_agent: clean(context.request.headers.get('user-agent'), 300),
     };
@@ -301,11 +334,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     // L'index unique peut claquer en cas de double envoi simultané.
     if (err instanceof Error && /UNIQUE/i.test(err.message)) {
       return Response.json(
-        { error: 'Une réponse existe déjà pour ce compte. Merci !' },
+        { error: t('Une réponse existe déjà pour ce compte. Merci !', 'We already have a response from this account. Thank you!') },
         { status: 409 }
       );
     }
     console.error('submit error', err);
-    return Response.json({ error: "L'enregistrement a échoué." }, { status: 500 });
+    return Response.json(
+      { error: t("L'enregistrement a échoué.", 'Your answers couldn’t be saved. Please try again.') },
+      { status: 500 }
+    );
   }
 };

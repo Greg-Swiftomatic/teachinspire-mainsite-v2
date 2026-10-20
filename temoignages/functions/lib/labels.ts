@@ -60,7 +60,10 @@ export function consentSummary(r: Row): string {
   return `Oui : ${[name, ...extras].join(', ')}`;
 }
 
-/** La signature telle qu'elle apparaîtrait sous une citation. */
+/**
+ * La signature telle qu'elle apparaîtrait sous une citation, dans la langue
+ * du formulaire rempli (une citation anglaise reste signée en anglais).
+ */
 export function attributionOf(r: Row): string {
   if (!r.consent_publish) return '';
   const first = String(r.first_name ?? '');
@@ -77,5 +80,5 @@ export function attributionOf(r: Row): string {
     r.consent_institute && institute && !title.includes(institute) ? institute : '',
     r.consent_city ? String(r.city ?? '') : '',
   ].filter(Boolean);
-  return parts.join(', ') || 'Participant·e au parcours';
+  return parts.join(', ') || (r.lang === 'en' ? 'Course participant' : 'Participant·e au parcours');
 }

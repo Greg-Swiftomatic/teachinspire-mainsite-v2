@@ -44,6 +44,7 @@ function card(r: Row): string {
   const name = [r.first_name, r.last_name].filter(Boolean).join(' ');
   const badges = [
     r.consent_publish ? '<span class="badge ok">Publiable</span>' : '<span class="badge">Interne</span>',
+    r.lang === 'en' ? '<span class="badge">En anglais</span>' : '',
     r.willing_video ? '<span class="badge ok">Vidéo</span>' : '',
     r.willing_linkedin_post ? '<span class="badge ok">Post LinkedIn</span>' : '',
     r.intro_ok === 'oui' ? '<span class="badge ok">Mise en relation</span>'

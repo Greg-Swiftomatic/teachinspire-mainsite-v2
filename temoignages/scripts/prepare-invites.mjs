@@ -7,7 +7,12 @@
  *     node scripts/prepare-invites.mjs "Kintail 2026-09 actifs" \
  *       --version mi-parcours --emails groupes/kintail-actifs.txt
  *
+ *   TI_ADMIN_USER=greg TI_ADMIN_PASS=... \
+ *     node scripts/prepare-invites.mjs "Arrimage 2026-04" \
+ *       --lang en --emails groupes/arrimage-en.txt
+ *
  * --version  mi-parcours (défaut) | fin-de-parcours : questionnaire et email présentés
+ * --lang     fr (défaut) | en : langue du formulaire et du brouillon d'email
  * --emails   fichier texte, un email par ligne (lignes vides et # ignorées).
  *            Sans ce fichier, tous les participants du Studio sont préparés.
  *
@@ -29,6 +34,7 @@ const flag = (name) => {
 };
 const cohort = args.find((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--')) ?? '';
 const version = flag('--version') ?? 'mi-parcours';
+const lang = flag('--lang') ?? 'fr';
 const emailsFile = flag('--emails');
 
 if (!user || !pass) {
@@ -37,6 +43,10 @@ if (!user || !pass) {
 }
 if (!['mi-parcours', 'fin-de-parcours'].includes(version)) {
   console.error('--version doit valoir mi-parcours ou fin-de-parcours.');
+  process.exit(1);
+}
+if (!['fr', 'en'].includes(lang)) {
+  console.error('--lang doit valoir fr ou en.');
   process.exit(1);
 }
 
@@ -52,7 +62,7 @@ const auth = 'Basic ' + Buffer.from(`${user}:${pass}`).toString('base64');
 const res = await fetch(`${BASE}/api/admin/prepare-invites`, {
   method: 'POST',
   headers: { Authorization: auth, 'Content-Type': 'application/json' },
-  body: JSON.stringify({ cohort, version, emails }),
+  body: JSON.stringify({ cohort, version, lang, emails }),
 });
 
 if (!res.ok) {
@@ -61,8 +71,21 @@ if (!res.ok) {
 }
 
 const data = await res.json();
+
+// Une version déployée sans --lang ignore le champ et prépare des invitations
+// en français : on s'arrête plutôt que d'écrire des brouillons dans la
+// mauvaise langue.
+if ((data.lang ?? 'fr') !== lang) {
+  console.error(
+    `Le serveur a préparé les invitations en « ${data.lang ?? 'fr'} » au lieu de « ${lang} » : ` +
+      'la version déployée ne connaît pas encore --lang. Aucun brouillon écrit. ' +
+      'Déployer la nouvelle version, puis corriger les invitations créées :\n' +
+      `  UPDATE invites SET lang = '${lang}' WHERE cohort = '${cohort}';`
+  );
+  process.exit(1);
+}
 console.log(
-  `Version : ${data.version} · ${data.participants} participant(s) retenu(s) · ` +
+  `Version : ${data.version} · langue : ${data.lang ?? 'fr'} · ${data.participants} participant(s) retenu(s) · ` +
     `${data.created} nouvelle(s) invitation(s) · déjà invités ${data.skipped.alreadyInvited} · ` +
     `déjà répondu ${data.skipped.alreadyResponded}`
 );
@@ -95,7 +118,7 @@ const blocks = data.drafts.map(
 const out =
   `# Invitations à envoyer${cohort ? ` : ${cohort}` : ''}\n\n` +
   `${data.created} email(s) personnel(s) à envoyer depuis la boîte de Greg ` +
-  `(questionnaire ${data.version}).\n\n` +
+  `(questionnaire ${data.version}, en ${data.lang === 'en' ? 'anglais' : 'français'}).\n\n` +
   '---\n\n' +
   blocks.join('\n\n---\n\n') +
   '\n';

@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS invites (
   role            TEXT,                     -- 'formateur' | 'direction'
   cohort          TEXT,
   form_version    TEXT,                     -- mi-parcours | fin-de-parcours
+  lang            TEXT NOT NULL DEFAULT 'fr', -- fr | en : langue du formulaire et de l'email
   created_at      TEXT NOT NULL,
   sent_at         TEXT,                     -- rempli quand le SYSTÈME envoie (relance)
   reminders_sent  INTEGER NOT NULL DEFAULT 0,
@@ -105,6 +106,7 @@ CREATE TABLE IF NOT EXISTS responses (
 
   -- Traces techniques
   form_version  TEXT,                       -- mi-parcours | fin-de-parcours
+  lang          TEXT NOT NULL DEFAULT 'fr', -- fr | en : langue dans laquelle la réponse a été écrite
   locale        TEXT,
   user_agent    TEXT
 );
