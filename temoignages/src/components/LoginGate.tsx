@@ -110,9 +110,7 @@ export function LoginGate({ lang, onLogin }: { lang: Lang; onLogin: (s: Session)
           <div className="mt-1 flex items-center justify-between gap-4">
             <a
               className="text-[13.5px] text-rust underline underline-offset-2"
-              href="https://studio.teachinspire.me/forgot-password.html"
-              target="_blank"
-              rel="noreferrer"
+              href={`https://studio.teachinspire.me/forgot-password?next=${encodeURIComponent(window.location.href)}`}
             >
               {c.forgot}
             </a>
