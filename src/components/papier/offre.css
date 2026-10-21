@@ -1,0 +1,567 @@
+/* Page Offre */
+
+.of-hero {
+  padding-top: clamp(56px, 8vw, 96px);
+}
+
+.of-hero-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+  gap: clamp(40px, 6vw, 90px);
+  align-items: center;
+}
+
+.of-proposition {
+  padding: 34px 34px 30px;
+  transform: rotate(0.8deg);
+}
+
+.of-proposition dl {
+  margin: 14px 0 0;
+}
+
+.of-proposition dl > div {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--trait);
+  font-size: 15px;
+}
+
+.of-proposition dt {
+  color: var(--encre-3);
+}
+
+.of-proposition dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.of-proposition-note {
+  position: absolute;
+  right: 24px;
+  bottom: -40px;
+  transform: rotate(-3deg);
+}
+
+/* Le calculateur */
+
+.of-calcul {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: center;
+  margin-top: 54px;
+}
+
+.of-calcul-choix label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sauge);
+}
+
+.of-calcul-n {
+  display: block;
+  margin: 6px 0 18px;
+  font-family: var(--display);
+  font-size: clamp(80px, 10vw, 132px);
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.of-calcul-choix input[type='range'] {
+  width: 100%;
+  height: 28px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+}
+
+.of-calcul-choix input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(var(--jaune), var(--jaune)) 0 0 / var(--rempli) 100% no-repeat, rgb(248 247 242 / 25%);
+}
+
+.of-calcul-choix input[type='range']::-moz-range-track {
+  height: 4px;
+  background: linear-gradient(var(--jaune), var(--jaune)) 0 0 / var(--rempli) 100% no-repeat, rgb(248 247 242 / 25%);
+}
+
+.of-calcul-choix input[type='range']::-webkit-slider-thumb {
+  width: 28px;
+  height: 28px;
+  margin-top: -12px;
+  border: 3px solid var(--marine);
+  border-radius: 50% !important;
+  background: var(--jaune);
+  appearance: none;
+  box-shadow: 0 0 0 2px var(--jaune);
+}
+
+.of-calcul-choix input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--marine);
+  border-radius: 50% !important;
+  background: var(--jaune);
+}
+
+.of-calcul-choix input[type='range']:focus-visible {
+  outline: 2px solid var(--jaune);
+  outline-offset: 6px;
+}
+
+.of-calcul-bornes {
+  position: relative;
+  height: 20px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--sable);
+}
+
+.of-calcul-bornes span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.of-calcul-bornes span:nth-child(1) { left: 1.5%; }
+.of-calcul-bornes span:nth-child(2) { left: 31%; }
+.of-calcul-bornes span:nth-child(3) { left: 65.5%; }
+.of-calcul-bornes span:nth-child(4) { left: 98.5%; }
+
+.of-devis {
+  position: relative;
+  padding: 30px 32px;
+  background: var(--feuille);
+  color: var(--encre);
+  box-shadow: var(--ombre-calque);
+}
+
+.of-devis dl {
+  margin: 14px 0 0;
+}
+
+.of-devis dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--trait);
+  font-size: 15px;
+  transition: opacity 0.3s;
+}
+
+.of-devis dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.of-devis .of-devis-vide {
+  opacity: 0.35;
+}
+
+.of-devis .of-devis-total {
+  align-items: baseline;
+  padding-top: 18px;
+  border-bottom: 0;
+}
+
+.of-devis-total dt {
+  font-weight: 700;
+}
+
+.of-devis-total dd {
+  font-family: var(--display);
+  font-size: clamp(38px, 4.4vw, 54px);
+  line-height: 1;
+}
+
+.of-devis-notes {
+  margin: 10px 0 0;
+  padding: 16px 0 0;
+  border-top: 1.5px solid var(--encre);
+  list-style: none;
+  font-size: 15px;
+  color: var(--encre-2);
+}
+
+.of-devis-notes li + li {
+  margin-top: 6px;
+}
+
+.of-devis-notes b {
+  color: var(--encre);
+}
+
+/* L'inventaire */
+
+.of-inventaire {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 54px clamp(36px, 5vw, 70px);
+  margin-top: 54px;
+}
+
+.of-groupe h3 {
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--encre);
+}
+
+.of-groupe ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.of-groupe li {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.of-groupe b {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--rouille);
+  white-space: nowrap;
+}
+
+/* Le programme */
+
+.of-programme-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.of-programme-tete {
+  position: sticky;
+  top: 120px;
+}
+
+.of-modules {
+  border-top: 1.5px solid var(--encre);
+}
+
+.of-modules details {
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.of-modules summary {
+  position: relative;
+  display: grid;
+  grid-template-columns: 54px 1fr 24px;
+  gap: 12px;
+  align-items: start;
+  padding: 22px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.of-modules summary::-webkit-details-marker {
+  display: none;
+}
+
+.of-modules summary:focus-visible {
+  outline: 2px solid var(--rouille);
+  outline-offset: 4px;
+}
+
+.of-modules-num {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--rouille);
+}
+
+.of-modules-nom {
+  font-family: var(--display);
+  font-size: clamp(21px, 1.9vw, 25px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.of-modules-nom small {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--encre-2);
+}
+
+.of-modules summary i {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  margin-top: 8px;
+}
+
+.of-modules summary i::before,
+.of-modules summary i::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: var(--encre);
+  transition: transform 0.3s;
+}
+
+.of-modules summary i::after {
+  transform: rotate(90deg);
+}
+
+.of-modules details[open] summary i::after {
+  transform: rotate(0deg);
+}
+
+.of-modules details ul {
+  margin: 0 0 0 66px;
+  padding: 0 0 8px;
+  list-style: none;
+}
+
+.of-modules details li {
+  position: relative;
+  padding: 6px 0 6px 22px;
+  color: var(--encre-2);
+}
+
+.of-modules details li::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 10px;
+  height: 2px;
+  background: var(--sauge);
+}
+
+.of-remis {
+  margin: 4px 0 24px 66px !important;
+  padding: 12px 16px;
+  background: var(--feuille);
+  border-left: 3px solid var(--sauge);
+  font-size: 15px;
+}
+
+.of-livrables-titre {
+  margin-top: 80px !important;
+  font-weight: 600;
+}
+
+.of-livrables {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+  margin: 26px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.of-livrables li:nth-child(odd) {
+  transform: rotate(-0.8deg);
+}
+
+.of-livrables li:nth-child(even) {
+  transform: rotate(0.8deg);
+}
+
+.of-livrables h3 {
+  font-size: 20px !important;
+}
+
+.of-livrables p {
+  margin-top: 8px !important;
+  font-size: 15px;
+  color: var(--encre-2);
+}
+
+/* Les démarches */
+
+.of-demarches-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.of-demarches-tete {
+  position: sticky;
+  top: 120px;
+}
+
+.of-etapes-zone {
+  position: relative;
+}
+
+.of-etapes-trait {
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 21px;
+  width: 2px;
+  height: calc(100% - 48px);
+  overflow: visible;
+}
+
+.of-etapes-trait path {
+  fill: none;
+  stroke: var(--jaune);
+  stroke-width: 2;
+  stroke-dasharray: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.of-etapes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.of-etapes li {
+  position: relative;
+  padding: 0 0 40px 72px;
+}
+
+.of-etapes-num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50% !important;
+  background: var(--marine);
+  border: 2px solid var(--sable);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.of-etapes h3 {
+  padding-top: 8px;
+}
+
+.of-etapes p {
+  margin-top: 8px !important;
+  color: #d6d1c4;
+}
+
+/* Conditions et questions */
+
+.of-conditions-grille,
+.of-questions-grille {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(36px, 6vw, 80px);
+  align-items: start;
+}
+
+.of-conditions-liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1.5px solid var(--encre);
+}
+
+.of-conditions-liste li {
+  position: relative;
+  padding: 16px 0 16px 30px;
+  border-bottom: 1px solid var(--trait-fort);
+}
+
+.of-conditions-liste li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--rouille);
+  font-weight: 700;
+}
+
+@media (max-width: 999px) {
+  .of-hero-grille,
+  .of-calcul,
+  .of-inventaire,
+  .of-programme-grille,
+  .of-demarches-grille,
+  .of-conditions-grille,
+  .of-questions-grille {
+    grid-template-columns: 1fr;
+  }
+
+  .of-programme-tete,
+  .of-demarches-tete {
+    position: static;
+  }
+
+  .of-livrables {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .of-proposition-note {
+    position: static;
+    margin-top: 18px !important;
+    text-align: right;
+  }
+}
+
+@media (max-width: 560px) {
+  .of-proposition {
+    padding: 26px 20px;
+  }
+
+  .of-proposition dl > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .of-devis {
+    padding: 24px 20px;
+  }
+
+  .of-devis dl > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .of-groupe li {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .of-groupe b {
+    font-size: 21px;
+  }
+
+  .of-modules summary {
+    grid-template-columns: 40px 1fr 20px;
+  }
+
+  .of-modules details ul,
+  .of-remis {
+    margin-left: 0 !important;
+  }
+
+  .of-livrables {
+    grid-template-columns: 1fr;
+  }
+}
