@@ -1,0 +1,168 @@
+/* Le cap — the TeachInspire charter (November 2026), as used by Campus.
+   Everything is scoped to .lc so the pages not yet rebuilt keep their old look. */
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/onest';
+
+:root {
+  --lc-paper: #fcfbf7;
+  --lc-paper-2: #f5f2e8;
+  --lc-sand: #efebdd;
+  --lc-sand-2: #e3dfd0;
+  --lc-white: #ffffff;
+  --lc-rule: #e3dfd0;
+  --lc-ink: #10231c;
+  --lc-ink-2: #2f4a40;
+  --lc-ink-3: #4d5b55;
+  --lc-green: #0f3b2e;
+  --lc-green-2: #164a3a;
+  --lc-green-3: #2f6652;
+  --lc-green-line: #4e7c6a;
+  --lc-on-green-2: #bfd8cc;
+  --lc-yellow: #ffd23f;
+  --lc-yellow-hover: #ffdc66;
+  --lc-tangerine: #f2622e;
+  --lc-mint: #ddeedf;
+  --lc-mint-2: #bfd8cc;
+  --lc-wash-audio: #fde3d7;
+  --lc-wash-docs: #fff1bf;
+  --lc-scrim: rgba(16, 35, 28, 0.72);
+
+  --lc-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
+  --lc-body: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --lc-xs: 0.8125rem;
+  --lc-sm: 0.9375rem;
+  --lc-base: 1rem;
+  --lc-lg: 1.1875rem;
+  --lc-xl: 1.375rem;
+  --lc-2xl: clamp(1.625rem, 3vw, 1.75rem);
+  --lc-3xl: clamp(2rem, 4.6vw, 3.5rem);
+  --lc-4xl: clamp(2.5rem, 6.4vw, 5.25rem);
+
+  --lc-r-sm: 8px;
+  --lc-r-md: 12px;
+  --lc-r-lg: 18px;
+  --lc-r-xl: 24px;
+  --lc-r-2xl: 32px;
+  --lc-r-pill: 999px;
+
+  --lc-gutter: clamp(16px, 3.2vw, 40px);
+  --lc-wide: 1240px;
+}
+
+.lc {
+  color: var(--lc-ink);
+  font-family: var(--lc-body);
+  font-size: var(--lc-base);
+  line-height: 1.6;
+  background: var(--lc-paper);
+}
+.lc *,
+.lc *::before,
+.lc *::after { box-sizing: border-box; }
+.lc h1,
+.lc h2 {
+  margin: 0;
+  font-family: var(--lc-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.lc h3 {
+  margin: 0;
+  font-family: var(--lc-body);
+  font-size: var(--lc-lg);
+  font-weight: 600;
+  line-height: 1.25;
+}
+.lc p { margin: 0; }
+.lc ul,
+.lc ol { margin: 0; padding: 0; list-style: none; }
+.lc :where(a) { color: inherit; }
+.lc :where(a, button, summary):focus-visible { outline: 3px solid var(--lc-ink); outline-offset: 3px; }
+.lc [data-surface='green'] :where(a, button):focus-visible { outline-color: var(--lc-yellow); }
+.lc ::selection { color: var(--lc-ink); background: var(--lc-yellow); }
+
+.lc-wrap { width: 100%; max-width: calc(var(--lc-wide) + 2 * var(--lc-gutter)); margin-inline: auto; padding-inline: var(--lc-gutter); }
+.lc-page { display: flex; flex-direction: column; gap: clamp(56px, 8vw, 112px); padding-block: var(--lc-gutter) clamp(56px, 8vw, 112px); }
+
+/* ---------- Buttons: pills, flat colour, 44px ---------- */
+.lc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  font-family: var(--lc-body);
+  font-size: var(--lc-base);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: var(--lc-r-pill);
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+.lc-btn--ink { color: var(--lc-white); background: var(--lc-ink); }
+.lc-btn--ink:hover { background: var(--lc-green-2); }
+.lc-btn--line { color: var(--lc-ink); background: transparent; border-color: var(--lc-ink); }
+.lc-btn--line:hover { background: var(--lc-sand); }
+.lc-btn--yellow { min-height: 56px; padding: 0 28px; color: var(--lc-ink); font-size: var(--lc-lg); font-weight: 700; background: var(--lc-yellow); }
+.lc-btn--yellow:hover { background: var(--lc-yellow-hover); }
+.lc-btn--on-green { min-height: 56px; color: var(--lc-white); border-color: var(--lc-green-line); }
+.lc-btn--on-green:hover { background: var(--lc-green-2); }
+.lc-btn--small { min-height: 44px; padding: 0 18px; font-size: var(--lc-sm); }
+
+.lc-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.lc-link:hover { text-decoration-thickness: 3px; }
+
+/* ---------- Words that carry the point ---------- */
+.lc-mark { padding: 0 0.12em; background: var(--lc-yellow); border-radius: var(--lc-r-sm); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.lc-under { position: relative; color: var(--lc-yellow); white-space: nowrap; }
+.lc-under svg { position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.22em; overflow: visible; }
+
+/* ---------- Sections ---------- */
+.lc-head { display: flex; flex-direction: column; gap: 16px; max-width: 46rem; margin-bottom: clamp(24px, 3.4vw, 44px); }
+.lc-kicker { color: var(--lc-ink-2); font-size: var(--lc-base); font-weight: 600; }
+.lc-h2 { font-size: var(--lc-3xl); }
+.lc-lead { max-width: 40rem; color: var(--lc-ink-2); font-size: var(--lc-lg); line-height: 1.5; }
+
+.lc-tile { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: clamp(20px, 2.6vw, 32px); border-radius: var(--lc-r-xl); }
+.lc-tile--sand { background: var(--lc-sand); }
+.lc-tile--mint { background: var(--lc-mint); }
+.lc-tile--paper { background: var(--lc-paper-2); }
+.lc-tile--ask { background: var(--lc-white); border: 2px solid var(--lc-ink); }
+
+/* ---------- The forest block ---------- */
+.lc-green {
+  position: relative;
+  overflow: hidden;
+  color: var(--lc-white);
+  background: var(--lc-green);
+  border-radius: var(--lc-r-2xl);
+}
+.lc-green::before {
+  content: '';
+  position: absolute;
+  top: -38%;
+  right: -12%;
+  width: min(62%, 760px);
+  aspect-ratio: 1;
+  background: var(--lc-green-2);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.lc-green > * { position: relative; z-index: 1; }
+
+@media (max-width: 620px) {
+  .lc-green { border-radius: var(--lc-r-xl); }
+  .lc-btn--yellow,
+  .lc-btn--on-green { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-btn { transition: none; }
+}

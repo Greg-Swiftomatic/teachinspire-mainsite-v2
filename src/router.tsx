@@ -1,5 +1,5 @@
 import { lazy, Suspense, type ReactNode } from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { RouteErrorPage } from './components/errors/RouteErrorPage';
 import { Layout } from './components/layout/Layout';
 
@@ -13,9 +13,9 @@ const FormationPage = lazy(async () => {
   return { default: mod.FormationPage };
 });
 
-const OffrePage = lazy(async () => {
-  const mod = await import('./pages/OffrePage');
-  return { default: mod.OffrePage };
+const CoursPage = lazy(async () => {
+  const mod = await import('./pages/CoursPage');
+  return { default: mod.CoursPage };
 });
 
 const StudioPage = lazy(async () => {
@@ -54,9 +54,7 @@ const NotFoundPage = lazy(async () => {
 });
 
 const pageFallback = (
-  <div className="min-h-[40vh] flex items-center justify-center text-sm text-navy/60">
-    Chargement...
-  </div>
+  <div className="min-h-[60vh]" aria-busy="true" />
 );
 
 const withSuspense = (element: ReactNode) => (
@@ -78,9 +76,17 @@ export const router = createBrowserRouter([
         element: withSuspense(<FormationPage />),
       },
       {
-        // Hidden page — not in navigation, accessible only via direct URL
+        // The old offer page now lives inside Formation (also redirected in public/_redirects).
         path: 'offre',
-        element: withSuspense(<OffrePage />),
+        element: <Navigate to="/formation" replace />,
+      },
+      {
+        path: 'cours-de-a-a-z',
+        element: withSuspense(<CoursPage />),
+      },
+      {
+        path: 'plateforme',
+        element: <Navigate to="/studio" replace />,
       },
       {
         path: 'studio',

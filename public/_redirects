@@ -3,3 +3,9 @@
 /campus    https://campus.teachinspire.me/  302
 /campus/   https://campus.teachinspire.me/  302
 /campus/*  https://campus.teachinspire.me/:splat  302
+
+# One offer page: the old /offre is now part of /formation.
+/offre     /formation  301
+/offre/    /formation  301
+# "La plateforme" in the menu is, for now, the Studio page.
+/plateforme  /studio  302

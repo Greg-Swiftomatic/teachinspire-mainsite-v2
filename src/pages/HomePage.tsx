@@ -1,18 +1,15 @@
-import { ApprovedHome } from '../components/home/ApprovedHome';
-import { ScrollScene } from '../components/motion/ScrollScene';
+import { Home } from '../components/lecap/Home';
 import { PageMeta } from '../components/seo/PageMeta';
 
 export function HomePage() {
   return (
     <>
       <PageMeta
-        title="TeachInspire : IA pour formateurs de langues"
-        description="Formation IA pour instituts de langues. Vos formateurs apprennent à créer des cours à partir de sources réelles, avec une méthode commune et des critères pédagogiques clairs."
+        title="TeachInspire : vos formateurs créent des cours sur mesure avec l’IA"
+        description="Une formation pour les instituts de langues et les formateurs indépendants : une méthode en six modules pour partir du métier de chaque apprenant et arriver à un cours prêt à enseigner."
         path="/"
       />
-      <ScrollScene>
-        <ApprovedHome />
-      </ScrollScene>
+      <Home />
     </>
   );
 }

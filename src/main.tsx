@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import './styles/globals.css';
+import './styles/le-cap.css';
 
 const PRELOAD_RELOAD_KEY = 'teachinspire:preload-reload';
 const PRELOAD_RELOAD_COOLDOWN_MS = 10_000;

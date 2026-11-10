@@ -1,18 +1,15 @@
-import { ApprovedFormation } from '../components/formation/ApprovedFormation';
-import { ScrollScene } from '../components/motion/ScrollScene';
+import { Formation } from '../components/lecap/Formation';
 import { PageMeta } from '../components/seo/PageMeta';
 
 export function FormationPage() {
   return (
     <>
       <PageMeta
-        title="Formation IA pour instituts de langues | TeachInspire"
-        description="En 3 mois, vos formateurs apprennent à transformer une vidéo, un podcast ou un document en cours sur mesure, avec une méthode commune et des supports prêts à utiliser."
+        title="La formation : 26 leçons, 6 modules, pour une équipe ou en individuel | TeachInspire"
+        description="Formation d’équipe : 4 200 € HT jusqu’à 10 formateurs. Formation individuelle : 790 € HT. 26 leçons en 6 modules, des ateliers en direct, Campus et le Studio pendant un an."
         path="/formation"
       />
-      <ScrollScene>
-        <ApprovedFormation />
-      </ScrollScene>
+      <Formation />
     </>
   );
 }
