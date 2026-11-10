@@ -1,0 +1,5 @@
+# Campus lives on its own subdomain; teachinspire.me/campus is a short way in.
+# 302 on purpose: browsers do not keep it forever, so the address stays ours to change.
+/campus    https://campus.teachinspire.me/  302
+/campus/   https://campus.teachinspire.me/  302
+/campus/*  https://campus.teachinspire.me/:splat  302
