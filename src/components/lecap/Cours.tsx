@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Words, order, useMotion } from './motion';
 import { LecteurAudio } from './LecteurAudio';
+import { MODULES } from './site';
 import './pages.css';
 import './cours.css';
 
@@ -23,7 +24,6 @@ const nombre = (n: number) => `${n} page${n > 1 ? 's' : ''}`;
 
 type Etape = {
   id: string;
-  nom: string;
   titre: string;
   fait: string;
   pourquoi: string;
@@ -31,72 +31,67 @@ type Etape = {
   docs: Doc[];
 };
 
+// One entry per module of the method, in the order and under the names of MODULES (site.ts).
 const etapes: Etape[] = [
   {
     id: 'clarifier',
-    nom: 'Clarifier',
-    titre: 'D’abord, qui est Thomas et ce qu’il doit réussir.',
-    fait: 'Le formateur met par écrit ce que Thomas a dit à l’entretien de démarrage : son poste, son niveau, sa réunion du lundi, ce qui le bloque.',
-    pourquoi: 'Si l’objectif est flou ici, tout le cours le sera. Rien n’est tiré d’un manuel ou d’un programme.',
-    place: 'C’est le point de départ. Le profil sert au formateur ; le brief est remis à Thomas, qui le valide.',
+    titre: 'D’abord, qui est Thomas.',
+    fait: 'Le formateur met par écrit ce que Thomas a dit à l’entretien de démarrage : son métier, son niveau, la réunion du lundi qu’il doit animer, ce qui le bloque.',
+    pourquoi: 'Tout le cours part de cette situation réelle. Rien n’est tiré d’un manuel ou d’un programme.',
+    place: 'C’est le point de départ. La fiche apprenant sert à tous les modules suivants.',
     docs: [
-      { fichier: '1-profil-apprenant', nom: 'Profil de l’apprenant', pour: 'Pour le formateur', pages: 2, langue: 'en français' },
-      { fichier: '2-course-brief', nom: 'Brief de formation', pour: 'Pour Thomas', pages: 1, langue: 'en anglais' },
+      { fichier: '1-profil-apprenant', nom: 'Fiche apprenant', pour: 'Pour le formateur', pages: 2, langue: 'en français' },
     ],
   },
   {
     id: 'structurer',
-    nom: 'Structurer',
-    titre: 'Ensuite, le chemin de la séance, en partant de la fin.',
-    fait: 'Le formateur écrit le plan des 90 minutes : l’objectif, les preuves de réussite, six étapes minutées.',
-    pourquoi: 'La tâche finale est la vraie réunion de Thomas. Une activité n’entre dans le plan que si elle l’y prépare.',
-    place: 'Le plan dit ce qu’il faudra trouver ou fabriquer ensuite : un article, des activités, un audio, une fiche.',
+    titre: 'Ensuite, les objectifs, écrits pour lui.',
+    fait: 'Le formateur transforme le besoin en objectifs concrets : ce que Thomas saura faire, et comment il saura que c’est réussi.',
+    pourquoi: 'Thomas lit ses objectifs et les valide avant de commencer. Si l’objectif est flou ici, tout le cours le sera.',
+    place: 'Dans une formation longue, on pose ensuite le calendrier, séance par séance. Ici, la formation tient en une séance de 90 minutes.',
     docs: [
-      { fichier: '3-plan-de-seance', nom: 'Plan de la séance', pour: 'Pour le formateur', pages: 2, langue: 'en français' },
+      { fichier: '2-course-brief', nom: 'Objectifs de la formation', pour: 'Pour Thomas', pages: 1, langue: 'en anglais' },
     ],
   },
   {
     id: 'selectionner',
-    nom: 'Sélectionner',
     titre: 'Puis une source authentique, choisie pour lui.',
     fait: 'Le formateur retient un article écrit pour de vrais lecteurs, pas pour des apprenants : court, bien découpé, avec cinq règles pour une réunion utile.',
     pourquoi: 'Thomas lira ce genre de texte au travail. L’article est cité par son lien, jamais recopié : il le lit en ligne.',
-    place: 'Les idées de l’article servent deux fois : pour la lecture, et comme ossature de l’audio.',
+    place: 'Ici, la source est un texte. Une vidéo ou un podcast serait d’abord transcrit, pour n’en garder que ce qui sert.',
     docs: [],
   },
   {
     id: 'concevoir',
-    nom: 'Concevoir',
-    titre: 'Les activités, écrites avec leurs réponses.',
-    fait: 'Cinq activités : parler de sa réunion, lire l’article, écouter une réunion, s’approprier les phrases, animer la sienne.',
-    pourquoi: 'Chaque activité prépare la suivante. Les réponses sont rédigées en même temps que les questions, pour écarter celles qui n’ont pas de réponse nette.',
-    place: 'Rien n’est encore mis en page. Ce contenu deviendra la fiche de Thomas et le guide du formateur.',
+    titre: 'La tâche finale, puis les étapes pour y arriver.',
+    fait: 'Le formateur fixe la tâche finale : Thomas anime sa propre réunion du lundi. Il écrit ensuite le plan de la séance, étape par étape, jusqu’à cette tâche.',
+    pourquoi: 'On part de la fin. Une activité n’entre dans le plan que si elle prépare Thomas à sa réunion.',
+    place: 'Le plan dit ce qu’il reste à fabriquer : un support, des exercices, un audio.',
     docs: [
-      { fichier: '5-role-cards', nom: 'Cartes de rôle', pour: 'Pour la tâche finale', pages: 1, langue: 'en anglais' },
+      { fichier: '3-plan-de-seance', nom: 'Plan de la séance', pour: 'Pour le formateur', pages: 2, langue: 'en français' },
+      { fichier: '5-role-cards', nom: 'Cartes de rôle de la tâche finale', pour: 'Pour Thomas et le formateur', pages: 1, langue: 'en anglais' },
     ],
   },
   {
     id: 'produire',
-    nom: 'Produire',
-    titre: 'Les supports que Thomas aura entre les mains.',
-    fait: 'Le formateur écrit lui-même une réunion de deux minutes qui applique les règles de l’article. Le Studio lui donne deux voix, puis met la fiche en page.',
+    titre: 'Le support, les exercices et le dialogue audio.',
+    fait: 'Le formateur écrit les exercices, puis une réunion de deux minutes qui applique les règles de l’article. Le Studio donne deux voix au dialogue et met le support en page.',
     pourquoi: 'Le texte reste celui du formateur : l’outil Audio ne l’écrit pas, l’outil Documents ne change pas un mot.',
-    place: 'C’est ici que le Studio sert. Il reste à tout relire.',
+    place: 'C’est ici que le Studio sert. Il reste les corrigés, le guide et la relecture.',
     docs: [
-      { fichier: '4-learner-handout', nom: 'Fiche apprenant', pour: 'Pour Thomas', pages: 5, langue: 'en anglais' },
-      { fichier: '6-meeting-script', nom: 'Script de la réunion', pour: 'Remis après l’écoute', pages: 1, langue: 'en anglais' },
+      { fichier: '4-learner-handout', nom: 'Support de l’apprenant', pour: 'Pour Thomas', pages: 5, langue: 'en anglais' },
+      { fichier: '6-meeting-script', nom: 'Transcription du dialogue', pour: 'Remise après l’écoute', pages: 1, langue: 'en anglais' },
     ],
   },
   {
     id: 'finaliser',
-    nom: 'Finaliser',
-    titre: 'Enfin, tout relire, et préparer lundi.',
-    fait: 'Le formateur relit avec une liste de contrôle, rédige le guide de la séance et prépare la carte que Thomas gardera près de son clavier.',
+    titre: 'Enfin, les corrigés, le guide et la dernière relecture.',
+    fait: 'Le formateur rédige le guide de l’enseignant avec les corrigés, relit tout avec une liste de contrôle, et prépare la carte que Thomas gardera près de son clavier.',
     pourquoi: 'C’est à la relecture qu’on attrape le lien mort ou la réponse qui ne correspond plus à l’audio. Et le cours se juge dans la vraie réunion.',
-    place: 'Dernière étape : le cours est prêt à enseigner, par ce formateur ou par un collègue.',
+    place: 'Dernier module : le cours est complet, prêt à enseigner, par ce formateur ou par un collègue.',
     docs: [
+      { fichier: '8-guide-enseignant', nom: 'Guide de l’enseignant et corrigés', pour: 'Pour le formateur', pages: 3, langue: 'en français' },
       { fichier: '7-liste-de-controle', nom: 'Liste de contrôle', pour: 'Pour le formateur', pages: 2, langue: 'en français' },
-      { fichier: '8-guide-enseignant', nom: 'Guide enseignant et corrigés', pour: 'Pour le formateur', pages: 3, langue: 'en français' },
       { fichier: '9-monday-meeting-card', nom: 'Carte mémo', pour: 'Pour Thomas, le lundi', pages: 1, langue: 'en anglais' },
     ],
   },
@@ -227,11 +222,11 @@ export function Cours() {
               <Words text="Suivez un vrai cours, du besoin de l’apprenant aux documents imprimés." under="un vrai cours" />
             </h1>
             <p className="lc-hero-lead">
-              Six étapes, celles de la méthode. À chacune, vous lisez ce qui a été fait et
-              pourquoi, et vous ouvrez le document produit.
+              Les six modules de la méthode, dans l’ordre. À chacun, vous lisez ce qui a été fait
+              pour Thomas et pourquoi, et vous ouvrez le document produit.
             </p>
             <div className="lc-hero-actions">
-              <a className="lc-btn lc-btn--yellow" href="#clarifier">Commencer par l’étape 1</a>
+              <a className="lc-btn lc-btn--yellow" href="#clarifier">Commencer par le module 1</a>
             </div>
             <p className="lc-hero-note">Thomas est un apprenant fictif, créé pour cette démonstration.</p>
           </div>
@@ -244,13 +239,13 @@ export function Cours() {
         </div>
       </section>
 
-      <nav className="lc-wrap lc-steps" aria-label="Les six étapes du cours">
+      <nav className="lc-wrap lc-steps" aria-label="Les six modules de la méthode">
         <ol>
           {etapes.map((etape, n) => (
             <li key={etape.id}>
               <a href={`#${etape.id}`} aria-current={ici === etape.id ? 'step' : undefined}>
                 <b>{n + 1}</b>
-                <span>{etape.nom}</span>
+                <span>{MODULES[n].nom}</span>
               </a>
             </li>
           ))}
@@ -260,13 +255,16 @@ export function Cours() {
       {etapes.map((etape, n) => (
         <section key={etape.id} id={etape.id} className="lc-wrap lc-step" aria-labelledby={`${etape.id}-titre`}>
           <div className="lc-step-head" data-reveal>
-            <p className="lc-step-num"><b>{n + 1}</b> Étape {n + 1} sur 6 · {etape.nom}</p>
+            <p className="lc-step-num"><b>{n + 1}</b> Module {n + 1} sur 6 · {MODULES[n].nom}</p>
             <h2 className="lc-h2" id={`${etape.id}-titre`}><Words text={etape.titre} /></h2>
+            <p className="lc-step-method">
+              <span>Dans la méthode</span> {MODULES[n].texte} On en repart avec {MODULES[n].remis}.
+            </p>
           </div>
 
           <div className="lc-step-body">
             <dl className="lc-step-why" data-reveal>
-              <div data-rise style={order(0)}><dt>Ce qui est fait</dt><dd>{etape.fait}</dd></div>
+              <div data-rise style={order(0)}><dt>Pour Thomas</dt><dd>{etape.fait}</dd></div>
               <div data-rise style={order(1)}><dt>Pourquoi</dt><dd>{etape.pourquoi}</dd></div>
               <div data-rise style={order(2)}><dt>Où on en est</dt><dd>{etape.place}</dd></div>
             </dl>
@@ -289,8 +287,8 @@ export function Cours() {
 
               {etape.id === 'produire' ? (
                 <div className="lc-listen" data-rise>
-                  <p className="lc-source-label">L’audio de la séance</p>
-                  <h3>Une réunion du lundi, deux voix, 1 min 37</h3>
+                  <p className="lc-source-label">Le dialogue audio</p>
+                  <h3>Le dialogue audio : une réunion du lundi, deux voix, 1 min 37</h3>
                   <LecteurAudio src={AUDIO} script={script} />
                   <p className="lc-source-note">
                     Texte écrit par le formateur, voix produites par l’outil Audio du Studio.
@@ -329,7 +327,7 @@ export function Cours() {
 
       <section className="lc-wrap" aria-labelledby="bilan-titre">
         <div className="lc-tile lc-tile--sand lc-bilan" data-reveal>
-          <h2 className="lc-h2" id="bilan-titre"><Words text="Un besoin, six étapes, neuf documents et un audio." mark="neuf documents et un audio" /></h2>
+          <h2 className="lc-h2" id="bilan-titre"><Words text="Un besoin, six modules, neuf documents et un audio." mark="neuf documents et un audio" /></h2>
           <p className="lc-lead">
             C’est ce parcours que chaque formateur refait pendant la formation, avec un de ses
             vrais apprenants.

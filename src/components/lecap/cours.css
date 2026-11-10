@@ -19,6 +19,8 @@
 .lc-step-num { display: flex; align-items: center; gap: 12px; color: var(--lc-ink-2); font-weight: 600; }
 .lc-step-num b { display: grid; flex: none; place-items: center; width: 44px; height: 44px; color: var(--lc-white); font-family: var(--lc-display); font-size: var(--lc-xl); background: var(--lc-green); border-radius: 50%; }
 .lc-step:first-of-type .lc-step-num b { color: var(--lc-ink); background: var(--lc-yellow); }
+.lc-step-method { max-width: 44rem; padding-left: 16px; color: var(--lc-ink-2); border-left: 3px solid var(--lc-yellow); }
+.lc-step-method span { display: block; color: var(--lc-ink); font-weight: 700; }
 .lc-step-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
 
 .lc-step-why { display: grid; gap: 8px; margin: 0; }
