@@ -53,6 +53,11 @@ const NotFoundPage = lazy(async () => {
   return { default: mod.NotFoundPage };
 });
 
+const ApercuTemoignagesPage = lazy(async () => {
+  const mod = await import('./pages/ApercuTemoignagesPage');
+  return { default: mod.ApercuTemoignagesPage };
+});
+
 const pageFallback = (
   <div className="min-h-[60vh]" aria-busy="true" />
 );
@@ -113,6 +118,10 @@ export const router = createBrowserRouter([
         path: 'confidentialite',
         element: withSuspense(<PolitiqueConfidentialitePage />),
       },
+      // Design preview with empty cards: local development only, never in the built site.
+      ...(import.meta.env.DEV
+        ? [{ path: 'apercu-temoignages', element: withSuspense(<ApercuTemoignagesPage />) }]
+        : []),
       {
         path: '*',
         element: withSuspense(<NotFoundPage />),

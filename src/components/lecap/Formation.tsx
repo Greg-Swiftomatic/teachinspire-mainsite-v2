@@ -13,7 +13,10 @@ import {
   euros,
   prixEquipe,
 } from './site';
-import { Words, order, useMotion } from './motion';
+import { DossierIllustration } from './Illustrations';
+import { Words, order, useMotion, useScrollProgress } from './motion';
+import { TestimonialSpot } from './Testimonials';
+import { TEMOIGNAGES } from './temoignages-data';
 import './pages.css';
 
 const reperes = [
@@ -115,11 +118,17 @@ function Simulateur() {
 export function Formation() {
   const page = useRef<HTMLDivElement>(null);
   useMotion(page);
+  const hero = useRef<HTMLDivElement>(null);
+  useScrollProgress(hero, { start: 0.14, end: 0.14, span: 1, prop: '--sp' });
+  // The programme: as the list of modules is read, one more document lands on the pile.
+  const programme = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
+  useScrollProgress(programme, { start: 0.72, end: 0.72, span: 1, onChange: (p) => setStep(Math.min(MODULES.length - 1, Math.floor(p * MODULES.length))) });
 
   return (
     <div className="lc lc-page" ref={page}>
       <section className="lc-wrap" aria-labelledby="formation-titre">
-        <div className="lc-green lc-hero lc-hero--formation" data-surface="green" data-reveal>
+        <div className="lc-green lc-hero lc-hero--formation" data-surface="green" data-reveal ref={hero}>
           <div className="lc-hero-text">
             <p className="lc-hero-kicker">La formation · Construire des formations avec l’IA</p>
             <h1 id="formation-titre">
@@ -154,16 +163,25 @@ export function Formation() {
           <p className="lc-kicker">Le programme</p>
           <h2 className="lc-h2" id="programme-titre"><Words text="Six modules. À chaque module, un document de plus." mark="un document de plus" /></h2>
         </div>
-        <ol className="lc-programme" data-reveal>
-          {MODULES.map((m, i) => (
-            <li key={m.nom} data-rise style={order(i)}>
-              <span className="lc-path-num" aria-hidden="true">{i + 1}</span>
-              <h3>{m.nom}</h3>
-              <p>{m.texte}</p>
-              <p className="lc-programme-out"><span>Ils repartent avec</span> {m.remis}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="lc-prog" ref={programme}>
+          <div className="lc-green lc-prog-art" data-surface="green" aria-hidden="true">
+            <DossierIllustration />
+            <p className="lc-prog-caption">
+              <strong>Module {step + 1} sur {MODULES.length}</strong>
+              <span>{MODULES[step].remis}</span>
+            </p>
+          </div>
+          <ol className="lc-programme" data-reveal>
+            {MODULES.map((m, i) => (
+              <li key={m.nom} className={i <= step ? 'est-atteint' : undefined} data-rise style={order(i)}>
+                <span className="lc-path-num" aria-hidden="true">{i + 1}</span>
+                <h3>{m.nom}</h3>
+                <p>{m.texte}</p>
+                <p className="lc-programme-out"><span>Ils repartent avec</span> {m.remis}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </section>
 
       <section className="lc-wrap" aria-labelledby="deroule-titre">
@@ -212,6 +230,9 @@ export function Formation() {
         </div>
       </section>
 
+      {/* A director speaks after the team offer; an independent trainer after the individual one. */}
+      <TestimonialSpot items={TEMOIGNAGES} id={4} cote="droite" />
+
       <section className="lc-wrap" id="independants" aria-labelledby="independants-titre">
         <div className="lc-solo lc-tile lc-tile--sand" data-reveal data-rise>
           <div className="lc-solo-text">
@@ -235,6 +256,8 @@ export function Formation() {
           </div>
         </div>
       </section>
+
+      <TestimonialSpot items={TEMOIGNAGES} id={2} cote="gauche" />
 
       <section className="lc-wrap" aria-labelledby="comparer-titre">
         <div className="lc-head" data-reveal>

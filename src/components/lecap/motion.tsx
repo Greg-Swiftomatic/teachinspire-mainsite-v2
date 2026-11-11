@@ -1,4 +1,4 @@
-import { useLayoutEffect, type CSSProperties, type RefObject } from 'react';
+import { useLayoutEffect, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import './motion.css';
 
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -23,6 +23,84 @@ export function useMotion(ref: RefObject<HTMLElement | null>) {
     root.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [ref]);
+}
+
+// ---------- Drawings that advance with the scroll ----------
+// One listener for the whole page. Each registered block gets a number from 0 to 1 in a CSS
+// variable as it travels up the window; the drawing inside reads it (see .lc-sd in motion.css).
+// The page is never held or moved: the visitor scrolls, the drawing follows.
+type Track = {
+  el: HTMLElement;
+  /** Where the top of the block is when the number is 0, and when it is 1 (share of the window height). */
+  start: number;
+  end: number;
+  /** Share of the block's own height added to the distance (1 for a long list read line by line). */
+  span: number;
+  prop: string;
+  last: number;
+  onChange?: (p: number) => void;
+};
+const tracks = new Set<Track>();
+let frame = 0;
+const measure = () => {
+  frame = 0;
+  const vh = window.innerHeight;
+  tracks.forEach((track) => {
+    const r = track.el.getBoundingClientRect();
+    const distance = vh * (track.start - track.end) + r.height * track.span;
+    const p = Math.min(1, Math.max(0, (vh * track.start - r.top) / Math.max(1, distance)));
+    const rounded = Math.round(p * 1000) / 1000;
+    if (rounded === track.last) return;
+    track.last = rounded;
+    track.el.style.setProperty(track.prop, String(rounded));
+    track.onChange?.(rounded);
+  });
+};
+const schedule = () => {
+  if (!frame) frame = requestAnimationFrame(measure);
+};
+
+export function useScrollProgress(
+  ref: RefObject<HTMLElement | null>,
+  { start = 0.92, end = 0.4, span = 0, prop = '--p', onChange }: Partial<Omit<Track, 'el' | 'last'>> = {},
+) {
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (reduced()) {
+      // Reduced motion: the finished drawing, and the last step for whoever listens.
+      if (prop === '--p') onChange?.(1);
+      return;
+    }
+    const track: Track = { el, start, end, span, prop, last: -1, onChange };
+    if (tracks.size === 0) {
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+    }
+    tracks.add(track);
+    measure();
+    return () => {
+      tracks.delete(track);
+      el.style.removeProperty(prop);
+      if (tracks.size === 0) {
+        window.removeEventListener('scroll', schedule);
+        window.removeEventListener('resize', schedule);
+      }
+    };
+    // The options are constants at each call site.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref]);
+}
+
+/** One part of a drawing: it plays between `f` and `f + s` of its block's progress. */
+export function S({ k, f, s, d, gx, gy, children }: { k: string; f: number; s: number; d?: number; gx?: number; gy?: number; children: ReactNode }) {
+  const style = {
+    '--from': f,
+    '--span': s,
+    ...(d !== undefined ? { '--d': `${d}px` } : {}),
+    ...(gx !== undefined ? { '--gx': `${gx}px`, '--gy': `${gy ?? 0}px` } : {}),
+  } as CSSProperties;
+  return <g className={`lc-sd lc-sd--${k}`} style={style}>{children}</g>;
 }
 
 const i = (n: number) => ({ '--i': n }) as CSSProperties;

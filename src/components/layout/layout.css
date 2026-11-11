@@ -34,11 +34,12 @@
 
 /* ---------- Footer ---------- */
 .lc-footer { padding-block: 0 32px; }
-.lc-call { display: grid; grid-template-columns: minmax(0, 1.2fr) auto; gap: 32px 48px; align-items: center; padding: clamp(28px, 5vw, 72px); }
+.lc-call { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 320px) auto; gap: 32px 48px; align-items: center; padding: clamp(28px, 5vw, 72px); }
 .lc-call-text { display: flex; flex-direction: column; gap: 16px; }
 .lc-call h2 { max-width: 14ch; color: var(--lc-white); font-size: var(--lc-4xl); }
 .lc-call p { max-width: 34rem; color: var(--lc-on-green-2); font-size: var(--lc-lg); line-height: 1.5; }
 .lc-call-actions { display: flex; flex-direction: column; gap: 12px; }
+.lc-call-art { min-width: 0; }
 
 .lc-footer-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr)); gap: 32px; padding-block: clamp(40px, 6vw, 72px) 32px; }
 .lc-footer-brand { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -49,6 +50,10 @@
 .lc-footer-legal ul { display: flex; flex-wrap: wrap; gap: 0 24px; }
 .lc-footer-legal a { display: inline-flex; align-items: center; min-height: 44px; }
 
+@media (max-width: 1100px) {
+  .lc-call { grid-template-columns: minmax(0, 1.2fr) auto; }
+  .lc-call-art { display: none; }
+}
 @media (max-width: 860px) {
   .lc-call { grid-template-columns: minmax(0, 1fr); }
   .lc-footer-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }

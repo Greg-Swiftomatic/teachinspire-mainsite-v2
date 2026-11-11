@@ -16,6 +16,7 @@
   --lc-green: #0f3b2e;
   --lc-green-2: #164a3a;
   --lc-green-3: #2f6652;
+  --lc-deep: #0b2e24;
   --lc-green-line: #4e7c6a;
   --lc-on-green-2: #bfd8cc;
   --lc-yellow: #ffd23f;
@@ -76,9 +77,8 @@
   font-weight: 600;
   line-height: 1.25;
 }
-.lc p { margin: 0; }
-.lc ul,
-.lc ol { margin: 0; padding: 0; list-style: none; }
+.lc :where(p) { margin: 0; }
+.lc :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
 .lc :where(a) { color: inherit; }
 .lc :where(a, button, summary):focus-visible { outline: 3px solid var(--lc-ink); outline-offset: 3px; }
 .lc [data-surface='green'] :where(a, button):focus-visible { outline-color: var(--lc-yellow); }

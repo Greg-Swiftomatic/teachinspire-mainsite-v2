@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Words, useMotion } from '../lecap/motion';
+import { ConversationIllustration } from '../lecap/Illustrations';
+import { Words, useMotion, useScrollProgress } from '../lecap/motion';
 import { BOOKING_URL, CAMPUS_URL, CTA_APPEL, CTA_COURS, MENU, ROUTES } from '../lecap/site';
 import './layout.css';
 
@@ -8,12 +9,14 @@ import './layout.css';
 export function Footer({ appel = true }: { appel?: boolean }) {
   const footer = useRef<HTMLElement>(null);
   useMotion(footer);
+  const call = useRef<HTMLElement>(null);
+  useScrollProgress(call, { start: 0.96, end: 0.38 });
 
   return (
     <footer className="lc lc-footer" ref={footer}>
       <div className="lc-wrap">
         {appel ? (
-          <section className="lc-green lc-call" data-surface="green" aria-labelledby="lc-call-titre" data-reveal>
+          <section className="lc-green lc-call" data-surface="green" aria-labelledby="lc-call-titre" data-reveal ref={call}>
             <div className="lc-call-text">
               <h2 id="lc-call-titre"><Words text="Quinze minutes, un avis honnête." dot /></h2>
               <p>
@@ -21,6 +24,7 @@ export function Footer({ appel = true }: { appel?: boolean }) {
                 équipe, que vous travailliez avec nous ou non.
               </p>
             </div>
+            <div className="lc-call-art"><ConversationIllustration /></div>
             <div className="lc-call-actions">
               <a className="lc-btn lc-btn--yellow" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">{CTA_APPEL}</a>
               <Link className="lc-btn lc-btn--on-green" to={ROUTES.cours}>{CTA_COURS}</Link>

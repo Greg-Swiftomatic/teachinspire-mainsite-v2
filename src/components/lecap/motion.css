@@ -145,6 +145,9 @@
 .lc-anim [data-in] .lc-route-base { d: var(--route); stroke-dasharray: 1 13; }
 .lc-route-lit { fill: none; stroke: var(--lc-yellow); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--p, 0)); }
 .lc-route-dot { fill: var(--lc-yellow); stroke: var(--lc-green); stroke-width: 4; }
+.lc-route-team { stroke: var(--lc-green); stroke-width: 3; }
+.lc-anim .lc-route-team { opacity: 0; transition: opacity 200ms ease 1500ms; }
+.lc-anim [data-in] .lc-route-team { opacity: 1; }
 .lc-node-disc { fill: var(--lc-green); stroke: var(--lc-on-green-2); stroke-width: 4; transition: fill 200ms ease, stroke 200ms ease; }
 .lc-node-ring { fill: none; stroke: var(--lc-yellow); stroke-width: 5; opacity: 0; }
 .lc-node text { fill: var(--lc-on-green-2); font-family: var(--lc-display); font-size: 26px; font-weight: 800; transition: fill 200ms ease; }
@@ -193,4 +196,28 @@
 @media (prefers-reduced-motion: reduce) {
   .lc-green::before,
   .lc-green::after { animation: none; }
+}
+
+/* ---------- Drawings that advance with the scroll ----------
+   --p is set by useScrollProgress on the block (0 to 1); without it (no script, reduced
+   motion) every part is simply in place. Each part plays between --from and --from + --span. */
+.lc-sd { --q: clamp(0, calc((var(--p, 1) - var(--from, 0)) / var(--span, 1)), 1); transform-box: fill-box; transform-origin: 50% 100%; transition: transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 160ms linear; }
+.lc-sd--drop { opacity: clamp(0, calc(var(--q) * 4), 1); transform: translateY(calc((var(--q) - 1) * var(--d, 110px))); }
+.lc-sd--rise { opacity: clamp(0, calc(var(--q) * 4), 1); transform: translateY(calc((1 - var(--q)) * var(--d, 70px))); }
+.lc-sd--side { opacity: clamp(0, calc(var(--q) * 4), 1); transform: translateX(calc((1 - var(--q)) * var(--d, 70px))); }
+.lc-sd--pop { opacity: clamp(0, calc(var(--q) * 4), 1); transform: scale(calc(0.3 + var(--q) * 0.7)); }
+.lc-sd--growx { transform: scaleX(var(--q)); transform-origin: 0 50%; }
+.lc-sd--growy { transform: scaleY(var(--q)); transform-origin: 50% 50%; }
+.lc-sd--land { opacity: clamp(0, calc(var(--q) * 4), 1); transform: translate(calc((1 - var(--q)) * 70px), calc((var(--q) - 1) * 190px)) rotate(calc((1 - var(--q)) * 16deg)); transform-origin: 50% 50%; }
+.lc-sd--gather { transform: translate(calc((1 - var(--q)) * var(--gx, 0px)), calc((1 - var(--q)) * var(--gy, 0px))); transform-origin: 50% 50%; }
+/* A hop: straight across, and up and down on the way. */
+.lc-sd--hop { transform: translate(calc(var(--q) * var(--gx, 60px)), calc(var(--q) * var(--gy, -20px) + var(--q) * (1 - var(--q)) * -120px)); transform-origin: 50% 50%; }
+.lc-sd--draw path { stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--q)); transition: stroke-dashoffset 220ms linear; }
+/* A quarter of the clock, swept in yellow; the hand follows it. */
+.lc-sd--wedge circle { stroke-dasharray: calc(var(--q) * var(--arc, 60px)) 1000px; transition: stroke-dasharray 220ms linear; }
+.lc-sd--hand { transform: rotate(calc(var(--q) * 90deg)); transform-box: view-box; }
+.lc-il { display: block; width: 100%; height: auto; overflow: visible; }
+.lc-il-num { font-family: var(--lc-display); font-weight: 800; }
+@media (prefers-reduced-motion: reduce) {
+  .lc-sd { transition: none; }
 }

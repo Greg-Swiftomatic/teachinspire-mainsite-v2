@@ -1,8 +1,11 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { IntroVideo } from './IntroVideo';
-import { Words, order, useMotion } from './motion';
+import { ShelfIllustration, SoloIllustration, TeamIllustration } from './Illustrations';
+import { Words, order, useMotion, useScrollProgress } from './motion';
 import { Route } from './Route';
+import { TestimonialSpot, Testimonials } from './Testimonials';
+import { CHIFFRES_TEMOIGNAGES, TEMOIGNAGES, TEMOIGNAGES_EN_ATTENTE } from './temoignages-data';
 import { ChatWindow, StudioWindow } from './Windows';
 import {
   BOOKING_URL,
@@ -75,11 +78,20 @@ function Art({ type }: { type: (typeof documents)[number]['art'] }) {
 export function Home() {
   const page = useRef<HTMLDivElement>(null);
   useMotion(page);
+  // Blocks whose drawing advances with the scroll.
+  const hero = useRef<HTMLDivElement>(null);
+  const docs = useRef<HTMLUListElement>(null);
+  const campusTile = useRef<HTMLElement>(null);
+  const doors = useRef<HTMLDivElement>(null);
+  useScrollProgress(hero, { start: 0.14, end: 0.14, span: 1, prop: '--sp' });
+  useScrollProgress(docs, { start: 0.96, end: 0.42 });
+  useScrollProgress(campusTile, { start: 0.94, end: 0.2 });
+  useScrollProgress(doors, { start: 0.98, end: 0.5 });
 
   return (
     <div className="lc lc-page" ref={page}>
       <section className="lc-wrap" aria-labelledby="accueil-titre">
-        <div className="lc-green lc-hero" data-surface="green" data-reveal>
+        <div className="lc-green lc-hero" data-surface="green" data-reveal ref={hero}>
           <div className="lc-hero-text">
             <p className="lc-hero-kicker">Formation pour les instituts de langues</p>
             <h1 id="accueil-titre">
@@ -137,9 +149,9 @@ export function Home() {
             </p>
             <Link className="lc-btn lc-btn--ink" to={ROUTES.cours}>{CTA_COURS}</Link>
           </div>
-          <ul className="lc-docs" data-reveal>
-            {documents.map((doc, n) => (
-              <li key={doc.nom} className={`lc-doc lc-doc--${doc.art}`} data-rise style={order(n)}>
+          <ul className="lc-docs lc-docs--stack" ref={docs}>
+            {documents.map((doc) => (
+              <li key={doc.nom} className={`lc-doc lc-doc--${doc.art} lc-sd lc-sd--stack`}>
                 <Art type={doc.art} />
                 <h3>{doc.nom}</h3>
                 <p>{doc.texte}</p>
@@ -148,6 +160,8 @@ export function Home() {
           </ul>
         </div>
       </section>
+
+      <Testimonials items={TEMOIGNAGES} chiffres={CHIFFRES_TEMOIGNAGES} brouillon={TEMOIGNAGES_EN_ATTENTE} sauf={[3]} />
 
       <section className="lc-wrap" aria-labelledby="parcours-titre">
         <div className="lc-green lc-journey" data-surface="green">
@@ -173,15 +187,13 @@ export function Home() {
           <p className="lc-lead">Campus et le Studio sont ouverts pendant un an à chaque formateur.</p>
         </div>
         <div className="lc-platform">
-          <article className="lc-tile lc-tile--sand lc-campus" data-reveal>
+          <article className="lc-green lc-campus" data-surface="green" ref={campusTile}>
             <p className="lc-tile-name">Campus</p>
             <h3>Le parcours, les travaux et le groupe.</h3>
+            <ShelfIllustration />
             <ul>
-              {campus.map((ligne, i) => (
-                <li key={ligne} data-rise style={order(i)}>
-                  <span className={i === 0 ? 'lc-dot est-ici' : 'lc-dot'} aria-hidden="true" />
-                  {ligne}
-                </li>
+              {campus.map((ligne) => (
+                <li key={ligne}>{ligne}</li>
               ))}
             </ul>
           </article>
@@ -189,6 +201,9 @@ export function Home() {
         </div>
         <Link className="lc-link" to={ROUTES.plateforme}>Découvrir la plateforme</Link>
       </section>
+
+      {/* A card about the Studio, right after the tools. */}
+      <TestimonialSpot items={TEMOIGNAGES} id={3} cote="droite" />
 
       <section className="lc-wrap" aria-labelledby="bref-titre">
         <div className="lc-head" data-reveal>
@@ -203,9 +218,9 @@ export function Home() {
             </li>
           ))}
         </ul>
-        <div className="lc-doors" data-reveal>
+        <div className="lc-doors" data-reveal ref={doors}>
           <Link data-rise style={order(0)} className="lc-tile lc-tile--ask lc-door" to={`${ROUTES.formation}#equipe`}>
-            <span className="lc-door-who">Je dirige un institut</span>
+            <span className="lc-door-top"><span className="lc-door-who">Je dirige un institut</span><TeamIllustration /></span>
             <strong>{euros(PRIX_EQUIPE)}&nbsp;HT</strong>
             <span>
               jusqu’à {FORMATEURS_INCLUS}&nbsp;formateurs, puis {euros(PRIX_FORMATEUR_SUPPLEMENTAIRE)}&nbsp;HT
@@ -214,7 +229,7 @@ export function Home() {
             <span className="lc-door-go">Voir la formation d’équipe</span>
           </Link>
           <Link data-rise style={order(1)} className="lc-tile lc-tile--sand lc-door" to={`${ROUTES.formation}#independants`}>
-            <span className="lc-door-who">Je suis formateur indépendant</span>
+            <span className="lc-door-top"><span className="lc-door-who">Je suis formateur indépendant</span><SoloIllustration /></span>
             <strong>{euros(PRIX_INDIVIDUEL)}&nbsp;HT</strong>
             <span>par personne, pour celui ou celle qui s’inscrit et paie pour soi</span>
             <span className="lc-door-go">Voir la formation individuelle</span>

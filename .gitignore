@@ -19,3 +19,8 @@ dist/
 .DS_Store
 Thumbs.db
 .gstack/
+
+# Testimonials awaiting the written agreement of each person: personal data, never committed.
+*.local.json
+*.local.md
+*.local/

@@ -9,10 +9,13 @@ const Y = (n: number) => (n % 2 ? 62 : 178);
 const ROUTE = MODULES.map((_, n) => (n === 0 ? `M${X(0)} ${Y(0)}` : `C${X(n) - 100} ${Y(n - 1)} ${X(n) - 100} ${Y(n)} ${X(n)} ${Y(n)}`)).join(' ');
 const TANGLE = 'M100 178 C760 -40 180 300 420 120 C700 -60 860 300 500 150 C120 0 300 290 700 110 C1010 -30 520 300 880 150 C1120 40 900 300 1100 62';
 
+const TEAM = ['var(--lc-mint)', 'var(--lc-paper)', 'var(--lc-mint-2)', 'var(--lc-sand)', 'var(--lc-paper)'];
+
 export function Route() {
   const box = useRef<HTMLDivElement>(null);
   const lit = useRef<SVGPathElement>(null);
   const dot = useRef<SVGCircleElement>(null);
+  const team = useRef<(SVGCircleElement | null)[]>([]);
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -35,6 +38,13 @@ export function Route() {
         const point = path.getPointAtLength(path.getTotalLength() * p);
         dot.current.setAttribute('cx', String(point.x));
         dot.current.setAttribute('cy', String(point.y));
+        // The team: a few points a little behind, on the same line.
+        team.current.forEach((follower, n) => {
+          if (!follower) return;
+          const behind = path.getPointAtLength(path.getTotalLength() * Math.max(0, p - 0.024 * (n + 1)));
+          follower.setAttribute('cx', String(behind.x));
+          follower.setAttribute('cy', String(behind.y + (n % 2 ? 7 : -7)));
+        });
       }
       setStep(Math.floor(p * (MODULES.length - 1) + 0.04));
     };
@@ -63,7 +73,10 @@ export function Route() {
             <text y="9" textAnchor="middle">{n + 1}</text>
           </g>
         ))}
-        <circle className="lc-route-dot" ref={dot} cx={X(0)} cy={Y(0)} r="10" />
+        {TEAM.map((fill, n) => (
+          <circle key={n} className="lc-route-team" ref={(el) => { team.current[n] = el; }} cx={X(0)} cy={Y(0)} r="7.5" fill={fill} />
+        ))}
+        <circle className="lc-route-dot" ref={dot} cx={X(0)} cy={Y(0)} r="11" />
       </svg>
       <ol className="lc-route-steps">
         {MODULES.map((m, n) => (

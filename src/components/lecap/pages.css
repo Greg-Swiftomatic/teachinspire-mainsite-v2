@@ -179,13 +179,6 @@
 .lc-faq details[open] summary span::after { transform: none; }
 .lc-faq details p { padding: 0 20px 20px; color: var(--lc-ink-2); }
 
-/* ---------- Testimonials (not mounted yet) ---------- */
-.lc-quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
-.lc-quote { margin: 0; gap: 20px; }
-.lc-quote blockquote { margin: 0; font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; }
-.lc-quote figcaption { display: flex; flex-direction: column; margin-top: auto; }
-.lc-quote figcaption span { color: var(--lc-ink-2); font-size: var(--lc-sm); }
-
 /* ---------- Narrower screens ---------- */
 @media (max-width: 1000px) {
   .lc-hero,
@@ -244,6 +237,7 @@
 .lc-journey .lc-link { align-self: flex-start; margin-top: 24px; color: var(--lc-white); }
 .lc-journey .lc-link:hover { color: var(--lc-yellow); }
 .lc-platform { align-items: start; padding: 0 12px 12px 0; }
+@media (min-width: 1001px) { .lc-platform { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
 .lc-figures strong { font-size: clamp(3rem, 7vw, 6rem); }
 @media (max-width: 620px) {
   .lc-principle,
@@ -254,3 +248,158 @@
 .lc-hero h1 { font-size: clamp(2.375rem, 4.7vw, 4.25rem); }
 .lc-hero-text { gap: 18px; }
 @media (max-width: 1000px) { .lc-hero { grid-template-columns: minmax(0, 1fr); } }
+
+.lc-draft { align-self: flex-start; padding: 6px 14px; font-size: var(--lc-sm); font-weight: 600; background: var(--lc-wash-audio); border-radius: var(--lc-r-pill); }
+.lc-quote-figures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 64px; }
+.lc-quote-figures li { display: flex; flex-direction: column; gap: 6px; padding: 24px; background: var(--lc-mint); border-radius: var(--lc-r-xl); }
+.lc-quote-figures strong { font-family: var(--lc-display); font-size: clamp(3rem, 6vw, 5rem); font-weight: 700; line-height: 1; letter-spacing: -0.03em; }
+.lc-quote-figures small { font-size: 0.4em; }
+.lc-quote-figures span { color: var(--lc-ink-2); }
+@media (max-width: 1000px) { .lc-quote-figures { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Testimonial cards: one drawing, four colours ---------- */
+.lc-tm { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; gap: clamp(18px, 2.2vw, 28px); margin: 0; padding: clamp(24px, 3.4vw, 44px); border-radius: var(--lc-r-2xl); }
+.lc-tm-shape { position: absolute; z-index: -1; border-radius: 50%; }
+.lc-tm-shape--a { width: 62%; aspect-ratio: 1; right: -18%; top: -42%; animation: lc-drift 24s ease-in-out infinite alternate; }
+.lc-tm-shape--b { width: 34%; aspect-ratio: 1; left: -12%; bottom: -34%; animation: lc-drift 30s ease-in-out infinite alternate-reverse; }
+.lc-tm-sign { display: block; height: 0.56em; font-family: var(--lc-display); font-size: clamp(5rem, 9vw, 8rem); font-weight: 800; line-height: 0.74; }
+.lc-tm blockquote { margin: 0; }
+.lc-tm blockquote p { font-family: var(--lc-display); font-weight: 700; line-height: 1.13; letter-spacing: -0.022em; text-wrap: balance; }
+.lc-tm--xl blockquote p { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.06; }
+.lc-tm--l blockquote p { font-size: clamp(1.625rem, 2.7vw, 2.25rem); line-height: 1.09; }
+.lc-tm--m blockquote p { font-size: clamp(1.5rem, 2.3vw, 1.875rem); }
+.lc-tm--s blockquote p { font-size: clamp(1.375rem, 2vw, 1.625rem); }
+.lc-tm mark { padding: 0.02em 0.14em 0.06em; margin: 0 -0.06em; color: var(--lc-ink); background: var(--lc-yellow); border-radius: 0.12em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.lc-tm-times { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: var(--lc-sm); font-weight: 600; }
+.lc-tm-times-label { flex-basis: 100%; font-weight: 500; opacity: 0.8; }
+.lc-tm-times svg { flex: none; width: 40px; height: 18px; }
+.lc-tm-pill { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 16px; font-family: var(--lc-display); font-size: var(--lc-lg); font-weight: 700; letter-spacing: -0.01em; border-radius: var(--lc-r-pill); }
+.lc-tm-pill small { font-family: var(--lc-body); font-size: var(--lc-xs); font-weight: 600; letter-spacing: 0; opacity: 0.75; }
+.lc-tm figcaption { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 4px; }
+.lc-tm-badge { display: grid; flex: none; place-items: center; width: 52px; height: 52px; font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 800; border-radius: 50%; }
+.lc-tm-badge--plain::after { content: ''; width: 16px; height: 16px; background: currentColor; border-radius: 50%; }
+.lc-tm-who { display: grid; gap: 2px; min-width: 0; }
+.lc-tm-who strong { font-size: var(--lc-lg); font-weight: 700; letter-spacing: -0.01em; }
+.lc-tm-who span { font-size: var(--lc-sm); line-height: 1.35; }
+
+.lc-tm--forest { color: var(--lc-white); background: var(--lc-green); }
+.lc-tm--forest .lc-tm-shape { background: var(--lc-green-2); }
+.lc-tm--forest .lc-tm-sign { color: var(--lc-yellow); }
+.lc-tm--forest .lc-tm-who span { color: var(--lc-on-green-2); }
+.lc-tm--forest .lc-tm-badge { color: var(--lc-ink); background: var(--lc-yellow); }
+.lc-tm--forest .lc-tm-pill--before { background: var(--lc-green-2); }
+.lc-tm--forest .lc-tm-pill--after { color: var(--lc-ink); background: var(--lc-yellow); }
+.lc-tm--mint { background: var(--lc-mint); }
+.lc-tm--mint .lc-tm-shape { background: #cde4d1; }
+.lc-tm--mint .lc-tm-sign { color: var(--lc-green); }
+.lc-tm--sand { background: var(--lc-sand); }
+.lc-tm--sand .lc-tm-shape { background: #e5dfca; }
+.lc-tm--sand .lc-tm-sign { color: var(--lc-tangerine); }
+.lc-tm--sand .lc-tm-badge { color: var(--lc-ink); background: var(--lc-tangerine); }
+.lc-tm--yellow { background: var(--lc-yellow); }
+.lc-tm--yellow .lc-tm-shape { background: var(--lc-yellow-hover); }
+.lc-tm--yellow .lc-tm-sign { color: var(--lc-green); }
+.lc-tm--yellow mark { background: var(--lc-paper); }
+.lc-tm--yellow .lc-tm-pill--before { background: var(--lc-yellow-hover); }
+.lc-tm--mint .lc-tm-who span,
+.lc-tm--sand .lc-tm-who span,
+.lc-tm--yellow .lc-tm-who span { color: var(--lc-ink-2); }
+.lc-tm--mint .lc-tm-badge,
+.lc-tm--yellow .lc-tm-badge { color: var(--lc-white); background: var(--lc-green); }
+.lc-tm--mint .lc-tm-pill--before,
+.lc-tm--sand .lc-tm-pill--before { background: var(--lc-paper); }
+.lc-tm--mint .lc-tm-pill--after,
+.lc-tm--sand .lc-tm-pill--after,
+.lc-tm--yellow .lc-tm-pill--after { color: var(--lc-white); background: var(--lc-green); }
+
+/* The centrepiece: full width, very large words. */
+.lc-tm--lead { padding: clamp(28px, 5.4vw, 80px); gap: clamp(22px, 3vw, 40px); }
+.lc-tm--lead blockquote p { max-width: 21em; font-size: clamp(1.75rem, 3.9vw, 3.375rem); text-wrap: wrap; }
+.lc-tm--lead .lc-tm-sign { font-size: clamp(6rem, 13vw, 12rem); }
+.lc-tm--lead .lc-mark { color: var(--lc-ink); }
+.lc-tm--lead .lc-tm-badge { width: 64px; height: 64px; }
+.lc-anim .lc-tm-sign { transform: scale(0) rotate(-20deg); transform-origin: 0 100%; transition: transform 600ms cubic-bezier(0.2, 0.9, 0.3, 1.5) 150ms; }
+.lc-anim [data-in] .lc-tm-sign,
+.lc-anim [data-in].lc-tm .lc-tm-sign { transform: none; }
+.lc-tm-grid { columns: 2; column-gap: 24px; margin-top: 24px; }
+.lc-tm-grid .lc-tm { break-inside: avoid; margin-bottom: 24px; }
+.lc-quote-lines { display: grid; gap: 0.5em; font-size: 2rem; }
+.lc-quote-lines i { height: 0.62em; background: currentColor; opacity: 0.18; border-radius: var(--lc-r-pill); }
+.lc-quote-lines i:nth-child(2n) { width: 88%; }
+.lc-quote-lines i:last-child { width: 46%; }
+@media (max-width: 860px) { .lc-tm-grid { columns: 1; } }
+@media (max-width: 620px) { .lc-tm { border-radius: var(--lc-r-xl); } }
+@media (prefers-reduced-motion: reduce) { .lc-tm-shape { animation: none; } }
+
+/* ---------- Third pass: drawings that advance with the scroll ---------- */
+/* The large shapes of the forest block and the video drift apart as the page moves. */
+.lc-hero::before { translate: 0 calc(var(--sp, 0) * 140px); }
+.lc-hero::after { translate: 0 calc(var(--sp, 0) * -90px); }
+.lc-hero .lc-video { translate: 0 calc(var(--sp, 0) * -28px); }
+.lc-hero-panel { translate: 0 calc(var(--sp, 0) * -28px); }
+
+/* Proof: the four documents start as a pile and open out as the block comes up. */
+.lc-docs--stack { position: relative; }
+.lc-docs--stack .lc-sd--stack { transform-origin: 50% 50%; transform: translate(calc((1 - var(--q)) * var(--sx)), calc((1 - var(--q)) * var(--sy))) rotate(calc((1 - var(--q)) * var(--sr))); }
+.lc-docs--stack li:nth-child(1) { --sx: calc(50% + 8px); --sy: calc(50% + 8px); --sr: -7deg; z-index: 4; }
+.lc-docs--stack li:nth-child(2) { --sx: calc(-50% - 8px); --sy: calc(50% + 8px); --sr: 5deg; --from: 0.06; z-index: 3; }
+.lc-docs--stack li:nth-child(3) { --sx: calc(50% + 8px); --sy: calc(-50% - 8px); --sr: 9deg; --from: 0.12; z-index: 2; }
+.lc-docs--stack li:nth-child(4) { --sx: calc(-50% - 8px); --sy: calc(-50% - 8px); --sr: -4deg; --from: 0.18; z-index: 1; }
+.lc-docs--stack li { --span: 0.82; }
+
+/* Campus: the shelf on the forest block, then what you find there. */
+.lc-campus { display: flex; flex-direction: column; gap: 12px; padding: clamp(20px, 2.6vw, 32px); border-radius: var(--lc-r-xl); }
+.lc-campus .lc-tile-name { color: var(--lc-white); }
+.lc .lc-campus h3 { color: var(--lc-on-green-2); }
+.lc-campus .lc-il { margin: 4px 0 8px; }
+.lc-campus ul { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
+.lc-campus li { min-height: 0; padding: 12px 14px; color: var(--lc-white); font-size: var(--lc-sm); line-height: 1.35; background: var(--lc-green-2); }
+
+/* The two doors: who is coming in. */
+.lc-door-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.lc-door-top .lc-il { flex: none; width: 84px; margin: -4px -4px 0 0; }
+
+/* Formation: the pile of documents stays in view while the six modules are read. */
+.lc-prog { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); gap: 24px; align-items: start; }
+.lc-prog-art { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 8px; padding: clamp(20px, 3vw, 40px) clamp(20px, 3vw, 40px) clamp(20px, 2.4vw, 28px); }
+.lc-prog-caption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; color: var(--lc-on-green-2); }
+.lc-prog-caption strong { color: var(--lc-yellow); font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
+.lc-prog-caption span::first-letter { text-transform: uppercase; }
+.lc-prog .lc-programme { grid-template-columns: minmax(0, 1fr); }
+.lc-programme li { transition: background-color 200ms ease; }
+.lc-programme li .lc-path-num { transition: background-color 200ms ease, color 200ms ease; }
+.lc-anim .lc-prog .lc-programme li:not(.est-atteint) .lc-path-num { color: var(--lc-ink); background: var(--lc-sand-2); }
+.lc-anim .lc-prog .lc-programme li.est-atteint .lc-path-num { color: var(--lc-ink); background: var(--lc-yellow); }
+
+@media (max-width: 1000px) {
+  .lc-prog { grid-template-columns: minmax(0, 1fr); }
+  /* No room to keep it beside the list: the finished pile, above it. */
+  .lc-prog-art { position: static; --p: 1; max-width: 560px; }
+  .lc-prog-caption { display: none; }
+  .lc-anim .lc-prog .lc-programme li .lc-path-num { color: var(--lc-white); background: var(--lc-green); }
+  .lc-anim .lc-prog .lc-programme li:first-child .lc-path-num { color: var(--lc-ink); background: var(--lc-yellow); }
+}
+@media (max-width: 620px) {
+  .lc-campus ul { grid-template-columns: minmax(0, 1fr); }
+  /* One column: the documents simply come up in turn. */
+  .lc-docs--stack .lc-sd--stack { transform: translateY(calc((1 - var(--q)) * 40px)); opacity: clamp(0, calc(var(--q) * 3), 1); }
+  .lc-docs--stack li { --span: 0.5; }
+}
+
+/* A testimonial on its own, between two sections: a band the full width of the page,
+   the words on the left, who says them on the right. No empty space beside it. */
+.lc-tm-spot { margin-block: calc(clamp(56px, 8vw, 112px) * -0.45); }
+.lc-tm-spot .lc-tm { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(0, 300px); column-gap: clamp(20px, 3.4vw, 56px); row-gap: 16px; align-items: center; width: 100%; padding: clamp(24px, 3.6vw, 52px) clamp(24px, 4.4vw, 72px); }
+.lc-tm-spot .lc-tm-sign { grid-column: 1; grid-row: 1 / span 2; align-self: start; margin-top: 0.08em; }
+.lc-tm-spot .lc-tm blockquote { grid-column: 2; grid-row: 1 / span 2; }
+.lc-tm-spot .lc-tm blockquote p { font-size: clamp(1.5rem, 2.7vw, 2.375rem); line-height: 1.1; }
+.lc-tm-spot .lc-tm-times { grid-column: 3; grid-row: 1; align-self: end; }
+.lc-tm-spot .lc-tm figcaption { grid-column: 3; grid-row: 2; align-self: start; margin-top: 0; padding-top: 0; }
+.lc-tm-spot .lc-tm:not(:has(.lc-tm-times)) figcaption { grid-row: 1 / span 2; align-self: center; }
+@media (max-width: 860px) {
+  .lc-tm-spot .lc-tm { display: flex; }
+}
+
+/* The single card on a page that still has the old look: its own strip of paper. */
+.lc-band { padding-block: clamp(32px, 5vw, 64px); }
+.lc-band .lc-tm-spot { margin-block: 0; }
