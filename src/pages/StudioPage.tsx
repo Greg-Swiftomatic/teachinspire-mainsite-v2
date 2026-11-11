@@ -9,6 +9,8 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 const STUDIO_URL = 'https://studio.teachinspire.me';
 const SIGNUP_URL = `${STUDIO_URL}/signup`;
 import { BOOKING_URL } from '../assets/assets';
+import { TestimonialBand } from '../components/lecap/Testimonials';
+import { TEMOIGNAGES } from '../components/lecap/temoignages-data';
 
 // ── Data ──────────────────────────────────────────────────
 
@@ -256,6 +258,9 @@ export function StudioPage() {
           </div>
         </Container>
       </section>
+
+      {/* After the workshops: Lyane on how her learners take the audios. Shows once her card is published. */}
+      <TestimonialBand items={TEMOIGNAGES} id={13} />
 
       {/* Offres */}
       <section className="bg-cream py-20 lg:py-28 relative overflow-hidden" id="offres">

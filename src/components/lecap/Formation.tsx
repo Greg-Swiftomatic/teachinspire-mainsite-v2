@@ -184,6 +184,9 @@ export function Formation() {
         </div>
       </section>
 
+      {/* Lyane: tailor-made courses even in trades she knows nothing about. */}
+      <TestimonialSpot items={TEMOIGNAGES} id={12} cote="gauche" />
+
       <section className="lc-wrap" aria-labelledby="deroule-titre">
         <div className="lc-head" data-reveal>
           <p className="lc-kicker">Le déroulé</p>
