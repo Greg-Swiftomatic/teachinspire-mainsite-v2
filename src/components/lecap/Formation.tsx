@@ -90,7 +90,7 @@ function Check() {
   return (
     <svg className="lc-check" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
       <circle cx="10" cy="10" r="10" fill="currentColor" />
-      <path d="M5.5 10.4l3 3 6-6.6" fill="none" stroke="var(--lc-white)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M5.5 10.4l3 3 6-6.6" fill="none" stroke="var(--lc-paper)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

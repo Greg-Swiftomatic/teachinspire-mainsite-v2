@@ -4,29 +4,21 @@
 @import '@fontsource-variable/onest';
 
 :root {
-  --lc-paper: #fcfbf7;
-  --lc-paper-2: #f5f2e8;
-  --lc-sand: #efebdd;
-  --lc-sand-2: #e3dfd0;
-  --lc-white: #ffffff;
-  --lc-rule: #e3dfd0;
-  --lc-ink: #10231c;
-  --lc-ink-2: #2f4a40;
-  --lc-ink-3: #4d5b55;
-  --lc-green: #0f3b2e;
-  --lc-green-2: #164a3a;
-  --lc-green-3: #2f6652;
-  --lc-deep: #0b2e24;
-  --lc-green-line: #4e7c6a;
-  --lc-on-green-2: #bfd8cc;
-  --lc-yellow: #ffd23f;
-  --lc-yellow-hover: #ffdc66;
-  --lc-tangerine: #f2622e;
-  --lc-mint: #ddeedf;
-  --lc-mint-2: #bfd8cc;
-  --lc-wash-audio: #fde3d7;
-  --lc-wash-docs: #fff1bf;
-  --lc-scrim: rgba(16, 35, 28, 0.72);
+  /* Five colours, the same as Campus (docs/design/le-cap.md in the Campus repo), and nothing else.
+     Every other colour is a tint below, mixed from two of the five. */
+  --lc-ink: #10231c;      /* text, outlines, the dark pill button      15.9:1 on paper */
+  --lc-paper: #fcfbf7;    /* the page, cards, text on green and on signal          */
+  --lc-green: #0f3b2e;    /* the one main block of a screen            12:1 paper on it */
+  --lc-yellow: #ffd23f;   /* go, "you are here". Dark text only        11.4:1 ink on it */
+  --lc-signal: #b23d12;   /* attention, an accent. Paper text on it    5.7:1 */
+
+  --lc-ink-soft: color-mix(in srgb, var(--lc-ink) 72%, var(--lc-paper));       /* secondary text (6.4:1), lines on green */
+  --lc-rule: color-mix(in srgb, var(--lc-ink) 14%, var(--lc-paper));           /* separations, tracks */
+  --lc-quiet: color-mix(in srgb, var(--lc-ink) 5%, color-mix(in srgb, var(--lc-yellow) 10%, var(--lc-paper))); /* quiet zones, tiles */
+  --lc-wash: color-mix(in srgb, var(--lc-yellow) 25%, var(--lc-paper));        /* the current row, a notice */
+  --lc-green-soft: color-mix(in srgb, var(--lc-paper) 12%, var(--lc-green));   /* a panel inside the green block */
+  --lc-yellow-press: color-mix(in srgb, var(--lc-yellow) 88%, var(--lc-ink));  /* hover of a yellow button */
+  --lc-scrim: color-mix(in srgb, var(--lc-ink) 72%, transparent);              /* behind dialogs */
 
   --lc-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
   --lc-body: 'Onest Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -106,14 +98,14 @@
   cursor: pointer;
   transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
 }
-.lc-btn--ink { color: var(--lc-white); background: var(--lc-ink); }
-.lc-btn--ink:hover { background: var(--lc-green-2); }
+.lc-btn--ink { color: var(--lc-paper); background: var(--lc-ink); }
+.lc-btn--ink:hover { background: var(--lc-green-soft); }
 .lc-btn--line { color: var(--lc-ink); background: transparent; border-color: var(--lc-ink); }
-.lc-btn--line:hover { background: var(--lc-sand); }
+.lc-btn--line:hover { background: var(--lc-quiet); }
 .lc-btn--yellow { min-height: 56px; padding: 0 28px; color: var(--lc-ink); font-size: var(--lc-lg); font-weight: 700; background: var(--lc-yellow); }
-.lc-btn--yellow:hover { background: var(--lc-yellow-hover); }
-.lc-btn--on-green { min-height: 56px; color: var(--lc-white); border-color: var(--lc-green-line); }
-.lc-btn--on-green:hover { background: var(--lc-green-2); }
+.lc-btn--yellow:hover { background: var(--lc-yellow-press); }
+.lc-btn--on-green { min-height: 56px; color: var(--lc-paper); border-color: var(--lc-ink-soft); }
+.lc-btn--on-green:hover { background: var(--lc-green-soft); }
 .lc-btn--small { min-height: 44px; padding: 0 18px; font-size: var(--lc-sm); }
 
 .lc-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
@@ -126,21 +118,21 @@
 
 /* ---------- Sections ---------- */
 .lc-head { display: flex; flex-direction: column; gap: 16px; max-width: 46rem; margin-bottom: clamp(24px, 3.4vw, 44px); }
-.lc-kicker { color: var(--lc-ink-2); font-size: var(--lc-base); font-weight: 600; }
+.lc-kicker { color: var(--lc-ink-soft); font-size: var(--lc-base); font-weight: 600; }
 .lc-h2 { font-size: var(--lc-3xl); }
-.lc-lead { max-width: 40rem; color: var(--lc-ink-2); font-size: var(--lc-lg); line-height: 1.5; }
+.lc-lead { max-width: 40rem; color: var(--lc-ink-soft); font-size: var(--lc-lg); line-height: 1.5; }
 
 .lc-tile { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: clamp(20px, 2.6vw, 32px); border-radius: var(--lc-r-xl); }
-.lc-tile--sand { background: var(--lc-sand); }
-.lc-tile--mint { background: var(--lc-mint); }
-.lc-tile--paper { background: var(--lc-paper-2); }
-.lc-tile--ask { background: var(--lc-white); border: 2px solid var(--lc-ink); }
+.lc-tile--sand { background: var(--lc-quiet); }
+.lc-tile--mint { background: var(--lc-quiet); }
+.lc-tile--paper { background: var(--lc-quiet); }
+.lc-tile--ask { background: var(--lc-paper); border: 2px solid var(--lc-ink); }
 
 /* ---------- The forest block ---------- */
 .lc-green {
   position: relative;
   overflow: hidden;
-  color: var(--lc-white);
+  color: var(--lc-paper);
   background: var(--lc-green);
   border-radius: var(--lc-r-2xl);
 }
@@ -151,7 +143,7 @@
   right: -12%;
   width: min(62%, 760px);
   aspect-ratio: 1;
-  background: var(--lc-green-2);
+  background: var(--lc-green-soft);
   border-radius: 50%;
   pointer-events: none;
 }

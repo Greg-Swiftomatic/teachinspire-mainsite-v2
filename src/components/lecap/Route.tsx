@@ -9,7 +9,7 @@ const Y = (n: number) => (n % 2 ? 62 : 178);
 const ROUTE = MODULES.map((_, n) => (n === 0 ? `M${X(0)} ${Y(0)}` : `C${X(n) - 100} ${Y(n - 1)} ${X(n) - 100} ${Y(n)} ${X(n)} ${Y(n)}`)).join(' ');
 const TANGLE = 'M100 178 C760 -40 180 300 420 120 C700 -60 860 300 500 150 C120 0 300 290 700 110 C1010 -30 520 300 880 150 C1120 40 900 300 1100 62';
 
-const TEAM = ['var(--lc-mint)', 'var(--lc-paper)', 'var(--lc-mint-2)', 'var(--lc-sand)', 'var(--lc-paper)'];
+const TEAM = ['var(--lc-quiet)', 'var(--lc-paper)', 'var(--lc-rule)', 'var(--lc-quiet)', 'var(--lc-paper)'];
 
 export function Route() {
   const box = useRef<HTMLDivElement>(null);

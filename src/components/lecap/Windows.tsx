@@ -3,7 +3,7 @@ import { OUTILS } from './site';
 // Small product windows drawn in HTML, as in the video: they play once when they enter the view.
 const Pointer = ({ className }: { className: string }) => (
   <svg className={`lc-pointer ${className}`} viewBox="0 0 26 34" width="30" height="40" aria-hidden="true">
-    <path d="M3 3L3 27L9.2 21.2L13.4 30.8L17.6 29L13.4 19.4L22 19.4Z" fill="var(--lc-ink)" stroke="var(--lc-white)" strokeWidth="2.2" strokeLinejoin="round" />
+    <path d="M3 3L3 27L9.2 21.2L13.4 30.8L17.6 29L13.4 19.4L22 19.4Z" fill="var(--lc-ink)" stroke="var(--lc-paper)" strokeWidth="2.2" strokeLinejoin="round" />
   </svg>
 );
 
