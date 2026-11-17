@@ -179,6 +179,16 @@
 .lc-faq details[open] summary span::after { transform: none; }
 .lc-faq details p { padding: 0 20px 20px; color: var(--lc-ink-2); }
 
+/* ---------- La plateforme ---------- */
+.lc-campus-steps { display: grid; gap: 16px; align-content: start; }
+.lc-campus-steps p { color: var(--lc-ink-2); }
+.lc-outils { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lc-outil h3 { font-size: var(--lc-2xl); }
+.lc-outil p { color: var(--lc-ink-2); }
+.lc .lc-outil .lc-outil-flux { color: var(--lc-ink); font-size: var(--lc-sm); font-weight: 700; }
+.lc .lc-outil .lc-outil-detail { margin-top: auto; padding-top: 12px; color: var(--lc-ink); font-size: var(--lc-sm); font-weight: 600; border-top: 1px solid rgba(16, 35, 28, 0.15); }
+.lc-free { margin-top: 20px; color: var(--lc-ink-2); }
+
 /* ---------- Narrower screens ---------- */
 @media (max-width: 1000px) {
   .lc-hero,
@@ -195,7 +205,8 @@
   .lc-path li > .lc-path-num { grid-column: 1; grid-row: 1 / span 3; margin: 0; }
   .lc-path h3 { align-self: center; min-height: 44px; display: flex; align-items: center; }
   .lc-programme,
-  .lc-three { grid-template-columns: minmax(0, 1fr); }
+  .lc-three,
+  .lc-outils { grid-template-columns: minmax(0, 1fr); }
   .lc-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .lc-doors { grid-template-columns: minmax(0, 1fr); }
   .lc-hero-panel { grid-template-columns: repeat(2, minmax(0, 1fr)); }
