@@ -1,0 +1,86 @@
+/* The quieter pages — About, Contact, the private preview, the legal pages, 404 — Le cap. */
+
+/* ---------- A page that opens on the forest block, text and one picture ---------- */
+.lc-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; padding: clamp(24px, 5vw, 72px); }
+.lc-intro-text { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; min-width: 0; }
+.lc-intro h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
+.lc-intro .lc-hero-lead { max-width: 36rem; }
+.lc-intro-photo { margin: 0; }
+.lc-intro-photo img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--lc-r-xl); }
+.lc-intro-photo figcaption { margin-top: 12px; color: var(--lc-paper); font-size: var(--lc-sm); }
+
+/* ---------- A story told in a column, its title on the left ---------- */
+.lc-story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+.lc-story .lc-head { margin-bottom: 0; }
+.lc-story-body { display: flex; flex-direction: column; gap: 20px; max-width: 42rem; font-size: var(--lc-lg); line-height: 1.6; }
+.lc-story-body > p { color: var(--lc-ink-soft); }
+.lc-story-body strong { color: var(--lc-ink); font-weight: 600; }
+.lc-story-key { padding: 20px 24px; color: var(--lc-ink); font-weight: 600; background: var(--lc-wash); border-radius: var(--lc-r-lg); }
+
+.lc-constraints { display: grid; gap: 8px; font-size: var(--lc-base); }
+.lc-constraints li { padding: 14px 18px; color: var(--lc-ink-soft); background: var(--lc-quiet); border-radius: var(--lc-r-lg); }
+.lc-constraints strong { display: block; color: var(--lc-ink); }
+
+/* ---------- Dates on a line ---------- */
+.lc-dates { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.lc-dates li { display: flex; flex-direction: column; gap: 6px; padding-top: 16px; border-top: 3px solid var(--lc-ink); }
+.lc-dates li:last-child { border-top-color: var(--lc-yellow); }
+.lc-dates span { color: var(--lc-ink-soft); font-size: var(--lc-sm); font-weight: 600; font-variant-numeric: tabular-nums; }
+.lc-dates h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
+.lc-dates p { color: var(--lc-ink-soft); }
+
+/* ---------- Numbered principles ---------- */
+.lc-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lc-rules li { display: flex; flex-direction: column; gap: 8px; padding: clamp(20px, 2.6vw, 32px); background: var(--lc-quiet); border-radius: var(--lc-r-xl); }
+.lc-rules .lc-path-num { margin-bottom: 4px; }
+.lc-rules h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
+.lc-rules p { color: var(--lc-ink-soft); }
+
+/* ---------- Contact: two ways in ---------- */
+.lc-ways { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; }
+.lc-way { gap: 16px; }
+.lc-way h2 { font-size: var(--lc-2xl); }
+.lc-way p { color: var(--lc-ink-soft); font-size: var(--lc-lg); line-height: 1.5; }
+.lc-way .lc-btn { align-self: flex-start; margin-top: auto; }
+.lc-way-mail { font-family: var(--lc-display); font-size: var(--lc-2xl); font-weight: 700; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+
+/* ---------- Private preview: the video in a frame ---------- */
+.lc-frame { overflow: hidden; background: var(--lc-ink); border-radius: var(--lc-r-xl); }
+.lc-frame iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.lc-points { display: grid; gap: 8px; }
+.lc-points li { display: flex; align-items: flex-start; gap: 12px; color: var(--lc-paper); }
+.lc-points li::before { content: ''; flex: none; width: 10px; height: 10px; margin-top: 0.55em; background: var(--lc-yellow); border-radius: 50%; }
+
+/* ---------- Long text: the legal pages ---------- */
+.lc-doc-page { display: flex; flex-direction: column; gap: 40px; max-width: 46rem; }
+.lc-doc-page h1 { font-size: var(--lc-3xl); }
+.lc-prose { display: flex; flex-direction: column; gap: 36px; }
+.lc-prose section { display: flex; flex-direction: column; gap: 12px; }
+.lc-prose h2 { font-size: var(--lc-xl); line-height: 1.2; }
+.lc-prose p,
+.lc-prose li { color: var(--lc-ink-soft); }
+.lc-prose strong { color: var(--lc-ink); font-weight: 600; }
+.lc-prose ul { display: grid; gap: 6px; }
+.lc-prose ul li { position: relative; padding-left: 20px; }
+.lc-prose ul li::before { content: ''; position: absolute; top: 0.7em; left: 2px; width: 6px; height: 6px; background: var(--lc-ink); border-radius: 50%; }
+.lc-prose a { font-weight: 600; text-underline-offset: 3px; }
+.lc-prose-date { padding-top: 16px; color: var(--lc-ink-soft); font-size: var(--lc-sm); border-top: 1px solid var(--lc-rule); }
+
+/* ---------- 404 and the loading error ---------- */
+.lc-lost { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 40rem; padding: clamp(24px, 5vw, 72px); }
+.lc-lost h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
+.lc-lost p:not(.lc-hero-kicker) { color: var(--lc-paper); font-size: var(--lc-lg); line-height: 1.5; }
+.lc-error-page { display: flex; align-items: center; min-height: 100vh; padding-block: var(--lc-gutter); }
+.lc-error-page .lc-logo { margin-bottom: 24px; }
+
+@media (max-width: 1000px) {
+  .lc-intro,
+  .lc-story,
+  .lc-ways { grid-template-columns: minmax(0, 1fr); }
+  .lc-intro-photo { max-width: 420px; }
+  .lc-dates { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .lc-dates,
+  .lc-rules { grid-template-columns: minmax(0, 1fr); }
+}

@@ -6,7 +6,7 @@
 
 const BASE_URL = 'https://teachinspire.me';
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
-const DEFAULT_IMAGE_ALT = 'TeachInspire : gagner du temps sans perdre le métier';
+const DEFAULT_IMAGE_ALT = 'TeachInspire : vos formateurs créent des cours sur mesure avec l’IA';
 
 interface PageMetaProps {
   title: string;

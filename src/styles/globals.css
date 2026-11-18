@@ -21,17 +21,21 @@
     scroll-behavior: smooth;
   }
 
+  /* Every page is on the Le cap charter now (src/styles/le-cap.css). */
   body {
-    @apply bg-cream text-navy font-sans antialiased;
+    color: var(--lc-ink);
+    font-family: var(--lc-body);
+    background: var(--lc-paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   :where(a, button, input, textarea, select, summary):focus-visible {
-    outline: 3px solid var(--ti-yellow);
+    outline: 3px solid var(--lc-ink);
     outline-offset: 4px;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
     text-wrap: balance;
   }
 }

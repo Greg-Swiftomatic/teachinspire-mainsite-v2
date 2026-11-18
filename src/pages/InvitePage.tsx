@@ -1,223 +1,87 @@
-import { motion } from 'framer-motion';
-import { Play, Check, ArrowRight } from 'lucide-react';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { PageMeta } from '../components/seo/PageMeta';
-import { Container } from '../components/layout/Container';
-import { Button } from '../components/ui/Button';
-import { GridOverlay } from '../components/ui/GridOverlay';
-import { useReducedMotion } from '../hooks/useReducedMotion';
+import { Words, order, useMotion } from '../components/lecap/motion';
+import { BOOKING_URL, CTA_APPEL, CTA_COURS, ROUTES } from '../components/lecap/site';
+import '../components/lecap/pages.css';
+import '../components/lecap/simple.css';
 
-import { BOOKING_URL } from '../assets/assets';
+// Hidden page, sent by hand to a director: not in the menu, not indexed.
+const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f9ff1fc5d4e87fe22ae3f932d6f/iframe';
 
-const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f9ff1fc5d4e87fe22ae3f932d6f/watch';
-
-const previewPoints = [
+const aVoir = [
   'Le ton et la pédagogie de la formation',
-  'La manière dont une vidéo avance, sans jargon inutile',
+  'La manière dont une leçon avance, sans jargon inutile',
   'Le niveau de précision demandé aux formateurs',
 ];
 
-const courseIncludes = [
-  '15 tutoriels vidéo pour donner des bases solides à vos formateurs',
-  '6 à 8 sessions live à partir de vos cas de cours',
-  "Une méthode qui reste utile quand les outils changent d'interface",
+const suite = [
+  { titre: '26 leçons en 6 modules', texte: 'Du besoin de l’apprenant au cours prêt à enseigner, à suivre au rythme de chacun.' },
+  { titre: '7 ateliers en direct', texte: 'Avec votre équipe, dont un de lancement, sur les cours de vos formateurs.' },
+  { titre: 'Campus et le Studio, un an', texte: 'Le parcours, les travaux avec un retour individuel, et les quatre outils pour produire.' },
 ];
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="flex items-center gap-4 mb-8">
-      <span className="text-xs font-medium tracking-[0.2em] uppercase text-rust">
-        {children}
-      </span>
-      <div className="flex-1 h-px bg-navy/10" />
-    </div>
-  );
-}
-
 export function InvitePage() {
-  const prefersReducedMotion = useReducedMotion();
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: prefersReducedMotion ? 0.01 : 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: prefersReducedMotion ? 0 : 0.1 },
-    },
-  };
+  const page = useRef<HTMLDivElement>(null);
+  useMotion(page);
 
   return (
-    <main className="bg-cream min-h-screen relative overflow-hidden">
+    <div className="lc lc-page" ref={page}>
       <PageMeta
         title="Aperçu privé : TeachInspire"
         description="Aperçu vidéo privé de la formation TeachInspire pour instituts de langues."
         path="/invite"
         noindex
       />
-      <GridOverlay />
 
-      <Container>
-        <div className="pt-32 pb-20 lg:pt-40 lg:pb-28">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-start mb-16"
-          >
-            <div className="lg:col-span-5">
-              <motion.div variants={fadeInUp}>
-                <SectionLabel>Aperçu privé</SectionLabel>
-              </motion.div>
-
-              <motion.h1
-                variants={fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-navy leading-[1.05] tracking-tight mb-6"
-              >
-                Un extrait pour voir{' '}
-                <span className="text-rust">comment ça travaille</span>
-              </motion.h1>
-
-              <motion.p
-                variants={fadeInUp}
-                className="text-xl text-navy/70 leading-relaxed mb-6"
-              >
-                Vous pouvez regarder le premier module et juger le rythme, le ton,
-                et le niveau de détail avant d'en discuter.
-              </motion.p>
-
-              <motion.div
-                variants={fadeInUp}
-                className="border border-navy/10 bg-white p-6 mb-8"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <Play className="w-5 h-5 text-rust" aria-hidden="true" />
-                  <p className="text-sm uppercase tracking-[0.18em] text-rust font-medium">
-                    Ce que vous verrez dans cette vidéo
-                  </p>
-                </div>
-
-                <ul className="space-y-3">
-                  {previewPoints.map((point) => (
-                    <li key={point} className="flex items-start gap-3 text-navy/75">
-                      <span className="text-sage mt-0.5">→</span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
-                <Button variant="primary" size="lg" href="/formation" showArrow>
-                  Voir le programme complet
-                </Button>
-                <Button variant="secondary" size="lg" href={BOOKING_URL} showArrow>
-                  Réserver un appel
-                </Button>
-              </motion.div>
-            </div>
-
-            <motion.div variants={fadeInUp} className="lg:col-span-7">
-              <div className="bg-white border border-navy/10 p-3 sm:p-4">
-                <div className="aspect-video bg-navy/5 border border-navy/10 overflow-hidden">
-                  <iframe
-                    src={VIDEO_URL}
-                    title="TeachInspire : aperçu privé de la formation"
-                    className="w-full h-full"
-                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                    allowFullScreen
-                    style={{ border: 0 }}
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          <section className="mb-16">
-            <div className="grid lg:grid-cols-12 gap-10">
-              <div className="lg:col-span-4">
-                <SectionLabel>Dans la suite</SectionLabel>
-                <h2 className="text-3xl lg:text-4xl font-display font-semibold text-navy leading-tight">
-                  Ce que contient la formation complète
-                </h2>
-              </div>
-
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-80px' }}
-                variants={staggerContainer}
-                className="lg:col-span-8 space-y-4"
-              >
-                {courseIncludes.map((item, index) => (
-                  <motion.div
-                    key={item}
-                    variants={fadeInUp}
-                    className="flex items-start gap-4 p-5 border border-navy/10 bg-white"
-                  >
-                    <span className="text-rust font-display text-lg font-semibold flex-shrink-0 tabular-nums">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <p className="text-navy/80">{item}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </section>
-
-          <section className="bg-navy text-cream p-8 lg:p-10 relative overflow-hidden">
-            <div className="grid lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-7">
-                <span className="text-xs font-medium tracking-[0.2em] uppercase text-yellow block mb-5">
-                  Prochaine étape
-                </span>
-                <h2 className="text-3xl lg:text-4xl font-display font-semibold leading-tight mb-4">
-                  Si cet aperçu vous parle, parlons de votre équipe.
-                </h2>
-                <p className="text-cream/70 text-lg leading-relaxed max-w-2xl">
-                  Je peux vous montrer où le parcours colle à vos besoins,
-                  et où il faudra l'ajuster.
-                </p>
-              </div>
-
-              <div className="lg:col-span-5 lg:pl-6">
-                <div className="border border-cream/10 bg-cream/5 p-6 mb-6">
-                  <div className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-yellow flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <p className="text-cream/80">
-                      Appel découverte de 15 minutes pour vérifier si le format
-                      correspond à votre institut.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row lg:flex-col gap-4">
-                  <Button variant="cta" size="lg" href={BOOKING_URL} showArrow>
-                    Réserver un appel découverte
-                  </Button>
-                  <Button variant="secondary" size="lg" href="/contact" className="border-cream/20 text-cream hover:bg-cream/10 hover:border-cream/40 focus-visible:ring-cream focus-visible:ring-offset-navy">
-                    Poser une question
-                  </Button>
-                </div>
-
-                <a
-                  href="/formation"
-                  className="inline-flex items-center gap-2 text-cream/70 hover:text-yellow transition-colors mt-6"
-                >
-                  <span>Consulter la page formation</span>
-                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                </a>
-              </div>
-            </div>
-          </section>
+      <section className="lc-wrap" aria-labelledby="invite-titre">
+        <div className="lc-green lc-intro" data-surface="green" data-reveal>
+          <div className="lc-intro-text">
+            <p className="lc-hero-kicker">Aperçu privé</p>
+            <h1 id="invite-titre"><Words text="Un extrait, pour voir comment ça travaille." under="comment ça travaille" /></h1>
+            <p className="lc-hero-lead" data-rise style={order(4)}>
+              Regardez le premier module et jugez le rythme, le ton et le niveau de détail avant d’en
+              discuter.
+            </p>
+            <ul className="lc-points" data-rise style={order(5)}>
+              {aVoir.map((point) => <li key={point}>{point}</li>)}
+            </ul>
+          </div>
+          <div className="lc-frame" data-rise style={order(3)}>
+            <iframe
+              src={VIDEO_URL}
+              title="TeachInspire : aperçu privé de la formation"
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
         </div>
-      </Container>
-    </main>
+      </section>
+
+      <section className="lc-wrap" aria-labelledby="suite-titre">
+        <div className="lc-head" data-reveal>
+          <p className="lc-kicker">Dans la suite</p>
+          <h2 className="lc-h2" id="suite-titre"><Words text="Ce que contient la formation complète." /></h2>
+        </div>
+        <ul className="lc-three" data-reveal>
+          {suite.map((s, n) => (
+            <li key={s.titre} className="lc-tile lc-tile--paper" data-rise style={order(n)}>
+              <h3>{s.titre}</h3>
+              <p>{s.texte}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="lc-free">
+          Si cet aperçu vous parle, parlons de votre équipe&nbsp;: je vous montre où le parcours colle
+          à vos besoins, et où il faudra l’ajuster.
+        </p>
+        <div className="lc-hero-actions">
+          <a className="lc-btn lc-btn--ink" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">{CTA_APPEL}</a>
+          <Link className="lc-btn lc-btn--line" to={ROUTES.formation}>Voir la formation</Link>
+          <Link className="lc-link" to={ROUTES.cours}>{CTA_COURS}</Link>
+        </div>
+      </section>
+    </div>
   );
 }
