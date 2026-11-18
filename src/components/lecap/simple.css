@@ -3,7 +3,7 @@
 /* ---------- A page that opens on the forest block, text and one picture ---------- */
 .lc-intro { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); align-items: center; padding: clamp(24px, 5vw, 72px); }
 .lc-intro-text { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; min-width: 0; }
-.lc-intro h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
+.lc .lc-intro h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
 .lc-intro .lc-hero-lead { max-width: 36rem; }
 .lc-intro-photo { margin: 0; }
 .lc-intro-photo img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: var(--lc-r-xl); }
@@ -26,20 +26,20 @@
 .lc-dates li { display: flex; flex-direction: column; gap: 6px; padding-top: 16px; border-top: 3px solid var(--lc-ink); }
 .lc-dates li:last-child { border-top-color: var(--lc-yellow); }
 .lc-dates span { color: var(--lc-ink-soft); font-size: var(--lc-sm); font-weight: 600; font-variant-numeric: tabular-nums; }
-.lc-dates h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
+.lc .lc-dates h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
 .lc-dates p { color: var(--lc-ink-soft); }
 
 /* ---------- Numbered principles ---------- */
 .lc-rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .lc-rules li { display: flex; flex-direction: column; gap: 8px; padding: clamp(20px, 2.6vw, 32px); background: var(--lc-quiet); border-radius: var(--lc-r-xl); }
 .lc-rules .lc-path-num { margin-bottom: 4px; }
-.lc-rules h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
+.lc .lc-rules h3 { font-family: var(--lc-display); font-size: var(--lc-xl); font-weight: 700; letter-spacing: -0.01em; }
 .lc-rules p { color: var(--lc-ink-soft); }
 
 /* ---------- Contact: two ways in ---------- */
 .lc-ways { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; }
 .lc-way { gap: 16px; }
-.lc-way h2 { font-size: var(--lc-2xl); }
+.lc .lc-way h2 { font-size: var(--lc-2xl); }
 .lc-way p { color: var(--lc-ink-soft); font-size: var(--lc-lg); line-height: 1.5; }
 .lc-way .lc-btn { align-self: flex-start; margin-top: auto; }
 .lc-way-mail { font-family: var(--lc-display); font-size: var(--lc-2xl); font-weight: 700; letter-spacing: -0.01em; overflow-wrap: anywhere; }
@@ -53,10 +53,10 @@
 
 /* ---------- Long text: the legal pages ---------- */
 .lc-doc-page { display: flex; flex-direction: column; gap: 40px; max-width: 46rem; }
-.lc-doc-page h1 { font-size: var(--lc-3xl); }
+.lc .lc-doc-page h1 { font-size: var(--lc-3xl); }
 .lc-prose { display: flex; flex-direction: column; gap: 36px; }
 .lc-prose section { display: flex; flex-direction: column; gap: 12px; }
-.lc-prose h2 { font-size: var(--lc-xl); line-height: 1.2; }
+.lc .lc-prose h2 { font-size: var(--lc-xl); line-height: 1.2; }
 .lc-prose p,
 .lc-prose li { color: var(--lc-ink-soft); }
 .lc-prose strong { color: var(--lc-ink); font-weight: 600; }
@@ -67,8 +67,9 @@
 .lc-prose-date { padding-top: 16px; color: var(--lc-ink-soft); font-size: var(--lc-sm); border-top: 1px solid var(--lc-rule); }
 
 /* ---------- 404 and the loading error ---------- */
-.lc-lost { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; max-width: 40rem; padding: clamp(24px, 5vw, 72px); }
-.lc-lost h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
+.lc-lost { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: clamp(24px, 5vw, 72px); }
+.lc-lost > * { max-width: 40rem; }
+.lc .lc-lost h1 { color: var(--lc-paper); font-size: var(--lc-4xl); }
 .lc-lost p:not(.lc-hero-kicker) { color: var(--lc-paper); font-size: var(--lc-lg); line-height: 1.5; }
 .lc-error-page { display: flex; align-items: center; min-height: 100vh; padding-block: var(--lc-gutter); }
 .lc-error-page .lc-logo { margin-bottom: 24px; }
@@ -83,4 +84,11 @@
 @media (max-width: 640px) {
   .lc-dates,
   .lc-rules { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Private preview: the video takes the larger half, the title steps down a size. */
+.lc .lc-intro--video { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.lc .lc-intro--video h1 { font-size: var(--lc-3xl); }
+@media (max-width: 1000px) {
+  .lc .lc-intro--video { grid-template-columns: minmax(0, 1fr); }
 }

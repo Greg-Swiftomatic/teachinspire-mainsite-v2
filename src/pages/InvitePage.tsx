@@ -35,10 +35,10 @@ export function InvitePage() {
       />
 
       <section className="lc-wrap" aria-labelledby="invite-titre">
-        <div className="lc-green lc-intro" data-surface="green" data-reveal>
+        <div className="lc-green lc-intro lc-intro--video" data-surface="green" data-reveal>
           <div className="lc-intro-text">
             <p className="lc-hero-kicker">Aperçu privé</p>
-            <h1 id="invite-titre"><Words text="Un extrait, pour voir comment ça travaille." under="comment ça travaille" /></h1>
+            <h1 id="invite-titre"><Words text="Un extrait, pour voir comment ça travaille." under="ça travaille" /></h1>
             <p className="lc-hero-lead" data-rise style={order(4)}>
               Regardez le premier module et jugez le rythme, le ton et le niveau de détail avant d’en
               discuter.
