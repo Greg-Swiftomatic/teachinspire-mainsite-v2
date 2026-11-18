@@ -7,12 +7,14 @@ import '../components/lecap/pages.css';
 import '../components/lecap/simple.css';
 
 // Hidden page, sent by hand to a director: not in the menu, not indexed.
-const VIDEO_URL = 'https://customer-y3j8jz0c4eop5wt4.cloudflarestream.com/eaa14f9ff1fc5d4e87fe22ae3f932d6f/iframe';
+// The introduction video validated on 10 November 2026, the same file as on the home page.
+const VIDEO = '/videos/introduction-teachinspire.mp4';
+const POSTER = '/videos/introduction-teachinspire-poster.webp';
 
 const aVoir = [
-  'Le ton et la pédagogie de la formation',
-  'La manière dont une leçon avance, sans jargon inutile',
-  'Le niveau de précision demandé aux formateurs',
+  'Le ton et la démarche de la formation',
+  'La méthode, du besoin de l’apprenant au cours prêt à enseigner',
+  'La place du formateur : l’IA prépare, il décide',
 ];
 
 const suite = [
@@ -38,9 +40,9 @@ export function InvitePage() {
         <div className="lc-green lc-intro lc-intro--video" data-surface="green" data-reveal>
           <div className="lc-intro-text">
             <p className="lc-hero-kicker">Aperçu privé</p>
-            <h1 id="invite-titre"><Words text="Un extrait, pour voir comment ça travaille." under="ça travaille" /></h1>
+            <h1 id="invite-titre"><Words text="La méthode, en 90 secondes." under="90 secondes" /></h1>
             <p className="lc-hero-lead" data-rise style={order(4)}>
-              Regardez le premier module et jugez le rythme, le ton et le niveau de détail avant d’en
+              Greg présente la méthode et la formation. Regardez-la, et jugez la démarche avant d’en
               discuter.
             </p>
             <ul className="lc-points" data-rise style={order(5)}>
@@ -48,12 +50,15 @@ export function InvitePage() {
             </ul>
           </div>
           <div className="lc-frame" data-rise style={order(3)}>
-            <iframe
-              src={VIDEO_URL}
-              title="TeachInspire : aperçu privé de la formation"
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
+            <video
+              src={VIDEO}
+              poster={POSTER}
+              controls
+              playsInline
+              preload="none"
+              width={1280}
+              height={720}
+              aria-label="Vidéo de présentation de TeachInspire"
             />
           </div>
         </div>

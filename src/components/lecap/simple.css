@@ -46,7 +46,7 @@
 
 /* ---------- Private preview: the video in a frame ---------- */
 .lc-frame { overflow: hidden; background: var(--lc-ink); border-radius: var(--lc-r-xl); }
-.lc-frame iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.lc-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: var(--lc-ink); }
 .lc-points { display: grid; gap: 8px; }
 .lc-points li { display: flex; align-items: flex-start; gap: 12px; color: var(--lc-paper); }
 .lc-points li::before { content: ''; flex: none; width: 10px; height: 10px; margin-top: 0.55em; background: var(--lc-yellow); border-radius: 50%; }
