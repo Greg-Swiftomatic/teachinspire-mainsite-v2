@@ -11,7 +11,7 @@ const indicateurs = [
   {
     numero: 'Indicateur 22',
     titre: 'Les compétences de l’équipe',
-    attendu: 'Le référentiel demande d’entretenir et de développer les compétences de vos formateurs.',
+    attendu: 'Le référentiel demande d’entretenir et de développer les compétences de vos salariés, adaptées aux formations que vous proposez.',
     parcours:
       'Le parcours forme toute l’équipe à l’IA appliquée à la pédagogie, avec des ateliers en direct et des échanges entre formateurs.',
   },
@@ -19,7 +19,7 @@ const indicateurs = [
     numero: 'Indicateur 25',
     titre: 'La veille, et ce qu’elle change',
     attendu:
-      'Le référentiel demande une veille sur les innovations pédagogiques et technologiques, et la preuve qu’elle fait évoluer vos formations.',
+      'Le référentiel demande une veille sur les innovations pédagogiques et technologiques qui permette de faire évoluer vos formations, et d’en exploiter les enseignements.',
     parcours:
       'Chaque formateur repart avec un cours construit pour un de ses apprenants, et l’équipe avec des outils qu’elle utilise au quotidien : une trace concrète de ce qui a changé.',
   },
@@ -35,8 +35,8 @@ export function Qualiopi() {
             <Words text="Former l’équipe à l’IA, c’est aussi nourrir votre veille." mark="nourrir votre veille" />
           </h2>
           <p className="lc-lead">
-            Un institut certifié doit montrer qu’il développe les compétences de ses formateurs et
-            qu’il suit les innovations pédagogiques et technologiques, puis qu’il s’en sert. Le
+            Un institut certifié doit montrer qu’il développe les compétences de son équipe et qu’il
+            suit les innovations pédagogiques et technologiques, puis qu’il en tire parti. Le
             parcours vous aide à le documenter.
           </p>
         </div>

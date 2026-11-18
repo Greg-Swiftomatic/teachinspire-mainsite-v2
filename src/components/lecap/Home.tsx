@@ -108,7 +108,7 @@ export function Home() {
             </div>
             <p className="lc-hero-note" data-rise style={order(6)}>
               Pour une équipe&nbsp;: {euros(PRIX_EQUIPE)}&nbsp;HT jusqu’à {FORMATEURS_INCLUS}&nbsp;formateurs.
-              Financement OPCO possible.{' '}
+              Financement OPCO possible. <a href="#qualiopi">Utile à votre dossier Qualiopi</a>.{' '}
               <Link to={`${ROUTES.formation}#independants`}>Vous êtes formateur indépendant&nbsp;?</Link>
             </p>
           </div>
@@ -229,7 +229,7 @@ export function Home() {
               jusqu’à {FORMATEURS_INCLUS}&nbsp;formateurs, puis {euros(PRIX_FORMATEUR_SUPPLEMENTAIRE)}&nbsp;HT
               par formateur supplémentaire
             </span>
-            <span>Utile à votre veille Qualiopi (indicateurs 22 et 25)</span>
+            <span>Utile à votre dossier Qualiopi (indicateurs 22 et 25)</span>
             <span className="lc-door-go">Voir la formation d’équipe</span>
           </Link>
           <Link data-rise style={order(1)} className="lc-tile lc-tile--sand lc-door" to={`${ROUTES.formation}#independants`}>

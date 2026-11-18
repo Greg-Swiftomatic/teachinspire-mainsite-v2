@@ -70,7 +70,7 @@ const comparaison = [
 const questions = [
   {
     q: 'La formation compte-t-elle pour Qualiopi ?',
-    r: 'Elle peut nourrir deux indicateurs du Référentiel national qualité : le développement des compétences de vos formateurs (indicateur 22) et la veille sur les innovations pédagogiques et technologiques, avec ce qu’elle change dans vos formations (indicateur 25). Un formateur indépendant certifié peut aussi s’en servir pour montrer sa propre formation continue. L’auditeur juge l’ensemble du dossier : la formation y contribue, elle ne garantit pas la certification.',
+    r: 'Elle peut nourrir deux indicateurs du Référentiel national qualité : le développement des compétences de votre équipe (indicateur 22) et la veille sur les innovations pédagogiques et technologiques, dont vous exploitez les enseignements dans vos formations (indicateur 25). Un formateur indépendant certifié peut aussi s’en servir pour montrer sa propre formation continue. L’auditeur juge l’ensemble du dossier : la formation y contribue, elle ne garantit pas la certification.',
   },
   {
     q: 'Mes formateurs n’ont pas le temps.',
