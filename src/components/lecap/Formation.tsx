@@ -69,6 +69,10 @@ const comparaison = [
 
 const questions = [
   {
+    q: 'La formation compte-t-elle pour Qualiopi ?',
+    r: 'Elle peut nourrir deux indicateurs du Référentiel national qualité : le développement des compétences de vos formateurs (indicateur 22) et la veille sur les innovations pédagogiques et technologiques, avec ce qu’elle change dans vos formations (indicateur 25). Un formateur indépendant certifié peut aussi s’en servir pour montrer sa propre formation continue. L’auditeur juge l’ensemble du dossier : la formation y contribue, elle ne garantit pas la certification.',
+  },
+  {
     q: 'Mes formateurs n’ont pas le temps.',
     r: 'Les leçons se suivent à son rythme, entre les ateliers, sur 6 semaines ou jusqu’à 3 mois. Les ateliers sont enregistrés. Surtout, chaque travail porte sur un vrai apprenant du formateur : le temps passé sert directement ses cours.',
   },
@@ -208,7 +212,8 @@ export function Formation() {
           <h2 className="lc-h2" id="equipe-titre"><Words text="La formation d’équipe." /></h2>
           <p className="lc-lead">
             Toute l’équipe suit le parcours ensemble, avec ses ateliers à elle et la même méthode
-            pour tout le monde.
+            pour tout le monde. Pour un institut certifié Qualiopi, c’est aussi une façon concrète
+            de nourrir la veille pédagogique et technologique de l’équipe.
           </p>
         </div>
         <div className="lc-offer lc-tile lc-tile--ask" data-reveal data-rise>

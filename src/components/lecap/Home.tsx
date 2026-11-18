@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { IntroVideo } from './IntroVideo';
+import { Qualiopi } from './Qualiopi';
 import { ShelfIllustration, SoloIllustration, TeamIllustration } from './Illustrations';
 import { Words, order, useMotion, useScrollProgress } from './motion';
 import { Route } from './Route';
@@ -180,6 +181,8 @@ export function Home() {
         </div>
       </section>
 
+      <Qualiopi />
+
       <section className="lc-wrap" aria-labelledby="outils-titre">
         <div className="lc-head" data-reveal>
           <p className="lc-kicker">Les outils</p>
@@ -226,6 +229,7 @@ export function Home() {
               jusqu’à {FORMATEURS_INCLUS}&nbsp;formateurs, puis {euros(PRIX_FORMATEUR_SUPPLEMENTAIRE)}&nbsp;HT
               par formateur supplémentaire
             </span>
+            <span>Utile à votre veille Qualiopi (indicateurs 22 et 25)</span>
             <span className="lc-door-go">Voir la formation d’équipe</span>
           </Link>
           <Link data-rise style={order(1)} className="lc-tile lc-tile--sand lc-door" to={`${ROUTES.formation}#independants`}>

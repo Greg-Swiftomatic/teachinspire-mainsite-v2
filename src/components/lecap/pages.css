@@ -414,3 +414,17 @@
 /* The single card on a page that still has the old look: its own strip of paper. */
 .lc-band { padding-block: clamp(32px, 5vw, 64px); }
 .lc-band .lc-tm-spot { margin-block: 0; }
+
+/* ---------- Qualiopi: what the referential asks, what the course leaves behind ---------- */
+.lc-qualiopi { padding: clamp(20px, 4vw, 56px); background: var(--lc-quiet); border-radius: var(--lc-r-2xl); }
+.lc-indicateurs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.lc-indicateur { display: flex; flex-direction: column; gap: 10px; padding: clamp(20px, 2.6vw, 32px); background: var(--lc-paper); border-radius: var(--lc-r-xl); }
+.lc .lc-indicateur-num { align-self: flex-start; padding: 4px 12px; color: var(--lc-ink); font-size: var(--lc-sm); font-weight: 700; background: var(--lc-yellow); border-radius: var(--lc-r-pill); }
+.lc .lc-indicateur h3 { font-family: var(--lc-display); font-size: var(--lc-2xl); font-weight: 700; letter-spacing: -0.02em; }
+.lc-indicateur > p { color: var(--lc-ink-soft); }
+.lc .lc-indicateur .lc-indicateur-nous { margin-top: auto; padding-top: 14px; color: var(--lc-ink); font-weight: 600; border-top: 1px solid var(--lc-rule); }
+.lc-qualiopi-note { max-width: 52rem; margin-top: 20px; color: var(--lc-ink-soft); font-size: var(--lc-sm); }
+.lc-qualiopi-note a { font-weight: 600; text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .lc-indicateurs { grid-template-columns: minmax(0, 1fr); }
+}
