@@ -18,9 +18,6 @@ import { TestimonialSpot } from './Testimonials';
 import { TEMOIGNAGES } from './temoignages-data';
 import './pages.css';
 
-// The free Prompts tool still opens its account on the Studio site; Campus itself is invite-only.
-const PROMPTS_GRATUIT_URL = 'https://studio.teachinspire.me/signup';
-
 const reperes = [
   { valeur: '4', label: 'outils dans le Studio' },
   { valeur: '26', label: 'leçons dans Campus' },
@@ -56,7 +53,7 @@ const outils: Record<(typeof OUTILS)[number]['ton'], { flux: string; texte: stri
     flux: 'Un besoin → une demande structurée',
     texte:
       'Décrivez votre besoin en français courant : niveau, public, objectif. L’outil pose deux ou trois questions, puis construit une demande structurée, prête à copier dans ChatGPT, Gemini ou l’IA de votre choix. Chaque bloc est annoté : vous voyez pourquoi il est là.',
-    detail: 'Aussi à essayer gratuitement, sans la formation',
+    detail: 'L’étape « Structurer » du parcours',
   },
   transcription: {
     flux: 'Un enregistrement → le texte',
@@ -81,7 +78,7 @@ const outils: Record<(typeof OUTILS)[number]['ton'], { flux: string; texte: stri
 const questions = [
   {
     q: 'Faut-il suivre la formation pour utiliser la plateforme ?',
-    r: 'Campus et le Studio complet sont compris dans la formation, pendant un an. L’outil Prompts s’essaie aussi gratuitement : le compte s’ouvre en deux minutes, sans carte bancaire.',
+    r: 'Oui. Campus et le Studio complet sont compris dans la formation, pendant un an.',
   },
   {
     q: 'Et si les 60 minutes d’audio ne suffisent pas ?',
@@ -210,10 +207,6 @@ export function Plateforme() {
             <span className="lc-door-go">Voir la formation individuelle</span>
           </Link>
         </div>
-        <p className="lc-free">
-          Vous voulez d’abord voir l’outil Prompts ?{' '}
-          <a className="lc-link" href={PROMPTS_GRATUIT_URL} target="_blank" rel="noopener noreferrer">Essayer Promptomatik gratuitement</a>
-        </p>
       </section>
 
       <section className="lc-wrap lc-faq" aria-labelledby="questions-titre">
