@@ -113,7 +113,44 @@ export function PolitiqueConfidentialitePage() {
         </section>
 
         <section>
-          <h2>11. Mise à jour de cette politique</h2>
+          <h2>11. Campus et le Studio</h2>
+          <p>
+            Campus et le Studio sont réservés aux participants de la formation. Pour les faire
+            fonctionner, nous traitons votre compte (nom, adresse e-mail, mot de passe, jamais
+            stocké en clair), vos travaux et vos échanges dans Campus, et les contenus que vous
+            créez dans le Studio : demandes, textes, documents et audios.
+          </p>
+          <p>
+            <strong>Aucune donnée personnelle d’apprenant.</strong> Le Studio sert à préparer des
+            cours. Décrivez le poste, le secteur et le niveau de l’apprenant, jamais son nom, ses
+            coordonnées ni un document confidentiel de son entreprise. Cette règle est rappelée dans
+            le Studio, sous les champs concernés.
+          </p>
+          <p>Les services d’intelligence artificielle utilisés :</p>
+          <ul>
+            <li>
+              <strong>OpenRouter</strong> (États-Unis) transmet les demandes aux modèles d’IA. Nous
+              lui imposons de n’utiliser que des fournisseurs qui ne conservent pas les contenus et
+              ne s’en servent pas pour entraîner leurs modèles. Pour les modèles de Google, cela
+              passe par Google Vertex : Google peut garder jusqu’à 90 jours une demande signalée
+              par ses filtres de sécurité, uniquement pour lutter contre les abus, jamais pour
+              l’entraînement. En secours, nous utilisons Mistral AI, entreprise française.
+            </li>
+            <li><strong>Google (API Gemini)</strong> : voix des dialogues audio.</li>
+            <li>
+              <strong>Deepgram</strong> et <strong>AssemblyAI</strong> : transcription, sur leurs
+              serveurs situés dans l’Union européenne. <strong>Groq</strong> (États-Unis) :
+              transcription des audios à une seule voix.
+            </li>
+          </ul>
+          <p>
+            Les autres services : Cloudflare (hébergement et stockage), Resend (envoi des e-mails),
+            Bunny.net (vidéos des leçons et des replays) et Stripe (paiements en ligne).
+          </p>
+        </section>
+
+        <section>
+          <h2>12. Mise à jour de cette politique</h2>
           <p>
             Cette politique de confidentialité peut être modifiée à tout moment. La date de dernière
             mise à jour est indiquée ci-dessous. Nous vous invitons à la consulter régulièrement.
